@@ -4,7 +4,7 @@
 
 * 작성자 등록
 
-* git cinfig --global user.name "이름"
+* git config --global user.name "이름"
 
 * git config --global user.email "메일 주소"
 
@@ -45,7 +45,9 @@ shift + insert  : 붙여넣기
 
 git
 작업할 폴더가서 우클릭 깃 베쉬 클릭하면 자동으로 디렉토리 설정
+
 git status  :  git 상태확인
+
 git init  :  현 디렉토리를 git 으로 관리한다는 명령어(.git 생성)
 git add  파일명/폴더명/./-A      : . 이랑 -A는 변경사항 전체
        깃 변경파일 추가하는 것 (커밋 전), 커밋을 가능하게 해주는 것
