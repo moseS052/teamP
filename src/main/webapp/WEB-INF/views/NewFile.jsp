@@ -11,10 +11,7 @@
 <c:forEach var='test' items="${test}">
 ${test.roomtype} <br>
 ${test.maxnop}<br>
-아년ㅇ하세여<br> choong1<br>
-3qjsW<br>
-dddffefef<br>
-1414141415153434
+dddffefef<br>434
 </c:forEach>
 </body>
 </html>
