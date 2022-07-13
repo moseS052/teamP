@@ -10,7 +10,8 @@
 <body>
 <c:forEach var='test' items="${test}">
 ${test.roomtype} <br>
-${test.maxnop}
+${test.maxnop}<br>
+아년ㅇ하세여
 </c:forEach>
 </body>
 </html>
