@@ -8,6 +8,6 @@
 <title>OK thanks</title>
 </head>
 <body>
-테스트 성공적
+테스트 성공적 good good
 </body>
 </html>
