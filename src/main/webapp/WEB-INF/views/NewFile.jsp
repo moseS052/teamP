@@ -12,7 +12,8 @@
 ${test.roomtype} <br>
 ${test.maxnop}<br>
 아년ㅇ하세여<br> choong1<br>
-3qjsW
+3qjsW<br>
+dddffefef
 </c:forEach>
 </body>
 </html>
