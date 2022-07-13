@@ -6,4 +6,7 @@
 <select id="testlist" resultType="com.team.pj.testDTO">
 	select roomtype, roomnumber, roomname, maxnop, dayprice from room
 </select>
+<insert id="test1">
+	insert into test values(#{param1},#{param2})
+</insert>
 </mapper>

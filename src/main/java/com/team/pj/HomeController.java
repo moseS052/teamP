@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Locale;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.ibatis.session.SqlSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,5 +41,15 @@ public class HomeController {
 		model.addAttribute("test",tD);
 		
 		return "NewFile";
+	}
+	
+	@RequestMapping("/New1")
+	public String test(HttpServletRequest req) {
+		itest it=sqlSession.getMapper(itest.class);
+		String name=req.getParameter("name");
+		String phone=req.getParameter("phone");
+		it.test1(name, phone);
+		
+		return "NewFile1";
 	}
 }
