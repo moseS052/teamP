@@ -33,19 +33,19 @@ public class controller {
 
 	@RequestMapping(value = "/upload_ok", method = RequestMethod.POST)
 	public String upload(@RequestParam("file") MultipartFile file, HttpServletRequest req, Model mod) throws IOException {
-		String fileRealName = file.getOriginalFilename(); // 파일명을 얻어낼 수 있는 메서드!
-		long size = file.getSize(); // 파일 사이즈
+		String fileRealName = file.getOriginalFilename(); // ���쇰��� �살�대�� �� ���� 硫�����!
+		long size = file.getSize(); // ���� �ъ�댁�
 
-		System.out.println("파일명 : " + fileRealName);
-		System.out.println("용량크기(byte) : " + size);
-		// 서버에 저장할 파일이름 fileextension으로 .jsp이런식의 확장자 명을 구함
+//		System.out.println("���쇰� : " + fileRealName);
+//		System.out.println("�⑸���ш린(byte) : " + size);
+		// ��踰��� ���ν�� ���쇱�대� fileextension�쇰� .jsp�대�곗���� ���μ�� 紐��� 援ы��
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
 		/* String uploadFolder = "resources/userimage/"; */
 //		String path = req.getServletContext().getRealPath("/resources/imma/");
-//		System.out.println("userimage 경로:"+path);
+//		System.out.println("userimage 寃쎈�:"+path);
 
 		
-		String uploadPath = "C:/Users/admin/팀프로젝트/teamP/src/main/webapp/resources/assets/image/";
+		String uploadPath = "C:/Users/admin/eclipse-workspace/teamP/src/main/webapp/resources/assets/image/";
 //		String imaUploadPath = uploadPath +File.separator +"userim";
 //		System.out.println(imaUploadPath);
 		UUID uuid = UUID.randomUUID();
@@ -53,23 +53,34 @@ public class controller {
 		String[] uuids = uuid.toString().split("-");
 
 		String uniqueName = uuids[0];
-		System.out.println("생성된 고유문자열" + uniqueName);
-		System.out.println("확장자명" + fileExtension);
+//		System.out.println("���깅�� 怨���臾몄����" + uniqueName);
+//		System.out.println("���μ��紐�" + fileExtension);
 		URL r = this.getClass().getResource("");
 		String path = r.getPath();
-		System.out.println("경로어디?"+path);
-		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid 적용 전
-		File saveFile = new File(uploadPath +uniqueName+ fileExtension);// 적용 후
+//		System.out.println("寃쎈��대��?"+path);
+		// File saveFile = new File(uploadFolder+"\\"+fileRealName); uuid ���� ��
+		File saveFile = new File(uploadPath +uniqueName+ fileExtension);// ���� ��
 		String name=uniqueName+ fileExtension;
 		try {
-			file.transferTo(saveFile); // 실제 파일 저장메서드(filewriter 작업을 손쉽게 한방에 처리해준다.)
+			file.transferTo(saveFile); // �ㅼ�� ���� ���λ�����(filewriter ������ ���쎄� ��諛⑹�� 泥�由ы�댁���.)
 		} catch (IllegalStateException e) {
 		e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+//		mod.addAttribute("userim",name);
 		mod.addAttribute("userim",name);
-		return "NewFile";
+		return "";
 	}
 	
+//	@RequestMapping("/pho")
+//	public String pho(Model model) {
+//		itest it = sqlSession.getMapper(itest.class);
+//		boardVO bo = new boardVO();
+//		bo=it.show();
+//		it.intest(bo.getB_no(), "/resources/assets/image/"+name);
+//		String aa=it.route(bo.getB_no());
+//		model.addAttribute("userim",aa);
+//		return "NewFile";
+//	}
 }

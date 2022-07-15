@@ -32,11 +32,5 @@ public class HomeController {
 		return "home";
 	}
 	
-	@RequestMapping("/New")
-	public String test(Model model) {
-		itest it=sqlSession.getMapper(itest.class);
-		
-		return "NewFile";
-	}
 	
 }
