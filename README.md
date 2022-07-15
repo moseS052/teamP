@@ -24,7 +24,8 @@
    * 큰 작업을 안했어도 기록을 남기는 의미로 푸시는 하는걸로
 4. 본인의 작업이 병합가능(기능적으로) 할 정도로 완성되면 말해주세요
 5. 병합 되기 전에는 되도록 작업진행 하지 말기(본인이 merge해서 충돌해결해야할수도있음)
-6. 병합 되면 pull origin master  한 후
+6. 병합 되면 pull origin master  한 후 log 확인할 것
+   * 자신의 head->브랜치가 정상적으로 pull 받은 마지막 커밋 지점 향하면 그대로 작업 만약 head->브랜치가 하위 커밋에 향해있다면 7번으로
 7. git checkout (pull받은 커밋Id값) 입력 -git log에서 확인가능
    * 새로운 브랜치 생성 후 브랜치로 옮기기(git checkout -b 브랜치명)
    * 자신의 브랜치를 최종단계로 옮기는 과정
@@ -110,3 +111,144 @@ git checkout -b branch명 origin/브렌치명
 git branch -d 브렌치명  == 해당 브렌치 로컬에서 삭제
 
 git push -d origin 브렌치명    == 원격 브렌치 삭제
+
+----
+
+----
+
+
+
+### member   =회원테이블    
+
+| m_no    | id           | pw       | name     | nick     | phone    |gender| mail     | score     | ava_route    | birth    |
+| ------- | ------------ | -------- | -------- | -------- | -------- | ---- | -------- | --------- | --------------- | -------- |
+| 회원seq | ID           | PW        | 이름     | 닉네임   | 모바일    | 성별 | 이메일    | 활동 점수 | 아바타 사진경로   | 생년월일 |
+| number  | varchar2     | varchar2 | varchar2 | varchar2 | varchar2 | char | varchar2 | number    | varchar2        | varchar2 |
+| primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 |                 |          |
+
+
+
+### talent_check  =재능체크테이블
+
+| m_no    | t_no     |
+| ------- | -------- |
+| 회원seq | 재능넘버 |
+| number  | number   |
+| NN      | NN       |
+
+
+
+### talent  =재능테이블
+
+| t_no        | t_name |
+| ----------- | -------- |
+| 재능넘버seq  | 재능명   |
+| number      | varchar2 |
+| primary     | NN       |
+
+
+
+### activities  =활동내역테이블
+
+| m_no    | act              | term     |
+| ------- | ---------------- | -------- |
+| 회원seq | 활동내역(활동명) | 기간     |
+| number  | varchar2         | varchar2 |
+| NN      | NN               | NN       |
+
+
+
+### board  =게시판 테이블
+
+| b_no      | b_type      | m_no    | b_title  | b_date   | b_con    |
+| --------- | --------------- | ------- | -------- | -------- | -------- |
+| 게시판seq | 게시판 종류 | 회원seq | 제목     | 작성시간 | 내용     |
+| number    | char    | number  | varchar2 | date     | varchar2 |
+| primary   | NN              | NN      | NN       | NN       |          |
+
+※게시판 분류
+
+* 포토  P
+* 요청게시판  Q
+* 자유게시판  F
+
+※제목은 안적으면 제목없음으로
+
+★ 게시판 Insert Update Delete 는 board 테이블 사용
+
+★ 게시판 Read 시에는 view 사용  boardP , boardQ, boardF
+
+
+
+### route  =파일경로테이블
+
+| b_no      | b_route  |
+| --------- | -------- |
+| 게시판seq | 경로     |
+| number    | varchar2 |
+| NN        | NN       |
+
+
+
+### comment_t  =댓글 테이블
+
+| c_no    | b_no      | c_con    | m_no    | c_date | c_pa_no     |
+| ------- | --------- | -------- | ------- | ------ | ----------- |
+| 자체seq | 게시판seq | 내용     | 회원seq | 시간   | 상위댓글seq |
+| nember  | number    | varchar2 | number  | date   | number      |
+| primary |           | NN       | NN      | NN     |             |
+
+
+
+### questions 질문게시판테이블(Q&A)
+
+| q_no    | q_title  | q_con    | q_date | m_no    | q_a      |
+| ------- | -------- | -------- | ------ | ------- | -------- |
+| 자체seq | 제목     | 내용     | 시간   | 회원seq | 답변     |
+| number  | varchar2 | varchar2 | date   | number  | varchar2 |
+| primary | NN       |          | NN     | NN      |          |
+
+♠ 자주묻는질문은 미리 questions 게시판에 입력후 사용하는 쪽으로
+
+
+
+### list  =목록테이블
+
+| l_no    | m_no    | l_title  | l_con    | l_date |      |
+| ------- | ------- | -------- | -------- | ------ | ---- |
+| 자체seq | 회원seq | 제목     | 내용     | 시간   |      |
+| number  | number  | varchar2 | varchar2 | date   |      |
+| primary | NN      | NN       |          | NN     |      |
+
+※추가할 내용이 많아질 것 같음
+
+
+
+### talent_check_list 목록 재능체크테이블
+
+| l_no    | t_no        |
+| ------- | ----------- |
+| 목록seq | 재능넘버seq |
+| number  | number      |
+| NN      | NN          |
+
+
+
+### apply  =신청자테이블
+
+| l_no    | m_no    |
+| ------- | ------- |
+| 목록seq | 회원seq |
+| number  | number  |
+| NN      | NN      |
+
+
+
+### note  =쪽지 테이블
+
+| m_no        | n_con    | n_date       | m_pa_no     |
+| ----------- | -------- | ------------ | ----------- |
+| 회원seq본인 | 내용     | 쪽지보낸시간 | 회원seq상대 |
+| number      | varchar2 | date         | number      |
+| NN          | NN       | NN           | NN          |
+
