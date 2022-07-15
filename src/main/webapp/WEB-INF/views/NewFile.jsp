@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page session="false" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,10 +9,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:forEach var='test' items="${test}">
-${test.roomtype} <br>
-${test.maxnop}<br>
-dddffefef<br>434
-</c:forEach>
+업로드 성공<br>
+<img src=<c:url value="/resources/assets/image/15daa5b6.jpg"/>/>
+${userim }
+
+
 </body>
 </html>

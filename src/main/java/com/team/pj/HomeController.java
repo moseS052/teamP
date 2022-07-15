@@ -35,9 +35,8 @@ public class HomeController {
 	@RequestMapping("/New")
 	public String test(Model model) {
 		itest it=sqlSession.getMapper(itest.class);
-		ArrayList<testDTO> tD=it.testlist();
-		model.addAttribute("test",tD);
 		
 		return "NewFile";
 	}
+	
 }
