@@ -20,26 +20,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Handles requests for the application home page.
  */
 @Controller
-public class HomeController {
+public class addController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private SqlSession sqlSession;
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	//건들지 마세요
-
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-		
-		return "home";
-	}
+	//여기서부터 작성
 	
-	@RequestMapping(value = "/ad", method = RequestMethod.GET)
-	public String ad() {
-		
-		return "addjsp";
-	}
 
 }
