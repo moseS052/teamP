@@ -178,6 +178,8 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ★ 게시판 Read 시에는 view 사용  boardP , boardQ, boardF
 
+★ b_no seq = board_sq    ,  board_sp.nextval  
+
 
 
 ### route  =파일경로테이블
