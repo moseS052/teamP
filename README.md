@@ -261,3 +261,4 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 |number    | number      | varchar2 | date         | number      |
 |primary   | NN          | NN       | NN           | NN          |
 
+★ n_no seq = note_sq    ,   사용-  note_sq.nextval
