@@ -255,9 +255,9 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ### note  =쪽지 테이블
 
-| m_no        | n_con    | n_date       | m_pa_no     |
-| ----------- | -------- | ------------ | ----------- |
-| 회원seq본인 | 내용     | 쪽지보낸시간 | 회원seq상대 |
-| number      | varchar2 | date         | number      |
-| NN          | NN       | NN           | NN          |
+|n_no      | m_no        | n_con    | n_date       | m_pa_no     |
+|----------| ----------- | -------- | ------------ | ----------- |
+|쪽지seq    | 회원seq본인 | 내용     | 쪽지보낸시간 | 회원seq상대 |
+|number    | number      | varchar2 | date         | number      |
+|primary   | NN          | NN       | NN           | NN          |
 
