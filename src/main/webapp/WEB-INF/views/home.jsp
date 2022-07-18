@@ -38,30 +38,7 @@
 							fade : 500
 						});
 
-				// Map Position And Settings
-				$("#mapwrapper").gMap({
-					controls : false,
-					scrollwheel : false,
-					markers : [ {
-						latitude : 40.7566,
-						longitude : -73.9863,
-						icon : {
-							image : "resources/assets/img/marker.png",
-							iconsize : [ 44, 44 ],
-							iconanchor : [ 12, 46 ],
-							infowindowanchor : [ 12, 0 ]
-						}
-					} ],
-					icon : {
-						image : "/resources/assets/img/marker.png",
-						iconsize : [ 26, 46 ],
-						iconanchor : [ 12, 46 ],
-						infowindowanchor : [ 12, 0 ]
-					},
-					latitude : 40.7566,
-					longitude : -73.9863,
-					zoom : 14
-				});
+				
 			});
 </script>
 </head>
@@ -85,6 +62,12 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
+				<c:if test="${userinfo==''}">
+				<a href="javascript:logIn()">login</a><a href="javascript:joinMember()">회원가입</a>
+				</c:if>
+				<c:if test="${userinfo!=''}">
+				${userinfo }&nbsp;<a href='logout'>Logout</a>
+				</c:if>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -1245,4 +1228,13 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script type="text/javascript">
+function logIn() { 
+	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
+	  }
+  function joinMember() { 
+	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
+	  }
+</script>     
+<!-- 작성 -->
 </html>

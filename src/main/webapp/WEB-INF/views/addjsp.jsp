@@ -49,7 +49,8 @@
 
 		});
 	});
-    </script> 
+    </script>
+	
   </head>
 
   <body class="single single-post"> 
@@ -67,7 +68,8 @@
         <div class="menu-wrap">
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
-                <h2><span class="pe-7s-chat logo-icon"></span> Quote</h2>
+                <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
+                
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
