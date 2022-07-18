@@ -5,6 +5,44 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+  <style>
+	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
+	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
+	.map_wrap {position:relative;width:100%;height:500px;}
+	#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
+	.bg_white {background:#fff;}
+	#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
+	#menu_wrap .option{text-align: center;}
+	#menu_wrap .option p {margin:10px 0;}  
+	#menu_wrap .option button {margin-left:5px;}
+	#placesList li {list-style: none;}
+	#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
+	#placesList .item span {display: block;margin-top:4px;}
+	#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
+	#placesList .item .info{padding:10px 0 10px 55px;}
+	#placesList .info .gray {color:#8a8a8a;}
+	#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
+	#placesList .info .tel {color:#009900;}
+	#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
+	#placesList .item .marker_1 {background-position: 0 -10px;}
+	#placesList .item .marker_2 {background-position: 0 -56px;}
+	#placesList .item .marker_3 {background-position: 0 -102px}
+	#placesList .item .marker_4 {background-position: 0 -148px;}
+	#placesList .item .marker_5 {background-position: 0 -194px;}
+	#placesList .item .marker_6 {background-position: 0 -240px;}
+	#placesList .item .marker_7 {background-position: 0 -286px;}
+	#placesList .item .marker_8 {background-position: 0 -332px;}
+	#placesList .item .marker_9 {background-position: 0 -378px;}
+	#placesList .item .marker_10 {background-position: 0 -423px;}
+	#placesList .item .marker_11 {background-position: 0 -470px;}
+	#placesList .item .marker_12 {background-position: 0 -516px;}
+	#placesList .item .marker_13 {background-position: 0 -562px;}
+	#placesList .item .marker_14 {background-position: 0 -608px;}
+	#placesList .item .marker_15 {background-position: 0 -654px;}
+	#pagination {margin:10px auto;text-align: center;}
+	#pagination a {display:inline-block;margin-right:10px;}
+	#pagination .on {font-weight: bold; cursor: default;color:#777;}
+</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -17,11 +55,6 @@
 <link href="<c:url value="/resources/assets/css/pe-icons.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/style.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/font-awesome.min.css"/>" rel="stylesheet">
-<link
-	href='http://fonts.googleapis.com/css?family=Cabin:300,400,700,300italic,400italic'
-	rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700'
-	rel='stylesheet' type='text/css'>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -37,17 +70,6 @@
 					duration : 8000,
 					fade : 500
 				});
-
-		// Map Position And Settings
-		$("#mapwrapper").gMap({ 
-			controls: false,
-			scrollwheel: false,
-			draggable: false,
-			latitude:40.7566,
-			longitude: -73.9863,
-			zoom: 11
-
-		});
 	});
     </script> 
   </head>
@@ -134,17 +156,48 @@
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-md-12">
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
+					<div class="col-md-8 fade-up">
+						<h3>재능기부신청서</h3>
 
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
-
-						<p>May indulgence difficulty ham can put especially. Bringing remember for supplied her why was confined. Middleton principle did she procuring extensive believing add. Weather adapted prepare oh is calling. These wrong of he which there smile to my front. He fruit oh enjoy it of whose table. Cultivated occasional old her unpleasing unpleasant. At as do be against pasture covered viewing started. Enjoyed me settled mr respect no spirits civilly. Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. </p>
-
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
+						<p>작성자:<input type="text" class="form-control" name="name" id="name" placeholder="Name" /></p>
+                        
+						<p>신청구역(서울)<select id="sel" class="form-control">
+                            <option>강남구</option>
+                            <option>강동구</option>
+                            <option>강북구</option>
+                            <option>강서구</option>
+                            <option>관악구</option>
+                            <option>광진구</option>
+                            <option>구로구</option>
+                            <option>금천구</option>
+                            <option>노원구</option>
+                            <option>도봉구</option>
+                            <option>동대문구</option>
+                            <option>동작구</option>
+                            <option>마포구</option>
+                            <option>서대문구</option>
+                            <option>서초구</option>
+                            <option>성동구</option>
+                            <option>성북구</option>
+                            <option>송파구</option>
+                            <option>양천구</option>
+                            <option>영등포구</option>
+                            <option>용산구</option>
+                            <option>은평구</option>
+                            <option>종로구</option>
+                            <option>중구</option>
+                            <option>중랑구</option>
+                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" />
+                        </select></p>
+                        
+						<p><select id="koo" class="form-control"">
+                            <input class="btn btn-outlined btn-primary" type="button" id="load" value="길찾기" />
+                            </select></p>
+						<p><input type="text" class="form-control" id="ko"/>
+						</p>
 						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
+
 				</div>
 			</div>	
 	    </section>
@@ -197,8 +250,35 @@
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+$(document)
+.ready(function(){
+	
+})
+.on('click','#load',function(){
+	let str=$('#koo option:selected').val();
+	$('#ko').val(str);
+})
+.on('click','#find',function(){
+	$.ajax({
+		type:'get',url:'ko_check',data:{area:$('#sel option:selected').text()},
+			dataType:'json',
+	  		success:function(data){
+// 	  			console.log(data);
+	  			for(let i=0;i<data.length;i++){
+					let jo=data[i];
+					let str='<option value="'+jo['ar']+'">'+jo['name']+'</option>';
+// 	 		   		console.log(str);
+					$('#koo').append(str);
+	  			}
+    		},
+    		error:function(){
+    			alert('데이터등록실패');
+    		},
+    		complete:function(){}
+    	});
+})
+</script>
 </html>

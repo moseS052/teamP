@@ -1,5 +1,5 @@
 package com.team.pj;
 
-public interface iteamp {
+public interface iteamP {
 
 }
