@@ -126,6 +126,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number  | varchar2     | varchar2 | varchar2 | varchar2 | varchar2 | char | varchar2 | number    | varchar2        | varchar2 |
 | primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 |                 |          |
 
+★ m_no seq = member_sq    ,   사용-  member_sq.nextval
 
 
 ### talent_check  =재능체크테이블
@@ -146,6 +147,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number      | varchar2 |
 | primary     | NN       |
 
+★ t_no seq = talent_sq    ,   사용-  talent_sq.nextval
 
 
 ### activities  =활동내역테이블
@@ -200,6 +202,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number  | number    | varchar2 | number  | date   | number      |
 | primary |           | NN       | NN      | NN     |             |
 
+★ c_no seq = comment_sq    ,   사용-  comment_sq.nextval  
 
 
 ### questions 질문게시판테이블(Q&A)
@@ -211,6 +214,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | primary | NN       |          | NN     | NN      |          |
 
 ♠ 자주묻는질문은 미리 questions 게시판에 입력후 사용하는 쪽으로
+★ q_no seq = questions_sq    ,   사용-  questions_sq.nextval 
 
 
 
@@ -223,6 +227,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | primary | NN      | NN       |          | NN     |      |
 
 ※추가할 내용이 많아질 것 같음
+★ l_no seq = list_sq    ,   사용-  list_sq.nextval 
 
 
 
