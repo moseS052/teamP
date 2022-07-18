@@ -214,6 +214,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | primary | NN       |          | NN     | NN      |          |
 
 ♠ 자주묻는질문은 미리 questions 게시판에 입력후 사용하는 쪽으로
+
 ★ q_no seq = questions_sq    ,   사용-  questions_sq.nextval 
 
 
