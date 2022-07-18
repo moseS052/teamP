@@ -1,5 +1,8 @@
 package com.team.pj;
 
-public interface iteamp {
+import java.util.ArrayList;
 
+public interface iteamP {
+	ArrayList<commentDTO> comlist();
+	
 }

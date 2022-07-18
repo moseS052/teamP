@@ -2,5 +2,8 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.team.pj.iteamp">
+<mapper namespace="com.team.pj.iteamP">
+<select id="comlist" resultType="com.team.pj.commentDTO">
+	select c_no, b_no, c_con, m_no, c_date, c_pa_no from comment_t 
+</select>
 </mapper>
