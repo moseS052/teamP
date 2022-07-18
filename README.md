@@ -178,7 +178,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ★ 게시판 Read 시에는 view 사용  boardP , boardQ, boardF
 
-★ b_no seq = board_sq    ,  board_sp.nextval  
+★ b_no seq = board_sq    ,   사용-  board_sq.nextval  
 
 
 
@@ -197,7 +197,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | c_no    | b_no      | c_con    | m_no    | c_date | c_pa_no     |
 | ------- | --------- | -------- | ------- | ------ | ----------- |
 | 자체seq | 게시판seq | 내용     | 회원seq | 시간   | 상위댓글seq |
-| nember  | number    | varchar2 | number  | date   | number      |
+| number  | number    | varchar2 | number  | date   | number      |
 | primary |           | NN       | NN      | NN     |             |
 
 
