@@ -116,7 +116,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ----
 
-#### ※sysdate 사용하지말고 current_date 로 
+### ※sysdate 사용하지말고 current_date 로 
 
 
 
