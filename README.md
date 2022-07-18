@@ -228,6 +228,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | primary | NN      | NN       |          | NN     |      |
 
 ※추가할 내용이 많아질 것 같음
+
 ★ l_no seq = list_sq    ,   사용-  list_sq.nextval 
 
 
