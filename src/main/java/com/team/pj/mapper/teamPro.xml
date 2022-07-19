@@ -7,7 +7,8 @@
 	select * from member 
 </select>
 <insert id="insert">
-	insert into member values(member_sq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+	insert into member
+	values(member_sq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
 </insert>
 <select id="count" resultType="int">
 	select count(*) cnt from member where id=#{param1} and pw=#{param2}

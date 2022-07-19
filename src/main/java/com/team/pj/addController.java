@@ -32,21 +32,32 @@ public class addController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	//여기서부터 작성
-//	@RequestMapping(value = "/", method = RequestMethod.GET)
-//	public String home(HttpServletRequest req, Model model) {
-//		HttpSession session=req.getSession();
-//		if(session.getAttribute("newuser")==null) { //로그인 하기 전 상태
-//			model.addAttribute("userinfo","");
-//
-//		}else { //로그인 성공 후
-//			model.addAttribute("userinfo",session.getAttribute("newuser"));
-//		}
-//		
-//		return "redirect:/";
-//	}
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String home(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		if(session.getAttribute("newuser")==null) { //로그인 하기 전 상태
+			model.addAttribute("userinfo","");
+			
+
+		}else { //로그인 성공 후
+			model.addAttribute("userinfo",session.getAttribute("newuser"));
+			
+		}
+		return "home";
+		
+	}
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String doLogin() {
+	//로그인 팝업
+	public String doLogin(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+//		req.getParameter("id");
+//		req.getParameter("pw");
 		return "login";
+	}
+	@RequestMapping(value="/signup", method=RequestMethod.GET)
+	//회원가입 팝업
+	public String doSignup() {
+		return "signup";
 	}
 	@RequestMapping(value="/user_check", method=RequestMethod.POST)
 	public String doCheck(HttpServletRequest req,Model model) {
@@ -56,6 +67,7 @@ public class addController {
 		model.addAttribute("signlist",mlist);
 		int n=m.count(req.getParameter("id"),Integer.parseInt(req.getParameter("pw")));
 		model.addAttribute("cnt",n);
+		System.out.println("cnt="+n);
 		
 		String user_id=req.getParameter("id");
 		String password=req.getParameter("pw");
@@ -76,14 +88,15 @@ public class addController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	@RequestMapping(value="/signup", method=RequestMethod.POST)
+	@RequestMapping(value="/sign", method=RequestMethod.POST)
 	//회원가입
-	public String doSignup(@RequestParam String pid,@RequestParam String ppwd,@RequestParam String pname,
+	public String doSign(@RequestParam String pid,@RequestParam String ppw,@RequestParam String pname,
 			@RequestParam String pnick,@RequestParam String pphone,
 			@RequestParam String pgender,@RequestParam String pmail,
 			@RequestParam String pbirth,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		p.insert(pid,ppwd,pname,pnick,pphone,pgender,pmail,pbirth);
+		System.out.println("id="+pid);
+		p.insert(pid,ppw,pname,pnick,pphone,pgender,pmail,pbirth);
 		return "redirect:/login";
 	}
 	
