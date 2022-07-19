@@ -5,6 +5,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- <link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous"> -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -42,7 +47,9 @@
 </script>
 
 </head>
+<style>
 
+</style>
 <body class="single single-post">
 
 	<div id="preloader"></div>
@@ -128,46 +135,39 @@
 		<div class="container">
 			<div class="gap"></div>
 			<div class="row gap">
-				<div class="col-md-12">
-
+				<div class="col-md-10">
+					<input type="text" id="page"><input type="button"
+						id="page_btn">
 					<div id="comments">
-                        <div id="comments-list gap">
-                            <div class="media">
-                                
-                                <div class="media-body fade-left">
-                                    <div class="well">
-                                        <div class="media-body">
-                                        	<input type="hidden" id="b_no">
-                                            <strong id="writer"></strong>&nbsp; <small id="date">30th Jan, 2014</small>
-                                        </div>
-                                        <p>test text1</p>
-                                        <a class="pull-right btn btn-primary btn-outlined" href="#">Reply</a>
-                                    </div>
-                                </div>
-                            </div><!--/.media-->
-                        </div><!--/#comments-list--> 
+						<div id="comments-list gap">
+							<div class="media">
+								<div class="media-body fade-left" id="replyList"></div>
+							</div>
+						</div>
+						<!--/#comments-list-->
 
-                        <div id="comment-form" class="mt fade-up">
-                            <form class="form-horizontal" role="form">
-                                <div class="form-group">
-                                    <div class="col-sm-6">
-                                        <input type="text" class="form-control" placeholder="Name">
-                                    </div>
-                                    <div class="col-sm-6">
-                                        <input type="email" class="form-control" placeholder="Email">
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <div class="col-sm-12">
-                                        <textarea rows="8" class="form-control" placeholder="Comment"></textarea>
-                                    </div>
-                                </div>
-                                <button type="submit" class="btn btn-primary btn-outlined">Submit Comment</button>
-                            </form>
-                        </div><!--/#comment-form-->
-                    </div><!--/#comments-->   
+						<div id="comment-form" class="mt fade-up">
+							<form class="form-horizontal" role="form">
+								<div class="form-group">
+									<div class="col-sm-6">
+										<input type="text" class="form-control" placeholder="작성자"
+											id="writer_1"><input type="text" id="commentNumber">
+									</div>
+								</div>
+								<div class="form-group">
+									<div class="col-sm-12">
+										<textarea rows="8" class="form-control" placeholder="Comment"
+											id="c_con"></textarea>
+									</div>
+								</div>
+								<input type="button" id="submit"
+									class="btn btn-primary btn-outlined" value="댓글등록">
+							</form>
+						</div>
+						<!--/#comment-form-->
+					</div>
+					<!--/#comments-->
 
-					
 
 
 
@@ -234,32 +234,88 @@
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+	<!-- <script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+		crossorigin="anonymous"></script> -->
 </body>
 <script>
 	let b_no = '${detail.b_no}';//게시글 번호
 	$(document).ready(function() {
-		$('#writer').text('서충실');
+	}).on('click', '#page_btn', function() {
+		commentLIst();
+	}).on('click', '#submit', function() {
+		insertComment();
 	})
+	.on('click','#delete_comment',function(){
+		console.log($(this).attr('value'));
+		let s = $(this).attr('value');
+		if(confirm('댓글을 삭제하시겠습니까')){
+		 	$.ajax({
+				url:'delete_comment',
+				data:{c_no:s},
+				dataType:'json',
+				type:'get',
+				success:function(data){
+					console.log(data);
+					commentLIst();
+				}
+			});
+		}
+	})
+	 .on('click','#update_comment',function(){
+		let s=$(this).attr('seq');
+		let t=$(this).attr('value');
+		let p =$('#page').val();
+		console.log(s);
+		$('#writer_1').val(s)
+		$('#commentNumber').val(t);
+		$('#submit').val('댓글수정');
+		
+	}) 
+	function insertComment() {
+		$.ajax({
+			url : 'insertcomment',
+			data : {
+				b_no : $('#page').val(),
+				c_con : $('#c_con').val(),
+				m_no : $('#writer_1').val()
+			},
+			type : 'post',
+			success : function() {
+				commentLIst();
+				$('#page').val('');
+				$('#c_con').val('');
+				$('#writer_1').val('');
+			}
+		});
+	}
 	function commentLIst() {
 		$
 				.ajax({
 					url : 'comment',
-					data : '',
+					data : {
+						page : $('#page').val()
+					},
 					dataType : 'json',
 					type : 'get',
+					beforeSend : function() {
+						$('#replyList').empty();
+					},
 					success : function(data) {
 						for (let i = 0; i < data.length; i++) {
 							com = data[i];
-							let list = "<li><p>"
-									+ "작성자:<input type='text' id='writer'" + "value="+ com['m_no']+">"
-									+ "<input type='text' id='date'"+ "value='"
-									+com['c_date']+"'>"
-									+ "</p><p>"
-									+ "<textarea rows='1' cols='30' id='content'>"
-									+ com['c_con']
-									+ "</textarea></p><a>답글쓰기</a></li>";
-
-							console.log(list);
+							let list = '<div class="well" ><div class="media-heading" >'
+					        		  +'<strong>'+com['m_no']+'</strong>&nbsp; <small>'
+					            	  +com['c_date']+'</small><div class="dropdown pull-right">'
+					            	  +'<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
+					                  +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
+					                  +'<a href=# class="dropdown-item" id="update_comment" seq='+com['m_no']+' value="'+com['c_no']+'">수정</a><br>'
+					                  +'<a href=# class="dropdown-item" id="delete_comment" value="'+com['c_no']+'">삭제</a></div>'
+					            	  +'</div></div>'
+					    			  +'<p>'+com['c_con']+'</p>'
+					    			  +'<a class="pull-left btn btn-primary btn-outlined" href="#">답글</a></div>';
+					    	console.log(list);
 							$('#replyList').append(list);
 						}
 

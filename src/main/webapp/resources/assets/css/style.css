@@ -210,9 +210,9 @@ hr {
 }
 
 .dropdown-menu {
-    opacity: 0;
+   opacity: 0;
     left: 0;
-    -webkit-transition: all .1s ease-in-out;
+   -webkit-transition: all .1s ease-in-out;
     -moz-transition: all .1s ease-in-out;
     -ms-transition: all .1s ease-in-out;
     -o-transition: all .1s ease-in-out;
@@ -1707,8 +1707,8 @@ h3.comments-title {
 
 .comment-list {
     list-style-type: none;
-    margin: 0 0 40px 0;
-    padding: 0;
+    margin: 0 100px 50px 100px;
+    padding: 50px;
 }
 
 .comment-list .comment {
@@ -1918,4 +1918,6 @@ i.pinterest,span.pinterest{color: #cb2027;}
         margin-bottom: 10px;
         text-align: center;
     }
+    
+
 }
