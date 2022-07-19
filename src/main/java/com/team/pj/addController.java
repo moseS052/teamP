@@ -23,6 +23,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -40,9 +41,18 @@ public class addController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@RequestMapping("/map")
+	public String doMap(HttpServletRequest req,Model model) {
+		String key = req.getParameter("key");
+		System.out.println(key);
+		model.addAttribute("key",key);
+		return "map_open";
+	}
+	
+	
 	@RequestMapping("/find")
 	public String doList() {
-		return "addjsp";
+		return "kwon";
 	}
 	@ResponseBody
 	@RequestMapping(value="/ko_check",produces="application/text;charset=utf8")

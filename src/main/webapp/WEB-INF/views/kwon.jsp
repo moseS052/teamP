@@ -47,6 +47,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
 <title>Team Project</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
@@ -160,7 +161,7 @@
 						<h3>재능기부신청서</h3>
 
 						<p>작성자:<input type="text" class="form-control" name="name" id="name" placeholder="Name" /></p>
-                        
+                        <p><input type="checkbox" class="btn btn-primary btn-outlined">미용</p>
 						<p>신청구역(서울)<select id="sel" class="form-control">
                             <option>강남구</option>
                             <option>강동구</option>
@@ -192,12 +193,12 @@
                         
 						<p><select id="koo" class="form-control"">
                             <input class="btn btn-outlined btn-primary" type="button" id="load" value="길찾기" />
-                            </select></p>
-						<p><input type="text" class="form-control" id="ko"/>
-						</p>
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+                            </select></p> 
+						<p>상세주소<input type="text" class="form-control" id="ko" name="ko"/>
+						<input type="hidden" id='hid'>
+						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
+						<div class="col-lg-4"></div><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="등록" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
 					</div>
-
 				</div>
 			</div>	
 	    </section>
@@ -251,21 +252,33 @@
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
 $(document)
 .ready(function(){
 	
 })
+.on('click','#map',function(){
+	let aa=$('#hid').val()
+	console.log(aa);
+	console.log('"'+'map?key='+aa+'"');
+ 	window.open('map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
+})
 .on('click','#load',function(){
 	let str=$('#koo option:selected').val();
 	$('#ko').val(str);
+	let ar = str.split(',');
+	let br = ar[0].split('(');
+	$('#hid').val(br[0]);
 })
 .on('click','#find',function(){
 	$.ajax({
 		type:'get',url:'ko_check',data:{area:$('#sel option:selected').text()},
 			dataType:'json',
 	  		success:function(data){
+	  			$('#koo').empty();
 // 	  			console.log(data);
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
@@ -280,5 +293,6 @@ $(document)
     		complete:function(){}
     	});
 })
+
 </script>
 </html>
