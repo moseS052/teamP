@@ -903,13 +903,14 @@ hr {
 ========================================================================== */
 .message-item {
     margin-bottom: 25px;
-    margin-left: 40px;
+    margin-left: -20px;
     position: relative;
 }
 
 .message-item .message-inner {
-    background: #E6E6E6;
+    background: #d8d8d8;
     border-radius: 0;
+    width:280px;
     padding: 10px;
     position: relative;
 }
@@ -933,7 +934,7 @@ hr {
 }
 
 .message-item .message-inner:after {
-    border-right: 10px solid #E6E6E6;
+    border-right: 10px solid #d8d8d8;
     border-style: solid;
     border-width: 10px;
     color: rgba(0,0,0,0);
@@ -951,23 +952,25 @@ hr {
     border-radius: 2px;
     content: "";
     height: 70%;
-    left: -29px;
+    left: -25px;
     position: absolute;
-    width: 1px;
+    width: 0px;
     top: 35px;
 }
 
-.message-item:after {
-    border-radius: 50%;
-    content: '\f017';
-    font-family: 'Fontawesome';
-    height: 15px;
-    left: -35px;
-    position: absolute;
-    top: 10px;
-    width: 15px;
-    line-height: 16px;
-}
+/* .message-item:after { */
+/*     border-radius: 50%; */
+/*     content:""; */
+/*     background-image: url(../img/avatar.png); */
+/*     background-size:10px 10px; */
+/* /*     font-family: 'Fontawesome'; */ */
+/*     height: 21px; */
+/*     left: -35px; */
+/*     position: absolute; */
+/*     top: 10px; */
+/*     width: 21px; */
+/*     line-height: 16px; */
+/* } */
 
 .message-item .message-head {
     border-bottom: 1px solid #eee;

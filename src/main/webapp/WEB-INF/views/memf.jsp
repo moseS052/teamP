@@ -22,12 +22,12 @@
 </div>
 
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
-<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote">쪽지 보내기</a></li>
+<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote">쪽지 보내기</a>
 </body>
 <script>
 $(document)
 .on('click','#btnSendNote',function(){
-	window.open("note?m_no=1&m_pa_no=3", "_blank", "width=300, height=300, top=110, left=1700");
+	window.open("note?m_no=1&m_pa_no=3", "_blank", "width=350, height=400, top=110, left=1700");
 })
 
 

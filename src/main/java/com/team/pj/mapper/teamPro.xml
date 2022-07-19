@@ -4,6 +4,6 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.pj.iteamP">
 <select id='getNoteCon' resultType="com.team.pj.noteVO">
-	select * from note where (m_no=#{param1} and m_pa_no=#{param2}) or (m_no=#{param2} and m_pa_no=#{param1})
+	select * from note where (m_no=#{param1} and m_pa_no=#{param2}) or (m_no=#{param2} and m_pa_no=#{param1}) order by n_date
 </select>
 </mapper>
