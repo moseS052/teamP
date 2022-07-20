@@ -127,7 +127,8 @@ $(document)
 					<h1 class="fade-down gap">
 						<span class="pe-7s-chat"></span> QUOTE
 					</h1>
-					<h2 class="fade-up">Something Rather Awesome Is Afoot...</h2>
+					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
+					<input type='text' id='searching'><input type='button' id='btnSearch' value='검색 알고리즘'></h2>
 					<div class="spacer"></div>
 				</div>
 			</div>
@@ -1236,6 +1237,16 @@ $(document)
 $(document)
 .on('click','#meminfo',function(){
 	window.open("meminfo", "_blank", "width=400, height=400, top=40, left=1340");
+})
+
+.on('click','#btnSearch',function(){
+	if($('#selSearch option:selected').text()=='작성자'){
+		let str='%'+$('#searching').val()+'%';
+		console.log(str);
+	} else {
+		let str='%'+$('#searching').val()+'%';
+	}
+	// 여기 하던거 검색 알고리즘
 })
 
 </script>

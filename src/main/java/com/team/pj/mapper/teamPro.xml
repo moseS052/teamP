@@ -9,5 +9,10 @@
 <insert id='noteSend'>
 	insert into note values(note_sq.nextval,#{param1},#{param3},current_date,#{param2})
 </insert>
-
+<select id='getID' resultType="String">
+	select id from member where m_no=#{param1}
+</select>
+<select id='getM_no' resultType="int">
+	select m_no from member where id=#{param1}
+</select>
 </mapper>
