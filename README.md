@@ -243,6 +243,13 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number  | number      |
 | NN      | NN          |
 
+### l_route  = 목록 파일경로테이블
+
+| l_no      | l_route  |
+| --------- | -------- |
+| 목록seq   | 경로     |
+| number    | varchar2 |
+| NN        | NN       |
 
 
 ### apply  =신청자테이블
