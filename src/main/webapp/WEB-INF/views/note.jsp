@@ -17,10 +17,11 @@
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 </head>
 <style>
+
 .message-item:after {
     border-radius: 50%;
-    content:"";
-/*     background-image:url(resources/assets/img/avatar2.png); */
+    content:"";     
+ 	background-image:url(resources/assets/img/avatar2.png);  
     background-size:21px 21px;
 /*     font-family: 'Fontawesome'; */
     height: 21px;
@@ -49,13 +50,19 @@ textarea {
 /* } */
 </style>
 <body  >
+<div style="margin-left:-35px">
+	<table>
+	<tr><td><textarea cols="27" rows="3" id='n_con'></textarea></td>
+		<td style="padding:5px;"><a class="btn btn-primary btn-outlined" href="#" id="btnSend">보내기</a></td></tr>
+	</table>
+	</div>
 <div id="divadd" style="margin-bottom:-3px;" >
 <!-- 	<div class="message-item fade-up"  > -->
 <!-- 		<div class="message-inner" > -->
 <!-- 			<div class="message-head clearfix" > -->
 <!-- 				<div class="user-detail" > -->
-<!-- 						<h5 class="handle" >aaaa</h5> -->
-<!-- 							<div class="post-meta" > -->
+<!-- 						<h5 class="handle" >a<br><br><br>aaaa<br></h5> -->
+<!-- 							<div class="post-meta"  > -->
 <!-- 								<div class="asker-meta" > -->
 <!-- 									<span class="qa-message-what"></span> <span -->
 <!-- 										class="qa-message-when"> <span -->
@@ -69,12 +76,7 @@ textarea {
 <!-- 		</div> -->
 <!-- 	</div> -->
 	</div>		
-	<div style="margin-left:-35px">
-	<table >
-	<tr><td><textarea cols="27" rows="3" ></textarea></td>
-		<td style="padding:5px;"><a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">보내기</a></td></tr>
-	</table>
-	</div>
+	
 </body>
 
 
@@ -82,9 +84,34 @@ textarea {
 $(document)
 .ready(function(){
 	noteCon();
+	
+// 	$('<style>.message-item:after {
+//  	background-image:url(resources/assets/img/avatar2.png);
+// 	}</style>').appendTo('head');
+// 	console.log($(".message-item::after").css("content"));
+})
+.on('keyup','#n_con',function(key){
+	console.log(key.keyCode);
+	if(key.keyCode==13){
+		$('#btnSend').trigger('click');
+	}
 })
 
-
+.on('click','#btnSend',function(){
+	let note = $('#n_con').val();
+	let youseq = 3;
+	$.ajax({
+		type:'get',url:'noteSend',dataType:'text',data:{n_con:note,youseq:youseq},
+		success:function(){
+			$('#n_con').val('');
+			noteCon();
+		},
+		error:function(){
+			alert('메세지를 보내지 못합니다');
+		},
+		complete:function(){}
+	})
+})
 
 
 
@@ -97,17 +124,25 @@ function noteCon(){
 			$('#divadd').empty();
 			for(let i=0;i<data.length;i++){
 				notetem=data[i];
-				$('.message-item:after').css("background-image","url(resources/assets/img/avatar2.png)");
+// 				$('.message-item:after').css("background-image","url(resources/assets/img/avatar2.png)");
 				// 제이쿼리 css적용하기 = 아바타
-// 				console.log(notetem["n_con"]);
-
-				let str='<div class="message-item fade-up" style="margin-bottom:5px;"><div class="message-inner">'
-					+'<div class="message-head clearfix"><div class="user-detail">'
-					+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta">'
-					+'<div class="asker-meta"><span class="qa-message-what"></span>'
-					+'<span	class="qa-message-when"><span class="qa-message-when-data">'+notetem["n_date"]+'</span>'
-					+'</span></div></div></div></div></div></div>'
-				$('#divadd').append(str);
+				if(notetem['m_no']==1){
+					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#e4e4e4">'
+						+'<div class="message-head clearfix" style="background-color:#e4e4e4"><div class="user-detail" >'
+						+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta" >'
+						+'<div class="asker-meta" ><span class="qa-message-what"></span>'
+						+'<span	class="qa-message-when"><span class="qa-message-when-data">'+notetem["n_date"]+'</span>'
+						+'</span></div></div></div></div></div></div>'
+					$('#divadd').prepend(str);
+				} else {
+					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#d8d8d8">'
+						+'<div class="message-head clearfix" style="background-color:#d8d8d8"><div class="user-detail" >'
+						+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta" >'
+						+'<div class="asker-meta" ><span class="qa-message-what"></span>'
+						+'<span	class="qa-message-when"><span class="qa-message-when-data">'+notetem["n_date"]+'</span>'
+						+'</span></div></div></div></div></div></div>'
+					$('#divadd').prepend(str);
+				}
 			} 
 			noteCon()
 		},
@@ -117,6 +152,7 @@ function noteCon(){
 		complete:function(){}
 	})
 }
+
 
 </script>
 </html>

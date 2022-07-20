@@ -18,7 +18,7 @@
 </head>
 <body>
 <div>
-	<img src=<c:url value="/resources/assets/img/avatar.png"/> width="200px" height="200px" />
+	<img src=<c:url value="resources/assets/img/avatar1.png"/> width="200px" height="200px" />
 </div>
 
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>

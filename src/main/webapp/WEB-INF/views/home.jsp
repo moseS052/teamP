@@ -71,7 +71,7 @@ $(document)
 				</h2>
 			</div>
 			<div>
-				<a href='#'><img src=<c:url value="/resources/assets/img/avatar.png"/> width="20px" height="20px" id='meminfo' /></a>
+				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
