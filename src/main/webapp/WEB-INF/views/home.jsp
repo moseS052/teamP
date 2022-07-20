@@ -17,9 +17,9 @@
 <link href="<c:url value="/resources/assets/css/style.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/font-awesome.min.css"/>" rel="stylesheet">
 <link
-	href='http://fonts.googleapis.com/css?family=Cabin:300,400,700,300italic,400italic'
+	href="<c:url value='http://fonts.googleapis.com/css?family=Cabin:300,400,700,300italic,400italic'/>"
 	rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700'
+<link href="<c:url value='http://fonts.googleapis.com/css?family=Lato:400,300,700'/>"
 	rel='stylesheet' type='text/css'>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
@@ -29,40 +29,24 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
-	$(document).ready(
-			function() {
-				jQuery('#headerwrap').backstretch(
-						[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-							"resources/assets/img/bg/bg3.jpg" ], {
-							duration : 8000,
-							fade : 500
-						});
-
-				// Map Position And Settings
-				$("#mapwrapper").gMap({
-					controls : false,
-					scrollwheel : false,
-					markers : [ {
-						latitude : 40.7566,
-						longitude : -73.9863,
-						icon : {
-							image : "resources/assets/img/marker.png",
-							iconsize : [ 44, 44 ],
-							iconanchor : [ 12, 46 ],
-							infowindowanchor : [ 12, 0 ]
-						}
-					} ],
-					icon : {
-						image : "/resources/assets/img/marker.png",
-						iconsize : [ 26, 46 ],
-						iconanchor : [ 12, 46 ],
-						infowindowanchor : [ 12, 0 ]
-					},
-					latitude : 40.7566,
-					longitude : -73.9863,
-					zoom : 14
+$(document)
+.ready(
+	function() {
+		jQuery('#headerwrap').backstretch(
+				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
+					"resources/assets/img/bg/bg3.jpg" ], {
+					duration : 8000,
+					fade : 500
 				});
-			});
+
+	});
+
+// $('#meminfo').on('click',function(){
+	
+// })
+// .on('click','#meminfo',function(){
+// })
+
 </script>
 </head>
 
@@ -85,6 +69,9 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
+			</div>
+			<div>
+				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -1242,7 +1229,14 @@
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
+		src='<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"/>'></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+$(document)
+.on('click','#meminfo',function(){
+	window.open("meminfo", "_blank", "width=400, height=400, top=40, left=1340");
+})
+
+</script>
 </html>
