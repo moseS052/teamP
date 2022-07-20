@@ -7,6 +7,7 @@ public class commentDTO {
 	private int m_no;
 	private String c_date;
 	private int c_pa_no;
+	private int replycount;
 
 	public commentDTO() {
 	}
@@ -57,6 +58,14 @@ public class commentDTO {
 
 	public void setC_pa_no(int c_pa_no) {
 		this.c_pa_no = c_pa_no;
+	}
+
+	public int getReplycount() {
+		return replycount;
+	}
+
+	public void setReplycount(int replycount) {
+		this.replycount = replycount;
 	}
 
 }

@@ -115,7 +115,7 @@
 		</div>
 	</nav>
 	<!-- END NAV -->
-
+	
 	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
 		<div class="container">
@@ -129,7 +129,7 @@
 		</div>
 		<!-- /container -->
 	</div>
-
+	<input type="text" readonly id="comment_cno">
 	<div id="content-wrapper">
 		<section id="about"></section>
 		<div class="container">
@@ -151,12 +151,12 @@
 								<div class="form-group">
 									<div class="col-sm-6">
 										<input type="text" class="form-control" placeholder="작성자"
-											id="writer_1"><input type="text" id="commentNumber">
+											id="writer_1">
 									</div>
 								</div>
 								<div class="form-group">
 									<div class="col-sm-12">
-										<textarea rows="8" class="form-control" placeholder="Comment"
+										<textarea rows="8" class="form-control" style="resize:none;" placeholder="Comment"
 											id="c_con"></textarea>
 									</div>
 								</div>
@@ -266,13 +266,107 @@
 	 .on('click','#update_comment',function(){
 		let s=$(this).attr('seq');
 		let t=$(this).attr('value');
+		$('#comment_cno').val(t);
+		console.log(t);
 		let p =$('#page').val();
-		console.log(s);
-		$('#writer_1').val(s)
-		$('#commentNumber').val(t);
-		$('#submit').val('댓글수정');
+		let str=$('#comment_content'+t).text();
+		let html='<textarea id="modifycomment" tseq="'+t+'" style="width:800px; height:100px; resize:none;">'+str+'</textarea><br>'
+				 +'<a class="pull-left btn btn-primary btn-outlined" id="reply_revice">댓글수정</a>';
+		$('#comment_board'+t).html(html);
 		
-	}) 
+	})
+	.on('click','#reply_revice',function(){
+		console.log('버튼 눌리나요');
+		console.log($('#modifycomment').attr('tseq'));
+		console.log($('#modifycomment').val());
+		  $.ajax({
+			url:'update_comment',
+			data:{
+				c_no:$('#comment_cno').val(),
+				c_con:$('#modifycomment').val()	
+			},
+			dataType : 'json',
+			type:'post',
+			success:function(data){
+				commentLIst();
+			}
+		});  
+	})
+	.on('click','#re_reply',function(){
+		let s=parseInt($(this).attr('reseq'));
+		console.log($(this).attr('reseq'));
+		let t=$(this).text().split('&nbsp;');
+		console.log($('#reply_controll'+s).val());
+		if($('#reply_controll'+s).val()=='close'){
+			rerplyList(s);
+			
+			$('#reply_controll'+s).val('open');
+			let strs='<div style="display:inline-block; overflow:hiddlen; white-space:nowrap;"><textarea style="width:400px; height:50px; resize:none;" id="re_replytextArea"></textarea>'
+				 +'&nbsp;&nbsp;<input type="button" id="re_replyaddbtn'+s+'" class="btn btn-primary btn-outlined" value="답글추가"><input type="text" id="re_replynum"></div>';
+			$('#re_replyadd'+s).append(strs);
+			$('#re_replynum').val(s);
+	  	}else if($('#reply_controll'+s).val()=='open'){
+		  	$('#re_replylist'+s).empty();
+		  	$('#re_replyadd'+s).empty();
+		  	$('#re_replynum').val('');
+		  	$('#reply_controll'+s).val('close');
+	  	};
+	})
+	
+	.on('click','#re_replyaddbtn',function(){
+		insertRe_Reply();
+		let s = $('#re_replynum').val();
+		rerplyList(s);
+	})
+	
+	function rerplyList(num){
+		$.ajax({
+			url:'re_reply',
+			data:{c_no:num},
+			dataType:'json',
+			type:'get',
+			beforeSend : function() {
+				$('#re_replylist'+num).empty();
+			},
+			success : function(data) {
+				let html='';
+				for(let i=0; i<data.length;i++){
+					let com = data[i];
+					html='<div class="well" style="margin:0 50px 0px 50px;">'
+		    			 +'<div class="media-heading">'
+		        		 +'<strong>'+com['m_no']+'</strong>&nbsp;'
+		        		 +'<small>'+com['c_date']+'</small>'
+		        		 +'<div class="dropdown pull-right">'
+		            	 +'<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
+		            	 +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
+		                 +'<a href=# class="dropdown-item">수정</a><br>'
+		                 +'<a href=# class="dropdown-item">삭제</a>'
+		                 +'</div></div></div><p>'+com['c_con']+'</p></div>';
+					 $('#re_replylist'+num).append(html);
+				};
+				
+			}
+		});
+	}
+	
+	function insertRe_Reply(){
+		$.ajax({
+			url:'re_replyinsert',
+			data:{
+				b_no:$('#page').val(),
+				c_pa_no:$('#re_replynum').val(),
+				m_no:7,
+				c_con:$('#re_replytextArea').val()
+				  },
+			type:'post',
+			dataType:'json',
+			success:function(data){
+				console.log(data);
+				$('#re_replytextArea').val('');
+			}
+			
+		});
+	}
 	function insertComment() {
 		$.ajax({
 			url : 'insertcomment',
@@ -306,15 +400,17 @@
 						for (let i = 0; i < data.length; i++) {
 							com = data[i];
 							let list = '<div class="well" ><div class="media-heading" >'
-					        		  +'<strong>'+com['m_no']+'</strong>&nbsp; <small>'
+					        		  +'<strong>'+com['m_no']+'</strong>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="text" id="realc_no" value="'+com['c_no']+'">'
 					            	  +com['c_date']+'</small><div class="dropdown pull-right">'
 					            	  +'<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
 					                  +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
 					                  +'<a href=# class="dropdown-item" id="update_comment" seq='+com['m_no']+' value="'+com['c_no']+'">수정</a><br>'
 					                  +'<a href=# class="dropdown-item" id="delete_comment" value="'+com['c_no']+'">삭제</a></div>'
 					            	  +'</div></div>'
-					    			  +'<p>'+com['c_con']+'</p>'
-					    			  +'<a class="pull-left btn btn-primary btn-outlined" href="#">답글</a></div>';
+					    			  +'<div id="comment_board'+com['c_no']+'"><p id="comment_content'+com['c_no']+'">'+com['c_con']+'</p>'
+					    			  +'<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'">답글&nbsp;'+com['count']
+					    			  +'</a><div><br><br><div style="margin:0 30px 0px 50px;"'
+					    			  +'id="re_replyadd'+com['c_no']+'"></div><div id="re_replylist'+com['c_no']+'"></div></div>';
 					    	console.log(list);
 							$('#replyList').append(list);
 						}

@@ -37,15 +37,18 @@ public class addController {
 	public String doList() {
 		return "comment";
 	}
+	//댓글 리스트 불러오기
 	@ResponseBody
 	@RequestMapping(value="/comment", produces="application/json;charset=utf-8")
 	public String comment(@RequestParam("page") int page) {
 		iteamP tp = sqlSession.getMapper(iteamP.class);
+		
 		ArrayList<commentDTO> comlist = tp.comlist(page);
 		JSONArray ja = new JSONArray();
 		for(int i = 0; i<comlist.size(); i++) {
 			commentDTO cdto= comlist.get(i);
 			JSONObject jo = new JSONObject();
+			jo.put("count",tp.countre_replylist(cdto.getC_no()));
 			jo.put("c_no", cdto.getC_no());
 			jo.put("b_no", cdto.getB_no());
 			jo.put("c_con", cdto.getC_con());
@@ -57,6 +60,7 @@ public class addController {
 		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
+	//댓글등록
 	@ResponseBody
 	@RequestMapping(value="/insertcomment", method=RequestMethod.POST)
 	public void insertComment(@RequestParam("b_no")int b_no,
@@ -66,6 +70,7 @@ public class addController {
 		tp.insertcomment(b_no, c_con, m_no);
 		
 	}
+	//댓글 삭제
 	@ResponseBody
 	@RequestMapping(value="/delete_comment", method=RequestMethod.GET)
 	public String deleteComment(@RequestParam("c_no")int c_no) {
@@ -74,5 +79,52 @@ public class addController {
 		System.out.println("댓글번호는="+c_no);
 		return Integer.toString(reccount);
 	}
+	//댓글 수정
+	@ResponseBody
+	@RequestMapping("/update_comment")
+	public String updatecommnet(@RequestParam("c_no")int c_no,
+								@RequestParam("c_con")String c_con) {
+		iteamP tp = sqlSession.getMapper(iteamP.class);
+		int reccount=tp.updatecomment(c_con, c_no);
+		return Integer.toString(reccount);
+	}
+	//대댓글 목록 출력
+	@ResponseBody
+	@RequestMapping(value="/re_reply", produces="application/json;charset=utf-8")
+	public String rereplylist(@RequestParam("c_no")int c_no) {
+		iteamP tp = sqlSession.getMapper(iteamP.class);
+		
+		ArrayList<commentDTO> re_replylist = tp.re_replylist(c_no);
+		System.out.println(re_replylist.size());
+		System.out.println("re_replylist:"+re_replylist);
+		JSONArray ja = new JSONArray();
+		for(int i = 0; i<re_replylist.size(); i++) {
+			commentDTO adto= re_replylist.get(i);
+			
+			JSONObject jo = new JSONObject();
+			jo.put("c_no", adto.getC_no());
+			jo.put("b_no", adto.getB_no());
+			jo.put("c_con", adto.getC_con());
+			jo.put("m_no", adto.getM_no());
+			jo.put("c_date", adto.getC_date());
+			jo.put("c_pa_no", adto.getC_pa_no());
+			ja.add(jo);
+		}
+		System.out.println(ja.toJSONString());
+		return ja.toJSONString();
+	}
+	//대댓글 등록
+	@ResponseBody
+	@RequestMapping(value="/re_replyinsert", produces="application/json;charset=utf-8",  method=RequestMethod.POST)
+	public String re_replyinsert(@RequestParam("b_no")int b_no,
+								 @RequestParam("c_pa_no")int c_pa_no,
+								 @RequestParam("m_no")int m_no,
+								 @RequestParam("c_con")String c_con) {
+		iteamP tp = sqlSession.getMapper(iteamP.class);
+		int reccount=tp.insertReRply(b_no, c_con, m_no, c_pa_no);
+		
+		return Integer.toString(reccount);
+	}
+	
 
 }
