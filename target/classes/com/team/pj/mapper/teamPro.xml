@@ -7,10 +7,16 @@
 	select * from member 
 </select>
 <insert id="insert">
-	insert into member
-	values(member_sq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})
+	insert into member(m_no,id,pw,name,nick,phone,gender,mail,birth)
+	values(member_sq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})	
+</insert>
+<insert id="talent">
+	insert into talent_check(m_no,t_no) select a.m_no,#{param1} from member a left join talent_check b on a.m_no=b.m_no where 1=1 and b.m_no is null
 </insert>
 <select id="count" resultType="int">
 	select count(*) cnt from member where id=#{param1} and pw=#{param2}
+</select>
+<select id="id" resultType="int">
+	select count(id) idcnt from member where id=#{param1}
 </select>
 </mapper>

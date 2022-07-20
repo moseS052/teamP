@@ -63,7 +63,7 @@
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
 			 	<c:if test="${userinfo==''}">
-				<a href="javascript:logIn()">login</a><a href="javascript:joinMember()">회원가입</a>
+				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${userinfo!=''}">
 				${userinfo }&nbsp;님<a href='logout'>Logout</a>

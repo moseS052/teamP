@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 
 
@@ -46,26 +47,26 @@ public class addController {
 		return "home";
 		
 	}
+	//로그인
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	//로그인 팝업
 	public String doLogin(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
 //		req.getParameter("id");
 //		req.getParameter("pw");
 		return "login";
 	}
+	//회원가입
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	//회원가입 팝업
 	public String doSignup() {
 		return "signup";
 	}
 	@RequestMapping(value="/user_check", method=RequestMethod.POST)
 	public String doCheck(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
-		iteamP m=sqlSession.getMapper(iteamP.class);
-		ArrayList<memberDTO> mlist=m.listMember();
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		ArrayList<memberDTO> mlist=p.listMember();
 		model.addAttribute("signlist",mlist);
-		int n=m.count(req.getParameter("id"),Integer.parseInt(req.getParameter("pw")));
+		int n=p.count(req.getParameter("id"),Integer.parseInt(req.getParameter("pw")));
 		model.addAttribute("cnt",n);
 		System.out.println("cnt="+n);
 		
@@ -74,7 +75,7 @@ public class addController {
 		
 		if(n==0) { //로그인 실패			
 			session.setAttribute("newuser",null);
-			//로그인실패면 null해야됨 "/"에서 null체크 해야되니까~
+			
 		}else if(n!=1) { //에러
 			
 		}else {	//로그인 성공	
@@ -88,16 +89,35 @@ public class addController {
 		session.invalidate();
 		return "redirect:/";
 	}
-	@RequestMapping(value="/sign", method=RequestMethod.POST)
 	//회원가입
-	public String doSign(@RequestParam String pid,@RequestParam String ppw,@RequestParam String pname,
-			@RequestParam String pnick,@RequestParam String pphone,
-			@RequestParam String pgender,@RequestParam String pmail,
-			@RequestParam String pbirth,Model model) {
+	@ResponseBody
+	@RequestMapping(value="/sign", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	public String doSign(@RequestParam("id") String id,@RequestParam("pw") String pw,
+			@RequestParam("name") String name,
+			@RequestParam("nick") String nick,@RequestParam("phone") String phone,
+			@RequestParam("gender") String gender,@RequestParam("mail") String mail,
+			@RequestParam("birth") String birth) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		System.out.println("id="+pid);
-		p.insert(pid,ppw,pname,pnick,pphone,pgender,pmail,pbirth);
-		return "redirect:/login";
+		System.out.println("id="+id);
+		int reccount=p.insert(id,pw,name,nick,phone,gender,mail,birth);
+		return Integer.toString(reccount);
 	}
-	
+	//회원가입시 재능체크테이블에도 추가 
+	@ResponseBody
+	@RequestMapping(value="/talent", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	public String doTalent(@RequestParam("t_no") String t_no) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		System.out.println("t_no="+t_no);
+		int reccount=p.talent(t_no);
+		return Integer.toString(reccount);
+	}
+	//아이디 중복체크
+	@ResponseBody
+	@RequestMapping(value="/idcheck", method=RequestMethod.GET, produces="application/text;charset=utf8")
+	public String doIdcheck(@RequestParam("id") String id, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int idcnt=p.id(id);
+		System.out.println("idcnt="+idcnt);
+		return Integer.toString(idcnt);		
+	}
 }
