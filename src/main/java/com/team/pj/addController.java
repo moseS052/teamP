@@ -30,6 +30,7 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+
 import ch.qos.logback.core.net.SyslogOutputStream;
 
 /**
@@ -40,7 +41,101 @@ public class addController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+	@ResponseBody
+	@RequestMapping(value="/find_list", produces="application/text;charset=utf8")
+	public String dofind_List(@RequestParam("l_koo") String l_koo) {
+		System.out.println(l_koo);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO> l_list=team.getL_list(l_koo);
+		JSONArray ja =new JSONArray();
+		for(int i=0; i<l_list.size();i++) {
+			L_listDTO ldto = l_list.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("l_no", ldto.getL_no());
+			jo.put("m_no", ldto.getM_no());
+			jo.put("l_title", ldto.getL_title());
+			jo.put("l_date", ldto.getL_date());
+			ja.add(jo);
+		}
+		System.out.println(ja.toJSONString());
+		return ja.toJSONString();
+	}
+	@ResponseBody
+	@RequestMapping(value="/open_list", produces="application/text;charset=utf8")
+	public String doOpen_list(@RequestParam("l_koo") String l_koo) {
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO> l_list=team.getL_list(l_koo);
+		System.out.println("size="+l_list.size());
+		JSONArray ja =new JSONArray();
+		for(int i=0; i<l_list.size();i++) {
+			L_listDTO ldto = l_list.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("l_no", ldto.getL_no());
+			jo.put("m_no", ldto.getM_no());
+			jo.put("l_con", ldto.getL_con());
+			jo.put("l_title", ldto.getL_title());
+			jo.put("l_name", ldto.getL_name());
+			jo.put("l_address", ldto.getL_address());
+			jo.put("l_koo", ldto.getL_koo());
+			jo.put("l_date", ldto.getL_date());
+			ja.add(jo);
+		}
+		System.out.println(ja.toJSONString());
+		return ja.toJSONString();
+	}
 	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//봉사활동기획서//
+	@RequestMapping("/proposal")
+	public String dosub() {
+		return "proposal";
+	}
+	//봉사활동기획서//
+	
+	//봉사활동 작성현황게시판 띄우는//
+	@RequestMapping("/proposal_list")
+	public String doList() {
+		return "proposal_list";
+	}
+	//봉사활동 작성현황게시판 띄우는//
+	
+	//insert후 나오는페이지//
+	@RequestMapping("/success_page")
+	public String doSuccess() {
+		return "success_page";
+	}
+	//insert후 나오는페이지//
+	
+	//list 테이블 insert //
+	@ResponseBody
+	@RequestMapping(value="/new_ad", produces="application/text;charset=utf8")
+	public String doNewad(@RequestParam("l_no") String l_no,
+						  @RequestParam("l_title") String l_title,
+						  @RequestParam("l_content") String l_content,
+						  @RequestParam("l_date") String l_date,
+						  @RequestParam("l_file") String l_file,
+						  @RequestParam("l_koo") String l_koo, 
+						  @RequestParam("l_name") String l_name,
+						  @RequestParam("l_address") String l_address) {
+		System.out.println("{이름="+l_no+"}{제목="+l_title+"}{내용="+l_content+"}{날짜="+l_date+"}{사진="+l_file+"}{신청구="+l_koo+"}{기관="+l_name+"}{상세주소="+l_address+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		int reccount=team.new_ad(l_no,l_title,l_content,l_name,l_address,l_koo,l_date);
+		return Integer.toString(reccount);
+	}
+	//list 테이블 insert //
+	
+	//카카오 맵API//
 	@RequestMapping("/map")
 	public String doMap(HttpServletRequest req,Model model) {
 		String key = req.getParameter("key");
@@ -48,16 +143,13 @@ public class addController {
 		model.addAttribute("key",key);
 		return "map_open";
 	}
+	//카카오맵API//
 	
-	
-	@RequestMapping("/find")
-	public String doList() {
-		return "kwon";
-	}
+	//복지회관 불러오는 API//
 	@ResponseBody
 	@RequestMapping(value="/ko_check",produces="application/text;charset=utf8")
 	public String doUsercheck(HttpServletRequest req,Model model) {
-		String ko = req.getParameter("area");
+		String ko = req.getParameter("l_koo");
 		System.out.println(ko);
 		
 		try {
@@ -70,9 +162,7 @@ public class addController {
     		Document doc =dBuilder.parse(stream);
     		doc.getDocumentElement().normalize();
     		
-//    		System.out.println("Root element:"+doc.getDocumentElement().getNodeName());
     		NodeList nlist = doc.getElementsByTagName("row");
-//    		System.out.println("--------------------------");
     		ApiDTO ao=new ApiDTO();
     		JSONArray ja =new JSONArray();
     		for(int temp = 0; temp<nlist.getLength(); temp++) {
@@ -81,9 +171,7 @@ public class addController {
     			if(nNode.getNodeType()==Node.ELEMENT_NODE) {
     				Element eElement = (Element) nNode;
     				if(ao.getTagValue("JRSD_SGG_NM",eElement).equals(ko)) {
-//    			  	System.out.println("복지회관:"+ao.getTagValue("FCLT_NM",eElement));
     			  	jo.put("name",ao.getTagValue("FCLT_NM",eElement));
-//    			  	System.out.println("위치:"+ao.getTagValue("FCLT_ADDR",eElement));
     				jo.put("ar", ao.getTagValue("FCLT_ADDR",eElement));
     				ja.add(jo);
     				}
@@ -97,4 +185,5 @@ public class addController {
 		
 		return "redirect:/find";
 	}
+	//복지회관// 
 }

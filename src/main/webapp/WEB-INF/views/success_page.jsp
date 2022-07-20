@@ -5,44 +5,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  <style>
-	.map_wrap, .map_wrap * {margin:0;padding:0;font-family:'Malgun Gothic',dotum,'돋움',sans-serif;font-size:12px;}
-	.map_wrap a, .map_wrap a:hover, .map_wrap a:active{color:#000;text-decoration: none;}
-	.map_wrap {position:relative;width:100%;height:500px;}
-	#menu_wrap {position:absolute;top:0;left:0;bottom:0;width:250px;margin:10px 0 30px 10px;padding:5px;overflow-y:auto;background:rgba(255, 255, 255, 0.7);z-index: 1;font-size:12px;border-radius: 10px;}
-	.bg_white {background:#fff;}
-	#menu_wrap hr {display: block; height: 1px;border: 0; border-top: 2px solid #5F5F5F;margin:3px 0;}
-	#menu_wrap .option{text-align: center;}
-	#menu_wrap .option p {margin:10px 0;}  
-	#menu_wrap .option button {margin-left:5px;}
-	#placesList li {list-style: none;}
-	#placesList .item {position:relative;border-bottom:1px solid #888;overflow: hidden;cursor: pointer;min-height: 65px;}
-	#placesList .item span {display: block;margin-top:4px;}
-	#placesList .item h5, #placesList .item .info {text-overflow: ellipsis;overflow: hidden;white-space: nowrap;}
-	#placesList .item .info{padding:10px 0 10px 55px;}
-	#placesList .info .gray {color:#8a8a8a;}
-	#placesList .info .jibun {padding-left:26px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/places_jibun.png) no-repeat;}
-	#placesList .info .tel {color:#009900;}
-	#placesList .item .markerbg {float:left;position:absolute;width:36px; height:37px;margin:10px 0 0 10px;background:url(https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_number_blue.png) no-repeat;}
-	#placesList .item .marker_1 {background-position: 0 -10px;}
-	#placesList .item .marker_2 {background-position: 0 -56px;}
-	#placesList .item .marker_3 {background-position: 0 -102px}
-	#placesList .item .marker_4 {background-position: 0 -148px;}
-	#placesList .item .marker_5 {background-position: 0 -194px;}
-	#placesList .item .marker_6 {background-position: 0 -240px;}
-	#placesList .item .marker_7 {background-position: 0 -286px;}
-	#placesList .item .marker_8 {background-position: 0 -332px;}
-	#placesList .item .marker_9 {background-position: 0 -378px;}
-	#placesList .item .marker_10 {background-position: 0 -423px;}
-	#placesList .item .marker_11 {background-position: 0 -470px;}
-	#placesList .item .marker_12 {background-position: 0 -516px;}
-	#placesList .item .marker_13 {background-position: 0 -562px;}
-	#placesList .item .marker_14 {background-position: 0 -608px;}
-	#placesList .item .marker_15 {background-position: 0 -654px;}
-	#pagination {margin:10px auto;text-align: center;}
-	#pagination a {display:inline-block;margin-right:10px;}
-	#pagination .on {font-weight: bold; cursor: default;color:#777;}
-</style>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -104,8 +66,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="about-us.html">About Us</a></li>  
-                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="proposal">봉사활동 기획서</a></li>  
+                        <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
                 </li>   
@@ -144,66 +106,34 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">재능기부 신청 현황</h2>
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
-	<div id="content-wrapper">
+		<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-md-8 fade-up">
-						<h3>재능기부신청서</h3>
+					
+					<div class="col-lg-8">
+						<h3>성공적으로 작성되었습니다.</h3>
+						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
+							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</p>	
+					</div>
 
-						<p>작성자:<input type="text" class="form-control" name="name" id="name" placeholder="Name" /></p>
-                        <p><input type="checkbox" class="btn btn-primary btn-outlined">미용</p>
-						<p>신청구역(서울)<select id="sel" class="form-control">
-                            <option>강남구</option>
-                            <option>강동구</option>
-                            <option>강북구</option>
-                            <option>강서구</option>
-                            <option>관악구</option>
-                            <option>광진구</option>
-                            <option>구로구</option>
-                            <option>금천구</option>
-                            <option>노원구</option>
-                            <option>도봉구</option>
-                            <option>동대문구</option>
-                            <option>동작구</option>
-                            <option>마포구</option>
-                            <option>서대문구</option>
-                            <option>서초구</option>
-                            <option>성동구</option>
-                            <option>성북구</option>
-                            <option>송파구</option>
-                            <option>양천구</option>
-                            <option>영등포구</option>
-                            <option>용산구</option>
-                            <option>은평구</option>
-                            <option>종로구</option>
-                            <option>중구</option>
-                            <option>중랑구</option>
-                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" />
-                        </select></p>
                         
-						<p><select id="koo" class="form-control"">
-                            <input class="btn btn-outlined btn-primary" type="button" id="load" value="길찾기" />
-                            </select></p> 
-						<p>상세주소<input type="text" class="form-control" id="ko" name="ko"/>
-						<input type="hidden" id='hid'>
-						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
-						<div class="col-lg-4"></div><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="등록" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
+
 					</div>
 				</div>
-			</div>	
 	    </section>
-	</div>
-
+			</div>	
+	
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -260,39 +190,5 @@ $(document)
 .ready(function(){
 	
 })
-.on('click','#map',function(){
-	let aa=$('#hid').val()
-	console.log(aa);
-	console.log('"'+'map?key='+aa+'"');
- 	window.open('map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
-})
-.on('click','#load',function(){
-	let str=$('#koo option:selected').val();
-	$('#ko').val(str);
-	let ar = str.split(',');
-	let br = ar[0].split('(');
-	$('#hid').val(br[0]);
-})
-.on('click','#find',function(){
-	$.ajax({
-		type:'get',url:'ko_check',data:{area:$('#sel option:selected').text()},
-			dataType:'json',
-	  		success:function(data){
-	  			$('#koo').empty();
-// 	  			console.log(data);
-	  			for(let i=0;i<data.length;i++){
-					let jo=data[i];
-					let str='<option value="'+jo['ar']+'">'+jo['name']+'</option>';
-// 	 		   		console.log(str);
-					$('#koo').append(str);
-	  			}
-    		},
-    		error:function(){
-    			alert('데이터등록실패');
-    		},
-    		complete:function(){}
-    	});
-})
-
 </script>
 </html>

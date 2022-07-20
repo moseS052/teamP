@@ -67,15 +67,15 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="index.jsp">Home Agency</a></li>
+						<li><a href="/pj">Home Agency</a></li>
 						<li><a href="index-blog.html">Home Blog</a></li>
 						<li><a href="index-single-page.html">Home Single Page</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="about-us.html">About Us</a></li>
-						<li><a href="contact-us.html">Contact Us</a></li>
+						<li><a href="proposal">봉사활동 기획서</a></li>
+						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
