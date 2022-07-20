@@ -126,7 +126,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | ------- | ------------ | -------- | -------- | -------- | -------- | ---- | -------- | --------- | --------------- | -------- |
 | 회원seq | ID           | PW        | 이름     | 닉네임   | 모바일    | 성별 | 이메일    | 활동 점수 | 아바타 사진경로   | 생년월일 |
 | number  | varchar2     | varchar2 | varchar2 | varchar2 | varchar2 | char | varchar2 | number    | varchar2        | varchar2 |
-| primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 |                 |          |
+| primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 | default avatar  |          |
 
 ★ m_no seq = member_sq    ,   사용-  member_sq.nextval
 
