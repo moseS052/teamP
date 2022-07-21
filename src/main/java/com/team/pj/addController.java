@@ -49,10 +49,7 @@ public class addController {
 	}
 	//로그인
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String doLogin(HttpServletRequest req, Model model) {
-		HttpSession session=req.getSession();
-//		req.getParameter("id");
-//		req.getParameter("pw");
+	public String doLogin() {
 		return "login";
 	}
 	//회원가입
@@ -99,17 +96,18 @@ public class addController {
 			@RequestParam("birth") String birth) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		System.out.println("id="+id);
-		int reccount=p.insert(id,pw,name,nick,phone,gender,mail,birth);
-		return Integer.toString(reccount);
+		p.insert(id,pw,name,nick,phone,gender,mail,birth);
+		
+		return "";
 	}
 	//회원가입시 재능체크테이블에도 추가 
 	@ResponseBody
 	@RequestMapping(value="/talent", method=RequestMethod.POST, produces="application/text;charset=utf8")
-	public String doTalent(@RequestParam("t_no") String t_no) {
+	public String doTalent(@RequestParam("id") String id, @RequestParam("t_no") int t_no) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		System.out.println("t_no="+t_no);
-		int reccount=p.talent(t_no);
-		return Integer.toString(reccount);
+		p.talent(p.getM_no1(id), t_no);
+		return "";
 	}
 	//아이디 중복체크
 	@ResponseBody
@@ -119,5 +117,14 @@ public class addController {
 		int idcnt=p.id(id);
 		System.out.println("idcnt="+idcnt);
 		return Integer.toString(idcnt);		
+	}
+	//닉네임 중복체크
+	@ResponseBody
+	@RequestMapping(value="/nickcheck", method=RequestMethod.GET, produces="application/text;charset=utf8")
+	public String doNickcheck(@RequestParam("nick") String nick, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int nickcnt=p.nick(nick);
+		System.out.println("idcnt="+nickcnt);
+		return Integer.toString(nickcnt);		
 	}
 }

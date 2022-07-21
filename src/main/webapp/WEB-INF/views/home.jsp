@@ -66,7 +66,7 @@
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${userinfo!=''}">
-				${userinfo }&nbsp;님<a href='logout'>Logout</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
 			<ul id="main-menu">
