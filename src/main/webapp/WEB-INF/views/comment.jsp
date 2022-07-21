@@ -129,7 +129,7 @@
 		</div>
 		<!-- /container -->
 	</div>
-	<input type="text" readonly id="comment_cno">
+	<input type="hidden" readonly id="comment_cno">
 	<div id="content-wrapper">
 		<section id="about"></section>
 		<div class="container">
@@ -179,9 +179,9 @@
 	</div>
 	</section>
 	</div>
-
+	<input type="button" id="hide" value="숨기기">
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<div id="footerwrap" style="display:none;">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -239,13 +239,17 @@
 		crossorigin="anonymous"></script> -->
 </body>
 <script>
-/* let name='<a href=#>'+ +'</a>' */
+let doo=5;
 	let b_no = '${detail.b_no}';//게시글 번호
 	$(document).ready(function() {
 	})
-	/* .on('click','a',function(){
-		preventDefault();
-	}) */
+	.on('click','#hide',function(){
+		if($('#footerwrap').css('display')=='none'){
+			$('#footerwrap').show();
+		}else{
+			$('#footerwrap').hide();
+		}
+	})
 	
 	
 	.on('click', '#page_btn', function() {
@@ -303,17 +307,24 @@
 			}
 		});  
 	})
+	.on('click','#btndoo',function(){		
+		let s=$(this).attr('seqnum');
+		doo+=5;
+		console.log(s);
+		rerplyList(s,doo);
+	})
 	.on('click','#re_reply',function(){
 		let s=parseInt($(this).attr('reseq'));
 		console.log($(this).attr('reseq'));
 		let t=$(this).text().split('&nbsp;');
 		console.log($('#reply_controll'+s).val());
-		if($('#reply_controll'+s).val()=='close'){
-			rerplyList(s);
 			
+		if($('#reply_controll'+s).val()=='close'){
+			rerplyList(s,doo);
 			$('#reply_controll'+s).val('open');
 			let strs='<div style="display:inline-block; overflow:hiddlen; white-space:nowrap;"><textarea style="width:400px; height:50px; resize:none;" id="re_replytextArea"></textarea>'
-				 +'&nbsp;&nbsp;<input type="button" id="re_replyaddbtn" class="btn btn-primary btn-outlined" value="답글추가"><input type="hidden" id="re_replynum" value="'+s+'"></div>';
+				 +'&nbsp;&nbsp;<input type="button" id="re_replyaddbtn" class="btn btn-primary btn-outlined" value="답글추가"><input type="hidden" id="re_replynum" value="'+s+'">'
+				 +'</div>';
 			$('#re_replyadd'+s).append(strs);
 			$('#re_replynum').val(s);
 	  	}else if($('#reply_controll'+s).val()=='open'){
@@ -321,6 +332,7 @@
 		  	$('#re_replyadd'+s).empty();
 		  	$('#re_replynum').val('');
 		  	$('#reply_controll'+s).val('close');
+		  	minus();
 	  	};
 	})
 	.on('click','#re_replyaddbtn',function(){
@@ -394,7 +406,8 @@
 	 	console.log();
  	})
 	//대댓글 리스트 불러오기
-	function rerplyList(num){
+	function rerplyList(num, doo){
+		
 		$.ajax({
 			url:'re_reply',
 			data:{c_no:num},
@@ -416,12 +429,20 @@
 		            	 +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
 		                 +'<a href=# class="dropdown-item" id="updatere_reply" seq1="'+com['c_no']+'"'+ 'seq2="'+com['c_pa_no']+'"'+'seq3="'+com['b_no']+'"'+'seq4="'+com['m_no']+'">수정</a><br>'
 		                 +'<a href=# class="dropdown-item" id="deletere_reply" value="'+com['c_no']+'">삭제</a>'
-		                 +'</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'+com['c_con']+'</p><a id="ansercomment" seq="'+com['m_no']+'" href="javascript:void(0);">답글</a></div></div>';
+		                 +'</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'+com['c_con']+'</p><a id="ansercomment" seq="'+com['m_no']+'" href="javascript:void(0);">답글</a></div>'
+		                 +'</div>';
 					 $('#re_replylist'+num).append(html);
+					 if(i==doo){
+						 $('#re_replylist'+num).append('<input type="button" id="btndoo" seqnum="'+num+'" value="더보기">');
+						 break;
+					 }
 				};
 				
 			}
 		});
+	}
+	function minus(){
+		doo=5;
 	}
 	function deleteRe_Reply(num){
 		let s = $('#re_replynum').val();
@@ -446,7 +467,7 @@
 			data:{
 				b_no:$('#page').val(),
 				c_pa_no:$('#realc_no'+s).val(),
-				m_no:55,
+				m_no:3,
 				c_con:$('#re_replytextArea').val()
 				  },
 			type:'post',
@@ -466,7 +487,7 @@
 			data:{
 				b_no:$('#page').val(),
 				c_pa_no:$('#realc_no'+s).val(),
-				m_no:55,
+				m_no:3,
 				c_con:html
 				  },
 			type:'post',
@@ -523,7 +544,6 @@
 					    			  +'<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'">답글&nbsp;'+'<span id="counts'+com['c_no']+'">'+com['count']+'</span>'
 					    			  +'</a><div><br><br><div style="margin:0 30px 0px 50px;"'
 					    			  +'id="re_replyadd'+com['c_no']+'"></div><div id="re_replylist'+com['c_no']+'"></div></div>';
-					    	console.log(list);
 							$('#replyList').append(list);
 						}
 
