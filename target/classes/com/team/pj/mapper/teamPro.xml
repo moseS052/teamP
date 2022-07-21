@@ -11,7 +11,7 @@
 		values(comment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date)
 </insert>
 <delete id="deletecomment">
-	delete comment_t where c_no=#{param1}
+	delete comment_t where c_no=#{param1} OR c_pa_no=#{param1}
 </delete>
 <update id="updatecomment">
 	update comment_t set c_con=#{param1} where c_no=#{param2}
