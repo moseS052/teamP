@@ -58,7 +58,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="home">Home Agency</a></li>
+                        <li><a href="index.html">Home Agency</a></li>
                         <li><a href="index-blog.html">Home Blog</a></li>
                         <li><a href="index-single-page.html">Home Single Page</a></li>
                     </ul>
@@ -66,7 +66,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal?m_no=45">봉사활동 기획서</a></li>  
+                        <li><a href="proposal">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -119,21 +119,23 @@
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					
-					<div class="col-lg-8">
-						<h3>성공적으로 작성되었습니다.</h3>
-						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
-							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
-						</p>	
-					</div>
-
+					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
+						<h3></h3>
+						
+                        <div id="cla">
                         
+                        </div>
+						
+						<p>신청구역(서울)</p>
+                        
+						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
 
+						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
 				</div>
-	    </section>
 			</div>	
-	
+	    </section>
+	</div>
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -186,9 +188,29 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
-$(document)
-.ready(function(){
-	
-})
+// $(document)
+// .ready(function(){
+// 	showlist();
+// })
+
+// function showlist(){
+// 	$.ajax({
+// 		url:'', data:'',dataType:'json',type:'get',
+// 		success:function(data){
+// 			$('#cla').empty();
+//   			for(let i=0;i<data.length;i++){
+// 				let jo=data[i];
+// 				let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
+// 				$('#cla').append(str);
+//   			}
+// 		},
+// 		error:function(){
+//     		alert('데이터등록실패');
+//     	},
+//     	complete:function(){}
+		
+// 	});
+// }
+
 </script>
 </html>

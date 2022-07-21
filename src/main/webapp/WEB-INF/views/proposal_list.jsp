@@ -58,7 +58,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Agency</a></li>
+                        <li><a href="/pj">Home Agency</a></li>
                         <li><a href="index-blog.html">Home Blog</a></li>
                         <li><a href="index-single-page.html">Home Single Page</a></li>
                     </ul>
@@ -66,7 +66,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal">봉사활동 기획서</a></li>  
+                        <li><a href="proposal?m_no=45">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -151,7 +151,7 @@
                             <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" /><br>
                         </select>
                         <div id="cla">
-                        
+                        	
                         </div>
 						
 						<p>신청구역(서울)</p>
@@ -218,7 +218,7 @@
 <script>
 $(document)
 .ready(function(){
-	
+	showlist();
 })
 .on('click','#find',function(){
 	console.log($('#l_koo option:selected').text());
@@ -239,6 +239,24 @@ $(document)
     		complete:function(){}
     	});
 })
+function showlist(){
+	$.ajax({
+		url:'open_list', data:'',dataType:'json',type:'get',
+		success:function(data){
+			$('#cla').empty();
+  			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
+				$('#cla').append(str);
+  			}
+		},
+		error:function(){
+    		alert('데이터등록실패');
+    	},
+    	complete:function(){}
+		
+	});
+}
 
 </script>
 </html>

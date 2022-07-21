@@ -74,7 +74,7 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="proposal">봉사활동 기획서</a></li>
+						<li><a href="proposal?m_no=45">봉사활동 기획서</a></li>
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 						<li><a href="404.html">404</a></li>
 					</ul></li>
@@ -256,13 +256,6 @@
 							<h4>John Smith</h4>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Integer posuere erat a ante.</p>
-							<div class="pull-right btn-group social-profiles">
-								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
-								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
-								</a> <a class="btn" href="#"> <i
-									class="fa fa-google-plus google"></i>
-								</a>
-							</div>
 						</div>
 						<div class="blockquote-box fade-up clearfix">
 							<div class="square pull-left">
@@ -1222,4 +1215,9 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+
+
+
+</script>
 </html>

@@ -11,6 +11,13 @@ public class L_listDTO {
 	 String l_koo;
 	 String l_date;
 	 String l_route;
+	 String nick;
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
 	public L_listDTO() {
 	}
 	public int getL_no() {

@@ -4,7 +4,8 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+ <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -36,7 +37,11 @@
 	});
     </script> 
   </head>
-
+<style>
+input[type="checkbox"]{
+accent-color:green;
+}
+</style>
   <body class="single single-post"> 
 
   	<div id="preloader"></div>
@@ -58,7 +63,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Agency</a></li>
+                        <li><a href="/pj">Home Agency</a></li>
                         <li><a href="index-blog.html">Home Blog</a></li>
                         <li><a href="index-single-page.html">Home Single Page</a></li>
                     </ul>
@@ -66,7 +71,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal">봉사활동 기획서</a></li>  
+                        <li><a href="proposal?m_no=45">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -121,10 +126,15 @@
 
 					<div class="col-md-8 fade-up">
 						<h3>봉사활동작성</h3>
-
-						<p>작성자<input type="text" class="form-control" id="l_no" placeholder="Name" />
-						   제목<input type="text" class="form-control" id="l_title" placeholder="title"/>
+						
+						<div id="cla">
+						<input type=hidden id="m_no" value="${m_no}">
+						작성자<input type="text" class="form-control" id="nick" placeholder="Name" value="${nick}" disabled/>
+						</div>
+						
+						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title"/>
 						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60 placeholder="자세한 내용을 적어주세요"></textarea>
+						   <p class="well">재능기부신청<br><input type="checkbox" value="1">요리&nbsp;<input type="checkbox" value="2">청소&nbsp;<input type="checkbox" value="3">미용&nbsp;<input type="checkbox" value="4">강연&nbsp;<input type="checkbox" value="5">기타</p>
 						   시행일자<input type="date" id="l_date" class="form-control">
 						   사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple>
 						</p>
@@ -223,12 +233,15 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+
 $(document)
 .ready(function(){
-	
+
 })
-.on('click','#ad',function(){
-	console.log('이름='+$('#l_no').val());
+
+.on('click','#ad',function(){	
+	
+	console.log('이름='+$('#m_no').val());
 	console.log('제목='+$('#l_title').val());
 	console.log('내용='+$('#l_content').val());
 	console.log('날자='+$('#l_date').val());
@@ -237,14 +250,28 @@ $(document)
 	console.log('상호='+$('#l_name option:selected').text());
 	console.log('상세주소='+$('#l_address').val());
 	$.ajax({
-		type:'get',url:'new_ad',data:{l_no:$('#l_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
-			dataType:'json',
-	  		success:function(data){
+		type:'get',url:'new_ad',data:{m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
+			dataType:'text',async: false,
+	  		success:function(){
+    				console.log('ann');
+	  			$("input[type=checkbox]:checked").each(function(){
+    				const value = $(this).val();
+    				$.ajax({
+    						type:'get',url:'check_ad',data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
+    						dataType:'text',
+    					  		success:function(){
+    					  		document.location='/pj/success_page'
+    				    		},
+    				    		error:function(){
+    				    			alert('데이터등록실패');
+    				    			document.location='/pj/success_page'
+    				    		},
+    				    		complete:function(){}
+    				    	});
+    			})
 	  			document.location='/pj/success_page'
     		},
     		error:function(){
-    			alert('데이터등록실패');
-    			document.location='/pj/success_page'
     		},
     		complete:function(){}
     	});
