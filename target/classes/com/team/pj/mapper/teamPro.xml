@@ -15,4 +15,10 @@
 <select id='getM_no' resultType="int">
 	select m_no from member where id=#{param1}
 </select>
+<select id='searchTNC' resultType="com.team.pj.SearchVO">
+	select m_no,#{param1},#{param2},#{param3} from #{param4} where (#{param5} like  #{param7}) or (#{param6} like #{param7})
+</select>
+<select id='test1' parameterType="com.team.pj.test2" resultType="int">
+	select m_no from #{table} where id='a'
+</select>
 </mapper>

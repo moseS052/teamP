@@ -33,7 +33,36 @@ public class addController {
 	 * Simply selects the home view to render by returning its name.
 	 */
 	//여기서부터 작성
-	
+	@ResponseBody
+	@RequestMapping(value="/search",produces="application/text;charset=utf8",method = RequestMethod.POST)
+	public String noteSend(HttpServletRequest req) {
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		String title=req.getParameter("title");
+		String date=req.getParameter("date");
+		String seqno=req.getParameter("seqno");
+		String table=req.getParameter("table");
+		String titleName=req.getParameter("titleName");
+		String con=req.getParameter("con");
+		String search="'"+req.getParameter("search")+"'";
+		System.out.println("select m_no,"+title+","+date+","+seqno+" from "+table+" where ("
+		+titleName+" like  "+search+") or ("+con+" like "+search+")");
+		
+		int aa=ip.test1();
+		System.out.println(aa);
+//		ArrayList<SearchVO> arsvo=ip.searchTNC(title, date, seqno, table, titleName, con, search);
+//		JSONArray ja=new JSONArray();
+//		for(int i=0;i<arsvo.size();i++) {
+//			SearchVO svo = arsvo.get(i);
+//			JSONObject jo = new JSONObject();
+//			jo.put("id", ip.getID(svo.getM_no()));
+//			jo.put("title", svo.getTitle());
+//			jo.put("date", svo.getDate());
+//			jo.put("seqno", svo.getSeqno());
+//			ja.add(jo);
+//		}
+		return "";
+//		return ja.toJSONString();
+	}
 	
 	
 	
