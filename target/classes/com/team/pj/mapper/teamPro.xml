@@ -4,7 +4,7 @@
     "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.team.pj.iteamP">
 <select id="comlist" resultType="com.team.pj.commentDTO">
-	select c_no, b_no, c_con, m_no, c_date, c_pa_no from comment_t where b_no=#{param1} and c_pa_no is null
+	select c_no, b_no, c_con, m_no, c_date, c_pa_no from comment_t where b_no=#{param1} and c_pa_no is null order by c_date
 </select>
 <insert id="insertcomment">
 	insert into comment_t(c_no, b_no, c_con, m_no, c_date) 
@@ -19,7 +19,7 @@
 <select id="re_replylist" resultType="com.team.pj.commentDTO">
 	select c_no, b_no, c_con, m_no, c_date, c_pa_no
 		from comment_t
-		where c_pa_no=#{param1}
+		where c_pa_no=#{param1} order by c_date
 </select>
 <select id="countre_replylist" resultType="int">
 	select count(c_pa_no) replycount from comment_t where c_pa_no=#{param1}
@@ -28,4 +28,10 @@
 	insert into comment_t values(comment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date,#{param4})
 
 </insert>
+<delete id="deleteReReply">
+	delete comment_t where c_no=#{param1}
+</delete>
+<update id="updateReReply">
+	update comment_t set c_con=#{param3} where c_no=#{param1} AND b_no=#{param2} AND m_no=#{param4} AND c_pa_no=#{param5}
+</update>
 </mapper>
