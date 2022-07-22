@@ -58,7 +58,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Agency</a></li>
+                        <li><a href="/pj">Home Agency</a></li>
                         <li><a href="index-blog.html">Home Blog</a></li>
                         <li><a href="index-single-page.html">Home Single Page</a></li>
                     </ul>
@@ -66,7 +66,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal">봉사활동 기획서</a></li>  
+                        <li><a href="proposal?m_no=85">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -122,15 +122,19 @@
 					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
 						<h3></h3>
 						
-                        <div id="cla">
-                        
+                        <div class="well">
+                        <input type="hidden" value="${l_no}">
+                        <p>${nick}</p>
+                        <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div>
+                        <h3>일시${l_date}</h3>                        
+                        <h3>장소${l_name}</h3>
+                        <h3>주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
                         </div>
 						
-						<p>신청구역(서울)</p>
+						<p>내용:${l_con}</p>
+                        <div class="square pull-right"><input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" /></div>
                         
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
 
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
 				</div>
 			</div>	
@@ -188,29 +192,18 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
-// $(document)
-// .ready(function(){
-// 	showlist();
-// })
+$(document)
+.ready(function(){
+console.log(`${l_addr}`);
 
-// function showlist(){
-// 	$.ajax({
-// 		url:'', data:'',dataType:'json',type:'get',
-// 		success:function(data){
-// 			$('#cla').empty();
-//   			for(let i=0;i<data.length;i++){
-// 				let jo=data[i];
-// 				let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
-// 				$('#cla').append(str);
-//   			}
-// 		},
-// 		error:function(){
-//     		alert('데이터등록실패');
-//     	},
-//     	complete:function(){}
-		
-// 	});
-// }
-
+})
+.on('click','#map',function(){
+	let a=`${l_addr}`
+	let ar =a.split("("); 
+	console.log(ar[0]);
+	console.log('"'+'map?key='+ar[0]+'"');
+ 	window.open('http://192.168.0.2:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
+	          // 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
+})
 </script>
 </html>

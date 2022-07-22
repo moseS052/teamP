@@ -43,29 +43,20 @@ public class addController {
 	private SqlSession sqlSession;
 	
 	@RequestMapping("/l_Read")
-	public String dora() {
-		return "l_Read";
-	}
-	
-	@ResponseBody
-	@RequestMapping(value="/l_Read",produces="application/text;charset=utf8")
-	public String dorea(HttpServletRequest req) {
+	public String dorea(HttpServletRequest req,Model model) {
 		int l_no =Integer.parseInt(req.getParameter("l_no"));
 		System.out.println(l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		ArrayList<L_listDTO> l_list=team.l_Read(l_no);
-		JSONArray ja =new JSONArray();
-		for(int i=0; i<l_list.size();i++) {
-			L_listDTO ldto = l_list.get(i);
-			JSONObject jo =new JSONObject();
-			jo.put("l_no", ldto.getL_no());
-			jo.put("m_no", ldto.getM_no());
-			jo.put("l_title", ldto.getL_title());
-			jo.put("l_date", ldto.getL_date());
-			ja.add(jo);
-		}
-		System.out.println(ja.toJSONString());
-		return ja.toJSONString();
+		L_listDTO re=team.read(l_no);
+		
+		model.addAttribute("l_no",l_no);
+		model.addAttribute("l_title",re.l_title);
+		model.addAttribute("l_con",re.l_con);
+		model.addAttribute("l_name",re.l_name);
+		model.addAttribute("l_addr",re.l_address);
+		model.addAttribute("l_date",re.l_date);
+		model.addAttribute("nick",re.nick);
+		return "l_Read";
 	}
 	
 	//--±¸ ÇöÈ²--//

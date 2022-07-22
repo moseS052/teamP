@@ -12,10 +12,6 @@
 <select id="Openl_list" resultType="com.team.pj.L_listDTO"> 
 	select l_no,m_no,l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list order by l_date
 </select>
-<!-- <select id="Openl_list" resultType="com.team.pj.L_listDTO">  -->
-<!-- 	select l_no,m_no,l_title,l_con,l_time,l_name,l_address,l_koo,l_date from list -->
-<!-- </select> -->
-
 <insert id="new_ad">
 	insert into list values(list_sq.nextval,#{param1},#{param2},#{param3},current_date,#{param4},#{param5},#{param6},#{param7})
 </insert>
@@ -25,4 +21,7 @@
 <insert id="check_ad">
 	insert into talent_check_list values(#{param1},#{param2})
 </insert>
+<select id="read" resultType="com.team.pj.L_listDTO"> 
+	select  a.l_title , a.l_con ,a.l_name, a.l_address, a.l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
+</select>
 </mapper>

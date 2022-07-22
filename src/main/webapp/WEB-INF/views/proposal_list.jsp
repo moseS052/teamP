@@ -66,7 +66,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal?m_no=45">봉사활동 기획서</a></li>  
+                        <li><a href="proposal?m_no=85">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -151,7 +151,6 @@
                             <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" /><br>
                         </select>
                         <div id="cla">
-                        	
                         </div>
 						
 						<p>신청구역(서울)</p>
@@ -229,7 +228,7 @@ $(document)
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
-					let str='<div class="well"><a href="find" l_no='+jo['l_no']+'><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
+					let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
 					$('#cla').append(str);
 	  			}
     		},
@@ -246,7 +245,7 @@ function showlist(){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
-				let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
+				let str='<div class="well"><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'</p></a></div>';
 				$('#cla').append(str);
   			}
 		},
