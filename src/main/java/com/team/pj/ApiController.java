@@ -39,7 +39,7 @@ import org.w3c.dom.NodeList;
 import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
-public class addController {
+public class ApiController {
 	
 	@Autowired
 	private SqlSession sqlSession;
