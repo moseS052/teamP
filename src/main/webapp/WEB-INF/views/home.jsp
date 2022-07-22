@@ -105,6 +105,12 @@ $(document)
 						<li><a href="category-alt.html">Category Page Alt</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="/pj/qna">자주 묻는 질문</a></li>
+						<li><a href="#">1:1 질문</a></li>
+					</ul></li>	
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i
 						class="fa fa-camera menu-icon"></i></a>
 					<ul class="dropdown-menu">

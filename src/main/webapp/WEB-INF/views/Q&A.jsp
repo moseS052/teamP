@@ -11,7 +11,7 @@
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
 
-<title>login</title>
+<title>자주 묻는 질문</title>
 
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
@@ -131,23 +131,19 @@
 
 					<div class="col-md-12">
 
-					<form id=frmLogin method=POST action="user_check">
-<!-- <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">ID</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ID">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">비밀번호</label>
-  <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
-</div> -->
-						
-					<label>id</label>
-					<input type=text name=id><br>
-					<label>비밀번호</label>
-					<input type=password name=pw><br><br><br>
-					<input type=submit value='로그인' class="btn btn-primary btn-outlined">&nbsp;
-					<input type=reset value='비우기' class="btn btn-primary btn-outlined">
-					</form>
+						<div>
+							<c:forEach items="${faqList }" var="faqVO">
+								<%-- <input type="radio" name="accordion" id="answer${faqVO.q_no }"> --%>
+								<lable id="title" for="answer${faqVO.q_no }">
+									${faqVO.q_con }
+									<i class="fa fa angle-down"></i>
+									<div>
+										<p style="text-align:left; display:none;">${faqVO.q_a }</p>
+									</div>
+								</lable>
+								
+							</c:forEach>
+						</div>
 
 					</div>
 				</div>
@@ -207,6 +203,11 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-
+	$(document)
+	.on('click','#title',function(){
+		if($(this div).css('display')=='none'){
+			$(this div).show();
+		}
+	})
 </script>
 </html>
