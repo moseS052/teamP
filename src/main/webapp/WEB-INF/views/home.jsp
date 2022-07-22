@@ -29,6 +29,7 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
+<<<<<<< HEAD
 $(document)
 .ready(
 	function() {
@@ -69,6 +70,12 @@ $(document)
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
+			 	<c:if test="${userinfo==''}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${userinfo!=''}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
 			</div>
 			<div>
 				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
@@ -1239,4 +1246,15 @@ $(document)
 })
 
 </script>
+
+<script type="text/javascript">
+function logIn() { 
+	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
+	  }
+  function joinMember() { 
+	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
+	  }
+</script>     
+<!-- 작성 -->
+
 </html>

@@ -33,11 +33,11 @@ public class HomeController {
 	 */
 	//건들지 마세요
 
-	@RequestMapping(value = "/", method = RequestMethod.GET)
-	public String home() {
-		
-		return "home";
-	}
+//	@RequestMapping(value = "/", method = RequestMethod.GET)
+//	public String home() {
+//		
+//		return "home";
+//	}
 	
 	@RequestMapping(value = "/ad", method = RequestMethod.GET)
 	public String ad() {

@@ -29,7 +29,7 @@
 	<![endif]-->
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
 				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
@@ -49,7 +49,7 @@
 
 		});
 	});
-    </script>
+    </script> -->
 	
   </head>
 
@@ -119,7 +119,7 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<div id="headerwrap" class="half">
+	<!-- <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
@@ -127,9 +127,9 @@
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
-
+		</div>/container
+	</div>/headerwrap
+ -->
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -137,15 +137,25 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
-
-						<p>May indulgence difficulty ham can put especially. Bringing remember for supplied her why was confined. Middleton principle did she procuring extensive believing add. Weather adapted prepare oh is calling. These wrong of he which there smile to my front. He fruit oh enjoy it of whose table. Cultivated occasional old her unpleasing unpleasant. At as do be against pasture covered viewing started. Enjoyed me settled mr respect no spirits civilly. Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. </p>
-
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+						<label>ID: </label><input type=text name=pid id="pid" autofocus onkeypress='return checkBlank(event)'><br>
+						<label>비밀번호: </label><input type=password name=ppw id="ppw" onkeypress='return checkBlank(event)'><br>
+						<label class="" for="inputInvalid">비밀번호 확인: </label>
+						<input type=password name=ppw2 id="ppw2" onkeypress='return checkBlank(event)'><br>
+						<label>이름: </label><input type=text name='pname' id="pname" onkeypress='return checkBlank(event)'><br>
+						<label>닉네임: </label><input type=text name='pnick' id="pnick" onkeypress='return checkBlank(event)'><br>
+						<label>모바일: </label><input type=text name='pphone' id="pphone" onkeypress='return checkBlank(event)'><br>
+						<label>성별: </label><input type="radio" name='pgender' id="pgender" value='M'>남성&nbsp;&nbsp;
+						<input type="radio" name='pgender' id="pgender" value='F'>여성<br>
+						<label>이메일: </label><input type=text name='pmail' id="pmail" onkeypress='return checkBlank(event)'><br>
+						<label>생년월일: </label><input type=text name='pbirth' id="pbirth" onchange="view()" onkeypress='return checkBlank(event)'><br>
+						내가 가진 재능을 체크해 주세요<br>
+						<input type="checkbox" name='ptalent' value='1' id='a'>요리<br>
+						<input type="checkbox" name='ptalent' value='2' id='b'>청소<br>
+						<input type="checkbox" name='ptalent' value='3' id='c'>미용<br>
+						<input type="checkbox" name='ptalent' value='4' id='d'>강연<br>
+						<input type="checkbox" name='ptalent' value='5' id='e'>기타<br>
+						<input type=button id="up" class="btn btn-primary btn-outlined" value='회원가입'>&nbsp;
+						<input type=button id="clean" class="btn btn-primary btn-outlined" value='비우기'>
 					</div>
 				</div>
 			</div>	
@@ -153,7 +163,7 @@
 	</div>
 
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -167,11 +177,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -179,15 +189,15 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
@@ -199,8 +209,147 @@
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
+	<!-- <script type="text/javascript"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script> -->
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+$(document)
+.on('click','#up',function(){
+	if($('#pid').val()=='' || $('#ppw').val()=='' || $('#ppw2').val()=='' || $('#pname').val()==""||$('#pnick').val()=='' ||
+			$('#pphone').val()=='' || $('#pmail').val()=='' || $('#pbirth').val()=='' ||
+			!$('input:checkbox[name="ptalent"]').is(":checked") || !$('input:radio[name="pgender"]').is(":checked")){
+		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
+		return false;
+	}else{
+		$.ajax({
+			type:'post',dataType:'text',url:'sign',async: false,
+			data:{id:$('#pid').val(),pw:$('#ppw').val(),name:$('#pname').val(),nick:$('#pnick').val(),
+				phone:$('#pphone').val(),gender:$('input[name="pgender"]:checked').val(),mail:$('#pmail').val(),
+				birth:$('#pbirth').val(),t_no:$('input[name="ptalent"]:checked').val()},
+			beforeSend:function(){
+				console.log("id: "+$('#pid').val()+"pw: "+$('#ppw').val()+",name: "+$('#pname').val() + ",nick: "+$('#pnick').val()+
+						",phone: "+$('#pphone').val()+",gender: "+$('input[name="pgender"]:checked').val()+" ,mail: "+$('#pmail').val()+
+						",birth: "+$('#pbirth').val()+",talent: "+$('input[name="ptalent"]:checked').val());
+				
+			},
+			success:function(){
+				let chk='';
+				$('input[name=ptalent]:checked').each(function(){
+					chk+=$(this).val()+' ';
+				})
+				 $.ajax({
+					type:'post',dataType:'text',url:'talent',
+					data:{
+						
+							id:$('#pid').val(),
+							t_no:chk	
+						
+						},
+					beforeSend:function(){
+						console.log("t_no: "+$('input[name="ptalent"]:checked').val());
+					},
+					success:function(){
+						alert('가입이 완료되었습니다');
+						window.location.href="<%= request.getContextPath() %>/login";
+					}
+				}) 
+			}
+		})
+	}
+})
+.on('click','#clean',function(){
+	$('#pid,#ppw,#ppw2,#pname,#pnick,#pphone,#pmail,#pbirth').val('');
+	$('input:checkbox[name="ptalent"]').prop("checked",false);
+	$('input:radio[name="pgender"]').prop("checked",false);
+})
+/* .on('change','#ppw',function(){
+	if($('#ppw').val()!=$('#ppw2').val() && $('#ppw2').val()==''){
+		
+		$('#ppw2').val('').focus();
+		
+	} else if($('#ppw').val()!=$('#ppw2').val()){
+		alert('비밀번호를 한번 더 입력해 주세요.');
+		$('#ppw2').val('').focus();
+	} else {
+		alert('비밀번호가 일치합니다.');
+	}
+	return true;
+}) */
+.on('change','#ppw2',function(){
+	if($('#ppw').val()!=$('#ppw2').val()){
+		alert('비밀번호를 한번 더 입력해 주세요.');
+		$('#ppw2').val('').focus();
+		return false;
+	} else if($('#ppw2').val()==''){
+		alert('비밀번호를 한번 더 입력해 주세요.');
+		$('#ppw2').val('').focus();
+	} else {
+		alert('비밀번호가 일치합니다.');
+	}
+	return true;
+})
+.on('change','#pid',function(){
+	$.ajax({
+		type:'get',dataType:'text',url:'idcheck',
+		data:{id:$('#pid').val()},
+		beforeSend:function(){},
+		success:function(data){
+			console.log("idcnt: "+data);
+			if(parseInt(data) == 0){
+				
+			} else {
+				alert('다른 아이디를 입력해주세요.');
+				$('#pid').val('').focus();
+			}
+		}
+	})
+})
+.on('change','#pmail',function(){
+	let email = $("#pmail").val();
+
+	if(email==""){
+		alert("이메일을 입력해주세요.");
+		$('#pnick').val('').focus();
+		return false;
+	}else{
+		if(!email_check(email)){
+			alert("이메일 형식에 맞게 입력해주세요");
+			$('#pmail').val('').focus();
+			return false;
+		}
+	}
+})
+.on('change','#pnick',function(){
+	$.ajax({
+		type:'get',dataType:'text',url:'nickcheck',
+		data:{nick:$('#pnick').val()},
+		beforeSend:function(){},
+		success:function(data){
+			console.log("nickcnt: "+data);
+			
+			if(parseInt(data) == 0){
+				
+			} else {
+				alert('다른 닉네임을 입력해주세요.');
+				$('#pnick').val('').focus();
+			}
+		}
+	})
+})
+function email_check(email) {
+	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+	return reg.test(email);
+}
+function view(){
+	alert('19990909 형식으로 입력 해주세요');
+}
+function checkBlank(event){
+	if(event.key == ' '){
+		alert('공백은 입력할 수 없습니다');
+		return false;
+	}
+	return true;
+}
+</script>
 </html>

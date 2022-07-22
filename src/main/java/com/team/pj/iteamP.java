@@ -14,4 +14,11 @@ public interface iteamP {
 	int insertReRply(int b_no, String c_con, int m_no, int c_pa_no);
 	int deleteReReply(int c_no);
 	int updateReReply(int c_no, int b_no, String c_con, int m_no, int c_pa_no);
+	ArrayList<memberDTO> listMember();
+	void insert(String id,String pw,String name,String nick,String phone,String gender,String mail,String birth);
+	int count(String id,int pw);
+	void talent(int m_no,int t_no);
+	int id(String id);
+	int getM_no1(String id);
+	int nick(String nick);
 }
