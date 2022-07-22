@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -27,7 +28,8 @@ public class questionController {
 	 * return "Q&A"; }
 	 */
 	
-	@RequestMapping(value="/qna", method = RequestMethod.GET)
+	//get qna list
+	@RequestMapping("/qna")
 	public String QnaList(Model model) {
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
 		ArrayList<qnaDTO> qnalist = qa.qnaList();
@@ -35,4 +37,23 @@ public class questionController {
 		
 		return "Q&A";
 	}
+	@RequestMapping("/question")
+	public String question(Model model) {
+
+		return "question";
+	}
+	
+	@RequestMapping("/qnaanswer")
+	public String QnaAnsewr(@RequestParam("q_no") int q_no, Model mod) {
+		iQuestion qa = sqlSession.getMapper(iQuestion.class);
+		qnaDTO qdto = qa.answerList(q_no);	
+		mod.addAttribute("qtitle", qdto.getQ_title());
+		mod.addAttribute("qcontent", qdto.getQ_con());
+		mod.addAttribute("qdate", qdto.getQ_date());
+		mod.addAttribute("qmno", qdto.getQ_a());
+		mod.addAttribute("qa", qdto.getQ_a());
+		return "QnAanswer";
+	}
+	
+	
 }

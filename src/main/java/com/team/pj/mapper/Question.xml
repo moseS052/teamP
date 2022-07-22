@@ -6,4 +6,7 @@
 <select id="qnaList" resultType="com.team.pj.qnaDTO">
 	select q_no, q_title, q_con, q_date, m_no, q_a from questions where m_no=0
 </select>
+<select id="answerList" resultType="com.team.pj.qnaDTO">
+	select q_no, q_title, q_con, q_date, m_no, q_a from questions where q_no=#{param1}
+</select>
 </mapper>

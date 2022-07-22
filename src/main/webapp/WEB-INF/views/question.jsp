@@ -12,7 +12,7 @@
 <link rel="shortcut icon"
 	href="<c:url value="/resources/assets/img/favicon.ico"/>">
 
-<title>자주 묻는 질문</title>
+<title>1:1 질문</title>
 
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
 	rel="stylesheet">
@@ -149,18 +149,14 @@
 			
 			<h2 class="centered section-heading">
 				<hr style="width:40%;">
-				자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문
+				1&nbsp;:&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;질문
 				<hr style="width:40%;">
 			</h2>
 			<div class="gap"></div>
 			<div class="row gap">
 					<div class="centered section-body"">
-						<div class="col-sm-12">
-							<c:forEach var="faqVO" items="${faqList }">
-								<div id="faqtitle" seq="${faqVO.q_no }" class="btn" style="font-size:20px;">${faqVO.q_title }
-								<hr style="width:100%;">
-								</div><br>
-							</c:forEach>
+						<div style="border:1px solid black;" class="col-sm-12">
+							
 						</div>
 								
 							
@@ -174,8 +170,8 @@
 		</div>
 	</div>
 
-	<!-- MAIN FOOTER -->
-	<!-- <div id="footerwrap">
+	<MAIN FOOTER></MAIN>
+	 <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -209,7 +205,7 @@
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div> -->
+	</div>
 
 	<a id="gototop" class="gototop no-display" href="#"><i
 		class="fa fa-angle-up"></i></a>
@@ -225,12 +221,6 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-	$(document)
-	.on('click', '#faqtitle', function() {
-		let seq = $(this).attr('seq');
-		console.log(seq);
-		document.location='qnaanswer?q_no='+seq;
-		
-	})
+	
 </script>
 </html>
