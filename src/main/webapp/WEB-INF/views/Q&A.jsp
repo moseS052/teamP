@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Team Project</title>
+<title>자주 묻는 질문</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -30,24 +30,15 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document)
+    .ready(function(){
     	jQuery('#headerwrap').backstretch(
 				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
 					"resources/assets/img/bg/bg3.jpg" ], {
 					duration : 8000,
 					fade : 500
 				});
-
-		// Map Position And Settings
-		$("#mapwrapper").gMap({ 
-			controls: false,
-			scrollwheel: false,
-			draggable: false,
-			latitude:40.7566,
-			longitude: -73.9863,
-			zoom: 11
-
-		});
+		
 	});
     </script> 
   </head>
@@ -121,9 +112,9 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <h2 class="main-title">자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문</h2>
+                <hr>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
@@ -135,15 +126,19 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
-
-						<p>May indulgence difficulty ham can put especially. Bringing remember for supplied her why was confined. Middleton principle did she procuring extensive believing add. Weather adapted prepare oh is calling. These wrong of he which there smile to my front. He fruit oh enjoy it of whose table. Cultivated occasional old her unpleasing unpleasant. At as do be against pasture covered viewing started. Enjoyed me settled mr respect no spirits civilly. Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. </p>
-
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+						<div>
+							<c:forEach items="${faqList }" var="faqVO">
+								<%-- <input type="radio" name="accordion" id="answer${faqVO.q_no }"> --%>
+								<lable id="title" for="answer${faqVO.q_no }">
+									${faqVO.q_con }
+									<i class="fa fa angle-down"></i>
+									<div>
+										<p style="text-align:left; display:none;">${faqVO.q_a }</p>
+									</div>
+								</lable>
+								
+							</c:forEach>
+						</div>
 					</div>
 				</div>
 			</div>	
@@ -201,4 +196,12 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+	$(document)
+	.on('click','#title',function(){
+		if($(this div).css('display')=='none'){
+			$(this div).show();
+		}
+	})
+</script>
 </html>
