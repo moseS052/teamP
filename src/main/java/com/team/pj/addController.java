@@ -47,7 +47,7 @@ public class addController {
 		System.out.println("select m_no,"+title+","+date+","+seqno+" from "+table+" where ("
 		+titleName+" like  "+search+") or ("+con+" like "+search+")");
 		
-		int aa=ip.test1();
+		int aa=ip.test1("member");
 		System.out.println(aa);
 //		ArrayList<SearchVO> arsvo=ip.searchTNC(title, date, seqno, table, titleName, con, search);
 //		JSONArray ja=new JSONArray();

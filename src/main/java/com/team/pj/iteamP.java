@@ -8,5 +8,5 @@ public interface iteamP {
 	String getID(int m_no);
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(String title,String date,String seqno,String table,String titleName,String con,String search);
-	int test1();
+	int test1(String a);
 }
