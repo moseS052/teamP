@@ -9,5 +9,35 @@
 <insert id='noteSend'>
 	insert into note values(note_sq.nextval,#{param1},#{param3},current_date,#{param2})
 </insert>
+<select id="comlist" resultType="com.team.pj.commentDTO">
+	select c_no, b_no, c_con, m_no, c_date, c_pa_no from comment_t where b_no=#{param1} and c_pa_no is null order by c_date
+</select>
+<insert id="insertcomment">
+	insert into comment_t(c_no, b_no, c_con, m_no, c_date) 
+		values(comment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date)
+</insert>
+<delete id="deletecomment">
+	delete comment_t where c_no=#{param1} OR c_pa_no=#{param1}
+</delete>
+<update id="updatecomment">
+	update comment_t set c_con=#{param1} where c_no=#{param2}
+</update>
+<select id="re_replylist" resultType="com.team.pj.commentDTO">
+	select c_no, b_no, c_con, m_no, c_date, c_pa_no
+		from comment_t
+		where c_pa_no=#{param1} order by c_date
+</select>
+<select id="countre_replylist" resultType="int">
+	select count(c_pa_no) replycount from comment_t where c_pa_no=#{param1}
+</select>
+<insert id="insertReRply">
+	insert into comment_t values(comment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date,#{param4})
 
+</insert>
+<delete id="deleteReReply">
+	delete comment_t where c_no=#{param1}
+</delete>
+<update id="updateReReply">
+	update comment_t set c_con=#{param3} where c_no=#{param1} AND b_no=#{param2} AND m_no=#{param4} AND c_pa_no=#{param5}
+</update>
 </mapper>
