@@ -103,10 +103,15 @@ public class addController {
 	//회원가입시 재능체크테이블에도 추가 
 	@ResponseBody
 	@RequestMapping(value="/talent", method=RequestMethod.POST, produces="application/text;charset=utf8")
-	public String doTalent(@RequestParam("id") String id, @RequestParam("t_no") int t_no) {
+	public String doTalent(@RequestParam("id") String id, @RequestParam("t_no") String t_no) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		System.out.println("t_no="+t_no);
-		p.talent(p.getM_no1(id), t_no);
+		String[] a = t_no.split(" ");
+		for(int i=0; i<a.length;i++) {
+			p.talent(p.getM_no1(id),Integer.parseInt(a[i]));
+			System.out.println("t_no="+a[i]);
+		}
+		
+		
 		return "";
 	}
 	//아이디 중복체크

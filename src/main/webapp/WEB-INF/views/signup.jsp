@@ -231,13 +231,21 @@ $(document)
 				console.log("id: "+$('#pid').val()+"pw: "+$('#ppw').val()+",name: "+$('#pname').val() + ",nick: "+$('#pnick').val()+
 						",phone: "+$('#pphone').val()+",gender: "+$('input[name="pgender"]:checked').val()+" ,mail: "+$('#pmail').val()+
 						",birth: "+$('#pbirth').val()+",talent: "+$('input[name="ptalent"]:checked').val());
+				
 			},
 			success:function(){
-				let s = $('input[name="ptalent"]:checked').val();
-				console.log(s);
-				<%-- $.ajax({
+				let chk='';
+				$('input[name=ptalent]:checked').each(function(){
+					chk+=$(this).val()+' ';
+				})
+				 $.ajax({
 					type:'post',dataType:'text',url:'talent',
-					data:{id:$('#pid').val(),t_no:$('input[name="ptalent"]:checked').val()},
+					data:{
+						
+							id:$('#pid').val(),
+							t_no:chk	
+						
+						},
 					beforeSend:function(){
 						console.log("t_no: "+$('input[name="ptalent"]:checked').val());
 					},
@@ -245,7 +253,7 @@ $(document)
 						alert('가입이 완료되었습니다');
 						window.location.href="<%= request.getContextPath() %>/login";
 					}
-				}) --%>
+				}) 
 			}
 		})
 	}
