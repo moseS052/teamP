@@ -96,13 +96,13 @@ $(document)
 						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-post.html">Single Post</a></li>
-						<li><a href="single-post-sidebar.html">Single Post
-								Sidebar</a></li>
-						<li><a href="category.html">Category Page</a></li>
-						<li><a href="category-alt.html">Category Page Alt</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board
+								</a></li>
+						<!-- <li><a href="category.html">Category Page</a></li>
+						<li><a href="category-alt.html">Category Page Alt</a></li> -->
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i

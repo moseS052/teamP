@@ -15,12 +15,12 @@ public interface iteamP {
 	int deleteReReply(int c_no);
 	int updateReReply(int c_no, int b_no, String c_con, int m_no, int c_pa_no);
 	ArrayList<memberDTO> listMember();
-	void insert(String id,String pw,String name,String nick,String phone,String gender,String mail,String birth);
-	int count(String id,int pw);
-	void talent(int m_no,int t_no);
-	int id(String id);
+	void member_insert(String id,String pw,String name,String nick,String phone,String gender,String mail,String birth);
+	int login_count(String id,int pw);
+	void talent_insert(int m_no,int t_no);
+	int id_count(String id);
 	int getM_no1(String id);
-	int nick(String nick);
+	int nick_count(String nick);
 	ArrayList<L_listDTO> getM_noNick(int m_no);
 	ArrayList<L_listDTO> Openl_list();
 	ArrayList<L_listDTO> getL_list(String l_koo);

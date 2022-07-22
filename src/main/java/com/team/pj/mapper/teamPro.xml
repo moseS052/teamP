@@ -42,23 +42,23 @@
 <select id="listMember" resultType="com.team.pj.memberDTO">
 	select * from member 
 </select>
-<insert id="insert">
+<insert id="member_insert">
 	insert into member(m_no,id,pw,name,nick,phone,gender,mail,birth)
 	values(member_sq.nextval,#{param1},#{param2},#{param3},#{param4},#{param5},#{param6},#{param7},#{param8})	
 </insert>
-<insert id="talent">
+<insert id="talent_insert">
 	insert into talent_check values(#{param1},#{param2})
 </insert>
-<select id="count" resultType="int">
+<select id="login_count" resultType="int">
 	select count(*) cnt from member where id=#{param1} and pw=#{param2}
 </select>
-<select id="id" resultType="int">
+<select id="id_count" resultType="int">
 	select count(id) idcnt from member where id=#{param1}
 </select>
 <select id="getM_no1" resultType="int">
 	select m_no from member where id=#{param1}	
 </select>
-<select id="nick" resultType="int">
+<select id="nick_count" resultType="int">
 	select count(nick) nickcnt from member where nick=#{param1}
 </select>
 <select id="getM_noNick" resultType="com.team.pj.L_listDTO"> 
@@ -84,5 +84,12 @@
 </select>
 <select id="getNickById" resultType="String">
 	select nick from member where id=#{param1}
-</select> 
+</select>
+<select id="listBoard" resultType="com.team.pj.boardDTO">
+	select a.b_no,a.b_title,b.nick from board a, member b where a.b_type='F' 
+</select>
+<insert id="fb_insert">
+	insert into board(b_no,b_type,m_no,b_title,b_date,b_con) 
+	values(board_sq.nextval,'F',#{param1},#{param2},current_date,#{param3})
+</insert> 
 </mapper>
