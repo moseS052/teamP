@@ -3,7 +3,7 @@ package com.team.pj;
 public class SearchVO {
 	private int m_no;
 	private String title;
-	private String date;
+	private String time;
 	private int seqno;
 	
 	public SearchVO() {
@@ -25,12 +25,12 @@ public class SearchVO {
 		this.title = title;
 	}
 
-	public String getDate() {
-		return date;
+	public String getTime() {
+		return time;
 	}
 
-	public void setDate(String date) {
-		this.date = date;
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	public int getSeqno() {

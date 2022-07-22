@@ -1240,28 +1240,49 @@ $(document)
 })
 
 .on('click','#btnSearch',function(){
-	//검색하는 게시판의 내용이 들어가야함
+	//검색하는 게시판의 내용이 들어가야함  view 이용해서 사용할 것!
 	let title='l_title title';  //타이틀
 	let date='l_time time'; // date말고 time으로
 	let seqno='l_no seqno';  // 게시판 seq
-	let table='list'; //table 이름
+// 	let table='list'; //table 이름
+	let table='listSearch';  // view 이름
 	let titleName='l_title';  //게시판 title
 	let con='l_con';  //게시판 con
-	let search='%'+$('#searching').val()+'%'; //검색값
-	
+	let search=$('#searching').val(); //검색값
+	if($('#searching').val()==''){
+		alert('검색값이 없습니다.');
+		return false;
+	}
 	if($('#selSearch option:selected').text()=='작성자'){
-	
-	} else {
-		
 		$.ajax({
-			type:'post',url:'search',data:{title:title,date:date,seqno:seqno,
-				table:table,titleName:titleName,con:con,search:search},dataType:'json',
+			type:'post',url:'searchNick',data:{title:title,date:date,seqno:seqno,
+				table:table,search:search},dataType:'json',
 			success:function(data){
 				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
-				for(let i=0;j<data.length;i++){
+				for(let i=0;i<data.length;i++){
 					let jo=data[i];
 					let str='<textarea cols="27" rows="3">'+jo['id']+', '+jo['title']+', '+jo['date']+', '+jo['seqno']+'</textarea>'
 					$('#bannertext').append(str);
+// 					console.log(str);
+				}
+			},
+			error:function(){
+				alert('검색값이 없습니다');
+			},
+			complete:function(){}
+		})
+	} else {
+		
+		$.ajax({
+			type:'post',url:'searchTNC',data:{title:title,date:date,seqno:seqno,
+				table:table,titleName:titleName,con:con,search:search},dataType:'json',
+			success:function(data){
+				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
+				for(let i=0;i<data.length;i++){
+					let jo=data[i];
+					let str='<textarea cols="27" rows="3">'+jo['id']+', '+jo['title']+', '+jo['date']+', '+jo['seqno']+'</textarea>'
+					$('#bannertext').append(str);
+// 					console.log(str);
 				}
 			},
 			error:function(){
