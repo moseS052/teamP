@@ -29,7 +29,7 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
-<<<<<<< HEAD
+
 $(document)
 .ready(
 	function() {
@@ -84,15 +84,15 @@ $(document)
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="index.jsp">Home Agency</a></li>
+						<li><a href="/pj">Home Agency</a></li>
 						<li><a href="index-blog.html">Home Blog</a></li>
 						<li><a href="index-single-page.html">Home Single Page</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="about-us.html">About Us</a></li>
-						<li><a href="contact-us.html">Contact Us</a></li>
+						<li><a href="proposal?m_no=45">봉사활동 기획서</a></li>
+						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -273,13 +273,6 @@ $(document)
 							<h4>John Smith</h4>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Integer posuere erat a ante.</p>
-							<div class="pull-right btn-group social-profiles">
-								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
-								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
-								</a> <a class="btn" href="#"> <i
-									class="fa fa-google-plus google"></i>
-								</a>
-							</div>
 						</div>
 						<div class="blockquote-box fade-up clearfix">
 							<div class="square pull-left">
@@ -1240,6 +1233,7 @@ $(document)
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
+
 $(document)
 .on('click','#meminfo',function(){
 	window.open("meminfo", "_blank", "width=400, height=400, top=40, left=1340");
@@ -1256,5 +1250,6 @@ function logIn() {
 	  }
 </script>     
 <!-- 작성 -->
+
 
 </html>

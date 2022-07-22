@@ -9,6 +9,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
 <meta name="author" content="">
+
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
 <title>Team Project</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
@@ -17,11 +18,6 @@
 <link href="<c:url value="/resources/assets/css/pe-icons.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/style.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/font-awesome.min.css"/>" rel="stylesheet">
-<link
-	href='http://fonts.googleapis.com/css?family=Cabin:300,400,700,300italic,400italic'
-	rel='stylesheet' type='text/css'>
-<link href='http://fonts.googleapis.com/css?family=Lato:400,300,700'
-	rel='stylesheet' type='text/css'>
 <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
 <!--[if lt IE 9]>
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -37,20 +33,8 @@
 					duration : 8000,
 					fade : 500
 				});
-
-		// Map Position And Settings
-		$("#mapwrapper").gMap({ 
-			controls: false,
-			scrollwheel: false,
-			draggable: false,
-			latitude:40.7566,
-			longitude: -73.9863,
-			zoom: 11
-
-		});
 	});
-    </script>
-	
+    </script> 
   </head>
 
   <body class="single single-post"> 
@@ -68,14 +52,13 @@
         <div class="menu-wrap">
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
-                <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <h2><span class="pe-7s-chat logo-icon"></span> Quote</h2>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="index.html">Home Agency</a></li>
+                        <li><a href="/pj">Home Agency</a></li>
                         <li><a href="index-blog.html">Home Blog</a></li>
                         <li><a href="index-single-page.html">Home Single Page</a></li>
                     </ul>
@@ -83,8 +66,8 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="about-us.html">About Us</a></li>  
-                        <li><a href="contact-us.html">Contact Us</a></li>
+                        <li><a href="proposal?m_no=85">봉사활동 기획서</a></li>  
+                        <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
                 </li>   
@@ -123,35 +106,34 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">재능기부 신청 현황</h2>
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
-	<div id="content-wrapper">
+		<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-md-12">
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
+					
+					<div class="col-lg-8">
+						<h3>성공적으로 작성되었습니다.</h3>
+						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
+							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</p>	
+					</div>
 
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+                        
 
-						<p>May indulgence difficulty ham can put especially. Bringing remember for supplied her why was confined. Middleton principle did she procuring extensive believing add. Weather adapted prepare oh is calling. These wrong of he which there smile to my front. He fruit oh enjoy it of whose table. Cultivated occasional old her unpleasing unpleasant. At as do be against pasture covered viewing started. Enjoyed me settled mr respect no spirits civilly. Consulted he eagerness unfeeling deficient existence of. Calling nothing end fertile for venture way boy. Esteem spirit temper too say adieus who direct esteem. It esteems luckily mr or picture placing drawing no. Apartments frequently or motionless on reasonable projecting expression. Way mrs end gave tall walk fact bed. </p>
-
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
 				</div>
-			</div>	
 	    </section>
-	</div>
-
+			</div>	
+	
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -199,8 +181,14 @@
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+	
+	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
+<script>
+$(document)
+.ready(function(){
+	
+})
+</script>
 </html>
