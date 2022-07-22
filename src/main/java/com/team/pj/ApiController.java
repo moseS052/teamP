@@ -109,7 +109,7 @@ public class ApiController {
 	public String dopro(HttpServletRequest req,Model model) {
 		int m_no =Integer.parseInt(req.getParameter("m_no"));
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		ArrayList<L_listDTO> l_list=team.nick(m_no);
+		ArrayList<L_listDTO> l_list=team.getM_noNick(m_no);
 		model.addAttribute("m_no",l_list.get(0).getM_no());
 		model.addAttribute("nick",l_list.get(0).getNick());
 		return "proposal";

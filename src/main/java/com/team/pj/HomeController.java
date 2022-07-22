@@ -43,12 +43,12 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
-		if(session.getAttribute("newuser")==null) { //로그인 전
+		if(session.getAttribute("id")==null) { //로그인 전
 			model.addAttribute("userinfo","");
 			
 
 		}else { //로그인 성공 후
-			model.addAttribute("userinfo",session.getAttribute("newuser"));
+			model.addAttribute("userinfo",session.getAttribute("id"));
 			
 		}
 		return "home";
@@ -64,6 +64,7 @@ public class HomeController {
 	public String doSignup() {
 		return "signup";
 	}
+	
 	@RequestMapping(value="/user_check", method=RequestMethod.POST)
 	public String doCheck(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
@@ -78,12 +79,14 @@ public class HomeController {
 		String password=req.getParameter("pw");
 		
 		if(n==0) { //로그인 실패			
-			session.setAttribute("newuser",null);
+			session.setAttribute("m_no",null);
 			
 		}else if(n!=1) { //에러
 			
 		}else {	//로그인 성공
-			session.setAttribute("newuser",user_id);			
+			session.setAttribute("m_no",p.getM_no1(user_id));
+			session.setAttribute("nick",p.getNickById(user_id) );
+			session.setAttribute("id", user_id);
 		}
 		return "redirect:/";
 	}
@@ -148,9 +151,14 @@ public class HomeController {
 		return "addjsp";
 	}
 
-	//�ƹ�Ÿ ������ �� ȸ������ �ߴ� ��
+	//session example
 	@RequestMapping(value = "/meminfo", method = RequestMethod.GET)
-	public String meminfo() {
+	public String meminfo(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		
 		//����
 		return "memf";
 	}

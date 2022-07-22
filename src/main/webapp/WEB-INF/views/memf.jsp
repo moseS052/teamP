@@ -26,6 +26,13 @@
 </body>
 <script>
 $(document)
+.ready(function(){
+	console.log(`${id}`)
+	console.log(`${m_no}`)
+	console.log(`${nick}`)
+})
+
+
 .on('click','#btnSendNote',function(){
 	window.open("note?m_no=1&m_pa_no=3", "_blank", "width=350, height=400, top=110, left=1700");
 })

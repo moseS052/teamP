@@ -61,7 +61,7 @@
 <select id="nick" resultType="int">
 	select count(nick) nickcnt from member where nick=#{param1}
 </select>
-<select id="nick" resultType="com.team.pj.L_listDTO"> 
+<select id="getM_noNick" resultType="com.team.pj.L_listDTO"> 
 	select m_no,nick from member where m_no=#{param1}
 </select>
 <select id="getL_list" resultType="com.team.pj.L_listDTO"> 
@@ -82,4 +82,7 @@
 <select id="read" resultType="com.team.pj.L_listDTO"> 
 	select  a.l_title , a.l_con ,a.l_name, a.l_address, a.l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
 </select>
+<select id="getNickById" resultType="String">
+	select nick from member where id=#{param1}
+</select> 
 </mapper>
