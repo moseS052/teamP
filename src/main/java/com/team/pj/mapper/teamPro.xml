@@ -79,10 +79,13 @@
 <insert id="check_ad">
 	insert into talent_check_list values(#{param1},#{param2})
 </insert>
-<select id="read" resultType="com.team.pj.L_listDTO"> 
-	select  a.l_title , a.l_con ,a.l_name, a.l_address, a.l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
+<select id="l_read" resultType="com.team.pj.L_listDTO"> 
+	select  a.l_title ,a.m_no ,a.l_con ,a.l_name, a.l_address, a.l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
 </select>
 <select id="getNickById" resultType="String">
 	select nick from member where id=#{param1}
-</select> 
+</select>
+<delete id="L_del">
+	delete from list where l_no=#{param1}
+</delete> 
 </mapper>

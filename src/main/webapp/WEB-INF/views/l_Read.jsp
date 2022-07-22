@@ -52,8 +52,16 @@
         <div class="menu-wrap">
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
-                <h2><span class="pe-7s-chat logo-icon"></span> Quote</h2>
-            </div>
+				<h2>
+					<span class="pe-7s-chat logo-icon"></span> Quote
+				</h2>
+			 	<c:if test="${userinfo==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${userinfo!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
+			</div>
             <ul id="main-menu">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
@@ -66,7 +74,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal?m_no=85">봉사활동 기획서</a></li>  
+                        <li>
+                         <c:if test="${userinfo==null}">
+						<a href="login">봉사활동기획서</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
+						</c:if>
+                        </li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -123,8 +138,8 @@
 						<h3></h3>
 						
                         <div class="well">
-                        <input type="hidden" value="${l_no}">
-                        <p>${nick}</p>
+                        <input type="hidden" id="l_no" value="${l_no}">
+                        <p>${l_nick}</p>
                         <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
@@ -132,8 +147,19 @@
                         </div>
 						
 						<p>내용:${l_con}</p>
-                        <div class="square pull-right"><input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" /></div>
-                        
+                        <div class="square pull-right">
+                        <c:if test="${userinfo==null && l_mno ne m_no }">
+						<a href="login">
+                        <input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" /></a>
+						</c:if>
+						<c:if test="${l_mno eq m_no}">
+						<input class="btn btn-outlined btn-primary" type="button" id="l_retouch" value="수정하기" />
+						<input class="btn btn-outlined btn-primary" type="button" id="l_del" value="삭제하기" />
+						</c:if>
+						<c:if test="${userinfo!=null && l_mno ne m_no}">
+						<input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" />
+						</c:if>
+                        </div>
 
 					</div>
 				</div>
@@ -194,7 +220,6 @@
 <script>
 $(document)
 .ready(function(){
-console.log(`${l_addr}`);
 
 })
 .on('click','#map',function(){
@@ -204,6 +229,35 @@ console.log(`${l_addr}`);
 	console.log('"'+'map?key='+ar[0]+'"');
  	window.open('http://192.168.0.2:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
 	          // 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
+})
+.on('click','#l_del',function(){
+	console.log($('#l_no').val());
+	$.ajax({
+		type:'get',url:'l_del',data:{l_no:$('#l_no').val()},
+			dataType:'json',
+	  		success:function(data){
+	  			console.log(data);
+	  			alert('삭제되었습니다');
+	  			document.location='/pj/proposal_list'
+    		},
+    		error:function(){
+    			alert('삭제실패');
+    		},
+    		complete:function(){}
+    	});
+})
+.on('click','#l_retouch',function(){
+	console.log($('#l_no').val());
+	$.ajax({
+		type:'get',url:'l_retouch',data:{l_no:$('#l_no').val()},
+			dataType:'json',
+	  		success:function(data){
+    		},
+    		error:function(){
+    			alert('삭제실패');
+    		},
+    		complete:function(){}
+    	});
 })
 </script>
 </html>

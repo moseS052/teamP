@@ -53,9 +53,16 @@
         <div class="menu-wrap">
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
-                <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
-            </div>
+				<h2>
+					<span class="pe-7s-chat logo-icon"></span> Quote
+				</h2>
+			 	<c:if test="${userinfo==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${userinfo!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}hihih&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
+			</div>
             <ul id="main-menu">
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
@@ -68,7 +75,14 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="proposal?m_no=85">봉사활동 기획서</a></li>  
+                        <li>
+                        <c:if test="${userinfo==null}">
+						<a href="login">봉사활동기획서</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
+						</c:if>
+                        </li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -219,6 +233,7 @@
 <script>
 $(document)
 .ready(function(){
+	console.log(`${userinfo==null}`);
 	showlist();
 })
 .on('click','#find',function(){
