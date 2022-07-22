@@ -3,6 +3,7 @@ package com.team.pj;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
@@ -47,7 +48,10 @@ public class addController {
 		System.out.println("select m_no,"+title+","+date+","+seqno+" from "+table+" where ("
 		+titleName+" like  "+search+") or ("+con+" like "+search+")");
 		
-		int aa=ip.test1("member");
+		HashMap<String,String> map = new HashMap<>();
+		map.put(table, "member");
+		
+		int aa=ip.test1(map);
 		System.out.println(aa);
 //		ArrayList<SearchVO> arsvo=ip.searchTNC(title, date, seqno, table, titleName, con, search);
 //		JSONArray ja=new JSONArray();

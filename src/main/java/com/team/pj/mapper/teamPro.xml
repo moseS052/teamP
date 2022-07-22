@@ -18,7 +18,7 @@
 <select id='searchTNC' resultType="com.team.pj.SearchVO">
 	select m_no,#{param1},#{param2},#{param3} from #{param4} where (#{param5} like  #{param7}) or (#{param6} like #{param7})
 </select>
-<select id='test1' resultType="int">
-	select m_no from #{0} where id='a'
+<select id='test1' parameterType="HashMap" resultType="int">
+	select m_no from ${table} where id='a'
 </select>
 </mapper>
