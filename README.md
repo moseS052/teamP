@@ -116,6 +116,8 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ----
 
+### ※sysdate 사용하지말고 current_date 로 
+
 
 
 ### member   =회원테이블    
@@ -124,8 +126,9 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | ------- | ------------ | -------- | -------- | -------- | -------- | ---- | -------- | --------- | --------------- | -------- |
 | 회원seq | ID           | PW        | 이름     | 닉네임   | 모바일    | 성별 | 이메일    | 활동 점수 | 아바타 사진경로   | 생년월일 |
 | number  | varchar2     | varchar2 | varchar2 | varchar2 | varchar2 | char | varchar2 | number    | varchar2        | varchar2 |
-| primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 |                 |          |
+| primary | not null(NN) | NN       | NN       | NN       | NN       |      |          | default 0 | default avatar  |          |
 
+★ m_no seq = member_sq    ,   사용-  member_sq.nextval
 
 
 ### talent_check  =재능체크테이블
@@ -146,6 +149,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number      | varchar2 |
 | primary     | NN       |
 
+★ t_no seq = talent_sq    ,   사용-  talent_sq.nextval
 
 
 ### activities  =활동내역테이블
@@ -178,6 +182,8 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ★ 게시판 Read 시에는 view 사용  boardP , boardQ, boardF
 
+★ b_no seq = board_sq    ,   사용-  board_sq.nextval  
+
 
 
 ### route  =파일경로테이블
@@ -195,9 +201,10 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | c_no    | b_no      | c_con    | m_no    | c_date | c_pa_no     |
 | ------- | --------- | -------- | ------- | ------ | ----------- |
 | 자체seq | 게시판seq | 내용     | 회원seq | 시간   | 상위댓글seq |
-| nember  | number    | varchar2 | number  | date   | number      |
+| number  | number    | varchar2 | number  | date   | number      |
 | primary |           | NN       | NN      | NN     |             |
 
+★ c_no seq = comment_sq    ,   사용-  comment_sq.nextval  
 
 
 ### questions 질문게시판테이블(Q&A)
@@ -210,17 +217,21 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ♠ 자주묻는질문은 미리 questions 게시판에 입력후 사용하는 쪽으로
 
+★ q_no seq = questions_sq    ,   사용-  questions_sq.nextval 
+
 
 
 ### list  =목록테이블
 
-| l_no    | m_no    | l_title  | l_con    | l_date |      |
-| ------- | ------- | -------- | -------- | ------ | ---- |
-| 자체seq | 회원seq | 제목     | 내용     | 시간   |      |
-| number  | number  | varchar2 | varchar2 | date   |      |
-| primary | NN      | NN       |          | NN     |      |
+| l_no    | m_no    | l_title  | l_con    | l_time | l_name   | l_address | l_koo   | l_date|
+| ------- | ------- | -------- | -------- | ------ | -------- |---------- |---------|-------|
+| 자체seq | 회원seq | 제목      | 내용     | 시간    | 기관명   | 기관주소   | 기관 구  | 기간  |
+| number  | number  | varchar2 | varchar2 | date   | varchar2 | varchar2  | varchar2 | date |
+| primary | NN      | NN       |          | NN     | NN       | NN        | NN       | NN   |
 
 ※추가할 내용이 많아질 것 같음
+
+★ l_no seq = list_sq    ,   사용-  list_sq.nextval 
 
 
 
@@ -232,6 +243,13 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 | number  | number      |
 | NN      | NN          |
 
+### l_route  = 목록 파일경로테이블
+
+| l_no      | l_route  |
+| --------- | -------- |
+| 목록seq   | 경로     |
+| number    | varchar2 |
+| NN        | NN       |
 
 
 ### apply  =신청자테이블
@@ -246,9 +264,10 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ### note  =쪽지 테이블
 
-| m_no        | n_con    | n_date       | m_pa_no     |
-| ----------- | -------- | ------------ | ----------- |
-| 회원seq본인 | 내용     | 쪽지보낸시간 | 회원seq상대 |
-| number      | varchar2 | date         | number      |
-| NN          | NN       | NN           | NN          |
+|n_no      | m_no        | n_con    | n_date       | m_pa_no     |
+|----------| ----------- | -------- | ------------ | ----------- |
+|쪽지seq    | 회원seq본인 | 내용     | 쪽지보낸시간 | 회원seq상대 |
+|number    | number      | varchar2 | date         | number      |
+|primary   | NN          | NN       | NN           | NN          |
 
+★ n_no seq = note_sq    ,   사용-  note_sq.nextval
