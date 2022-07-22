@@ -32,7 +32,7 @@ public class addController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	//¿©±â¼­ºÎÅÍ ÀÛ¼º
+	//ï¿½ï¿½ï¿½â¼­ï¿½ï¿½ï¿½ï¿½ ï¿½Û¼ï¿½
 	@ResponseBody
 	@RequestMapping(value="/search",produces="application/text;charset=utf8",method = RequestMethod.POST)
 	public String noteSend(HttpServletRequest req) {
