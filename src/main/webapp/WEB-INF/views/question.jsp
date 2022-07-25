@@ -73,10 +73,10 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==''}">
+			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=''}">
+				<c:if test="${userinfo!=null}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -149,28 +149,50 @@
 			
 			<h2 class="centered section-heading">
 				<hr style="width:40%;">
-				1&nbsp;:&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;질문
+				1&nbsp;:&nbsp;1&nbsp;&nbsp;&nbsp;&nbsp;문의
 				<hr style="width:40%;">
 			</h2>
 			<div class="gap"></div>
-			<div class="row gap">
-					<div class="centered section-body"">
-						<div style="border:1px solid black;" class="col-sm-12">
+			<div class="row">
+					<div class="col-xs-100%" style="border-bottom:2px solid black;text-align:left;">
+						<p style="padding:0 0 0 40px;">문의내역</p>
+					</div>
+		   </div>
+		   <div class="row gap" style="border-bottom:2px solid black;">
+		   			<div class="col-xs-5">
+						<p style="padding:10px 0 0 250px;">제목</p>
+						<c:forEach var="questionDTO" items="${list }">
+							<p><a id="questiontitle" class="btn" style="padding:0 0 0 200px;" seq="${questionDTO.q_no }">${questionDTO.q_title }</a></p>
+						</c:forEach>
 							
-						</div>
-								
-							
-
-
-
-
-
-
-				</div>
-		</div>
+					</div>
+					<div class="col-xs-3" >
+						<p style="text-align:center;">작성일 </p>
+						<c:forEach var="dataDTO" items="${datalist }">
+							<p style="padding:0 0 0 90px;">${dataDTO.q_date }</p>
+						</c:forEach>
+					</div>
+					<div class="col-xs-2" >
+						<p style="text-align:right;">답변여부 </p>
+						 <c:forEach var="answerDTO" items="${answerlist }">
+							<c:if test="${empty answerDTO.q_a}">
+								<p style="text-align:right;">답변대기</p>
+							</c:if>
+							<c:if test="${!empty answerDTO.q_a}">
+								<strong><p style="text-align:right;">답변완료</p></strong>
+							</c:if>
+						</c:forEach>
+					</div>
+		
+		   </div>
+		    <div class="row">
+		    		<div class="pull-right">
+		    			<input id="questionBtn" type="button" class="btn btn-primary btn-outlined" value="1:1 문의하기">
+		    		</div>
+		    </div>
 	</div>
-
-	<MAIN FOOTER></MAIN>
+</div>
+	<!-- <MAIN FOOTER></MAIN>
 	 <div id="footerwrap">
 		<div class="container">
 			<div class="row">
@@ -205,7 +227,7 @@
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 
 	<a id="gototop" class="gototop no-display" href="#"><i
 		class="fa fa-angle-up"></i></a>
@@ -221,6 +243,15 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
+$(document)
+.on('click', '#questiontitle', function() {
+	let seq = $(this).attr('seq');
+	console.log(seq);
+	document.location='questionAnswer?q_no='+seq;
 	
+})
+.on('click','#questionBtn',function(){
+	document.location='contactus';
+})
 </script>
 </html>

@@ -53,20 +53,18 @@
 </script>
 
 </head>
+<body class="single single-post"> 
 
-<body class="single single-post">
+  	<div id="preloader"></div>
 
-	<div id="preloader"></div>
+    <div id="search-wrapper">
+        <div class="container">
+            <input id="search-box" placeholder="Search"><span class="close-trigger"><i class="fa fa-angle-up"></i></span>
+        </div>
+    </div>
 
-	<div id="search-wrapper">
-		<div class="container">
-			<input id="search-box" placeholder="Search"><span
-				class="close-trigger"><i class="fa fa-angle-up"></i></span>
-		</div>
-	</div>
-
-	<!-- END NAV -->
-	<nav class="menu" id="theMenu">
+    <!-- END NAV -->
+    <nav class="menu" id="theMenu">
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
@@ -111,7 +109,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="#">1:1 질문</a></li>
 					</ul></li>	
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i
@@ -133,49 +131,42 @@
 			</ul>
 		</div>
 	</nav>
-	<!-- END NAV -->
-
-	MAIN IMAGE SECTION
+    <!-- END NAV -->
+	
+	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
-		<div class="container">
-			<div id="bannertext" class="centered fade-down section-heading">
-
-			</div>
-		</div>
-	</div>
+   		<div class="container">
+	    	<div class="gap"></div> 
+        	<div id="bannertext" class="centered fade-down section-heading">
+                <h2 class="main-title"></h2>
+                
+            </div>
+		</div><!-- /container -->
+	</div><!-- /headerwrap -->
+				
 	<div id="content-wrapper">
-		<section id="about"></section>
-		<div class="container">
-			
-			<h2 class="centered section-heading">
-				<hr style="width:40%;">
-				자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문
-				<hr style="width:40%;">
-			</h2>
-			<div class="gap"></div>
-			<div class="row gap">
-					<div class="centered section-body"">
-						<div class="fade-up col-sm-12 fade-up">
-							<c:forEach var="faqVO" items="${faqList }">
-								<div id="faqtitle" seq="${faqVO.q_no }" class="btn" style="font-size:20px;">${faqVO.q_title }
-								<hr style="width:100%;">
-								</div><br>
-							</c:forEach>
-						</div>
-								
-							
-
-
-
-
-
-
-				</div>
-		</div>
+	    <section id="about">
+	   		<div class="container">
+		    	<div class="gap">
+		    		<hr>
+                <h2><p style="text-align:center;">${qtitle}</p></h2>
+                <hr>
+		    	</div>
+                    <div class="row gap">
+                        <div class="fade-up col-md-10 fade-up" style="margin:20px 20px 20px 60px;">
+                            <div class="centered">
+                                <p><textarea class="form-control" readonly style="height:300px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qcontent }</textarea></p>
+                                <p><textarea class="form-control"  readonly style="height:300px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qa }</textarea></p>
+                        	</div>
+                        	<input id="questionList" class="pull-right btn btn-primary btn-outlined" type="button" value="목록" seq="${qmno }">
+                        </div>
+                    </div><!-- row -->
+			</div>	
+	    </section>
 	</div>
 
 	<!-- MAIN FOOTER -->
-	<!-- <div id="footerwrap">
+	<div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -189,11 +180,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div>col-lg-4
+				</div><!--col-lg-4-->
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div>col-lg-4
+				</div><!--col-lg-4-->
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -201,44 +192,34 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div>col-lg-4
-			</div>row
-		</div>container
+				</div><!--col-lg-4-->
+			</div><!-- row -->
+		</div><!-- container -->
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div> -->
-
-	<a id="gototop" class="gototop no-display" href="#"><i
-		class="fa fa-angle-up"></i></a>
+	</div>
+	
+	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
 
-	<!-- Bootstrap core JavaScript
+    <!-- Bootstrap core JavaScript
     ================================================== -->
-	<!-- Placed at the end of the document so the pages load faster -->
-	<script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
-</body>
+  </body>
+
 <script>
 	$(document)
-	.on('click', '#faqtitle', function() {
-		let seq = $(this).attr('seq');
-		console.log(seq);
-		document.location='qnaanswer?q_no='+seq;
-		
-	})
-	.on('click','#question',function(){
-	console.log(`${userinfo}`=='')
-	if(`${userinfo}`==''){
-		alert('로그인 후 사용가능합니다.')
-	}else{
-		document.location='/pj/question';
-	}
-})
+		.on('click','#questionList',function(){
+			let seq=$(this).attr('seq');
+			document.location='question';
+		})
 </script>
 </html>
