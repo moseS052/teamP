@@ -185,7 +185,6 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 ★ b_no seq = board_sq    ,   사용-  board_sq.nextval  
 
 
-
 ### route  =파일경로테이블
 
 | b_no      | b_route  |
@@ -271,3 +270,8 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 |primary   | NN          | NN       | NN           | NN          |
 
 ★ n_no seq = note_sq    ,   사용-  note_sq.nextval
+
+
+◆ 검색 테이블 bfsearch,bpsearch,bqsearch,listsearch  테이블명
+
+### alarm  =알림 
