@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Free Board</title>
+<title>Update</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -137,26 +137,17 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<h1>Free Board</h1>
-
-					<table align=center>
-					<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
-					<c:forEach var="boardDTO" items="${boardlist }">
-					<tr><td>${boardDTO.b_no }</td><td><a href='freedetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
-					<td>${boardDTO.nick }</td>
-					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>
-					<%-- <td><form id=frmup method=get action="updetail">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='수정'></form></td><td>
-					<form id=frmdel method=get action="delete_free">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='삭제'></form></td> --%>
-					</tr>
-					</c:forEach>
-					</table>
-					<c:if test="${m_no!=null}">
-					<a href='newpost_write' align='center'>새글쓰기</a>
-					</c:if>
+					<form id=frmbbs method=get action="update_free">
+					<input type=hidden name=b_no value="${bdto.b_no }">
+					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }"><br>
+					내용: <textarea id=b_con name=b_con rows=10 cols=70>${bdto.b_con }</textarea><br>
+					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
+					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date}" readonly>
+					<input type=submit value='수정완료'>
+					<input type=reset value='취소' id=btnReset>
+					<!-- <button type=submit formaction='delete' formmethod=post>삭제</button> -->
+					
+					</form>
 					</div>
 				</div>
 			</div>	
@@ -214,4 +205,10 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+$(document)
+.on('click','#btnReset',function(){
+	document.location='/pj/freeboard';
+})
+</script>
 </html>

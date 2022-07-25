@@ -2,6 +2,7 @@ package com.team.pj;
 
 import java.util.ArrayList;
 
+
 public interface iteamP {
 	ArrayList<noteVO> getNoteCon(int m_no,int m_pa_no);
 	void noteSend(int me,int you,String con);
@@ -29,4 +30,10 @@ public interface iteamP {
 	int checkl_no(int l_no,String l_date);
 	void check_ad(int l_no,int t_no);
 	String getNickById(String id);
+	ArrayList<boardDTO> listBoard();
+	void free_insert(int m_no,String b_title,String b_con);
+	void free_delete(int b_no);
+	boardDTO free_detail(int b_no);
+	void free_update(String b_title,String b_con,int b_no);
+	void free_viewcnt(int b_no);
 }

@@ -1238,7 +1238,6 @@ $(document)
 .on('click','#meminfo',function(){
 	window.open("meminfo", "_blank", "width=400, height=400, top=40, left=1340");
 })
-
 </script>
 
 <script type="text/javascript">

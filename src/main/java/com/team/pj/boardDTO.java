@@ -6,6 +6,9 @@ public class boardDTO {
 	int m_no;
 	String b_title;	
 	String b_con;
+	String nick;
+	String b_date;
+	int views;
 	public boardDTO() {
 		
 	}
@@ -38,6 +41,24 @@ public class boardDTO {
 	}
 	public void setB_con(String b_con) {
 		this.b_con = b_con;
+	}
+	public String getNick() {
+		return nick;
+	}
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+	public String getB_date() {
+		return b_date;
+	}
+	public void setB_date(String b_date) {
+		this.b_date = b_date;
+	}
+	public int getViews() {
+		return views;
+	}
+	public void setViews(int views) {
+		this.views = views;
 	}
 	
 }

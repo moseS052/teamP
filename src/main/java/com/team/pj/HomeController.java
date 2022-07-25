@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
 /**
  * Handles requests for the application home page.
  */
@@ -88,6 +89,9 @@ public class HomeController {
 			session.setAttribute("nick",p.getNickById(user_id) );
 			session.setAttribute("id", user_id);
 		}
+		
+//		ArrayList<boardDTO> blist=p.listBoard();
+//		model.addAttribute("boardlist",blist);
 		return "redirect:/";
 	}
 	//濡�洹몄����
