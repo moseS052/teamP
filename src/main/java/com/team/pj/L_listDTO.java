@@ -12,6 +12,21 @@ public class L_listDTO {
 	 String l_date;
 	 String l_route;
 	 String nick;
+	 String t_name;
+	 int l_views;
+	 
+	public int getL_views() {
+		return l_views;
+	}
+	public void setL_views(int l_views) {
+		this.l_views = l_views;
+	}
+	public String getT_name() {
+		return t_name;
+	}
+	public void setT_name(String t_name) {
+		this.t_name = t_name;
+	}
 	public String getNick() {
 		return nick;
 	}

@@ -4,7 +4,8 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+ <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -34,10 +35,13 @@
 					fade : 500
 				});
 	});
-    </script>
-	
+    </script> 
   </head>
-
+<style>
+input[type="checkbox"]{
+accent-color:green;
+}
+</style>
   <body class="single single-post"> 
 
   	<div id="preloader"></div>
@@ -56,10 +60,10 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==null}">
+			 	<c:if test="${userinfo==''}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=null}">
+				<c:if test="${userinfo!=''}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -75,14 +79,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
                     <ul class="dropdown-menu">
-                        <li>
-                        <c:if test="${userinfo==null}">
-						<a href="login">봉사활동기획서</a>
-						</c:if>
-						<c:if test="${userinfo!=null}">
-						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
-						</c:if>
-                        </li>  
+                        <li><a href="proposal?m_no=${m_no}">봉사활동 기획서</a></li>  
                         <li><a href="proposal_list">봉사활동 현황목록</a></li>
                         <li><a href="404.html">404</a></li>                   
                     </ul>
@@ -122,23 +119,36 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">재능기부 신청 현황</h2>
+                <h2 class="main-title">봉사활동작성</h2>
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
-		<div id="content-wrapper">
+	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
-						<h3>재능기부신청 게시판</h3>
+					<div class="col-md-8 fade-up">
+						<h3>봉사활동작성</h3>
+						
+						<div id="cla">
+						<input type=hidden id="m_no" value="${m_no}">
+						<input type=hidden id="l_no" value="${l_no}">
+						작성자<input type="text" class="form-control" id="nick" placeholder="Name" value="${nick}" disabled/>
+						</div>
+						
+						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title" value="${l_title}"/>
+						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60>${l_con}</textarea>
+						   <p class="well">재능기부신청<br><input type="checkbox" value="1" name="che">요리&nbsp;<input type="checkbox" value="2" name="che">청소&nbsp;<input type="checkbox" value="3" name="che">미용&nbsp;<input type="checkbox" value="4" name="che">강연&nbsp;<input type="checkbox" value="5" name="che">기타</p>
+						   시행일자<input type="date" id="l_date" class="form-control" value="${l_date}">
+						   사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple>
+						</p>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
-                            <option value=''></option>
+                            <option >${l_koo}</option>
                             <option>강남구</option>
                             <option>강동구</option>
                             <option>강북구</option>
@@ -166,19 +176,21 @@
                             <option>중랑구</option>
                             <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" /><br>
                         </select>
-                        <div id="cla">
-                        </div>
-						
-						<p>신청구역(서울)</p>
                         
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+						기관(명)<select id="l_name" class="form-control">
+						<option>${l_name}</option>
+                            <input class="btn btn-outlined btn-primary" type="button" id="load" value="길찾기" /><br>
+                            </select> 
+						상세주소<input type="text" class="form-control" id="l_address" value="${l_addr}"/>
+						<input type="hidden" id='hid'>
+						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
+						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
 					</div>
 				</div>
 			</div>	
 	    </section>
 	</div>
+
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -231,22 +243,82 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+
 $(document)
 .ready(function(){
-	console.log(`${userinfo==null}`);
-	showlist();
+	console.log('이름='+$('#m_no').val());
+	console.log('제목='+$('#l_title').val());
+	console.log('내용='+$('#l_content').val());
+	console.log('날자='+$('#l_date').val());
+	console.log('사진='+$('#l_file').val());
+	console.log('신청구역='+$('#l_koo option:selected').val());
+	console.log('상호='+$('#l_name option:selected').text());
+	console.log('상세주소='+$('#l_address').val());
+})
+
+.on('click','#ad',function(){	
+	
+	console.log('이름='+$('#m_no').val());
+	console.log('제목='+$('#l_title').val());
+	console.log('내용='+$('#l_content').val());
+	console.log('날자='+$('#l_date').val());
+	console.log('사진='+$('#l_file').val());
+	console.log('신청구역='+$('#l_koo option:selected').val());
+	console.log('상호='+$('#l_name option:selected').text());
+	console.log('상세주소='+$('#l_address').val());
+	$.ajax({
+		type:'get',url:'proUp',data:{l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
+			dataType:'text',async: false,
+	  		success:function(){
+    				console.log('ann');
+	  			$("input[type=checkbox]:checked").each(function(){
+    				const value = $(this).val();
+    				$.ajax({
+    						type:'get',url:'upcheckbox',data:{l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
+    						dataType:'text',
+    					  		success:function(){
+    					  		document.location='/pj/success_page'
+    				    		},
+    				    		error:function(){
+    				    			alert('데이터등록실패');
+    				    		},
+    				    		complete:function(){}
+    				    	});
+    			})
+	  			
+    		},
+    		error:function(){
+    		},
+    		complete:function(){}
+    	});
+})
+.on('click','#ca',function(){
+	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date').val('');
+})
+.on('click','#map',function(){
+	let aa=$('#hid').val()
+	console.log(aa);
+	console.log('"'+'map?key='+aa+'"');
+ 	window.open('http://192.168.0.2:8080/pj/map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
+	          // 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
+})
+.on('click','#load',function(){
+	let str=$('#l_name option:selected').val();
+	$('#l_address').val(str);
+	let ar = str.split(',');
+	let br = ar[0].split('(');
+	$('#hid').val(br[0]);
 })
 .on('click','#find',function(){
-	console.log($('#l_koo option:selected').text());
 	$.ajax({
-		type:'get',url:'find_list',data:{l_koo:$('#l_koo option:selected').text()},
+		type:'get',url:'ko_check',data:{l_koo:$('#l_koo option:selected').text()},
 			dataType:'json',
 	  		success:function(data){
-	  			$('#cla').empty();
+	  			$('#l_name').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
-					$('#cla').append(str);
+					let str='<option value="'+jo['ar']+'">'+jo['name']+'</option>';
+					$('#l_name').append(str);
 	  			}
     		},
     		error:function(){
@@ -255,24 +327,6 @@ $(document)
     		complete:function(){}
     	});
 })
-function showlist(){
-	$.ajax({
-		url:'open_list', data:'',dataType:'json',type:'get',
-		success:function(data){
-			$('#cla').empty();
-  			for(let i=0;i<data.length;i++){
-				let jo=data[i];
-				let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'</p></a></div>';
-				$('#cla').append(str);
-  			}
-		},
-		error:function(){
-    		alert('데이터등록실패');
-    	},
-    	complete:function(){}
-		
-	});
-}
 
 </script>
 </html>

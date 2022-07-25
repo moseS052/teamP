@@ -65,10 +65,10 @@
 	select m_no,nick from member where m_no=#{param1}
 </select>
 <select id="getL_list" resultType="com.team.pj.L_listDTO"> 
-	select l_no,m_no,l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list where l_koo=#{param1} order by l_date
+	select l_views,l_no,m_no,l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list where l_koo=#{param1} order by l_date
 </select>
 <select id="Openl_list" resultType="com.team.pj.L_listDTO"> 
-	select l_no,m_no,l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list order by l_date
+	select l_views,l_no,m_no,l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list order by l_date
 </select>
 <insert id="new_ad">
 	insert into list values(list_sq.nextval,#{param1},#{param2},#{param3},current_date,#{param4},#{param5},#{param6},#{param7})
@@ -80,12 +80,42 @@
 	insert into talent_check_list values(#{param1},#{param2})
 </insert>
 <select id="l_read" resultType="com.team.pj.L_listDTO"> 
-	select  a.l_title ,a.m_no ,a.l_con ,a.l_name, a.l_address, a.l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
+	select a.l_views, a.l_title ,a.m_no ,a.l_con ,a.l_name, a.l_address, to_char(l_date, 'YYYY-MM-DD') l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
 </select>
 <select id="getNickById" resultType="String">
 	select nick from member where id=#{param1}
 </select>
 <delete id="L_del">
 	delete from list where l_no=#{param1}
-</delete> 
+</delete>
+<select id="reto" resultType="com.team.pj.L_listDTO"> 
+	select l_no ,m_no ,l_title ,l_con ,to_char(l_date, 'YYYY-MM-DD') l_date ,l_name ,l_address ,l_koo from list where l_no=#{param1}
+</select>
+<select id="bringt_no" resultType="int"> 
+	select t_no from talent_check_list where l_no=#{param1}
+</select>
+<delete id="delcheck">
+	delete from talent_check_list where l_no=#{param1}
+</delete>
+<select id="bringt_name" resultType="string"> 
+	select a.t_name from talent a,talent_check_list b where  a.t_no=b.t_no and l_no=#{param1}
+</select>
+<select id="buttoncreate" resultType="int"> 
+	select count(*) from apply where l_no=#{param1} and m_no=#{param2}
+</select>
+<select id="applist" resultType="com.team.pj.L_listDTO"> 
+	select   b.nick from apply a , member b where a.m_no=b.m_no and a.l_no=#{param1}
+</select>
+<insert id="applyad">
+	insert into apply values(#{param1},#{param2})
+</insert>
+<delete id="applydel">
+	delete from apply where l_no=#{param1} and m_no=#{param2}
+</delete>
+<update id="l_views">
+	update list set l_views=l_views+1 where l_no=#{param1}
+</update>
+<update id="prUodate">
+update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4},l_time=current_date,l_name=#{param5},l_address=#{param6},l_koo=#{param7} where l_no=#{param8} 
+</update>    
 </mapper>

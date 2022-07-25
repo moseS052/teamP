@@ -139,25 +139,20 @@
 						
                         <div class="well">
                         <input type="hidden" id="l_no" value="${l_no}">
-                        <p>${l_nick}</p>
+                        <input type="hidden" id="user_name" value="${userinfo}">
+                        <p>${l_nick}<div class="square pull-right">${l_views}</div></p>
                         <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
-                        <h3>주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
+                        <h3 id="cbox">주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
                         </div>
-						
 						<p>내용:${l_con}</p>
-                        <div class="square pull-right">
-                        <c:if test="${userinfo==null && l_mno ne m_no }">
-						<a href="login">
-                        <input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" /></a>
-						</c:if>
-						<c:if test="${l_mno eq m_no}">
-						<input class="btn btn-outlined btn-primary" type="button" id="l_retouch" value="수정하기" />
-						<input class="btn btn-outlined btn-primary" type="button" id="l_del" value="삭제하기" />
-						</c:if>
-						<c:if test="${userinfo!=null && l_mno ne m_no}">
-						<input class="btn btn-outlined btn-primary" type="button" id="find" value="신청하기" />
+                        <div class="square pull-right" id="but">
+					
+						<c:if test="${userinfo!=null && l_mno eq m_no}">
+						현황목록<select id="l_name" class="form-control"">
+                            
+                        	 </select> 
 						</c:if>
                         </div>
 
@@ -220,7 +215,38 @@
 <script>
 $(document)
 .ready(function(){
-
+	shwocheck();
+	applylist()
+	if(`${l_mno}`==`${m_no}`){
+		let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
+			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
+			$('#but').append(str);	
+	}else if(`${userinfo}`== ""){
+		let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
+			$('#but').append(str);
+	}else if(`${l_mno}`!=`${m_no}`){
+		$.ajax({
+			type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+				dataType:'json',
+		  		success:function(data){
+		  			console.log('데이타는='+data)
+		  			if(data==1){
+		  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
+		  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
+		  					$('#but').append(str);
+		  			}else{
+		  				let str="<input class='btn btn-outlined btn-primary' id='find' type='button' value='신청하기' />"
+		  					$('#but').append(str);
+		  			}
+	    		},
+	    		error:function(){
+	    			alert('삭제실패');
+	    		},
+	    		complete:function(){}
+	    	});
+	}
+		
+	
 })
 .on('click','#map',function(){
 	let a=`${l_addr}`
@@ -246,18 +272,85 @@ $(document)
     		complete:function(){}
     	});
 })
+
 .on('click','#l_retouch',function(){
 	console.log($('#l_no').val());
+	
+	document.location='/pj/l_retouch?l_no='+$('#l_no').val()
+})
+.on('click','#find',function(){
+	console.log(`${m_no}`);
+	console.log(`${l_no}`);
 	$.ajax({
-		type:'get',url:'l_retouch',data:{l_no:$('#l_no').val()},
+		type:'get',url:'applynew',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+			dataType:'text',
+	  		success:function(){
+	  			alert('신청완료되셨습니다')
+	  			document.location='/pj/l_Read?l_no='+$('#l_no').val()
+    		},
+    		error:function(){
+    			alert('데이터등록실패');
+    		},
+    		complete:function(){}
+    	});
+})
+.on('click','#apdel',function(){
+	console.log(`${m_no}`);
+	console.log(`${l_no}`);
+	$.ajax({
+		type:'get',url:'applydel',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+			dataType:'text',
+	  		success:function(){
+	  			alert('신청이취소되었습니다')
+	  			document.location='/pj/l_Read?l_no='+$('#l_no').val()
+    		},
+    		error:function(){
+    			alert('데이터등록실패');
+    		},
+    		complete:function(){}
+    	});
+})
+function shwocheck(){
+	let ar=`${sd}`.split(',');
+	let str="";
+// 	console.log(ar[1]);
+	for(let i=0; i<ar.length; i++){
+		str+=ar[i];
+	}
+		$('#cbox').append('<h3>재능:'+str+'</h3>');
+}
+function usercheck(){
+	$.ajax({
+		type:'get',url:'user_check',data:{l_no:$('#l_no').val()},
 			dataType:'json',
-	  		success:function(data){
+	  		success:function(){
+	  			console.log(data);
+	  			alert('삭제되었습니다');
+	  			document.location='/pj/proposal_list'
     		},
     		error:function(){
     			alert('삭제실패');
     		},
     		complete:function(){}
     	});
-})
+}
+function applylist(){
+	$.ajax({
+		type:'get',url:'applylist',data:{l_no:$('#l_no').val()},
+			dataType:'json',
+	  		success:function(data){
+	  			$('#l_name').empty();
+	  			for(let i=0;i<data.length;i++){
+					let jo=data[i];
+					let str='<option>'+jo['appnick']+'</option>';
+					$('#l_name').append(str);
+	  			}
+    		},
+    		error:function(){
+    			alert('데이터등록실패');
+    		},
+    		complete:function(){}
+    	});
+}
 </script>
 </html>

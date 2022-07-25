@@ -30,5 +30,14 @@ public interface iteamP {
 	void check_ad(int l_no,int t_no);
 	String getNickById(String id);
 	int L_del(int l_no);
-	ArrayList<L_listDTO> reto(int l_no);
+	L_listDTO reto(int l_no);
+	ArrayList<Integer> bringt_no(int l_no);
+	void delcheck(int l_no);
+	ArrayList<String> bringt_name(int l_no);
+	int buttoncreate(int l_no,int m_no);
+	ArrayList<L_listDTO>applist(int l_no);
+	void applyad(int l_no , int m_no);
+	void applydel(int l_no , int m_no);
+	void l_views(int l_no);
+	void prUodate(int m_no,String l_title,String l_content,String l_date,String l_name,String l_address,String l_koo,int l_no);
 }
