@@ -164,11 +164,11 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ### board  =게시판 테이블
 
-| b_no      | b_type      | m_no    | b_title  | b_date   | b_con    |
-| --------- | --------------- | ------- | -------- | -------- | -------- |
-| 게시판seq | 게시판 종류 | 회원seq | 제목     | 작성시간 | 내용     |
-| number    | char    | number  | varchar2 | date     | varchar2 |
-| primary   | NN              | NN      | NN       | NN       |          |
+| b_no      | b_type      | m_no    | b_title  | b_date   | b_con    |views   |
+| --------- | --------------- | ------- | -------- | -------- | -------- |-----|
+| 게시판seq | 게시판 종류 | 회원seq | 제목     | 작성시간 | 내용     |조회수  |
+| number    | char    | number  | varchar2 | date     | varchar2 |number |
+| primary   | NN              | NN      | NN       | NN       |       |default 0|
 
 ※게시판 분류
 
