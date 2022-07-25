@@ -20,9 +20,12 @@
 <div>
 	<img src=<c:url value="resources/assets/img/avatar1.png"/> width="200px" height="200px" />
 </div>
-
+<c:if test="${m_no==semno }">
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
+</c:if>
+<c:if test="${m_no!=semno }">
 <a class="btn btn-primary btn-outlined" href="#" id="btnSendNote">쪽지 보내기</a>
+</c:if>
 </body>
 <script>
 $(document)

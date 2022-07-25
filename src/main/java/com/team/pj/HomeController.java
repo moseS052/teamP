@@ -51,7 +51,7 @@ public class HomeController {
 
 		}else { //로그인 성공 후
 			model.addAttribute("userinfo",session.getAttribute("id"));
-			
+			model.addAttribute("m_no",session.getAttribute("m_no"));
 		}
 		return "home";
 		
@@ -157,6 +157,7 @@ public class HomeController {
 	@RequestMapping(value = "/meminfo", method = RequestMethod.GET)
 	public String meminfo(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
+		model.addAttribute("semno",Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("id",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
