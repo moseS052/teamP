@@ -181,6 +181,7 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 ★ 게시판 Insert Update Delete 는 board 테이블 사용
 
 ★ 게시판 Read 시에는 view 사용  boardP , boardQ, boardF
+   -view에는 닉네임 조인해 놓았음!! 컬럼명  :  nick
 
 ★ b_no seq = board_sq    ,   사용-  board_sq.nextval  
 
