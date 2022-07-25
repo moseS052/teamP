@@ -10,7 +10,9 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
+
 <title>login</title>
+
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -30,24 +32,15 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
-    $(document).ready(function(){
+    $(document)
+    .ready(function(){
     	jQuery('#headerwrap').backstretch(
 				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
 					"resources/assets/img/bg/bg3.jpg" ], {
 					duration : 8000,
 					fade : 500
 				});
-
-		// Map Position And Settings
-		$("#mapwrapper").gMap({ 
-			controls: false,
-			scrollwheel: false,
-			draggable: false,
-			latitude:40.7566,
-			longitude: -73.9863,
-			zoom: 11
-
-		});
+		
 	});
     </script>
 	
@@ -123,9 +116,9 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <h2 class="main-title">자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문</h2>
+                <hr>
             </div>
 		</div>/container
 	</div>/headerwrap
@@ -137,6 +130,7 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
+
 					<form id=frmLogin method=POST action="user_check">
 <!-- <div class="mb-3">
   <label for="exampleFormControlInput1" class="form-label">ID</label>
@@ -154,6 +148,7 @@
 					<input type=submit value='로그인' class="btn btn-primary btn-outlined">&nbsp;
 					<input type=reset value='비우기' class="btn btn-primary btn-outlined">
 					</form>
+
 					</div>
 				</div>
 			</div>	
@@ -211,4 +206,7 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
+<script>
+
+</script>
 </html>
