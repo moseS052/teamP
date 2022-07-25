@@ -275,3 +275,9 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 ◆ 검색 테이블 bfsearch,bpsearch,bqsearch,listsearch  테이블명
 
 ### alarm  =알림 
+
+|m_no    |alarm    |time    |check    |
+|--------|---------|--------|---------|
+|회원seq |쪽지내용  |쪽지시간 |확인유무 |
+|number  |varchar2 |date    |number  |
+|NN      | NN      |NN      |NN      |
