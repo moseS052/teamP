@@ -1,6 +1,8 @@
 package com.team.pj;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public interface iteamP {
 	ArrayList<noteVO> getNoteCon(int m_no,int m_pa_no);
@@ -29,4 +31,8 @@ public interface iteamP {
 	int checkl_no(int l_no,String l_date);
 	void check_ad(int l_no,int t_no);
 	String getNickById(String id);
+	String getID(int m_no);
+	int getM_no(String id);
+	ArrayList<SearchVO> searchTNC(Map map);
+	ArrayList<SearchVO> searchNick(Map map);
 }

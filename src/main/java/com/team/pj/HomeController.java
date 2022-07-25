@@ -3,7 +3,9 @@ package com.team.pj;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -203,5 +205,60 @@ public class HomeController {
 		int me=1; //���Ǹ����� ���Ǿ� ��
 		ip.noteSend(me, you, con);
 		return "";
+	}
+	
+	//search title and content
+	@ResponseBody
+	@RequestMapping(value="/searchTNC",produces="application/text;charset=utf8",method = RequestMethod.POST)
+	public String searchTNC(HttpServletRequest req) {
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		String table=req.getParameter("table");
+		String search="'"+req.getParameter("search")+"'";
+
+		Map map=new HashMap();
+		map.put("table", table);
+		map.put("search", search);
+		
+		ArrayList<SearchVO> arsvo=ip.searchTNC(map);
+		JSONArray ja=new JSONArray();
+		for(int i=0;i<arsvo.size();i++) {
+			SearchVO svo = arsvo.get(i);
+			JSONObject jo = new JSONObject();
+			jo.put("nick", svo.getNick());
+			jo.put("title", svo.getTitle());
+			jo.put("date", svo.getTime());
+			jo.put("seqno", svo.getSeqno());
+			jo.put("con", svo.getCon());
+			ja.add(jo);
+		}
+		map.clear();
+		return ja.toJSONString();
+	}
+	
+	//search nick
+	@ResponseBody
+	@RequestMapping(value="/searchNick",produces="application/text;charset=utf8",method = RequestMethod.POST)
+	public String searchNick(HttpServletRequest req) {
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		String table=req.getParameter("table");
+		String search=req.getParameter("search");
+		Map map=new HashMap();
+		map.put("table", table);
+		map.put("search", search);
+		ArrayList<SearchVO> arsvo=ip.searchNick(map);
+		
+		JSONArray ja=new JSONArray();
+		for(int j=0;j<arsvo.size();j++) {
+			SearchVO svo = arsvo.get(j);
+			JSONObject jo = new JSONObject();
+			jo.put("nick", svo.getNick());
+			jo.put("title", svo.getTitle());
+			jo.put("date", svo.getTime());
+			jo.put("seqno", svo.getSeqno());
+			ja.add(jo);
+		}
+		
+		map.clear();
+		return ja.toJSONString();
 	}
 }
