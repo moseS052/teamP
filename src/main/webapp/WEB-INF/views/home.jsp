@@ -70,10 +70,10 @@ $(document)
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==''}">
+			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=''}">
+				<c:if test="${userinfo!=null}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -114,7 +114,7 @@ $(document)
 					data-toggle="dropdown">Portfolio <i
 						class="fa fa-camera menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="photoBoard">사진게시판</a></li>
 						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
 						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
 						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>

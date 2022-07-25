@@ -71,10 +71,10 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==''}">
+			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=''}">
+				<c:if test="${userinfo!=null}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -109,7 +109,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a href="#">1:1 질문</a></li>
+						<li><a id="question" href="#">1:1 질문</a></li>
 					</ul></li>	
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i
@@ -213,6 +213,14 @@
   </body>
 
 <script>
+$(document)
+ .on('click','#question',function(){
+			if(`${userinfo}`==null){
+				alert('로그인 후 사용가능합니다.')
+			}else{
+			document.location='/pj/question';
+			}
+		})
 	
 </script>
 </html>

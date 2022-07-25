@@ -46,7 +46,7 @@ public class HomeController {
 	public String home(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
 		if(session.getAttribute("id")==null) { //로그인 전
-			model.addAttribute("userinfo","");
+			model.addAttribute("userinfo", null);
 			
 
 		}else { //로그인 성공 후
