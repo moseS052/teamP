@@ -40,21 +40,11 @@ public class addController {
 	@RequestMapping(value="/searchTNC",produces="application/text;charset=utf8",method = RequestMethod.POST)
 	public String searchTNC(HttpServletRequest req) {
 		iteamP ip=sqlSession.getMapper(iteamP.class);
-		String title=req.getParameter("title");
-		String date=req.getParameter("date");
-		String seqno=req.getParameter("seqno");
 		String table=req.getParameter("table");
-		String titleName=req.getParameter("titleName");
-		String con=req.getParameter("con");
 		String search="'"+req.getParameter("search")+"'";
 
 		Map map=new HashMap();
-		map.put("title", title);
-		map.put("date", date);
-		map.put("seqno", seqno);
 		map.put("table", table);
-		map.put("titleName", titleName);
-		map.put("con", con);
 		map.put("search", search);
 		
 		ArrayList<SearchVO> arsvo=ip.searchTNC(map);
@@ -62,10 +52,11 @@ public class addController {
 		for(int i=0;i<arsvo.size();i++) {
 			SearchVO svo = arsvo.get(i);
 			JSONObject jo = new JSONObject();
-			jo.put("id", ip.getID(svo.getM_no()));
+			jo.put("nick", svo.getNick());
 			jo.put("title", svo.getTitle());
 			jo.put("date", svo.getTime());
 			jo.put("seqno", svo.getSeqno());
+			jo.put("con", svo.getCon());
 			ja.add(jo);
 		}
 		map.clear();
@@ -76,9 +67,6 @@ public class addController {
 	@RequestMapping(value="/searchNick",produces="application/text;charset=utf8",method = RequestMethod.POST)
 	public String searchNick(HttpServletRequest req) {
 		iteamP ip=sqlSession.getMapper(iteamP.class);
-		String title=req.getParameter("title");
-		String date=req.getParameter("date");
-		String seqno=req.getParameter("seqno");
 		String table=req.getParameter("table");
 		String search=req.getParameter("search");
 		Map map=new HashMap();
@@ -90,37 +78,14 @@ public class addController {
 		for(int j=0;j<arsvo.size();j++) {
 			SearchVO svo = arsvo.get(j);
 			JSONObject jo = new JSONObject();
-			jo.put("id", ip.getID(svo.getM_no()));
+			jo.put("nick", svo.getNick());
 			jo.put("title", svo.getTitle());
 			jo.put("date", svo.getTime());
 			jo.put("seqno", svo.getSeqno());
 			ja.add(jo);
 		}
 		
-//		ArrayList<Integer> mno=ip.searchMno(search);
-//		
-//		Map map=new HashMap();
-//		map.put("title", title);
-//		map.put("date", date);
-//		map.put("seqno", seqno);
-//		map.put("table", table);
-//		map.put("m_no", 85);
-//		JSONArray ja=new JSONArray();
-//		for(int i=0;i<mno.size();i++) {
-//			map.put("m_no", mno.get(i));
-//			ArrayList<SearchVO> arsvo=ip.searchNick(map);
-//			for(int j=0;j<arsvo.size();j++) {
-//				SearchVO svo = arsvo.get(j);
-//				JSONObject jo = new JSONObject();
-//				jo.put("id", ip.getID(svo.getM_no()));
-//				jo.put("title", svo.getTitle());
-//				jo.put("date", svo.getTime());
-//				jo.put("seqno", svo.getSeqno());
-//				ja.add(jo);
-//			}
-//		}
 		map.clear();
-//		return "";
 		return ja.toJSONString();
 	}
 	

@@ -11,5 +11,4 @@ public interface iteamP {
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(Map map);
 	ArrayList<SearchVO> searchNick(Map map);
-	ArrayList<Integer> searchMno(String nick);
 }

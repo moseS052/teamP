@@ -1,20 +1,30 @@
 package com.team.pj;
 
 public class SearchVO {
-	private int m_no;
+	private String nick;
 	private String title;
 	private String time;
 	private int seqno;
+	private String con;
 	
 	public SearchVO() {
 	}
 
-	public int getM_no() {
-		return m_no;
+	public String getCon() {
+		return con;
 	}
 
-	public void setM_no(int m_no) {
-		this.m_no = m_no;
+	public void setCon(String con) {
+		this.con = con;
+	}
+
+
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
 	}
 
 	public String getTitle() {
@@ -41,6 +51,7 @@ public class SearchVO {
 		this.seqno = seqno;
 	}
 
+	
 	
 	
 }

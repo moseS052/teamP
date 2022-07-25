@@ -16,13 +16,10 @@
 	select m_no from member where id=#{param1}
 </select>
 <select id='searchTNC' parameterType="hashMap" resultType="com.team.pj.SearchVO">
-	select m_no,${title},${date},${seqno} from ${table} where (${titleName} like  '%'||${search}||'%') or (${con} like '%'||${search}||'%')
+	select nick,title,time,seqno,substr(con,instr(con,${search}),10) con from ${table} where (title like  '%'||${search}||'%') or (con like '%'||${search}||'%')
 </select>
 <select id='searchNick' parameterType="hashMap" resultType="com.team.pj.SearchVO">
-	select m_no,title,time,seqno from ${table} where nick like '%'||#{search}||'%'
-</select>
-<select id='searchMno' resultType="int">
-	select m_no from member where nick like '%'||#{param1}||'%'
+	select nick,title,time,seqno from ${table} where nick like '%'||#{search}||'%'
 </select>
 </mapper>
 
