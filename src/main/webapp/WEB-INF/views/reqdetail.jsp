@@ -142,22 +142,22 @@
 
 					<div class="col-md-12">
 					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
+					<input type=hidden name=m_no value="${bdto.m_no }">
 					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }" readonly><br>
 					내용: <textarea id=b_con name=b_con rows=10 cols=70 readonly>${bdto.b_con }</textarea><br>
 					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
 					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
 					
 					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
-					<input type=hidden id="m_no" name="m_no" value="${m_no}">
-					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
+					<input type=hidden id="b_no" name="b_no" value="${m_no}">
+					<input type=hidden id="b_no" name="b_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
-					<input type=hidden id="btdo.m_no" name="btdo.m_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					<!-- <form id=frmdel method=get action="delete_free"> -->
+					<form id=frmup method=get action="requpdetail">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' class="btn btn-primary btn-outlined"></form>
+					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
+					<form id=frmdel method=get action="delete_free">
+					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
+					<input type=submit value='글삭제' class="btn btn-primary btn-outlined"></form>
 					</c:if>
 					</div>
 				</div>
@@ -219,25 +219,11 @@
 <script>
 $(document)
 .on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/reqboard';
 })
-.on('click','#del',function(){
+.on('click','#frmdel',function(){
 	if(!confirm("정말로 글을 삭제 할까요?")) return false;
-
-	$.ajax({
-		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val()},
-		beforeSend:function(){
-			console.log("b_no:"+$('#b_no').val());
-			window.location.href="<%= request.getContextPath() %>/freeboard";//??????
-		},
-		success:function(){	
-			alert('글을 삭제하였습니다');
-			
-		}
-	}) 
-
-
+	
 })
 </script>
 </html>

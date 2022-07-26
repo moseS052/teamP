@@ -98,7 +98,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="single-post-sidebar.html">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
                        
                     </ul>
                 </li>

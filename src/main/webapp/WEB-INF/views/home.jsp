@@ -99,7 +99,7 @@ $(document)
 					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="single-post-sidebar.html">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
 						<!-- <li><a href="category.html">Category Page</a></li>
 						<li><a href="category-alt.html">Category Page Alt</a></li> -->
 					</ul></li>

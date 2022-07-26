@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Detail</title>
+<title>Free Board</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -52,6 +52,7 @@
     </script>
 	
   </head>
+
 
   <body class="single single-post"> 
 
@@ -98,7 +99,7 @@
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
-                        
+                       
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -141,23 +142,24 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
-					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }" readonly><br>
-					내용: <textarea id=b_con name=b_con rows=10 cols=70 readonly>${bdto.b_con }</textarea><br>
-					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
-					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
-					
-					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
-					<input type=hidden id="m_no" name="m_no" value="${m_no}">
-					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
-					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
-					<input type=hidden id="btdo.m_no" name="btdo.m_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					<!-- <form id=frmdel method=get action="delete_free"> -->
-					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' class="btn btn-primary btn-outlined"></form>
+					<h1 align="center">Request Board</h1>
+					<table align=center>
+					<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
+					<c:forEach var="boardDTO" items="${boardlist }">
+					<tr><td>${boardDTO.b_no }</td><td><a href='reqdetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
+					<td>${boardDTO.nick }</td>
+					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>
+					<%-- <td><form id=frmup method=get action="updetail">
+					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
+					<input type=submit value='수정'></form></td><td>
+					<form id=frmdel method=get action="delete_free">
+					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
+					<input type=submit value='삭제'></form></td> --%>
+					</tr>
+					</c:forEach>
+					</table>
+					<c:if test="${m_no!=null}">
+					<p align="center"><a href='newpost_req'>새글쓰기</a></p>
 					</c:if>
 					</div>
 				</div>
@@ -216,28 +218,4 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
-<script>
-$(document)
-.on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
-})
-.on('click','#del',function(){
-	if(!confirm("정말로 글을 삭제 할까요?")) return false;
-
-	$.ajax({
-		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val()},
-		beforeSend:function(){
-			console.log("b_no:"+$('#b_no').val());
-			window.location.href="<%= request.getContextPath() %>/freeboard";//??????
-		},
-		success:function(){	
-			alert('글을 삭제하였습니다');
-			
-		}
-	}) 
-
-
-})
-</script>
 </html>

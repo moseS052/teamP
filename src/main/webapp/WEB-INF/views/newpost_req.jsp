@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Detail</title>
+<title>새글쓰기_자유게시판</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -96,7 +96,7 @@
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+                       <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
                         
                     </ul>
@@ -141,24 +141,12 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
-					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }" readonly><br>
-					내용: <textarea id=b_con name=b_con rows=10 cols=70 readonly>${bdto.b_con }</textarea><br>
-					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
-					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
-					
-					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
-					<input type=hidden id="m_no" name="m_no" value="${m_no}">
-					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
-					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
-					<input type=hidden id="btdo.m_no" name="btdo.m_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					<!-- <form id=frmdel method=get action="delete_free"> -->
-					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' class="btn btn-primary btn-outlined"></form>
-					</c:if>
+					<form id=frmfb method=get action="insert_req">
+					제목: <input type=text id=title name=title><br>
+					내용: <textarea id=content name=content rows=10 cols=70></textarea><br>
+					<input type=submit value='작성완료' class="btn btn-primary btn-outlined">&nbsp;
+					<input type=reset value='목록' id=btnList class="btn btn-primary btn-outlined">
+					</form>
 					</div>
 				</div>
 			</div>	
@@ -218,26 +206,8 @@
 </body>
 <script>
 $(document)
-.on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
-})
-.on('click','#del',function(){
-	if(!confirm("정말로 글을 삭제 할까요?")) return false;
-
-	$.ajax({
-		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val()},
-		beforeSend:function(){
-			console.log("b_no:"+$('#b_no').val());
-			window.location.href="<%= request.getContextPath() %>/freeboard";//??????
-		},
-		success:function(){	
-			alert('글을 삭제하였습니다');
-			
-		}
-	}) 
-
-
+.on('click','#btnList',function(){
+	document.location='/pj/reqboard';
 })
 </script>
 </html>

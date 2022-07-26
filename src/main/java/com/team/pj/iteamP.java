@@ -42,4 +42,7 @@ public interface iteamP {
 	boardDTO free_detail(int b_no);
 	void free_update(String b_title,String b_con,int b_no);
 	void free_viewcnt(int b_no);
+	ArrayList<boardDTO> reqBoard();
+	void req_insert(int m_no,String b_title,String b_con);
+	boardDTO req_detail(int b_no);
 }
