@@ -222,11 +222,11 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ### list  =목록테이블
 
-| l_no    | m_no    | l_title  | l_con    | l_time | l_name   | l_address | l_koo   | l_date|l_views   |
-| ------- | ------- | -------- | -------- | ------ | -------- |---------- |---------|-------|----------|
-| 자체seq | 회원seq | 제목      | 내용     | 시간    | 기관명   | 기관주소   | 기관 구  | 기간  |조회수     |
-| number  | number  | varchar2 | varchar2 | date   | varchar2 | varchar2  | varchar2 | date |number    |
-| primary | NN      | NN       |          | NN     | NN       | NN        | NN       | NN   |default 0 |
+| l_no    | m_no    | l_title  | l_con    | l_time | l_name   | l_address | l_koo   | l_date|l_views   | nop    |
+| ------- | ------- | -------- | -------- | ------ | -------- |---------- |---------|-------|----------|--------|
+| 자체seq | 회원seq | 제목      | 내용     | 시간    | 기관명   | 기관주소   | 기관 구  | 기간  |조회수    |참여인원 |
+| number  | number  | varchar2 | varchar2 | date   | varchar2 | varchar2  | varchar2 | date |number    |number  |
+| primary | NN      | NN       |          | NN     | NN       | NN        | NN       | NN   |default 0 |        |
 
 ※추가할 내용이 많아질 것 같음
 
