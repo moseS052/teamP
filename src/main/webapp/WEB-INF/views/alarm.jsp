@@ -16,26 +16,24 @@
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 </head>
-<body>
-<div>
-	<img src=<c:url value="resources/assets/img/avatar1.png"/> width="200px" height="200px" />
-</div>
-<c:if test="${m_no==semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
-</c:if>
-<c:if test="${m_no!=semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
-</c:if>
+<style>
+
+</style>
+<body  >
+${aravo}
+
 </body>
+
+
 <script>
 $(document)
 .ready(function(){
-	console.log(`${id}`)
-	console.log(`${m_no}`)
-	console.log(`${nick}`)
 })
-
-
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
 .on('click','#btnSendNote',function(){
 	let m_no=$(this).attr('myseq');
 	let m_pa_no=$(this).attr('yourseq');
@@ -46,19 +44,5 @@ $(document)
 	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
 	}
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 </script>
 </html>

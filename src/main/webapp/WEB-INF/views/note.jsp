@@ -83,7 +83,7 @@ textarea {
 <script>
 $(document)
 .ready(function(){
-	noteCon(`${mno}`,`${mpno}`);
+	noteCon();
 	
 // 	$('<style>.message-item:after {
 //  	background-image:url(resources/assets/img/avatar2.png);
@@ -99,7 +99,7 @@ $(document)
 
 .on('click','#btnSend',function(){
 	let note = $('#n_con').val();
-	let youseq = `${mpno}`;
+	let youseq = `${mpano}`;
 	$.ajax({
 		type:'get',url:'noteSend',dataType:'text',data:{n_con:note,youseq:youseq},
 		success:function(){
@@ -117,16 +117,16 @@ $(document)
 
 
 
-function noteCon(mno,mpno){
+function noteCon(){
 	$.ajax({
-		type:'get',url:'noteUp',dataType:'json',data:{m_no:mno,m_pa_no:mpano},
+		type:'get',url:'noteUp',dataType:'json',data:{m_no:`${mno}`,m_pa_no:`${mpano}`},
 		success:function(data){
 			$('#divadd').empty();
 			for(let i=0;i<data.length;i++){
 				notetem=data[i];
 // 				$('.message-item:after').css("background-image","url(resources/assets/img/avatar2.png)");
 				// 제이쿼리 css적용하기 = 아바타
-				if(notetem['m_no']==mno){
+				if(notetem['m_no']==`${mno}`){
 					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#e4e4e4">'
 						+'<div class="message-head clearfix" style="background-color:#e4e4e4"><div class="user-detail" >'
 						+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta" >'

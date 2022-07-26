@@ -97,6 +97,12 @@
 <select id='searchNick' parameterType="hashMap" resultType="com.team.pj.SearchVO">
 	select nick,title,time,seqno from ${table} where nick like '%'||#{search}||'%'
 </select>
+<insert id='insertAlarm'>
+	insert into alarm values(#{param1},#{param2},CURRENT_date,0)
+</insert>
+<select id='showAlarm' resultType="com.team.pj.alarmVO">
+	select * from alarm where m_no=#{param1}
+</select>
 </mapper>
 
 

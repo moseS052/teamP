@@ -198,7 +198,7 @@ public class HomeController {
 		return ja.toJSONString();
 	}
 	
-	//���� ������ ��Ʈ�ѷ�
+	//���� ������ ��Ʈ�ѷ�  all page need jquery because a tag
 	@ResponseBody
 	@RequestMapping(value="/noteSend",produces="application/text;charset=utf8")
 	public String noteSend(HttpServletRequest req) {
@@ -208,6 +208,9 @@ public class HomeController {
 		int you=Integer.parseInt(req.getParameter("youseq"));
 		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
+		String nick=(String) session.getAttribute("nick");		
+		String mes="<a href='' id='meminfo' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
+		ip.insertAlarm(you, mes);
 		return "";
 	}
 	

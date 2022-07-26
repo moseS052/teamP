@@ -35,4 +35,6 @@ public interface iteamP {
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(Map map);
 	ArrayList<SearchVO> searchNick(Map map);
+	void insertAlarm(int m_no,String alarm);
+	ArrayList<alarmVO> showAlarm(int m_no);
 }

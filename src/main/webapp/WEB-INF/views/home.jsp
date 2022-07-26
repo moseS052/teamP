@@ -80,7 +80,7 @@ $(document)
 			<div>
 				<c:if test="${m_no!=null}">
 				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<a href='#'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
+				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
 				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
 				</c:if>
 			</div>
