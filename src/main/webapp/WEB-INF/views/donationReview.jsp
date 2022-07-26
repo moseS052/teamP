@@ -154,41 +154,34 @@
 
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">사진게시판</h2>
+					<h2 class="main-title">후기 작성하기</h2>
 					<hr>
+					<p>후기 사진을 올려주세요</p>
+					<div class="gap">
+						
+					</div>
+					<div Style="height:90px;">
+						<input type="text" style="height:60px; font-size:25px;" id="photoTitle" class="form-control" placeholder="제목">
+						
+					</div>
 					<div>
-						<input class="btn btn-outlined btn-primary pull-right"
-							type="button" id="donationReview" value="후기올리기">
+						<textarea style="padding:40px 40px 0 50px; height:500px;" id="photoContent" class="form-control" placeholder="내용"></textarea>
+					</div>
+					<div>
+						<form id="fileForm" method="post" enctype="multipart/form-data">
+							<input class="btn btn-primary btn-outlined" type="file" name="file" id="uploadFile" multiple="true">
+						</form>
+					</div>
+					<div>
+						<input class="btn btn-primary btn-outlined" type="button" id="doDonationreviewBtn" value="후기작성">
 					</div>
 				</div>
 			</div>
 
 			<div class="row mt gap">
-				<c:forEach var="photo" items="${photolist}">
 					<div class="col-md-4 post fade-up">
-						<div class="item-inner">
-							 <img style="width: 400px; height: 245px;"
-								src=<c:url value="${photo.b_route }"/>
-								alt="" class="img-responsive">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary" href=#><i
-									class="fa fa-link"></i></a>
-							</div>
-							<div class="post-meta">
-								<span class="post-comment"><i class="fa fa-comments"></i>
-									댓글갯수</span>
-							</div>
-						</div>
-						<h3>
-							<a href="#">${photo.b_title }</a>
-						</h3>
-						<div class="gap"></div>
-
-						<p>
-							<a class="btn btn-outlined btn-primary" href="#">Read More</a>
-						</p>
+						
 					</div>
-				</c:forEach>
 			</div>
 		</div>
 	</div>
@@ -246,19 +239,40 @@
 	$(document)
 	.on('click', '#question', function() {
 		console.log(`${userinfo}` == '')
-		if (`${userinfo}` == null) {
+		if (`${userinfo}` == '') {
 			alert('로그인 후 사용가능합니다.')
 		} else {
 			document.location = '/pj/question';
 		}
 	})
-	.on('click','#donationReview',function(){
-		if (`${userinfo}` == '') {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-			document.location='/pj/donationReviwe';
-		}
-		
+	.on('click','#doDonationreviewBtn', function(){
+		let formData = new FormData($('#fileForm')[0]);
+		console.log(formData);
+		$.ajax({
+			url:'insertphotoBoard',
+			data:{
+				title: $('#photoTitle').val(),
+				con: $('#photoContent').val()
+			},
+			dataType:'text',
+			type:'get',
+			async:false,
+			success : function(){
+				$.ajax({
+					url:'findb_no',
+					enctype: 'multipart/form-data',
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : 'POST',
+					success:function(data){
+						console.log(data);
+						document.location = '/pj/photoBoard';
+					}
+					
+				})
+			}
+		})
 	})
 </script>
 </html>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.pj.iphotoBoard">
+	<select id="photoTableList" resultType="com.team.pj.photoBoardDTO">
+		select A.*, b.b_route
+			from boardP A
+			left join (select * from route where rowid in(select max(rowid)from route group by b_no))B
+			on A.b_no=B.b_no order by A.b_no
+	</select>
+	<insert id="insertPhotoBoard">
+		insert into board(b_no, b_type, m_no, b_title, b_date, b_con) 
+			values(board_sq.nextval, 'P', #{param1}, #{param2},	current_date, #{param3})
+	</insert>
+	<select id="maxB_noFind" resultType="int">
+		select max(b_no) from boardP where m_no=#{param1}
+	</select>
+	<insert id="insertphotoRoute">
+	 insert into route values(#{param1},#{param2})
+	</insert>
+	
+</mapper>
