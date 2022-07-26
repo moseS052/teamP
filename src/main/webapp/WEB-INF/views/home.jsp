@@ -608,7 +608,7 @@ $(document)
 						</div>
 					</div>
 					<h3>
-						<a href="#">Blog Article Title</a>
+						<a href="#">Blog </a>
 					</h3>
 					<p>Sentiments projection particular companions interested do at
 						my delightful. Listening newspaper in advantage frankness to
@@ -633,7 +633,7 @@ $(document)
 						</div>
 					</div>
 					<h3>
-						<a href="#">Blog Article Title</a>
+						<a href="#">Blog Article </a>
 					</h3>
 					<p>Sentiments projection particular companions interested do at
 						my delightful. Listening newspaper in advantage frankness to

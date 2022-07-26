@@ -142,11 +142,11 @@ accent-color:green;
 						</div>
 						
 						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title" value="${l_title}"/>
-						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60>${l_con}</textarea>
+						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60>${l_con}</textarea></p>
 						   <p class="well">재능기부신청<br><input type="checkbox" value="1" name="che">요리&nbsp;<input type="checkbox" value="2" name="che">청소&nbsp;<input type="checkbox" value="3" name="che">미용&nbsp;<input type="checkbox" value="4" name="che">강연&nbsp;<input type="checkbox" value="5" name="che">기타</p>
-						   시행일자<input type="date" id="l_date" class="form-control" value="${l_date}">
-						   사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple>
-						</p>
+						  <div class="col-md-4 post fade-up"> 시행일자<input type="date" id="l_date" class="form-control" value="${l_date}"></div>
+						  <div class="col-md-4 post fade-up">사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple></div>
+						  <div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" value="${nop}" class="form-control"></div>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
                             <option >${l_koo}</option>
                             <option>강남구</option>
@@ -184,7 +184,7 @@ accent-color:green;
 						상세주소<input type="text" class="form-control" id="l_address" value="${l_addr}"/>
 						<input type="hidden" id='hid'>
 						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
-						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
+						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="비우기" /><a href="l_Read?l_no=${l_no}"><input class="btn btn-outlined btn-primary" type="button" id="ca" value="수정취소" /></a></p></div>						
 					</div>
 				</div>
 			</div>	
@@ -246,14 +246,20 @@ accent-color:green;
 
 $(document)
 .ready(function(){
-	console.log('이름='+$('#m_no').val());
-	console.log('제목='+$('#l_title').val());
-	console.log('내용='+$('#l_content').val());
-	console.log('날자='+$('#l_date').val());
-	console.log('사진='+$('#l_file').val());
-	console.log('신청구역='+$('#l_koo option:selected').val());
-	console.log('상호='+$('#l_name option:selected').text());
-	console.log('상세주소='+$('#l_address').val());
+	let ar = `${sd}`.split("");
+	for(i=0; i<ar.length; i++){
+	 $('input:checkbox[name="che"]').each(function() {
+		     if(this.value == ar[i]){
+			this.checked = true; } });
+	}
+// 	console.log('이름='+$('#m_no').val());
+// 	console.log('제목='+$('#l_title').val());
+// 	console.log('내용='+$('#l_content').val());
+// 	console.log('날자='+$('#l_date').val());
+// 	console.log('사진='+$('#l_file').val());
+// 	console.log('신청구역='+$('#l_koo option:selected').val());
+// 	console.log('상호='+$('#l_name option:selected').text());
+// 	console.log('상세주소='+$('#l_address').val());
 })
 
 .on('click','#ad',function(){	
@@ -293,7 +299,11 @@ $(document)
     	});
 })
 .on('click','#ca',function(){
-	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date').val('');
+	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date,#l_address,#nop').val('');
+	 $('input:checkbox[name="che"]').each(function() {
+		      this.checked = false;
+		 });
+	
 })
 .on('click','#map',function(){
 	let aa=$('#hid').val()

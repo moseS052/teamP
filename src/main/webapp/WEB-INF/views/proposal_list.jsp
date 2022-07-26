@@ -232,7 +232,7 @@
 </body>
 <script>
 $(document)
-.ready(function(){
+.ready(function(){	
 	console.log(`${userinfo==null}`);
 	showlist();
 })
@@ -245,8 +245,13 @@ $(document)
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><p>'+jo['l_title']+'<br>'+jo['l_date']+'</p></a></div>';
-					$('#cla').append(str);
+					if(jo['count']==jo['nop']){
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						$('#cla').append(str);
+					}else{
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						$('#cla').append(str);
+					}
 	  			}
     		},
     		error:function(){
@@ -262,8 +267,14 @@ function showlist(){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
-				let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'</p></a></div>';
-				$('#cla').append(str);
+				if(jo['count']==jo['nop']){
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					$('#cla').append(str);
+				}else{
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					$('#cla').append(str);
+				}
+				
   			}
 		},
 		error:function(){

@@ -14,7 +14,21 @@ public class L_listDTO {
 	 String nick;
 	 String t_name;
 	 int l_views;
+	 int nop;
+	 int count;
 	 
+	public int getCount() {
+		return count;
+	}
+	public void setCount(int count) {
+		this.count = count;
+	}
+	public int getNop() {
+		return nop;
+	}
+	public void setNop(int nop) {
+		this.nop = nop;
+	}
 	public int getL_views() {
 		return l_views;
 	}

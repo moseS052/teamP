@@ -138,12 +138,13 @@ public class ApiController {
 		model.addAttribute("l_name",re.l_name);
 		model.addAttribute("l_addr",re.l_address);
 		model.addAttribute("l_date",re.l_date);
+		model.addAttribute("nop",re.nop);
 		ArrayList<Integer>sd=team.bringt_no(l_no);
 		String str="";
 		for(int i=0;i<sd.size();i++) {
 			str+=sd.get(i);
 		}
-//		System.out.println(sd);
+		System.out.println(sd);
 		model.addAttribute("sd",str);
 		return "proposalUpdate";
 	}
@@ -154,6 +155,7 @@ public class ApiController {
 	public String dol_del(@RequestParam("l_no") int l_no) {
 //		System.out.println("목록번호"+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
+		team.tal_che_li_del(l_no);
 		int reccount = team.L_del(l_no);
 		return Integer.toString(reccount);
 	}
@@ -169,6 +171,8 @@ public class ApiController {
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
 		team.l_views(l_no);
+		int lookapp=team.lookup(l_no);
+		model.addAttribute("lookapp",lookapp);
 		L_listDTO re=team.l_read(l_no);
 		model.addAttribute("l_no",l_no);
 		model.addAttribute("l_title",re.l_title);
@@ -179,6 +183,7 @@ public class ApiController {
 		model.addAttribute("l_nick",re.nick);
 		model.addAttribute("l_mno",re.m_no);
 		model.addAttribute("l_views",re.l_views);
+		model.addAttribute("nop",re.nop);
 		ArrayList<String>sd=team.bringt_name(l_no);
 		String str="";
 		for(int i=0;i<sd.size();i++) {
@@ -206,6 +211,8 @@ public class ApiController {
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());
 			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
 //		System.out.println(ja.toJSONString());
@@ -228,9 +235,11 @@ public class ApiController {
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());
 			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
-		System.out.println(ja.toJSONString());
+//		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
 	//--占쏙옙체 占쏙옙황--//
@@ -287,7 +296,8 @@ public class ApiController {
 	//list 占쏙옙占싱븝옙 insert //
 	@ResponseBody
 	@RequestMapping(value="/new_ad", produces="application/text;charset=utf8")
-	public String doNewad(@RequestParam("m_no") int m_no,
+	public String doNewad(@RequestParam("nop") int nop,
+						  @RequestParam("m_no") int m_no,
 						  @RequestParam("l_title") String l_title,
 						  @RequestParam("l_content") String l_content,
 						  @RequestParam("l_date") String l_date,
@@ -295,9 +305,9 @@ public class ApiController {
 						  @RequestParam("l_koo") String l_koo, 
 						  @RequestParam("l_name") String l_name,
 						  @RequestParam("l_address") String l_address) {
-		System.out.println("{占싱몌옙="+m_no+"}{占쏙옙占쏙옙="+l_title+"}{占쏙옙占쏙옙="+l_content+"}{占쏙옙짜="+l_date+"}{占쏙옙占쏙옙="+l_file+"}{占쏙옙청占쏙옙="+l_koo+"}{占쏙옙占�="+l_name+"}{占쏙옙占쌍쇽옙="+l_address+"}");
+		System.out.println(nop);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		team.new_ad(m_no,l_title,l_content,l_name,l_address,l_koo,l_date);
+		team.new_ad(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop);
 		
 		return "";
 	}

@@ -141,11 +141,12 @@ accent-color:green;
 						</div>
 						
 						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title"/>
-						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60 placeholder="자세한 내용을 적어주세요"></textarea>
+						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60 placeholder="자세한 내용을 적어주세요"></textarea></p>
 						   <p class="well">재능기부신청<br><input type="checkbox" value="1">요리&nbsp;<input type="checkbox" value="2">청소&nbsp;<input type="checkbox" value="3">미용&nbsp;<input type="checkbox" value="4">강연&nbsp;<input type="checkbox" value="5">기타</p>
-						   시행일자<input type="date" id="l_date" class="form-control">
-						   사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple>
-						</p>
+						   
+						   <div class="col-md-4 post fade-up">시행일자<input type="date" id="l_date" class="form-control"></div>
+						   <div class="col-md-4 post fade-up">사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple></div>
+							<div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" placeholder="선택안할시자동5입력" class="form-control"></div>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
                             <option value=''></option>
                             <option>강남구</option>
@@ -244,7 +245,7 @@ accent-color:green;
 
 $(document)
 .ready(function(){
-
+	
 })
 
 .on('click','#ad',function(){	
@@ -257,8 +258,15 @@ $(document)
 	console.log('신청구역='+$('#l_koo option:selected').val());
 	console.log('상호='+$('#l_name option:selected').text());
 	console.log('상세주소='+$('#l_address').val());
+	a=0;
+	if($('#nop').val()==0){
+		a=5;
+	}else{
+		a=$('#nop').val();
+	}	
+		console.log(a)
 	$.ajax({
-		type:'get',url:'new_ad',data:{m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
+		type:'get',url:'new_ad',data:{nop:a,m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
 			dataType:'text',async: false,
 	  		success:function(){
     				console.log('ann');
@@ -284,7 +292,8 @@ $(document)
     	});
 })
 .on('click','#ca',function(){
-	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date').val('');
+	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date,#nop').val('');
+	
 })
 .on('click','#map',function(){
 	let aa=$('#hid').val()

@@ -148,9 +148,13 @@
                         </div>
 						<p>내용:${l_con}</p>
                         <div class="square pull-right" id="but">
-					
+						<p>
+						신청현황<br>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}
+						</p>
+						
 						<c:if test="${userinfo!=null && l_mno eq m_no}">
-						현황목록<select id="l_name" class="form-control"">
+						현황목록<select id="l_name" class="form-control">
                             
                         	 </select> 
 						</c:if>
@@ -215,35 +219,70 @@
 <script>
 $(document)
 .ready(function(){
+	console.log('오늘'+getToday());
+	console.log('예약'+`${l_date}`)
 	shwocheck();
 	applylist()
 	if(`${l_mno}`==`${m_no}`){
-		let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
-			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
-			$('#but').append(str);	
-	}else if(`${userinfo}`== ""){
-		let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
+		if(getToday()>`${l_date}`){
+			let str="<input class='btn btn-outlined btn-primary' type='button' id='0' value='봉사후기' />"
 			$('#but').append(str);
+			}else{let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
+			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
+			$('#but').append(str);}
+			
+	}else if(`${userinfo}`== ""){
+		if(`${lookapp}`==`${nop}`){
+			let str ="<input class='btn btn-outlined btn-primary' type='button'  value='신청마감' />"
+				$('#but').append(str);
+		}else if(`${lookapp}`<=`${nop}`){
+				let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
+					$('#but').append(str);	
+		}
+		
 	}else if(`${l_mno}`!=`${m_no}`){
-		$.ajax({
-			type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
-				dataType:'json',
-		  		success:function(data){
-		  			console.log('데이타는='+data)
-		  			if(data==1){
-		  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
-		  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
-		  					$('#but').append(str);
-		  			}else{
-		  				let str="<input class='btn btn-outlined btn-primary' id='find' type='button' value='신청하기' />"
-		  					$('#but').append(str);
-		  			}
-	    		},
-	    		error:function(){
-	    			alert('삭제실패');
-	    		},
-	    		complete:function(){}
-	    	});
+		if(`${lookapp}`==`${nop}`){
+			$.ajax({
+				type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+					dataType:'json',
+			  		success:function(data){
+			  			console.log('데이타는='+data)
+			  			if(data==1){
+			  				let str="<input class='btn btn-outlined btn-primary'  type='button' value='신청마감' />"
+			  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
+			  					$('#but').append(str);
+			  			}else{
+			  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
+			  					$('#but').append(str);
+			  			}
+		    		},
+		    		error:function(){
+		    			alert('삭제실패');
+		    		},
+		    		complete:function(){}
+		    	});
+		}else if(`${lookapp}`<=`${nop}`){
+			$.ajax({
+				type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+					dataType:'json',
+			  		success:function(data){
+			  			console.log('데이타는='+data)
+			  			if(data==1){
+			  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
+			  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
+			  					$('#but').append(str);
+			  			}else{
+			  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
+			  					$('#but').append(str);
+			  			}
+		    		},
+		    		error:function(){
+		    			alert('삭제실패');
+		    		},
+		    		complete:function(){}
+		    	});
+		}
+	
 	}
 		
 	
@@ -278,7 +317,7 @@ $(document)
 	
 	document.location='/pj/l_retouch?l_no='+$('#l_no').val()
 })
-.on('click','#find',function(){
+.on('click','#called',function(){
 	console.log(`${m_no}`);
 	console.log(`${l_no}`);
 	$.ajax({
@@ -351,6 +390,14 @@ function applylist(){
     		},
     		complete:function(){}
     	});
+}
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
+
+    return year + "-" + month + "-" + day;
 }
 </script>
 </html>
