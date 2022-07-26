@@ -53,6 +53,7 @@
 	
   </head>
 
+
   <body class="single single-post"> 
 
   	<div id="preloader"></div>
@@ -69,7 +70,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -89,12 +95,11 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
+                       
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -137,8 +142,7 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<h1>Free Board</h1>
-
+					<h1 align="center">Free Board</h1>
 					<table align=center>
 					<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
 					<c:forEach var="boardDTO" items="${boardlist }">
@@ -155,7 +159,7 @@
 					</c:forEach>
 					</table>
 					<c:if test="${m_no!=null}">
-					<a href='newpost_write' align='center'>새글쓰기</a>
+					<p align="center"><a href='newpost_write'>새글쓰기</a></p>
 					</c:if>
 					</div>
 				</div>

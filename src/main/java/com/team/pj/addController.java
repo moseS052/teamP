@@ -26,8 +26,10 @@ public class addController {
 	public String doFreeboard(HttpServletRequest req, Model mod) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session =req.getSession();
+		
 		if(session.getAttribute("m_no")!=null) {
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
+			mod.addAttribute("id",session.getAttribute("id"));
 		}else {
 			mod.addAttribute("m_no", null);
 		}
@@ -36,15 +38,14 @@ public class addController {
 		ArrayList<boardDTO> blist=p.listBoard();
 		mod.addAttribute("boardlist",blist);
 		return "freeboard";
-	}
-	//view list on free board
-	/*
-	 * @RequestMapping(value="/list_free", method=RequestMethod.POST) public String
-	 * doList() { iteamP p=sqlSession.getMapper(iteamP.class); return ""; }
-	 */
+	}	
 	//go to new post page in free board
 	@RequestMapping("/newpost_write")
-	public String doNewPost() {
+	public String doNewPost(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		
 		return "newpost_fb";
 	}
 	//insert new post in free board
@@ -73,19 +74,26 @@ public class addController {
 	}
 	//view detail on free board
 	@RequestMapping("/freedetail")
-	public String doDetail(@RequestParam int b_no,Model model) {
+	public String doDetail(HttpServletRequest req ,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session =req.getSession();		
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.free_detail(b_no);
-		//bdto=p.free_viewcnt(b_no);
 		model.addAttribute("bdto",bdto);
 		
 		return "freedetail";
 	}
 	//view update page on free board
 	@RequestMapping("/updetail")
-	public String doUpdetail(@RequestParam int b_no,Model model) {
+	public String doUpdetail(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session =req.getSession();		
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		boardDTO bdto=p.free_detail(b_no);
 		model.addAttribute("bdto",bdto);
 		return "updetail";

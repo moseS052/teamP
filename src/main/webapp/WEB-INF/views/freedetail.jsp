@@ -69,7 +69,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -89,12 +94,11 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
+                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -144,14 +148,16 @@
 					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
 					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
 					
-					<br><input type=button value='목록으로 돌아가기' id=btnReset>
+					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
+					<input type=hidden id="b_no" name="b_no" value="${m_no}">
+					<input type=hidden id="b_no" name="b_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
 					<form id=frmup method=get action="updetail">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='수정'></form>
+					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
 					<form id=frmdel method=get action="delete_free">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='글삭제'></form>
+					<input type=submit value='글삭제' class="btn btn-primary btn-outlined"></form>
 					</c:if>
 					</div>
 				</div>

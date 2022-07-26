@@ -80,7 +80,7 @@ public class HomeController {
 		String password=req.getParameter("pw");
 		
 		if(n==0) { //濡�洹몄�� �ㅽ��			
-			session.setAttribute("m_no",null);
+			session.setAttribute("m_no",null);			
 			
 		}else if(n!=1) { //����
 			

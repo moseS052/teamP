@@ -69,7 +69,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -89,12 +94,11 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
+                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -143,8 +147,8 @@
 					내용: <textarea id=b_con name=b_con rows=10 cols=70>${bdto.b_con }</textarea><br>
 					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
 					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date}" readonly>
-					<input type=submit value='수정완료'>
-					<input type=reset value='취소' id=btnReset>
+					<input type=submit value='수정완료' class="btn btn-primary btn-outlined">
+					<input type=reset value='취소' id=btnReset class="btn btn-primary btn-outlined">
 					<!-- <button type=submit formaction='delete' formmethod=post>삭제</button> -->
 					
 					</form>
