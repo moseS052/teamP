@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public interface iteamP {
 	ArrayList<noteVO> getNoteCon(int m_no,int m_pa_no);
 	void noteSend(int me,int you,String con);
@@ -17,12 +18,12 @@ public interface iteamP {
 	int deleteReReply(int c_no);
 	int updateReReply(int c_no, int b_no, String c_con, int m_no, int c_pa_no);
 	ArrayList<memberDTO> listMember();
-	void insert(String id,String pw,String name,String nick,String phone,String gender,String mail,String birth);
-	int count(String id,int pw);
-	void talent(int m_no,int t_no);
-	int id(String id);
+	void member_insert(String id,String pw,String name,String nick,String phone,String gender,String mail,String birth);
+	int login_count(String id,int pw);
+	void talent_insert(int m_no,int t_no);
+	int id_count(String id);
 	int getM_no1(String id);
-	int nick(String nick);
+	int nick_count(String nick);
 	ArrayList<L_listDTO> getM_noNick(int m_no);
 	ArrayList<L_listDTO> Openl_list();
 	ArrayList<L_listDTO> getL_list(String l_koo);
@@ -35,4 +36,10 @@ public interface iteamP {
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(Map map);
 	ArrayList<SearchVO> searchNick(Map map);
+	ArrayList<boardDTO> listBoard();
+	void free_insert(int m_no,String b_title,String b_con);
+	void free_delete(int b_no);
+	boardDTO free_detail(int b_no);
+	void free_update(String b_title,String b_con,int b_no);
+	void free_viewcnt(int b_no);
 }
