@@ -169,8 +169,10 @@ public class HomeController {
 	//���������� ������ ��(����Ʈ �߱�)
 	@RequestMapping(value = "/note", method = RequestMethod.GET)
 	public String note(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
 		model.addAttribute("mno",req.getParameter("m_no")); //�����ʿ�
 		model.addAttribute("mpano",req.getParameter("m_pa_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "note";
 	}
 	
@@ -200,10 +202,11 @@ public class HomeController {
 	@ResponseBody
 	@RequestMapping(value="/noteSend",produces="application/text;charset=utf8")
 	public String noteSend(HttpServletRequest req) {
+		HttpSession session=req.getSession();
 		iteamP ip=sqlSession.getMapper(iteamP.class);
 		String con=req.getParameter("n_con");
 		int you=Integer.parseInt(req.getParameter("youseq"));
-		int me=1; //���Ǹ����� ���Ǿ� ��
+		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
 		return "";
 	}
