@@ -43,29 +43,165 @@ public class ApiController {
 	
 	@Autowired
 	private SqlSession sqlSession;
-
+	
+	@ResponseBody
+	@RequestMapping(value="/applydel", produces="application/text;charset=utf8")
+	public String doappdel(@RequestParam("l_no") int l_no,
+							@RequestParam("m_no") int m_no) {
+		System.out.println("{목록번호="+l_no+"}{체크="+m_no+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.applydel(l_no,m_no);
+		return "";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/applynew", produces="application/text;charset=utf8")
+	public String doappnew(@RequestParam("l_no") int l_no,
+							@RequestParam("m_no") int m_no) {
+		System.out.println("{목록번호="+l_no+"}{체크="+m_no+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.applyad(l_no,m_no);
+		return "";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/applylist", produces="application/text;charset=utf8")
+	public String doapplylist(@RequestParam("l_no") int l_no) {
+		System.out.println("{목록번호="+l_no);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			ArrayList<L_listDTO>re=team.applist(l_no);
+			JSONArray ja =new JSONArray();
+			for(int i=0; i<re.size();i++) {
+				L_listDTO ldto = re.get(i);
+				JSONObject jo =new JSONObject();
+				jo.put("appnick", ldto.getNick());
+				ja.add(jo);
+			}
+			System.out.println(ja.toJSONString());
+			return ja.toJSONString();
+	}
+	
+	//--button--//
+	@ResponseBody
+	@RequestMapping(value="/butdiff", produces="application/text;charset=utf8")
+	public String doDelete(@RequestParam("l_no") int l_no,
+						   @RequestParam("m_no") int m_no) {
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		int reccount=team.buttoncreate(l_no,m_no);
+		return Integer.toString(reccount);
+	}
+	//--l_Read jsp,button--//
+	
+	//update//
+	@ResponseBody
+	@RequestMapping(value="/upcheckbox", produces="application/text;charset=utf8")
+	public String doUpcheck(@RequestParam("l_no") int l_no,
+							@RequestParam("t_no") int t_no) {
+//		System.out.println("{목록번호="+l_no+"}{체크="+t_no+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.delcheck(l_no);
+			team.check_ad(l_no,t_no);
+		return "";
+	}
+	@ResponseBody
+	@RequestMapping(value="/proUp", produces="application/text;charset=utf8")
+	public String doProup(@RequestParam("nop") int nop,
+						  @RequestParam("l_no") int l_no,
+						  @RequestParam("m_no") int m_no,
+						  @RequestParam("l_title") String l_title,
+						  @RequestParam("l_content") String l_content,
+						  @RequestParam("l_date") String l_date,
+						  @RequestParam("l_file") String l_file,
+						  @RequestParam("l_koo") String l_koo, 
+						  @RequestParam("l_name") String l_name,
+						  @RequestParam("l_address") String l_address) {
+		System.out.println(nop);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		team.prUodate(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop,l_no);
+		
+		return "";
+	}
+	//--update--//
+	
+	//update read//
+	@RequestMapping(value="/l_retouch", produces="application/text;charset=utf8")
+	public String doRetouch(@RequestParam("l_no") int l_no,HttpServletRequest req,Model model) {
+//		System.out.println("목록번호"+l_no);
+		HttpSession session=req.getSession();
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		L_listDTO re=team.reto(l_no);
+		model.addAttribute("l_no",l_no);
+		model.addAttribute("l_title",re.l_title);
+		model.addAttribute("l_koo",re.l_koo);
+		model.addAttribute("l_con",re.l_con);
+		model.addAttribute("l_name",re.l_name);
+		model.addAttribute("l_addr",re.l_address);
+		model.addAttribute("l_date",re.l_date);
+		model.addAttribute("nop",re.nop);
+		ArrayList<Integer>sd=team.bringt_no(l_no);
+		String str="";
+		for(int i=0;i<sd.size();i++) {
+			str+=sd.get(i);
+		}
+		System.out.println(sd);
+		model.addAttribute("sd",str);
+		return "proposalUpdate";
+	}
+	//--update read--//
+	//delete//
+	@ResponseBody
+	@RequestMapping(value="/l_del", produces="application/text;charset=utf8")
+	public String dol_del(@RequestParam("l_no") int l_no) {
+//		System.out.println("목록번호"+l_no);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		team.tal_che_li_del(l_no);
+		int reccount = team.L_del(l_no);
+		return Integer.toString(reccount);
+	}
+	//--delete--//
+	//list read//
 	@RequestMapping("/l_Read")
 	public String dorea(HttpServletRequest req,Model model) {
+		HttpSession session=req.getSession();
 		int l_no =Integer.parseInt(req.getParameter("l_no"));
-		System.out.println(l_no);
+//		System.out.println(l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		L_listDTO re=team.read(l_no);
-		
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		team.l_views(l_no);
+		int lookapp=team.lookup(l_no);
+		model.addAttribute("lookapp",lookapp);
+		L_listDTO re=team.l_read(l_no);
 		model.addAttribute("l_no",l_no);
 		model.addAttribute("l_title",re.l_title);
 		model.addAttribute("l_con",re.l_con);
 		model.addAttribute("l_name",re.l_name);
 		model.addAttribute("l_addr",re.l_address);
 		model.addAttribute("l_date",re.l_date);
-		model.addAttribute("nick",re.nick);
+		model.addAttribute("l_nick",re.nick);
+		model.addAttribute("l_mno",re.m_no);
+		model.addAttribute("l_views",re.l_views);
+		model.addAttribute("nop",re.nop);
+		ArrayList<String>sd=team.bringt_name(l_no);
+		String str="";
+		for(int i=0;i<sd.size();i++) {
+			str+=sd.get(i)+",";
+		}
+//		System.out.println(str);
+		model.addAttribute("sd",str);
 		return "l_Read";
 	}
+	//--list read--//
 	
-	//--�� ��Ȳ--//
+	//--占쏙옙 占쏙옙황--//
 	@ResponseBody
 	@RequestMapping(value="/find_list", produces="application/text;charset=utf8")
 	public String dofind_List(@RequestParam("l_koo") String l_koo) {
-		System.out.println(l_koo);
+//		System.out.println(l_koo);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		ArrayList<L_listDTO> l_list=team.getL_list(l_koo);
 		JSONArray ja =new JSONArray();
@@ -76,14 +212,17 @@ public class ApiController {
 			jo.put("m_no", ldto.getM_no());
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());
+			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
-		System.out.println(ja.toJSONString());
+//		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
-	//--�� ��Ȳ--//
+	//--占쏙옙 占쏙옙황--//
 	
-	//--��ü ��Ȳ--//
+	//--占쏙옙체 占쏙옙황--//
 	@ResponseBody
 	@RequestMapping(value="/open_list", produces="application/text;charset=utf8")
 	public String doOpen_list() {
@@ -97,54 +236,70 @@ public class ApiController {
 			jo.put("m_no", ldto.getM_no());
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());
+			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
-		System.out.println(ja.toJSONString());
+//		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
-	//--��ü ��Ȳ--//
+	//--占쏙옙체 占쏙옙황--//
 	
-	//--����Ȱ����ȹ��--//
+	//--占쏙옙占쏙옙활占쏙옙占쏙옙획占쏙옙--//
 	@RequestMapping("/proposal")
 	public String dopro(HttpServletRequest req,Model model) {
+		HttpSession session=req.getSession();
 		int m_no =Integer.parseInt(req.getParameter("m_no"));
 		iteamP team=sqlSession.getMapper(iteamP.class);
+		model.addAttribute("userinfo",session.getAttribute("id"));
 		ArrayList<L_listDTO> l_list=team.getM_noNick(m_no);
 		model.addAttribute("m_no",l_list.get(0).getM_no());
 		model.addAttribute("nick",l_list.get(0).getNick());
 		return "proposal";
 	}
-	//--����Ȱ����ȹ��--//
+	//--占쏙옙占쏙옙활占쏙옙占쏙옙획占쏙옙--//
 	
-	//--����Ȱ�� �ۼ���Ȳ�Խ��� ����--//
+	//--占쏙옙占쏙옙활占쏙옙 占쌜쇽옙占쏙옙황占쌉쏙옙占쏙옙 占쏙옙占쏙옙--//
 	@RequestMapping("/proposal_list")
-	public String doList() {
+	public String doList(HttpServletRequest req,Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "proposal_list";
 	}
-	//--����Ȱ�� �ۼ���Ȳ�Խ��� ����--//
+	//--占쏙옙占쏙옙활占쏙옙 占쌜쇽옙占쏙옙황占쌉쏙옙占쏙옙 占쏙옙占쏙옙--//
 	
-	//insert�� ������������//
+	//insert占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙//
 	@RequestMapping("/success_page")
-	public String doSuccess() {
+	public String doSuccess(HttpServletRequest req,Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "success_page";
 	}
-	//insert�� ������������//
+	//insert占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙//
+	
 	@ResponseBody
 	@RequestMapping(value="/check_ad", produces="application/text;charset=utf8")
 	public String dochead(@RequestParam("m_no") int m_no,
 						  @RequestParam("l_date") String l_date,
 						  @RequestParam("t_no") int t_no) {
-		System.out.println("{�̸�="+m_no+"}{��¥="+l_date+"}{��ɹ�ȣ="+t_no+"}");
+		System.out.println("{占싱몌옙="+m_no+"}{占쏙옙짜="+l_date+"}{占쏙옙�뱄옙호="+t_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			int l_no = team.checkl_no(m_no,l_date);
 			System.out.println(l_no);
 			team.check_ad(l_no,t_no);
 		return "";
 	}
-	//list ���̺� insert //
+	
+	//list 占쏙옙占싱븝옙 insert //
 	@ResponseBody
 	@RequestMapping(value="/new_ad", produces="application/text;charset=utf8")
-	public String doNewad(@RequestParam("m_no") int m_no,
+	public String doNewad(@RequestParam("nop") int nop,
+						  @RequestParam("m_no") int m_no,
 						  @RequestParam("l_title") String l_title,
 						  @RequestParam("l_content") String l_content,
 						  @RequestParam("l_date") String l_date,
@@ -152,15 +307,15 @@ public class ApiController {
 						  @RequestParam("l_koo") String l_koo, 
 						  @RequestParam("l_name") String l_name,
 						  @RequestParam("l_address") String l_address) {
-		System.out.println("{�̸�="+m_no+"}{����="+l_title+"}{����="+l_content+"}{��¥="+l_date+"}{����="+l_file+"}{��û��="+l_koo+"}{���="+l_name+"}{���ּ�="+l_address+"}");
+		System.out.println(nop);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		team.new_ad(m_no,l_title,l_content,l_name,l_address,l_koo,l_date);
+		team.new_ad(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop);
 		
 		return "";
 	}
-	//list ���̺� insert //
+	//list 占쏙옙占싱븝옙 insert //
 	
-	//īī�� ��API//
+	//카카占쏙옙 占쏙옙API//
 	@RequestMapping("/map")
 	public String doMap(HttpServletRequest req,Model model) {
 		String key = req.getParameter("key");
@@ -168,9 +323,9 @@ public class ApiController {
 		model.addAttribute("key",key);
 		return "map_open";
 	}
-	//īī����API//
+	//카카占쏙옙占쏙옙API//
 	
-	//����ȸ�� �ҷ����� API//
+	//占쏙옙占쏙옙회占쏙옙 占쌀뤄옙占쏙옙占쏙옙 API//
 	@ResponseBody
 	@RequestMapping(value="/ko_check",produces="application/text;charset=utf8")
 	public String doUsercheck(HttpServletRequest req,Model model) {
@@ -210,6 +365,6 @@ public class ApiController {
 		
 		return "redirect:/find";
 	}
-	//--����ȸ�� ��ȸ API--// 
+	//--占쏙옙占쏙옙회占쏙옙 占쏙옙회 API--// 
 }
 

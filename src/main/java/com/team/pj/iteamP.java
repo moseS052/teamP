@@ -27,8 +27,8 @@ public interface iteamP {
 	ArrayList<L_listDTO> getM_noNick(int m_no);
 	ArrayList<L_listDTO> Openl_list();
 	ArrayList<L_listDTO> getL_list(String l_koo);
-	L_listDTO read(int l_no);
-	void new_ad(int m_no,String l_title,String l_con,String l_name, String l_address,String l_koo,String l_date);
+	L_listDTO l_read(int l_no);
+	void new_ad(int m_no,String l_title,String l_con,String l_date,String l_name, String l_address,String l_koo,int nop);
 	int checkl_no(int l_no,String l_date);
 	void check_ad(int l_no,int t_no);
 	String getNickById(String id);
@@ -42,4 +42,18 @@ public interface iteamP {
 	boardDTO free_detail(int b_no);
 	void free_update(String b_title,String b_con,int b_no);
 	void free_viewcnt(int b_no);
+	int L_del(int l_no);
+	L_listDTO reto(int l_no);
+	ArrayList<Integer> bringt_no(int l_no);
+	void delcheck(int l_no);
+	ArrayList<String> bringt_name(int l_no);
+	int buttoncreate(int l_no,int m_no);
+	ArrayList<L_listDTO>applist(int l_no);
+	void applyad(int l_no , int m_no);
+	void applydel(int l_no , int m_no);
+	void l_views(int l_no);
+	void prUodate(int m_no,String l_title,String l_content,String l_date,String l_name,String l_address,String l_koo,int nop,int l_no);
+	int lookup (int l_no);
+	int getcount(int l_no);
+	void tal_che_li_del(int l_no);
 }
