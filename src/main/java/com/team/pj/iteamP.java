@@ -56,4 +56,6 @@ public interface iteamP {
 	int lookup (int l_no);
 	int getcount(int l_no);
 	void tal_che_li_del(int l_no);
+	void insertAlarm(int m_no,String alarm);
+	ArrayList<alarmVO> showAlarm(int m_no);
 }

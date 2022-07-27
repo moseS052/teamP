@@ -166,6 +166,7 @@ public class HomeController {
 	@RequestMapping(value = "/meminfo", method = RequestMethod.GET)
 	public String meminfo(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
+		model.addAttribute("semno",Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("id",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
@@ -177,8 +178,10 @@ public class HomeController {
 	//占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙(占쏙옙占쏙옙트 占쌩깍옙)
 	@RequestMapping(value = "/note", method = RequestMethod.GET)
 	public String note(HttpServletRequest req, Model model) {
-		model.addAttribute("mno",req.getParameter("m_no")); //占쏙옙占쏙옙占십울옙
+		HttpSession session=req.getSession();
+		model.addAttribute("mno",req.getParameter("m_no")); //�����ʿ�
 		model.addAttribute("mpano",req.getParameter("m_pa_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "note";
 	}
 	
@@ -204,15 +207,19 @@ public class HomeController {
 		return ja.toJSONString();
 	}
 	
-	//占쏙옙占쏙옙 占쏙옙占쏙옙占쏙옙 占쏙옙트占싼뤄옙
+	//���� ������ ��Ʈ�ѷ�  all page need jquery because a tag
 	@ResponseBody
 	@RequestMapping(value="/noteSend",produces="application/text;charset=utf8")
 	public String noteSend(HttpServletRequest req) {
+		HttpSession session=req.getSession();
 		iteamP ip=sqlSession.getMapper(iteamP.class);
 		String con=req.getParameter("n_con");
 		int you=Integer.parseInt(req.getParameter("youseq"));
-		int me=1; //占쏙옙占실몌옙占쏙옙占쏙옙 占쏙옙占실억옙 占쏙옙
+		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
+		String nick=(String) session.getAttribute("nick");		
+		String mes="<a href='' id='meminfo' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
+		ip.insertAlarm(you, mes);
 		return "";
 	}
 	
@@ -269,5 +276,18 @@ public class HomeController {
 		
 		map.clear();
 		return ja.toJSONString();
+	}
+	
+	//alarm call
+	@RequestMapping(value = "/alarm", method = RequestMethod.GET)
+	public String alarm(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		ArrayList<alarmVO> aravo=ip.showAlarm((int)session.getAttribute("m_no"));
+		
+		model.addAttribute("aravo",aravo.get(0).getAlarm());
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		
+		return "alarm";
 	}
 }

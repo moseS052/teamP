@@ -21,4 +21,6 @@ public class addController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	// go
+	
 }

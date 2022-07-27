@@ -155,5 +155,11 @@ update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4
 <delete id="tal_che_li_del">
 	delete from talent_check_list where l_no=#{param1}
 </delete>    
+<insert id='insertAlarm'>
+	insert into alarm values(#{param1},#{param2},CURRENT_date,0)
+</insert>
+<select id='showAlarm' resultType="com.team.pj.alarmVO">
+	select * from alarm where m_no=#{param1}
+</select>
 </mapper>
 

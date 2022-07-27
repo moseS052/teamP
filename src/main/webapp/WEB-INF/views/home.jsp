@@ -72,7 +72,11 @@ $(document)
 				</c:if>
 			</div>
 			<div>
-				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
+				<c:if test="${m_no!=null}">
+				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
+				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
+				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
+				</c:if>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -138,10 +142,12 @@ $(document)
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE
+						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90'>나</a> 
+<!-- 						                  여기서부터 작성할 것 버튼 누르면 바로 /meminfo?m_no=어쩌구 가는 걸로 -->
 					</h1>
 					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
 					<input type='text' id='searching'><input type='button' id='btnSearch' value='검색 알고리즘'></h2>
+					
 					<div class="spacer"></div>
 				</div>
 			</div>
@@ -1246,7 +1252,9 @@ $(document)
 	console.log(`${m_no}`);
 })
 .on('click','#meminfo',function(){
-	window.open("meminfo", "_blank", "width=400, height=400, top=40, left=1340");
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
 })
 
 .on('click','#btnSearch',function(){
