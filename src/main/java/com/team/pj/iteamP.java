@@ -39,7 +39,7 @@ public interface iteamP {
 	void applyad(int l_no , int m_no);
 	void applydel(int l_no , int m_no);
 	void l_views(int l_no);
-	void prUodate(int m_no,String l_title,String l_content,String l_date,String l_name,String l_address,String l_koo,int l_no);
+	void prUodate(int m_no,String l_title,String l_content,String l_date,String l_name,String l_address,String l_koo,int nop,int l_no);
 	int lookup (int l_no);
 	int getcount(int l_no);
 	void tal_che_li_del(int l_no);

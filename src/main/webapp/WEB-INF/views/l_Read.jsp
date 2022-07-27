@@ -154,7 +154,7 @@
 						</p>
 						
 						<c:if test="${userinfo!=null && l_mno eq m_no}">
-						현황목록<select id="l_name" class="form-control">
+						신청인원(아이디)<select id="l_name" class="form-control">
                             
                         	 </select> 
 						</c:if>
@@ -225,63 +225,74 @@ $(document)
 	applylist()
 	if(`${l_mno}`==`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<input class='btn btn-outlined btn-primary' type='button' id='0' value='봉사후기' />"
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button' id='0' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='작성할때필요' value='후기작성' />"
 			$('#but').append(str);
 			}else{let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
 			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
 			$('#but').append(str);}
 			
 	}else if(`${userinfo}`== ""){
-		if(`${lookapp}`==`${nop}`){
-			let str ="<input class='btn btn-outlined btn-primary' type='button'  value='신청마감' />"
-				$('#but').append(str);
-		}else if(`${lookapp}`<=`${nop}`){
-				let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
-					$('#but').append(str);	
+		if(getToday()>`${l_date}`){
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
+			$('#but').append(str);
+		}else{
+			if(`${lookapp}`==`${nop}`){
+				let str ="<input class='btn btn-outlined btn-primary' type='button'  value='신청마감' />"
+					$('#but').append(str);
+			}else if(`${lookapp}`<=`${nop}`){
+					let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
+						$('#but').append(str);	
+			}
 		}
 		
 	}else if(`${l_mno}`!=`${m_no}`){
-		if(`${lookapp}`==`${nop}`){
-			$.ajax({
-				type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
-					dataType:'json',
-			  		success:function(data){
-			  			console.log('데이타는='+data)
-			  			if(data==1){
-			  				let str="<input class='btn btn-outlined btn-primary'  type='button' value='신청마감' />"
-			  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
-			  					$('#but').append(str);
-			  			}else{
-			  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
-			  					$('#but').append(str);
-			  			}
-		    		},
-		    		error:function(){
-		    			alert('삭제실패');
-		    		},
-		    		complete:function(){}
-		    	});
-		}else if(`${lookapp}`<=`${nop}`){
-			$.ajax({
-				type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
-					dataType:'json',
-			  		success:function(data){
-			  			console.log('데이타는='+data)
-			  			if(data==1){
-			  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
-			  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
-			  					$('#but').append(str);
-			  			}else{
-			  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
-			  					$('#but').append(str);
-			  			}
-		    		},
-		    		error:function(){
-		    			alert('삭제실패');
-		    		},
-		    		complete:function(){}
-		    	});
+		if(getToday()>`${l_date}`){
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
+				$('#but').append(str);
+		}else{
+			if(`${lookapp}`==`${nop}`){
+				$.ajax({
+					type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+						dataType:'json',
+				  		success:function(data){
+				  			console.log('데이타는='+data)
+				  			if(data==1){
+				  				let str="<input class='btn btn-outlined btn-primary'  type='button' value='신청마감' />"
+				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
+				  					$('#but').append(str);
+				  			}else{
+				  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
+				  					$('#but').append(str);
+				  			}
+			    		},
+			    		error:function(){
+			    			alert('삭제실패');
+			    		},
+			    		complete:function(){}
+			    	});
+			}else if(`${lookapp}`<=`${nop}`){
+				$.ajax({
+					type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
+						dataType:'json',
+				  		success:function(data){
+				  			console.log('데이타는='+data)
+				  			if(data==1){
+				  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
+				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
+				  					$('#but').append(str);
+				  			}else{
+				  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
+				  					$('#but').append(str);
+				  			}
+			    		},
+			    		error:function(){
+			    			alert('삭제실패');
+			    		},
+			    		complete:function(){}
+			    	});
+			}
 		}
+		
 	
 	}
 		

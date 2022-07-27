@@ -273,7 +273,7 @@ $(document)
 	console.log('상호='+$('#l_name option:selected').text());
 	console.log('상세주소='+$('#l_address').val());
 	$.ajax({
-		type:'get',url:'proUp',data:{l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
+		type:'get',url:'proUp',data:{nop:$('#nop').val(),l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
 			dataType:'text',async: false,
 	  		success:function(){
     				console.log('ann');

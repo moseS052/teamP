@@ -105,7 +105,8 @@ public class ApiController {
 	}
 	@ResponseBody
 	@RequestMapping(value="/proUp", produces="application/text;charset=utf8")
-	public String doProup(@RequestParam("l_no") int l_no,
+	public String doProup(@RequestParam("nop") int nop,
+						  @RequestParam("l_no") int l_no,
 						  @RequestParam("m_no") int m_no,
 						  @RequestParam("l_title") String l_title,
 						  @RequestParam("l_content") String l_content,
@@ -114,8 +115,9 @@ public class ApiController {
 						  @RequestParam("l_koo") String l_koo, 
 						  @RequestParam("l_name") String l_name,
 						  @RequestParam("l_address") String l_address) {
+		System.out.println(nop);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		team.prUodate(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,l_no);
+		team.prUodate(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop,l_no);
 		
 		return "";
 	}

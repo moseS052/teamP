@@ -116,7 +116,7 @@
 	update list set l_views=l_views+1 where l_no=#{param1}
 </update>
 <update id="prUodate">
-update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4},l_time=current_date,l_name=#{param5},l_address=#{param6},l_koo=#{param7} where l_no=#{param8} 
+update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4},l_time=current_date,l_name=#{param5},l_address=#{param6},l_koo=#{param7},nop=#{param8} where l_no=#{param9} 
 </update>
 <select id="lookup" resultType="int">
 	select count(m_no) from apply where l_no=#{param1}
