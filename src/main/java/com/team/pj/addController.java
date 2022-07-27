@@ -46,6 +46,7 @@ public class addController {
 		
 		model.addAttribute("aravo",aravo.get(0).getAlarm());
 		model.addAttribute("m_no",session.getAttribute("m_no"));
+		
 		return "alarm";
 	}
 }
