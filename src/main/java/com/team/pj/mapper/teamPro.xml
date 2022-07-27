@@ -161,5 +161,14 @@ update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4
 <select id='showAlarm' resultType="com.team.pj.alarmVO">
 	select * from alarm where m_no=#{param1}
 </select>
+<select id='privacyRead' resultType="com.team.pj.memberDTO">
+	select * from member where m_no=#{param1}
+</select>
+<select id='nickcheck' resultType="int">
+	select count(nick) from member where nick=#{param1}
+</select>
+<update id="prichange">
+update member set name=#{param1},nick=#{param2},phone=#{param3},mail=#{param4} where m_no=#{param5} 
+</update>
 </mapper>
 

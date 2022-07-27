@@ -47,74 +47,80 @@
         </div>
     </div>
 
-    <!-- END NAV -->
-    <nav class="menu" id="theMenu">
-        <div class="menu-wrap">
-            <i class="fa fa-bars menu-close"></i>
-            <div id="menu-logo">
+	<!-- END NAV -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<i class="fa fa-bars menu-close"></i>
+			<div id="menu-logo">
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==null}">
+			 	<c:if test="${userinfo==''}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=null}">
+				<c:if test="${userinfo!=''}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
-            <ul id="main-menu">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/pj">Home Agency</a></li>
-                        <li><a href="index-blog.html">Home Blog</a></li>
-                        <li><a href="index-single-page.html">Home Single Page</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li>
-                         <c:if test="${userinfo==null}">
+			<div>
+				<c:if test="${m_no!=null}">
+				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
+				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
+				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
+				</c:if>
+			</div>
+			<ul id="main-menu">
+			<c:if test="${userinfo!=''}">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">개인정보<i
+						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
+						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
+						<li><a href="portfolio-4-column.html">내가쓴게시물찾기</a></li>
+					</ul></li>
+					</c:if>
+				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
+					<i class="fa fa-home menu-icon"></i></a>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
+					<ul class="dropdown-menu">	
+						<li>
+						<c:if test="${userinfo==''}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${userinfo!=null}">
+						<c:if test="${userinfo!=''}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
-                        </li>  
-                        <li><a href="proposal_list">봉사활동 현황목록</a></li>
-                        <li><a href="404.html">404</a></li>                   
-                    </ul>
-                </li>   
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
-                    <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <i class="fa fa-camera menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="single-project.html">Single Project</a></li>    
-                        <li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-                        <li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-                        <li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>                
-                    </ul>
-                </li>
-                <li><a href="#" class="search-trigger">Search <i class="fa fa-search menu-icon"></i></a></li>
-            </ul>
-
-            <ul id="social-icons">
-                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-            </ul>
-        </div>
-    </nav>
-    <!-- END NAV -->
+						</li>
+						<li><a href="proposal_list">봉사활동 현황목록</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="/pj/qna">자주 묻는 질문</a></li>
+						<li><a id='question' href="#">1:1 질문</a></li>
+					</ul></li>	
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Portfolio <i
+						class="fa fa-camera menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
+						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
+						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
@@ -156,7 +162,7 @@
 						<c:if test="${userinfo!=null && l_mno eq m_no}">
 						신청인원(아이디)<select id="l_name" class="form-control">
                             
-                        	 </select> 
+                        	 		</select> 
 						</c:if>
                         </div>
 
@@ -304,7 +310,8 @@ $(document)
 	console.log(ar[0]);
 	console.log('"'+'map?key='+ar[0]+'"');
  	window.open('http://192.168.0.2:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
-	          // 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
+	return false;
+	// 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
 })
 .on('click','#l_del',function(){
 	console.log($('#l_no').val());

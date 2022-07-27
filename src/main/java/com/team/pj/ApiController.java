@@ -40,9 +40,63 @@ import ch.qos.logback.core.net.SyslogOutputStream;
 
 @Controller
 public class ApiController {
-	
+
 	@Autowired
 	private SqlSession sqlSession;
+	
+	@RequestMapping("/pwchange")
+	public String dopasswordchange(HttpServletRequest req,Model model) {
+		int m_no = Integer.parseInt(req.getParameter("m_no"));
+		System.out.println("회원번호="+m_no);
+		HttpSession session=req.getSession();
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		return "pwchange";
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/prichange", produces="application/text;charset=utf8")
+	public String domemberchange(@RequestParam("m_no") int m_no,
+								 @RequestParam("nick") String nick,
+								 @RequestParam("name") String name,
+								 @RequestParam("phone") String phone,
+								 @RequestParam("mail") String mail) {
+		System.out.println("{회원번호="+m_no+"}"+"{닉넴="+nick+"}"+"{이름="+name+"}"+"{번호="+phone+"}"+"{메일="+mail+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.prichange(name,nick,phone,mail,m_no);
+		return "";
+	}
+	@ResponseBody
+	@RequestMapping(value="/nickcheck", produces="application/text;charset=utf8")
+	public String donickcheck(@RequestParam("nick") String nick) {
+		System.out.println("{목록번호="+nick+"}");
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.nickcheck(nick);
+		return "";
+	}
+	//information inquiry//
+	@RequestMapping("/privacy")
+	public String doprivacy(HttpServletRequest req,Model model) {
+		int m_no = Integer.parseInt(req.getParameter("m_no"));
+		System.out.println("회원번호="+m_no);
+		HttpSession session=req.getSession();
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		memberDTO re=team.privacyRead(m_no);
+		model.addAttribute("id",re.id);
+		model.addAttribute("name",re.name);
+		model.addAttribute("nick",re.nick);
+		model.addAttribute("phone",re.phone);
+		model.addAttribute("mail",re.mail);
+		return "privacy";
+	}
+	//information inquiry//
+	
 	
 	@ResponseBody
 	@RequestMapping(value="/applydel", produces="application/text;charset=utf8")

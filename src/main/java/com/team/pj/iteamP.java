@@ -58,4 +58,7 @@ public interface iteamP {
 	void tal_che_li_del(int l_no);
 	void insertAlarm(int m_no,String alarm);
 	ArrayList<alarmVO> showAlarm(int m_no);
+	memberDTO privacyRead(int m_no);
+	int nickcheck(String nick);
+	void prichange(String name,String nick,String phone,String mail,int m_no);
 }

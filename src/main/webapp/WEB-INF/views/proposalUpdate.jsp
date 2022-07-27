@@ -52,11 +52,11 @@ accent-color:green;
         </div>
     </div>
 
-    <!-- END NAV -->
-    <nav class="menu" id="theMenu">
-        <div class="menu-wrap">
-            <i class="fa fa-bars menu-close"></i>
-            <div id="menu-logo">
+	<!-- END NAV -->
+	<nav class="menu" id="theMenu">
+		<div class="menu-wrap">
+			<i class="fa fa-bars menu-close"></i>
+			<div id="menu-logo">
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
@@ -67,52 +67,65 @@ accent-color:green;
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
-            <ul id="main-menu">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/pj">Home Agency</a></li>
-                        <li><a href="index-blog.html">Home Blog</a></li>
-                        <li><a href="index-single-page.html">Home Single Page</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="proposal?m_no=${m_no}">봉사활동 기획서</a></li>  
-                        <li><a href="proposal_list">봉사활동 현황목록</a></li>
-                        <li><a href="404.html">404</a></li>                   
-                    </ul>
-                </li>   
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
-                    <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Portfolio <i class="fa fa-camera menu-icon"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="single-project.html">Single Project</a></li>    
-                        <li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-                        <li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-                        <li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>                
-                    </ul>
-                </li>
-                <li><a href="#" class="search-trigger">Search <i class="fa fa-search menu-icon"></i></a></li>
-            </ul>
-
-            <ul id="social-icons">
-                <li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
-            </ul>
-        </div>
-    </nav>
-    <!-- END NAV -->
+			<div>
+				<c:if test="${m_no!=null}">
+				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
+				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
+				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
+				</c:if>
+			</div>
+			<ul id="main-menu">
+			<c:if test="${userinfo!=''}">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">개인정보<i
+						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
+						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
+						<li><a href="portfolio-4-column.html">내가쓴게시물찾기</a></li>
+					</ul></li>
+					</c:if>
+				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
+					<i class="fa fa-home menu-icon"></i></a>
+				</li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
+					<ul class="dropdown-menu">	
+						<li>
+						<c:if test="${userinfo==''}">
+						<a href="login">봉사활동기획서</a>
+						</c:if>
+						<c:if test="${userinfo!=''}">
+						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
+						</c:if>
+						</li>
+						<li><a href="proposal_list">봉사활동 현황목록</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
+					</ul></li>
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="/pj/qna">자주 묻는 질문</a></li>
+						<li><a id='question' href="#">1:1 질문</a></li>
+					</ul></li>	
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Portfolio <i
+						class="fa fa-camera menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
+						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
+						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
+					</ul></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
@@ -184,7 +197,7 @@ accent-color:green;
 						상세주소<input type="text" class="form-control" id="l_address" value="${l_addr}"/>
 						<input type="hidden" id='hid'>
 						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
-						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="비우기" /><a href="l_Read?l_no=${l_no}"><input class="btn btn-outlined btn-primary" type="button" id="ca" value="수정취소" /></a></p></div>						
+						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="수정취소" /></p></div>						
 					</div>
 				</div>
 			</div>	
@@ -263,15 +276,6 @@ $(document)
 })
 
 .on('click','#ad',function(){	
-	
-	console.log('이름='+$('#m_no').val());
-	console.log('제목='+$('#l_title').val());
-	console.log('내용='+$('#l_content').val());
-	console.log('날자='+$('#l_date').val());
-	console.log('사진='+$('#l_file').val());
-	console.log('신청구역='+$('#l_koo option:selected').val());
-	console.log('상호='+$('#l_name option:selected').text());
-	console.log('상세주소='+$('#l_address').val());
 	$.ajax({
 		type:'get',url:'proUp',data:{nop:$('#nop').val(),l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
 			dataType:'text',async: false,
@@ -299,18 +303,16 @@ $(document)
     	});
 })
 .on('click','#ca',function(){
-	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date,#l_address,#nop').val('');
-	 $('input:checkbox[name="che"]').each(function() {
-		      this.checked = false;
-		 });
-	
+	alert('수정을 취소하고 홈으로이동합니다')
+	document.location='/pj/'
 })
 .on('click','#map',function(){
 	let aa=$('#hid').val()
 	console.log(aa);
 	console.log('"'+'map?key='+aa+'"');
  	window.open('http://192.168.0.2:8080/pj/map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
-	          // 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
+	return false;
+	// 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
 })
 .on('click','#load',function(){
 	let str=$('#l_name option:selected').val();

@@ -4,7 +4,8 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+ <head>
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -36,7 +37,11 @@
 	});
     </script> 
   </head>
-
+<style>
+input[type="checkbox"]{
+accent-color:green;
+}
+</style>
   <body class="single single-post"> 
 
   	<div id="preloader"></div>
@@ -75,7 +80,7 @@
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
+						<li><a href="single-project.html">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="portfolio-4-column.html">내가쓴게시물찾기</a></li>
 					</ul></li>
@@ -127,34 +132,36 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">재능기부 신청 현황</h2>
+                <h2 class="main-title">개인정보수정</h2>
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
-		<div id="content-wrapper">
+	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					
-					<div class="col-lg-8">
-						<h3>성공적으로 작성되었습니다.</h3>
-						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
-							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
-						</p>	
-					</div>
-
-                        
-
+					<div class="col-md-8 fade-up">
+						<h3>개인정보수정</h3>
+						
+						<div id="cla">
+						<input type=hidden id="m_no" value="${m_no}">
+						현재 비밀번호<input type="text" class="form-control" id="ppwd"/>
+						새 비밀번호 입력<input type="text" class="form-control" id="npwd"/>
+						새 비밀번호 확인<input type="text" class="form-control" id="npwd1"/>
+						<input class="btn btn-outlined btn-primary" type="button" id="pwchange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="수정취소" />
+						</div>
+						
 					</div>
 				</div>
-	    </section>
 			</div>	
-	
+	    </section>
+	</div>
+
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -209,7 +216,32 @@
 <script>
 $(document)
 .ready(function(){
-	
+
+})
+.on('click','#can',function(){
+	alert('수정을 취소하고 홈으로이동합니다')
+	document.location='/pj/'
+})
+
+.on('click','#pwchange',function(){
+	if($('#npwd').val()==$('#npwd1').val()){
+		$.ajax({
+			type:'get',url:'nickcheck',data:{m_no:`${m_no}`pwd:$('#ppwd').val()},
+				dataType:'text',
+		  		success:function(data){
+		  			if(data==1){
+		  				alert('비밀번호변경')
+		  			}else{	  				
+		  				alert('현재비밀번호 확인필요')
+		  			}
+	    		},
+	    		error:function(){
+	    		},
+	    		complete:function(){}
+	    	});
+	}else{
+		alert('비밀번호 불일치 비밀번호 확인이필요합니다')
+	}
 })
 </script>
 </html>
