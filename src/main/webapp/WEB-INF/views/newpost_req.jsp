@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>새글쓰기_자유게시판</title>
+<title>새글쓰기_요청게시판</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -123,17 +123,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">새글쓰기_요청게시판</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">

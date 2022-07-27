@@ -95,7 +95,7 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-smile-o menu-icon" aria-hidden="true"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
@@ -124,17 +124,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">Free Board</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">

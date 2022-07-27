@@ -96,12 +96,11 @@ $(document)
 						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class=" fa fa-regular fa-comments menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
-						<!-- <li><a href="category.html">Category Page</a></li>
-						<li><a href="category-alt.html">Category Page Alt</a></li> -->
+						
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>

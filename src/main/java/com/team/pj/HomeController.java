@@ -59,12 +59,18 @@ public class HomeController {
 	}
 	//濡�洹몄��
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String doLogin() {
+	public String doLogin(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "login";
 	}
 	//����媛���jsp
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	public String doSignup() {
+	public String doSignup(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "signup";
 	}
 	
@@ -91,9 +97,6 @@ public class HomeController {
 			session.setAttribute("nick",p.getNickById(user_id) );
 			session.setAttribute("id", user_id);
 		}
-		
-//		ArrayList<boardDTO> blist=p.listBoard();
-//		model.addAttribute("boardlist",blist);
 		return "redirect:/";
 	}
 	//濡�洹몄����

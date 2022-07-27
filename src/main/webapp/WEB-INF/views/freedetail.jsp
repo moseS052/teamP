@@ -123,17 +123,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">Detail</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -153,11 +153,11 @@
 					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
 					<form id=frmup method=get action="updetail">
-					<input type=hidden id="btdo.m_no" name="btdo.m_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					<!-- <form id=frmdel method=get action="delete_free"> -->
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' class="btn btn-primary btn-outlined"></form>
+					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
+					
+					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
+					<input type=button id="del" name="del" value='글삭제' class="btn btn-primary btn-outlined">
 					</c:if>
 					</div>
 				</div>
@@ -229,15 +229,12 @@ $(document)
 		data:{b_no:$('#b_no').val()},
 		beforeSend:function(){
 			console.log("b_no:"+$('#b_no').val());
-			window.location.href="<%= request.getContextPath() %>/freeboard";//??????
 		},
 		success:function(){	
 			alert('글을 삭제하였습니다');
-			
+			window.location.href="<%= request.getContextPath() %>/freeboard";
 		}
 	}) 
-
-
 })
 </script>
 </html>

@@ -123,17 +123,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">Detail</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -142,22 +142,22 @@
 
 					<div class="col-md-12">
 					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=m_no value="${bdto.m_no }">
+					<input type=hidden name=bdto.m_no value="${bdto.m_no }">
 					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }" readonly><br>
 					내용: <textarea id=b_con name=b_con rows=10 cols=70 readonly>${bdto.b_con }</textarea><br>
 					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
 					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
 					
 					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
-					<input type=hidden id="b_no" name="b_no" value="${m_no}">
-					<input type=hidden id="b_no" name="b_no" value="${bdto.m_no }">
+					<input type=hidden id="m_no" name="m_no" value="${m_no}">
+					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
 					<form id=frmup method=get action="requpdetail">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					<form id=frmdel method=get action="delete_free">
+					
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='글삭제' class="btn btn-primary btn-outlined"></form>
+					<input type=button id="del" value='글삭제' class="btn btn-primary btn-outlined">
 					</c:if>
 					</div>
 				</div>
@@ -221,9 +221,20 @@ $(document)
 .on('click','#btnReset',function(){
 	document.location='/pj/reqboard';
 })
-.on('click','#frmdel',function(){
+.on('click','#del',function(){
 	if(!confirm("정말로 글을 삭제 할까요?")) return false;
-	
+
+	$.ajax({
+		type:'get',dataType:'text',url:'delete_free',
+		data:{b_no:$('#b_no').val()},
+		beforeSend:function(){
+			console.log("b_no:"+$('#b_no').val());
+		},
+		success:function(){	
+			alert('글을 삭제하였습니다');
+			window.location.href="<%= request.getContextPath() %>/reqboard";
+		}
+	}) 
 })
 </script>
 </html>

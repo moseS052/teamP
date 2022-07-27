@@ -35,15 +35,20 @@
     $(document)
     .ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/plant.jpg" 
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
 		
 	});
     </script>
-	
+<style>
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    } 
+</style>	
   </head>
 
   <body class="single single-post"> 
@@ -62,7 +67,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -82,12 +92,10 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+                        <li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -112,17 +120,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	<div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <hr>
-                <h2 class="main-title">자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문</h2>
+                
+                <h2 class="main-title">Login</h2>
                 <hr>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -131,24 +139,48 @@
 
 					<div class="col-md-12">
 
-					<form id=frmLogin method=POST action="user_check">
-<!-- <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">ID</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ID">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">비밀번호</label>
-  <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
-</div> -->
-						
+					<!-- <form id=frmLogin method=POST action="user_check">
 					<label>id</label>
 					<input type=text name=id><br>
 					<label>비밀번호</label>
 					<input type=password name=pw><br><br><br>
 					<input type=submit value='로그인' class="btn btn-primary btn-outlined">&nbsp;
 					<input type=reset value='비우기' class="btn btn-primary btn-outlined">
-					</form>
+					</form> -->
+<div class="container" >
+    <div class="row">
+      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
+        <div class="card card-signin my-5">
+          <div class="card-body">
+            <!-- <h1 class="card-title text-center">Log In</h1> -->
+            <form class="form-signin" method="post" action="user_check">
+              <div class="form-label-group">
+                <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
+              </div><br>
 
+              <div class="form-label-group">
+                <input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>
+              </div>
+              
+              <hr>
+              
+              <div class="form-label-group">
+              <%-- <c:if test="${n != 1 }">
+                <label>message</label>
+              </c:if> --%>
+              </div>
+
+              <button class="btn btn-primary btn-outlined btn-block text-uppercase" type="submit">Log in</button>
+              <hr class="my-4">
+             <!--  Forgot your <a href="javascript:void(0)" onclick="findid()">ID</a> or 
+              				<a href="javascript:void(0)" onclick="findpassword()">Password</a>? -->
+              <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='/pj/signup'">Join</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 					</div>
 				</div>
 			</div>	
@@ -206,7 +238,17 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
-<script>
-
-</script>
+<script type="text/javascript">
+  function findid(){
+		var url="find_id_form";
+		
+		window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+	}
+  
+  function findpassword(){
+	  var url="find_password_form";
+	  
+	  window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
+  }
+  </script>
 </html>

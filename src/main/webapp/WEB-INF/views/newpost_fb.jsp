@@ -123,17 +123,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">새글쓰기_자유게시판</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">

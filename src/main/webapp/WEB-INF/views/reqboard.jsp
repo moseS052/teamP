@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Free Board</title>
+<title>Req Board</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -95,7 +95,7 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-file-text-o menu-icon" aria-hidden="true"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
@@ -124,17 +124,17 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <h2 class="main-title">Req Board</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -148,13 +148,7 @@
 					<c:forEach var="boardDTO" items="${boardlist }">
 					<tr><td>${boardDTO.b_no }</td><td><a href='reqdetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
 					<td>${boardDTO.nick }</td>
-					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>
-					<%-- <td><form id=frmup method=get action="updetail">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='수정'></form></td><td>
-					<form id=frmdel method=get action="delete_free">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='삭제'></form></td> --%>
+					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>					
 					</tr>
 					</c:forEach>
 					</table>
