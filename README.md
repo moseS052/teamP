@@ -232,7 +232,15 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ★ l_no seq = list_sq    ,   사용-  list_sq.nextval 
 
+### review   = 후기 테이블, 목록마다 포토테이블 b_no 
 
+|l_no    | b_no    |
+|--------|---------|
+|목록seq |게시판seq |
+|number  |number   |
+|NN      |NN       |
+
+▲ 후기보러가기 눌렀을 때 해당 게시판이 떠야함, 포토게시판 작성 자체를 후기작성으로
 
 ### talent_check_list 목록 재능체크테이블
 
