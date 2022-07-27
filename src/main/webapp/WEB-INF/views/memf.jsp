@@ -45,6 +45,7 @@ $(document)
 	}else{
 	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
 	}
+	return false;
 })
 
 

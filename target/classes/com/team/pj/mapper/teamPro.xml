@@ -156,10 +156,10 @@ update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4
 	delete from talent_check_list where l_no=#{param1}
 </delete>    
 <insert id='insertAlarm'>
-	insert into alarm values(#{param1},#{param2},CURRENT_date,0)
+	insert into alarm values(al_sq.nextval,#{param1},#{param2},CURRENT_date,0)
 </insert>
 <select id='showAlarm' resultType="com.team.pj.alarmVO">
-	select * from alarm where m_no=#{param1}
+	select al_no,m_no,alarm,to_char(al_time, 'MM/DD HH24:MI') al_time,al_check from alarm where al_time in(select max(al_time) from alarm where m_no=#{param1} group by alarm) order by al_time
 </select>
 </mapper>
 

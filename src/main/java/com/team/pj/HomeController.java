@@ -218,7 +218,7 @@ public class HomeController {
 		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
 		String nick=(String) session.getAttribute("nick");		
-		String mes="<a href='' id='meminfo' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
+		String mes="<a href='' id='meminfo' style='display:inline' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' style='display:inline' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
 		ip.insertAlarm(you, mes);
 		return "";
 	}
@@ -279,15 +279,22 @@ public class HomeController {
 	}
 	
 	//alarm call
-	@RequestMapping(value = "/alarm", method = RequestMethod.GET)
-	public String alarm(HttpServletRequest req, Model model) {
+	@ResponseBody
+	@RequestMapping(value = "/alarm", produces="application/text;charset=utf8")
+	public String alarm(HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		iteamP ip=sqlSession.getMapper(iteamP.class);
 		ArrayList<alarmVO> aravo=ip.showAlarm((int)session.getAttribute("m_no"));
-		
-		model.addAttribute("aravo",aravo.get(0).getAlarm());
-		model.addAttribute("m_no",session.getAttribute("m_no"));
-		
-		return "alarm";
+		JSONArray ja=new JSONArray();
+		for(int i=0;i<aravo.size();i++) {
+			alarmVO avo=aravo.get(i);
+			JSONObject jo = new JSONObject();
+			jo.put("m_no", avo.getM_no());
+			jo.put("alarm",avo.getAlarm());
+			jo.put("al_time", avo.getAl_time());
+			jo.put("al_check", avo.getAl_check());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
 }

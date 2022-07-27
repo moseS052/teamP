@@ -74,8 +74,14 @@ $(document)
 			<div>
 				<c:if test="${m_no!=null}">
 				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
-				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
+				<div class="dropdown pull-right">
+				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
+		        <div id="alarmInto" class="dropdown-menu" style="width:500px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+		        
+<!-- 		        <div class="well"><div class="square pull-right" id="but">헬로</div><h4>I'm Kim</h4></div> -->
+<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a> -->
+<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a> -->
+				</div></div>
 				</c:if>
 			</div>
 			<ul id="main-menu">
@@ -1249,11 +1255,26 @@ $(document)
 
 $(document)
 .ready(function(){
-	console.log(`${m_no}`);
+	console.log(`${userinfo}`!='');
+	if(`${userinfo}`!=''){
+	alarmList()
+	}
 })
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
 	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
 	return false;
 })
 
@@ -1321,6 +1342,42 @@ $(document)
 		document.location='/pj/question';
 	}
 })
+
+.on('click','#alarmDiv',function(){
+	let ms=$(this).attr("alseq");
+})
+
+
+function alarmList() {
+	let str='';
+	let icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+	$.ajax({
+		type:'get',url:'alarm',data:{},dataType:'json',
+		success:function(data){
+			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					icon='<img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" />';
+					break;
+				}else icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+			}
+			$('#alarmClick').append(icon);
+			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					str='<div id="alarmDiv" alseq=8 class="well" style="height:35px; margin-bottom:5px; background-color:white"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-7px;">'+jo['alarm']+'</h4></div>';
+					$('#alarmInto').prepend(str);
+				}else {
+					str='<div id="alarmDiv" alseq=5 class="well" style="height:35px; margin-bottom:5px; background-color:#e4e4e4"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-7px;">'+jo['alarm']+'</h4></div>'
+					$('#alarmInto').append(str);
+				}
+			}
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
 
 </script>
 
