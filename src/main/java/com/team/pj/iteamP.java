@@ -58,4 +58,5 @@ public interface iteamP {
 	void tal_che_li_del(int l_no);
 	void insertAlarm(int m_no,String alarm);
 	ArrayList<alarmVO> showAlarm(int m_no);
+	void alarmCheck(int al_no);
 }

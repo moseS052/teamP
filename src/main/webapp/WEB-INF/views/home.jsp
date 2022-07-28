@@ -44,7 +44,13 @@ $(document)
 
 </script>
 </head>
-
+<style>
+a#meminfo, #btnSendNote{
+ 	display:inline; 
+	font-size:18px;
+	color:#007979;
+}
+</style>
 <body>
 
 	<div id="preloader"></div>
@@ -148,7 +154,7 @@ $(document)
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90'>나</a> 
+						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90' style='font-size:50px;color:yellow'>나</a> 
 <!-- 						                  여기서부터 작성할 것 버튼 누르면 바로 /meminfo?m_no=어쩌구 가는 걸로 -->
 					</h1>
 					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
@@ -1343,14 +1349,24 @@ $(document)
 	}
 })
 
-.on('click','#alarmDiv',function(){
-	let ms=$(this).attr("alseq");
+.on('click','#alarmDiv a',function(){
+	let ms=$(this).parent().parent().attr("alseq");
+	console.log(ms);
+	$.ajax({
+		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
 })
 
 
 function alarmList() {
 	let str='';
 	let icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+	
 	$.ajax({
 		type:'get',url:'alarm',data:{},dataType:'json',
 		success:function(data){
@@ -1365,10 +1381,10 @@ function alarmList() {
 			for(let i=0;i<data.length;i++){
 				let jo=data[i];
 				if(jo['al_check']==0){
-					str='<div id="alarmDiv" alseq=8 class="well" style="height:35px; margin-bottom:5px; background-color:white"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-7px;">'+jo['alarm']+'</h4></div>';
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:white"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>';
 					$('#alarmInto').prepend(str);
 				}else {
-					str='<div id="alarmDiv" alseq=5 class="well" style="height:35px; margin-bottom:5px; background-color:#e4e4e4"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-7px;">'+jo['alarm']+'</h4></div>'
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:#e4e4e4"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>'
 					$('#alarmInto').append(str);
 				}
 			}

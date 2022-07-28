@@ -1,12 +1,21 @@
 package com.team.pj;
 
 public class alarmVO {
+	private int al_no;
 	private int m_no;
 	private String alarm;
 	private String al_time;
 	private int al_check;
 	
 	public alarmVO() {
+	}
+
+	public int getAl_no() {
+		return al_no;
+	}
+
+	public void setAl_no(int al_no) {
+		this.al_no = al_no;
 	}
 
 	public int getM_no() {

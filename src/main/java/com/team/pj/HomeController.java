@@ -218,7 +218,7 @@ public class HomeController {
 		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
 		String nick=(String) session.getAttribute("nick");		
-		String mes="<a href='' id='meminfo' style='display:inline' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' style='display:inline' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
+		String mes="<a href='' id='meminfo' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
 		ip.insertAlarm(you, mes);
 		return "";
 	}
@@ -289,6 +289,7 @@ public class HomeController {
 		for(int i=0;i<aravo.size();i++) {
 			alarmVO avo=aravo.get(i);
 			JSONObject jo = new JSONObject();
+			jo.put("al_no", avo.getAl_no());
 			jo.put("m_no", avo.getM_no());
 			jo.put("alarm",avo.getAlarm());
 			jo.put("al_time", avo.getAl_time());
@@ -297,4 +298,14 @@ public class HomeController {
 		}
 		return ja.toJSONString();
 	}
+	
+	//alarm check
+	@ResponseBody
+	@RequestMapping(value = "/alarmCheck", produces="application/text;charset=utf8")
+	public String alarmCheck(HttpServletRequest req) {
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		ip.alarmCheck(Integer.parseInt(req.getParameter("al_no")));
+		return "";
+	}
+	
 }
