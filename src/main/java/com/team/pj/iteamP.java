@@ -59,4 +59,6 @@ public interface iteamP {
 	void insertAlarm(int m_no,String alarm);
 	ArrayList<alarmVO> showAlarm(int m_no);
 	void alarmCheck(int al_no);
+	ArrayList<Integer> findT_C_P(int t_no);
+	String findTname(int t_no);
 }

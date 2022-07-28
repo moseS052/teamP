@@ -17,20 +17,18 @@
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 </head>
 <style>
+/* .message-item:after { */
+/* 	    border-radius: 50%; */
+/* 	    content:""; */
+/* 	 	background-image:url(resources/assets/img/avatar2.png); */
+/* 	    background-size:21px 21px;height: 21px; */
+/* 	    left: -35px; */
+/* 	    position: absolute; */
+/* 	    top: 10px; */
+/* 	    width: 21px; */
+/* 	    line-height: 10px; */
+/* } */
 
-.message-item:after {
-    border-radius: 50%;
-    content:"";     
- 	background-image:url(resources/assets/img/avatar2.png);  
-    background-size:21px 21px;
-/*     font-family: 'Fontawesome'; */
-    height: 21px;
-    left: -35px;
-    position: absolute;
-    top: 10px;
-    width: 21px;
-    line-height: 10px;
-}
 textarea {
     border: none;
     resize: none;
@@ -50,6 +48,7 @@ textarea {
 /* } */
 </style>
 <body  >
+
 <div style="margin-left:-35px">
 	<table>
 	<tr><td><textarea cols="27" rows="3" id='n_con'></textarea></td>
@@ -57,6 +56,7 @@ textarea {
 	</table>
 	</div>
 <div id="divadd" style="margin-bottom:-3px;" >
+
 <!-- 	<div class="message-item fade-up"  > -->
 <!-- 		<div class="message-inner" > -->
 <!-- 			<div class="message-head clearfix" > -->
@@ -75,7 +75,7 @@ textarea {
 <!-- 			</div> -->
 <!-- 		</div> -->
 <!-- 	</div> -->
-	</div>		
+	</div>	
 	
 </body>
 
@@ -84,7 +84,12 @@ textarea {
 $(document)
 .ready(function(){
 	noteCon();
-	
+	let str1='.message-item:after {'
+	    +'border-radius: 50%;content:"";'
+// 	 	+'background-image:url(resources/assets/img/avatar2.png);'
+	    +'background-size:21px 21px;height: 21px;left: -35px;'
+	    +'position: absolute;top: 10px;width: 21px;line-height: 10px;}'
+	$('style').append(str1);
 // 	$('<style>.message-item:after {
 //  	background-image:url(resources/assets/img/avatar2.png);
 // 	}</style>').appendTo('head');
@@ -134,6 +139,7 @@ function noteCon(){
 						+'<span	class="qa-message-when"><span class="qa-message-when-data">'+notetem["n_date"]+'</span>'
 						+'</span></div></div></div></div></div></div>'
 					$('#divadd').prepend(str);
+					
 				} else {
 					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#d8d8d8">'
 						+'<div class="message-head clearfix" style="background-color:#d8d8d8"><div class="user-detail" >'
@@ -142,6 +148,7 @@ function noteCon(){
 						+'<span	class="qa-message-when"><span class="qa-message-when-data">'+notetem["n_date"]+'</span>'
 						+'</span></div></div></div></div></div></div>'
 					$('#divadd').prepend(str);
+					
 				}
 			} 
 			noteCon()

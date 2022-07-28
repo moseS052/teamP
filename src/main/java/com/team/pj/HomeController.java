@@ -207,7 +207,7 @@ public class HomeController {
 		return ja.toJSONString();
 	}
 	
-	//���� ������ ��Ʈ�ѷ�  all page need jquery because a tag
+	//note send  all page need jquery because a tag
 	@ResponseBody
 	@RequestMapping(value="/noteSend",produces="application/text;charset=utf8")
 	public String noteSend(HttpServletRequest req) {

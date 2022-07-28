@@ -159,10 +159,16 @@
 	insert into alarm values(al_sq.nextval,#{param1},#{param2},CURRENT_date,0)
 </insert>
 <select id='showAlarm' resultType="com.team.pj.alarmVO">
-	select al_no,m_no,alarm,to_char(al_time, 'MM/DD HH24:MI') al_time,al_check from alarm where al_time in(select max(al_time) from alarm where m_no=#{param1} group by alarm) order by al_time
+	select al_no,m_no,alarm,to_char(al_time, 'MM/DD HH24:MI') al_time,al_check from alarm where al_time in(select max(al_time) from alarm where m_no=#{param1} group by alarm) and m_no=#{param1} order by al_check, al_time desc
 </select>
 <update id='alarmCheck'>
 	update alarm set al_check=1 where al_no=#{param1}
 </update>
+<select id='findT_C_P' resultType="int">
+	select m_no from talent_check where t_no=#{param1}
+</select>
+<select id='findTname' resultType="string">
+	select t_name from talent where t_no=#{param1}
+</select>
 </mapper>
 
