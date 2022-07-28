@@ -168,13 +168,13 @@ update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4
 	select count(nick) from member where nick=#{param1}
 </select>
 <update id="prichange">
-update member set name=#{param1},nick=#{param2},phone=#{param3},mail=#{param4} where m_no=#{param5} 
+	update member set name=#{param1},nick=#{param2},phone=#{param3},mail=#{param4} where m_no=#{param5} 
 </update>
 <select id='pwdcheck' resultType="int">
 	select count(*) from member where m_no=#{param1} and pw=#{param2}
 </select>
 <update id="pwdchange">
-update member set pw=#{param1} where m_no=#{param2} 
+	update member set pw=#{param1} where m_no=#{param2} 
 </update>
 <select id="open_mypost" resultType="com.team.pj.L_listDTO"> 
 	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a where a.m_no=#{param1}
