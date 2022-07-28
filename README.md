@@ -284,8 +284,10 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ### alarm  =알림 
 
-|m_no    |alarm    |al_time |al_check |
-|--------|---------|--------|---------|
-|회원seq |쪽지내용  |쪽지시간 |확인유무 |
-|number  |varchar2 |date    |number  |
-|NN      | NN      |NN      |NN      |
+|m_no    |alarm    |al_time |al_check | al_no |
+|--------|---------|--------|---------|-------|
+|회원seq |쪽지내용  |쪽지시간 |확인유무 |자체seq |
+|number  |varchar2 |date    |number  |number  |
+|NN      | NN      |NN      |NN      |primary |
+
+★ al_sq 사용 
