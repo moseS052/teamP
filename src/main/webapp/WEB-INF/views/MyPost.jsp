@@ -4,8 +4,7 @@
 <%@ page session="false" %>
 <!DOCTYPE html>
 <html lang="en">
- <head>
-
+  <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="description" content="">
@@ -35,13 +34,10 @@
 					fade : 500
 				});
 	});
-    </script> 
+    </script>
+	
   </head>
-<style>
-input[type="checkbox"]{
-accent-color:green;
-}
-</style>
+
   <body class="single single-post"> 
 
   	<div id="preloader"></div>
@@ -132,39 +128,35 @@ accent-color:green;
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">개인정보수정</h2>
+                <h2 class="main-title">내가 쓴 게시물</h2>
                 <hr>
                 <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
 
-	<div id="content-wrapper">
+		<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-md-8 fade-up">
-						<h3>개인정보수정</h3>
-						
+					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
+						<h3>내가 쓴 게시물 목록</h3>
 						<div id="cla">
-						<input type=hidden id="m_no" value="${m_no}">
-						<input type=hidden id="nick0" value=0>
-						ID<input type="text" class="form-control" id="priid" placeholder="아이디" value="${id}" disabled/>
-						닉네임<input type="text" class="form-control" id="prinick" value="${nick}"/><input class="btn btn-outlined btn-primary" type="button" id="nickcheck" value="중복확인" /><br>
-						이름<input type="text" class="form-control" id="priname" value="${name}"/>
-						전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
-						이메일<input type="text" class="form-control" id="primail" value="${mail}"/>
-						<input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="수정취소" />
-						</div>
 						
+                        </div>
+						
+						<p>신청구역(서울)</p>
+                        
+						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
+
+						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
 				</div>
 			</div>	
 	    </section>
 	</div>
-
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -218,59 +210,33 @@ accent-color:green;
 </body>
 <script>
 $(document)
-.ready(function(){
+.ready(function(){	
+	showlist();
+})
+function showlist(){
+	$.ajax({
+		url:'open_mypost', data:{m_no:`${m_no}`},dataType:'json',type:'get',
+		success:function(data){
+			$('#cla').empty();
+  			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(jo['count']==jo['nop']){
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					$('#cla').append(str);
+				}else{
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					$('#cla').append(str);
+				}
+				
+  			}
+		},
+		error:function(){
+    		alert('데이터등록실패');
+    	},
+    	complete:function(){}
+		
+	});
+}
 
-})
-
-.on('click','#can',function(){
-	alert('수정을 취소하고 홈으로이동합니다')
-	document.location='/pj/'
-})
-.on('click','#prichange',function(){
-	if(`${nick}`==$('#prinick').val()){
-		$('#nick0').val(0);
-	}
-	if($('#nick0').val()==0){
-		$.ajax({
-			type:'get',url:'prichange',data:{m_no:`${m_no}`,nick:$('#prinick').val(),name:$('#priname').val(),phone:$('#priphone').val(),mail:$('#primail').val()},
-				dataType:'text',
-		  		success:function(){
-		  			alert('수정되었습니다')
-		  			document.location='/pj/'
-	    		},
-	    		error:function(){
-	    		},
-	    		complete:function(){}
-	    	});
-	}else{
-		alert('아이디 중복체크 다시 해주세요');
-		return false;
-	}
-})
-.on('click','#nickcheck',function(){
-	if(`${nick}`==$('#prinick').val()){
-		alert('닉네임이 동일합니다')
-		$('#nick0').val(0);
-	}else{
-		$.ajax({
-			type:'get',url:'nickcheck',data:{nick:$('#prinick').val()},
-				dataType:'text',
-		  		success:function(data){
-		  			console.log(data);
-		  			if(data==1){
-		  				alert('사용할수없습니다.')
-		  				$('#nick0').val(1);
-		  			}else{	  				
-		  				alert('사용할수있습니다.')
-		  				$('#nick0').val(0);
-		  			}
-	    		},
-	    		error:function(){
-	    		},
-	    		complete:function(){}
-	    	});
-
-	}
-})
 </script>
 </html>

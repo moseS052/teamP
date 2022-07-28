@@ -80,9 +80,9 @@ accent-color:green;
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-project.html">개인정보수정</a></li>
+						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
-						<li><a href="portfolio-4-column.html">내가쓴게시물찾기</a></li>
+						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -150,9 +150,9 @@ accent-color:green;
 						
 						<div id="cla">
 						<input type=hidden id="m_no" value="${m_no}">
-						현재 비밀번호<input type="text" class="form-control" id="ppwd"/>
-						새 비밀번호 입력<input type="text" class="form-control" id="npwd"/>
-						새 비밀번호 확인<input type="text" class="form-control" id="npwd1"/>
+						현재 비밀번호<input type="password" class="form-control" id="ppwd"/>
+						새 비밀번호 입력<input type="password" class="form-control" id="npwd"/>
+						새 비밀번호 확인<input type="password" class="form-control" id="npwd1"/>
 						<input class="btn btn-outlined btn-primary" type="button" id="pwchange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="수정취소" />
 						</div>
 						
@@ -226,14 +226,26 @@ $(document)
 .on('click','#pwchange',function(){
 	if($('#npwd').val()==$('#npwd1').val()){
 		$.ajax({
-			type:'get',url:'nickcheck',data:{m_no:`${m_no}`pwd:$('#ppwd').val()},
-				dataType:'text',
+			type:'get',url:'pwdcheck',data:{m_no:`${m_no}`,pw:$('#ppwd').val()},
+				dataType:'text',async: false,
 		  		success:function(data){
+		  			console.log(data);
 		  			if(data==1){
-		  				alert('비밀번호변경')
-		  			}else{	  				
-		  				alert('현재비밀번호 확인필요')
+		  					$.ajax({
+		  						type:'get',url:'pwdchange',data:{m_no:`${m_no}`,npwd1:$('#npwd1').val()},
+		  							dataType:'text',
+		  					  		success:function(data){
+		  					  			alert('비밀번호변경')
+		  					  			document.location='/pj/'
+		  				    		},
+		  				    		error:function(){
+		  				    		},
+		  				    		complete:function(){}
+		  				    	});
+		  			}else{
+		  				alert('현재비밀번호를 정확히 적어주세요')
 		  			}
+		  				
 	    		},
 	    		error:function(){
 	    		},

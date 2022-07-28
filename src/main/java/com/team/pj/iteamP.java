@@ -61,4 +61,7 @@ public interface iteamP {
 	memberDTO privacyRead(int m_no);
 	int nickcheck(String nick);
 	void prichange(String name,String nick,String phone,String mail,int m_no);
+	int pwdcheck(int m_no,int pw);
+	void pwdchange(int npwd1,int m_no);
+	ArrayList<L_listDTO> open_mypost(int m_no);
 }

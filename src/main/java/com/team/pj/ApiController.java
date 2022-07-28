@@ -44,19 +44,77 @@ public class ApiController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@ResponseBody
+	@RequestMapping(value="/open_mypost", produces="application/text;charset=utf8")
+	public String doopenmypost(@RequestParam("m_no") int m_no) {
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);
+		JSONArray ja =new JSONArray();
+		for(int i=0; i<l_list.size();i++) {
+			L_listDTO ldto = l_list.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("l_no", ldto.getL_no());
+			jo.put("m_no", ldto.getM_no());
+			jo.put("l_title", ldto.getL_title());
+			jo.put("l_date", ldto.getL_date());
+			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
+			ja.add(jo);
+		}
+		System.out.println(ja.toJSONString());
+		return ja.toJSONString();
+	}
+	
+	//open MyPost.jsp//
+	@RequestMapping("/MyPost")
+	public String domypost(HttpServletRequest req,Model model) {
+		int m_no = Integer.parseInt(req.getParameter("m_no"));
+		System.out.println("회원번호="+m_no);
+		HttpSession session=req.getSession();
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		return "MyPost";
+	}
+	//open MyPost.jsp//
+	
+	//pw change//
+	@ResponseBody
+	@RequestMapping(value="/pwdchange", produces="application/text;charset=utf8")
+	public String dopwdchange(@RequestParam("m_no") int m_no,
+							 @RequestParam("npwd1") int npwd1) {
+		System.out.println("{목록번호="+m_no+"}"+npwd1);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.pwdchange(npwd1,m_no);
+		return "";
+	}
+	//pw change//
+	//pw check//
+	@ResponseBody
+	@RequestMapping(value="/pwdcheck", produces="application/text;charset=utf8")
+	public String dopwdcheck(@RequestParam("m_no") int m_no,
+							 @RequestParam("pw") int pw) {
+		System.out.println("{목록번호="+m_no+"}"+pw);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			int a=team.pwdcheck(m_no,pw);
+		return Integer.toString(a);
+	}
+	//pw check//
+	//pwchange.jsp open//
 	@RequestMapping("/pwchange")
 	public String dopasswordchange(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
 		System.out.println("회원번호="+m_no);
 		HttpSession session=req.getSession();
-		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
 		return "pwchange";
 	}
+	//pwchange.jsp open//
 	
-	
+	//privacy change//
 	@ResponseBody
 	@RequestMapping(value="/prichange", produces="application/text;charset=utf8")
 	public String domemberchange(@RequestParam("m_no") int m_no,
@@ -69,15 +127,20 @@ public class ApiController {
 			team.prichange(name,nick,phone,mail,m_no);
 		return "";
 	}
+	//privacy change//
+	
+	//nickname check//
 	@ResponseBody
-	@RequestMapping(value="/nickcheck", produces="application/text;charset=utf8")
+	@RequestMapping(value="/nickcheck",produces="application/text;charset=utf8")
 	public String donickcheck(@RequestParam("nick") String nick) {
 		System.out.println("{목록번호="+nick+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
-			team.nickcheck(nick);
-		return "";
+			int a=team.nickcheck(nick);
+		return Integer.toString(a);
 	}
-	//information inquiry//
+	//nickname check//
+	
+	//privacy.jsp open//
 	@RequestMapping("/privacy")
 	public String doprivacy(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
@@ -95,9 +158,9 @@ public class ApiController {
 		model.addAttribute("mail",re.mail);
 		return "privacy";
 	}
-	//information inquiry//
+	//privacy.jsp open//
 	
-	
+	//apply table delete//
 	@ResponseBody
 	@RequestMapping(value="/applydel", produces="application/text;charset=utf8")
 	public String doappdel(@RequestParam("l_no") int l_no,
@@ -107,7 +170,9 @@ public class ApiController {
 			team.applydel(l_no,m_no);
 		return "";
 	}
+	//apply table delete//
 	
+	//apply table new //
 	@ResponseBody
 	@RequestMapping(value="/applynew", produces="application/text;charset=utf8")
 	public String doappnew(@RequestParam("l_no") int l_no,
@@ -117,7 +182,9 @@ public class ApiController {
 			team.applyad(l_no,m_no);
 		return "";
 	}
+	//apply table new //
 	
+	//apply list lookup//
 	@ResponseBody
 	@RequestMapping(value="/applylist", produces="application/text;charset=utf8")
 	public String doapplylist(@RequestParam("l_no") int l_no) {
@@ -134,8 +201,9 @@ public class ApiController {
 			System.out.println(ja.toJSONString());
 			return ja.toJSONString();
 	}
+	//apply list lookup//
 	
-	//--button--//
+	//--button produce--//
 	@ResponseBody
 	@RequestMapping(value="/butdiff", produces="application/text;charset=utf8")
 	public String doDelete(@RequestParam("l_no") int l_no,
@@ -144,19 +212,21 @@ public class ApiController {
 		int reccount=team.buttoncreate(l_no,m_no);
 		return Integer.toString(reccount);
 	}
-	//--l_Read jsp,button--//
+	//--l_Read jsp,button produce--//
 	
-	//update//
+	//check box update//
 	@ResponseBody
 	@RequestMapping(value="/upcheckbox", produces="application/text;charset=utf8")
 	public String doUpcheck(@RequestParam("l_no") int l_no,
 							@RequestParam("t_no") int t_no) {
-//		System.out.println("{목록번호="+l_no+"}{체크="+t_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			team.delcheck(l_no);
 			team.check_ad(l_no,t_no);
 		return "";
 	}
+	//check box update//
+	
+	//list update//
 	@ResponseBody
 	@RequestMapping(value="/proUp", produces="application/text;charset=utf8")
 	public String doProup(@RequestParam("nop") int nop,
@@ -175,7 +245,7 @@ public class ApiController {
 		
 		return "";
 	}
-	//--update--//
+	//--list update--//
 	
 	//update read//
 	@RequestMapping(value="/l_retouch", produces="application/text;charset=utf8")
@@ -205,23 +275,23 @@ public class ApiController {
 		return "proposalUpdate";
 	}
 	//--update read--//
-	//delete//
+	
+	//list delete//
 	@ResponseBody
 	@RequestMapping(value="/l_del", produces="application/text;charset=utf8")
 	public String dol_del(@RequestParam("l_no") int l_no) {
-//		System.out.println("목록번호"+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		team.tal_che_li_del(l_no);
 		int reccount = team.L_del(l_no);
 		return Integer.toString(reccount);
 	}
-	//--delete--//
+	//--list delete--//
+	
 	//list read//
 	@RequestMapping("/l_Read")
 	public String dorea(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
 		int l_no =Integer.parseInt(req.getParameter("l_no"));
-//		System.out.println(l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
