@@ -55,10 +55,10 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==''}">
+			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=''}">
+				<c:if test="${userinfo!=null}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -70,7 +70,7 @@
 				</c:if>
 			</div>
 			<ul id="main-menu">
-			<c:if test="${userinfo!=''}">
+			<c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
@@ -87,10 +87,10 @@
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${userinfo==''}">
+						<c:if test="${userinfo==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${userinfo!=''}">
+						<c:if test="${userinfo!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>
@@ -147,7 +147,7 @@
                         <input type="hidden" id="l_no" value="${l_no}">
                         <input type="hidden" id="user_name" value="${userinfo}">
                         <p>${l_nick}<div class="square pull-right">${l_views}</div></p>
-                        <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div>
+                        <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
                         <h3 id="cbox">주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />

@@ -433,8 +433,13 @@ public class ApiController {
 						  @RequestParam("l_address") String l_address) {
 		System.out.println(nop);
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		team.new_ad(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop);
-		
+			int a=team.datecheck(m_no,l_date);
+			if(a==1) {
+				return Integer.toString(a);
+			}else {				
+				team.new_ad(m_no,l_title,l_content,l_date,l_name,l_address,l_koo,nop);
+			}
+			
 		return "";
 	}
 	//list 占쏙옙占싱븝옙 insert //

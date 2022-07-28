@@ -112,48 +112,50 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
-   		<div class="container">
-	    	<div class="gap"></div> 
-        	<div id="bannertext" class="centered fade-down section-heading">
-                <hr>
-                <h2 class="main-title">자주&nbsp;&nbsp;&nbsp;묻는&nbsp;&nbsp;&nbsp;질문</h2>
+	   <div id="headerwrap" class="half">
+         <div class="container">
+          <div class="gap"></div> 
+           <div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br>
+                <h2 class="main-title">Login</h2>
                 <hr>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
-	<div id="content-wrapper">
-	    <section id="about">
-	   		<div class="container">
-		    	<div class="gap"></div>
-				<div class="row gap">
+      </div>
+   </div>
 
-					<div class="col-md-12">
+   <div id="content-wrapper">
+       <section id="about">
+            <div class="container">
+             <div class="gap"></div>
+            <div class="row gap">
 
-					<form id=frmLogin method=POST action="user_check">
-<!-- <div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">ID</label>
-  <input type="text" class="form-control" id="exampleFormControlInput1" placeholder="ID">
-</div>
-<div class="mb-3">
-  <label for="exampleFormControlInput1" class="form-label">비밀번호</label>
-  <input type="password" class="form-control" id="exampleFormControlInput1" placeholder="password">
-</div> -->
-						
-					<label>id</label>
-					<input type=text name=id><br>
-					<label>비밀번호</label>
-					<input type=password name=pw><br><br><br>
-					<input type=submit value='로그인' class="btn btn-primary btn-outlined">&nbsp;
-					<input type=reset value='비우기' class="btn btn-primary btn-outlined">
-					</form>
+               <div class="col-md-12 fade-up">
+            <div class="col-md-4 fade-up"></div><div class="col-md-4 fade-up">
+            <form class="form-signin" method="post" action="user_check">
+              <div class="form-label-group">
+                <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
+              </div><br>
 
-					</div>
-				</div>
-			</div>	
-	    </section>
-	</div>
+              <div class="form-label-group">
+                <input type="password" id="pw" name="pw" class="form-control" placeholder="Password" required>
+              </div>
+              
+              <hr>
+              
+              <div class="form-label-group">
+              </div>
+
+              <button class="btn btn-primary btn-outlined btn-block text-uppercase" type="submit">Log in</button>
+              <hr class="my-4">
+              <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='/pj/signup'">Join</button>
+            </form>
+            </div><div class="col-md-4 fade-up"></div>
+
+               </div>
+            </div>
+         </div>   
+       </section>
+   </div>
 
 	<!-- MAIN FOOTER -->
 	<!-- <div id="footerwrap">
