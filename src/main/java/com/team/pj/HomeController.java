@@ -48,12 +48,10 @@ public class HomeController {
 		HttpSession session=req.getSession();
 		if(session.getAttribute("id")==null) { //濡�洹몄�� ��
 			model.addAttribute("userinfo","");
-			
-
 		}else { //濡�洹몄�� �깃났 ��
-			model.addAttribute("userinfo",session.getAttribute("id"));
-			
+			model.addAttribute("userinfo",session.getAttribute("id"));			
 		}
+		
 		return "home";
 		
 	}
@@ -88,7 +86,8 @@ public class HomeController {
 		String password=req.getParameter("pw");
 		
 		if(n==0) { //濡�洹몄�� �ㅽ��			
-			session.setAttribute("m_no",null);			
+			session.setAttribute("m_no",null);
+			
 			
 		}else if(n!=1) { //����
 			
@@ -96,6 +95,7 @@ public class HomeController {
 			session.setAttribute("m_no",p.getM_no1(user_id));
 			session.setAttribute("nick",p.getNickById(user_id) );
 			session.setAttribute("id", user_id);
+			
 		}
 		return "redirect:/";
 	}

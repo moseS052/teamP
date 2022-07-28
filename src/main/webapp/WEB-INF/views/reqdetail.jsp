@@ -32,8 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/board2.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -50,7 +50,14 @@
 		});
 	});
     </script>
-	
+<style>
+	table{
+		text-align:center;
+	}
+	th {
+    	text-align:center;
+	}
+</style>		
   </head>
 
   <body class="single single-post"> 
@@ -94,7 +101,7 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
@@ -127,6 +134,7 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br>
                 <h2 class="main-title">Detail</h2>
                 <hr>
                 <p></p>
@@ -141,24 +149,26 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
+					<table class="table table-striped" style="">
 					<input type=hidden name=b_no value="${bdto.b_no }">
 					<input type=hidden name=bdto.m_no value="${bdto.m_no }">
-					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }" readonly><br>
-					내용: <textarea id=b_con name=b_con rows=10 cols=70 readonly>${bdto.b_con }</textarea><br>
-					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
-					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date }" readonly>
-					
+					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td>
+					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td>
+					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly></td>
+					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;"  value="${bdto.b_date }" readonly></td></tr>
+					</table>
 					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
 					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
 					<form id=frmup method=get action="requpdetail">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>
-					
+					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>					
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=button id="del" value='글삭제' class="btn btn-primary btn-outlined">
 					</c:if>
+					
+					
 					</div>
 				</div>
 			</div>	

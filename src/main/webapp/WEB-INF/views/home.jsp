@@ -34,8 +34,8 @@ $(document)
 .ready(
 	function() {
 		jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/main.jpg", "resources/assets/img/bg/main2.png",
+					"resources/assets/img/bg/main3.png" ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -1225,7 +1225,7 @@ $(document)
 	<a id="gototop" class="gototop no-display" href="#"><i
 		class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
-
+	
 	<!-- Bootstrap core JavaScript
     ================================================== -->
 	<!-- Placed at the end of the document so the pages load faster -->
@@ -1311,15 +1311,15 @@ $(document)
 
 </script>
 
-<script type="text/javascript">
+<%-- <script type="text/javascript">
 function logIn() { 
 	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
 	  }
   function joinMember() { 
 	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
 	  }
-</script>     
-<!-- 작성 -->
+</script>    --%>  
+
 
 
 </html>

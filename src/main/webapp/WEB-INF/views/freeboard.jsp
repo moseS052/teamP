@@ -32,8 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/board2.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -50,7 +50,14 @@
 		});
 	});
     </script>
-	
+<style>
+	table{
+		text-align:center;
+	}
+	th {
+    	text-align:center;
+	}
+</style>	
   </head>
 
 
@@ -128,6 +135,7 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br>
                 <h2 class="main-title">Free Board</h2>
                 <hr>
                 <p></p>
@@ -142,9 +150,10 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<h1 align="center">Free Board</h1>
-					<table align=center>
-					<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
+					<!-- <h1 align="center">Free Board</h1> -->
+					<table class="table table-striped" style="">
+					<thead><tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr></thead>
+					<tbody>
 					<c:forEach var="boardDTO" items="${boardlist }">
 					<tr><td>${boardDTO.b_no }</td><td><a href='freedetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
 					<td>${boardDTO.nick }</td>
@@ -156,7 +165,7 @@
 					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
 					<input type=submit value='삭제'></form></td> --%>
 					</tr>
-					</c:forEach>
+					</c:forEach></tbody>
 					</table>
 					<c:if test="${m_no!=null}">
 					<p align="center"><a href='newpost_write'>새글쓰기</a></p>

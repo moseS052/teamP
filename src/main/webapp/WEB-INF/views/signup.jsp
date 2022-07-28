@@ -51,15 +51,16 @@
 	});
     </script>
 <style>
-   /*  body {
-      min-height: 100vh;
+     body {
+      /* min-height: 100vh;
 
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
       background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
-      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%);
-    } */
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); */
+      align:center;
+    } 
 
     .input-form {
       max-width: 680px;
@@ -73,7 +74,14 @@
       border-radius: 10px;
       -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
       -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
-      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15)
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      
+    }
+    .container{
+    	positon: absolute;
+    	width: 800px;
+    	height:800px; 
+    	margin: auto;
     }
   </style>
 <style>
@@ -157,6 +165,7 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br>
                 <h2 class="main-title">회원가입</h2>
                 <hr>
                 <p></p>
@@ -166,7 +175,7 @@
  
 	<div id="content-wrapper">
 	    <section id="about">
-	   		<div class="container">
+	   		<!-- <div class="container"> -->
 		    	<div class="gap"></div>
 				<div class="row gap">
 
@@ -197,75 +206,75 @@
        <!--  <form class="validation-form" novalidate> -->
           <div class="row">
             <div class="col-md-6 mb-3">
-            <label for="email">ID</label>
+            <label>ID</label>
             <input type="text" class="form-control" id="pid" name="pid" placeholder="id" required autofocus onkeypress='return checkBlank(event)'>
-            <div class="invalid-feedback">
+           <!--  <div class="invalid-feedback">
               ID를 입력해주세요.
-            </div>
+            </div> -->
           </div>
           <div class="col-md-6 mb-3">
-              <label for="name">모바일</label>
-              <input type="text" class="form-control" id="pphone" name="pphone" placeholder="" value="" required onkeypress='return checkBlank(event)'>
-              <div class="invalid-feedback">
+              <label>모바일</label>
+              <input type="text" class="form-control" id="pphone" name="pphone" placeholder="01012345678" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
                 모바일을 입력해주세요.
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 mb-3">
-              <label for="name">비밀번호</label>
+              <label>비밀번호</label>
               <input type="password" class="form-control" id="ppw" name="ppw" placeholder="password" value="" required onkeypress='return checkBlank(event)'>
-              <div class="invalid-feedback">
+              <!-- <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 mb-3">
-              <label for="nickname">비밀번호 확인</label>
-              <input type="password" class="form-control" id="ppw2" name="ppw2" placeholder="비밀번호확인" value="" required onkeypress='return checkBlank(event)'>
-              <div class="invalid-feedback">
+              <label>비밀번호 확인</label>
+              <input type="password" class="form-control" id="ppw2" name="ppw2" placeholder="비밀번호를 한번 더 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
                 비밀번호를 한번 더 입력해주세요.
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 mb-3">
-              <label for="name">이름</label>
-              <input type="text" class="form-control" id="pname" name="pname" placeholder="" value="" required onkeypress='return checkBlank(event)'>
-              <div class="invalid-feedback">
+              <label>이름</label>
+              <input type="text" class="form-control" id="pname" name="pname" placeholder="이름을 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
                 이름을 입력해주세요.
-              </div>
+              </div> -->
             </div>
             <div class="col-md-6 mb-3">
-              <label for="nickname">닉네임</label>
-              <input type="text" class="form-control" id="pnick" name="pnick" placeholder="" value="" required onkeypress='return checkBlank(event)'>
-              <div class="invalid-feedback">
+              <label>닉네임</label>
+              <input type="text" class="form-control" id="pnick" name="pnick" placeholder="닉네임을 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
                 별명을 입력해주세요.
-              </div>
+              </div> -->
             </div>            
           </div>
 		
             <div class="mb-3">
-              <label for="nickname">성별</label><br>
+              <label>성별</label><br>
               <input type="radio" id="pgender" name="pgender" placeholder="" value="M" required>남
               <input type="radio" id="pgender" name="pgender" placeholder="" value="F" required>여
-              <div class="invalid-feedback">
+              <!-- <div class="invalid-feedback">
                 성별을 입력해주세요.
-              </div>
+              </div> -->
             </div>	
           <div class="mb-3">
-            <label for="email">이메일</label>
+            <label>이메일</label>
             <input type="email" class="form-control" id="pmail" name="pmail" placeholder="you@example.com" required onkeypress='return checkBlank(event)'>
-            <div class="invalid-feedback">
+            <!-- <div class="invalid-feedback">
               이메일을 입력해주세요.
-            </div>
+            </div> -->
           </div>
 
           <div class="mb-3">
-            <label for="address">생년월일</label>
+            <label>생년월일</label>
             <input type="text" class="form-control" id="pbirth" name="pbirth" placeholder="19990909" required onkeypress='return checkBlank(event)'>
-            <div class="invalid-feedback">
+            <!-- <div class="invalid-feedback">
               생년월일을 입력해주세요.
-            </div>
+            </div> -->
           </div>
 
           <div class="mb-3">
-            <label for="address2">내가 가진 재능을 체크해 주세요</label><br>
+            <label>내가 가진 재능을 체크해 주세요</label><br>
             <input type="checkbox" name='ptalent' value='1' id='a'>요리<br>
 			<input type="checkbox" name='ptalent' value='2' id='b'>청소<br>
 			<input type="checkbox" name='ptalent' value='3' id='c'>미용<br>
@@ -307,7 +316,7 @@
     </div>
    
   </div>
-  <script>
+  <!-- <script>
     window.addEventListener('load', () => {
       const forms = document.getElementsByClassName('validation-form');
 
@@ -322,7 +331,7 @@
         }, false);
       });
     }, false);
-  </script>
+  </script> -->
 
 
 					</div>
@@ -510,10 +519,10 @@ function email_check(email) {
 	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	return reg.test(email);
 }
-function view(){
+/* function view(){
 	alert('19990909 형식으로 입력 해주세요');
 }
-function checkBlank(event){
+ */function checkBlank(event){
 	if(event.key == ' '){
 		alert('공백은 입력할 수 없습니다');
 		return false;

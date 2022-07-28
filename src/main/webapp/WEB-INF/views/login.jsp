@@ -47,7 +47,13 @@
 	.form-control:focus {
         border-color: #28a745;
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-    } 
+    }
+   /*  .content-wrapper{
+    	positon: absolute;
+    	width: 500px;
+    	height: 500px; 
+    	margin: auto;
+    }  */
 </style>	
   </head>
 
@@ -124,7 +130,7 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                
+                <br><br><br>
                 <h2 class="main-title">Login</h2>
                 <hr>
             </div>
@@ -137,22 +143,12 @@
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-md-12">
+					<div class="col-md-12 fade-up">
 
-					<!-- <form id=frmLogin method=POST action="user_check">
-					<label>id</label>
-					<input type=text name=id><br>
-					<label>비밀번호</label>
-					<input type=password name=pw><br><br><br>
-					<input type=submit value='로그인' class="btn btn-primary btn-outlined">&nbsp;
-					<input type=reset value='비우기' class="btn btn-primary btn-outlined">
-					</form> -->
-<div class="container" >
-    <div class="row">
-      <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
-        <div class="card card-signin my-5">
-          <div class="card-body">
-            <!-- <h1 class="card-title text-center">Log In</h1> -->
+					<div class="col-md-4 fade-up"></div><div class="col-md-4 fade-up">
+					
+					
+
             <form class="form-signin" method="post" action="user_check">
               <div class="form-label-group">
                 <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
@@ -172,16 +168,13 @@
 
               <button class="btn btn-primary btn-outlined btn-block text-uppercase" type="submit">Log in</button>
               <hr class="my-4">
-             <!--  Forgot your <a href="javascript:void(0)" onclick="findid()">ID</a> or 
-              				<a href="javascript:void(0)" onclick="findpassword()">Password</a>? -->
               <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='/pj/signup'">Join</button>
             </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-					</div>
+        
+    
+  						
+					</div><div class="col-md-12 fade-up"></div>
+					
 				</div>
 			</div>	
 	    </section>
@@ -238,17 +231,5 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
-<script type="text/javascript">
-  function findid(){
-		var url="find_id_form";
-		
-		window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
-	}
-  
-  function findpassword(){
-	  var url="find_password_form";
-	  
-	  window.open(url, "_blank_1", "toolbar=no, menubar=no, scrollbars=yes, resizable=no, width=500, height=500");
-  }
-  </script>
+
 </html>

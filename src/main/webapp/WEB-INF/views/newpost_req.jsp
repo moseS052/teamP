@@ -32,8 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/board2.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -94,7 +94,7 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
@@ -127,6 +127,7 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br>
                 <h2 class="main-title">새글쓰기_요청게시판</h2>
                 <hr>
                 <p></p>
@@ -142,9 +143,10 @@
 
 					<div class="col-md-12">
 					<form id=frmfb method=get action="insert_req">
-					제목: <input type=text id=title name=title><br>
-					내용: <textarea id=content name=content rows=10 cols=70></textarea><br>
-					<input type=submit value='작성완료' class="btn btn-primary btn-outlined">&nbsp;
+					<table class="table table-striped" style="">
+					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="50" autofocus></td></tr>
+					<tr><td>내용: <textarea id=content name=content rows=10 cols=90 style="border:none; background-color:transparent; resize:none;"></textarea></td></tr>
+					</table><input type=submit value='작성완료' class="btn btn-primary btn-outlined">&nbsp;
 					<input type=reset value='목록' id=btnList class="btn btn-primary btn-outlined">
 					</form>
 					</div>

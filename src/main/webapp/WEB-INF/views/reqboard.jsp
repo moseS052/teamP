@@ -32,8 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/board2.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -50,7 +50,14 @@
 		});
 	});
     </script>
-	
+<style>
+	table{
+		text-align:center;
+	}
+	th {
+    	text-align:center;
+	}
+</style>	
   </head>
 
 
@@ -95,7 +102,7 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-file-text-o menu-icon" aria-hidden="true"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon" aria-hidden="true"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
@@ -128,7 +135,8 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">Req Board</h2>
+                <br><br><br>
+                <h2 class="main-title">Request Board</h2>
                 <hr>
                 <p></p>
             </div>
@@ -142,15 +150,16 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<h1 align="center">Request Board</h1>
-					<table align=center>
-					<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr>
+					<!-- <h1 align="center">Request Board</h1> -->
+					<table class="table table-striped" style="">
+					<thead><tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr></thead>
+					<tbody>
 					<c:forEach var="boardDTO" items="${boardlist }">
 					<tr><td>${boardDTO.b_no }</td><td><a href='reqdetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
 					<td>${boardDTO.nick }</td>
 					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>					
 					</tr>
-					</c:forEach>
+					</c:forEach></tbody>
 					</table>
 					<c:if test="${m_no!=null}">
 					<p align="center"><a href='newpost_req'>새글쓰기</a></p>
