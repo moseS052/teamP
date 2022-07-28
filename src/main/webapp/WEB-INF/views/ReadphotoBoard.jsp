@@ -32,11 +32,10 @@
 	rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700'
 	rel='stylesheet' type='text/css'>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>
 <script type="text/javascript">
@@ -52,7 +51,12 @@
 
 			});
 </script>
-
+<style>
+.swiper {
+	width: 600px;
+	height: 300px;
+}
+</style>
 </head>
 
 <body class="single single-post">
@@ -153,49 +157,40 @@
 		<div class="container">
 
 			<div class="row mt">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">사진게시판</h2>
-					<hr>
-					<div>
-						<input class="btn btn-outlined btn-primary pull-right"
-							type="button" id="donationReview" value="후기올리기">
+				<div class="row gap fade-down section-heading">
+					<div class="pull-left">
+						<div class="swiper">
+							<!-- Additional required wrapper -->
+							<div class="swiper-wrapper">
+								<!-- Slides -->
+								<c:forEach var="photo" items="${list}">
+									<div class="swiper-slide">
+										<img style="width: 600px; height: 300px;"
+											src=<c:url value="${photo.b_route }"/>>
+									</div>
+								</c:forEach>
+							</div>
+							<div class="swiper-pagination"></div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+							<div class="swiper-scrollbar"></div>
+						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="row mt gap">
-				<c:forEach var="photo" items="${photolist}">
-					<div class="col-md-4 post fade-up">
-						<div class="item-inner">
-							<img style="width: 400px; height: 245px;"
-								src=<c:url value="${photo.b_route }"/> alt=""
-								class="img-responsive">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary" href=#><i
-									class="fa fa-link"></i></a>
-							</div>
-							<div class="post-meta">
-								<span class="post-comment"><i class="fa fa-comments"></i>
-									댓글갯수</span>
-							</div>
-						</div>
-						<h3>
-							<a href="#">${photo.b_title }</a>
-						</h3>
-						<div class="gap"></div>
-
-						<p>
-							<a class="btn btn-outlined btn-primary" seq="${photo.b_no}" id="readPhotoBoard">Read More</a>
-						</p>
-					</div>
-				</c:forEach>
-
-				
-
-			</div>
-			 <div align="center" id="pageCount">
+			<%-- <div class="row mt gap">
+				<div class="col-md-4 post fade-up">
+					<c:set var="content" items="${list}">
+					<p>${content.b_con}</p>
+					</c:set>
 					
-				</div> 
+					
+				</div>
+
+
+
+			</div> --%>
+
 		</div>
 	</div>
 	<!-- MAIN FOOTER -->
@@ -249,38 +244,26 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-	$(document)
-	.ready(function(){
-	let a=`${total}`/6;
-	console.log(a);
-	html='';
-	for(let i=1;i<a+1;i++){
-		html+='<a href="photoBoard?stanum='+((i-1)*6+1)+'&endnum='+i*6+'" class=btn id="qqq">'+i+'</a>';
-		
-	}
-	$('#pageCount').append(html);
-	
-	})
-	.on('click','#readPhotoBoard',function(){
-		console.log($(this).attr('seq'));
-		let seq=$(this).attr('seq');
-		document.location = '/pj/ReadPhoto?seq='+ seq;
-	})
-	.on('click', '#question', function() {
-		console.log(`${userinfo}` == '')
-		if (`${userinfo}` == null) {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-			document.location = '/pj/question';
-		}
-	}).on('click', '#donationReview', function() {
-		if (`${userinfo}` == '') {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-			document.location = '/pj/donationReviwe';
-		}
+	const swiper = new Swiper('.swiper', {
+		// Optional parameters
+		direction : 'horizontal',
+		loop : true,
 
-	})
-	
+		// If we need pagination
+		pagination : {
+			el : '.swiper-pagination',
+		},
+
+		// Navigation arrows
+		navigation : {
+			nextEl : '.swiper-button-next',
+			prevEl : '.swiper-button-prev',
+		},
+
+	// And if we need scrollbar
+	/* scrollbar: {
+	  el: '.swiper-scrollbar',
+	}, */
+	});
 </script>
 </html>

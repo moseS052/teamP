@@ -114,7 +114,7 @@ $(document)
 					data-toggle="dropdown">Portfolio <i
 						class="fa fa-camera menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="photoBoard">사진게시판</a></li>
+						<li><a href="photoBoard?stanum=1&endnum=6">사진게시판</a></li>
 						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
 						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
 						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
