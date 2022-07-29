@@ -10,7 +10,9 @@
 	insert into note values(note_sq.nextval,#{param1},#{param3},current_date,#{param2})
 </insert>
 <select id="comlist" resultType="com.team.pj.commentDTO">
-	select c_no, b_no, c_con, m_no, c_date, c_pa_no from comment_t where b_no=#{param1} and c_pa_no is null order by c_date
+	select a.c_no, a.b_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick 
+		from comment_t a, member b
+		where b_no=#{param1} and c_pa_no is null and a.m_no=b.m_no order by c_date
 </select>
 <insert id="insertcomment">
 	insert into comment_t(c_no, b_no, c_con, m_no, c_date) 
@@ -23,9 +25,9 @@
 	update comment_t set c_con=#{param1} where c_no=#{param2}
 </update>
 <select id="re_replylist" resultType="com.team.pj.commentDTO">
-	select c_no, b_no, c_con, m_no, c_date, c_pa_no
-		from comment_t
-		where c_pa_no=#{param1} order by c_date
+	select a.c_no, a.b_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick
+		from comment_t a, member b
+		where c_pa_no=#{param1} and a.m_no=b.m_no order by c_date
 </select>
 <select id="countre_replylist" resultType="int">
 	select count(c_pa_no) replycount from comment_t where c_pa_no=#{param1}

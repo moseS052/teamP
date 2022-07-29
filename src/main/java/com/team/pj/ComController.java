@@ -6,6 +6,7 @@ import java.util.Date;
 import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
 import org.json.simple.JSONArray;
@@ -47,7 +48,7 @@ public class ComController {
 	@RequestMapping(value = "/comment", produces = "application/json;charset=utf-8")
 	public String comment(@RequestParam("page") int page) {
 		iteamP tp = sqlSession.getMapper(iteamP.class);
-
+		
 		ArrayList<commentDTO> comlist = tp.comlist(page);
 		JSONArray ja = new JSONArray();
 		for (int i = 0; i < comlist.size(); i++) {
@@ -60,6 +61,7 @@ public class ComController {
 			jo.put("m_no", cdto.getM_no());
 			jo.put("c_date", cdto.getC_date());
 			jo.put("c_pa_no", cdto.getC_pa_no());
+			jo.put("nick", cdto.getNick());
 			ja.add(jo);
 		}
 		System.out.println(ja.toJSONString());
@@ -70,7 +72,9 @@ public class ComController {
 	@ResponseBody
 	@RequestMapping(value = "/insertcomment", method = RequestMethod.POST)
 	public void insertComment(@RequestParam("b_no") int b_no, @RequestParam("c_con") String c_con,
-			@RequestParam("m_no") int m_no) {
+			HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		int m_no=(int)session.getAttribute("m_no");
 		iteamP tp = sqlSession.getMapper(iteamP.class);
 		tp.insertcomment(b_no, c_con, m_no);
 
@@ -114,6 +118,7 @@ public class ComController {
 			jo.put("m_no", adto.getM_no());
 			jo.put("c_date", adto.getC_date());
 			jo.put("c_pa_no", adto.getC_pa_no());
+			jo.put("nick", adto.getNick());
 			ja.add(jo);
 			
 		}
@@ -124,8 +129,11 @@ public class ComController {
 	@ResponseBody
 	@RequestMapping(value = "/re_replyinsert", produces = "application/json;charset=utf-8", method = RequestMethod.POST)
 	public String re_replyinsert(@RequestParam("b_no") int b_no, @RequestParam("c_pa_no") int c_pa_no,
-			@RequestParam("m_no") int m_no, @RequestParam("c_con") String c_con) {
+			@RequestParam("c_con") String c_con, HttpServletRequest req) {
 		iteamP tp = sqlSession.getMapper(iteamP.class);
+		HttpSession session=req.getSession();
+		int m_no=(int)session.getAttribute("m_no");
+
 		int reccount = tp.insertReRply(b_no, c_con, m_no, c_pa_no);
 
 		return Integer.toString(reccount);

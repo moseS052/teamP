@@ -107,6 +107,7 @@ public class photoBoardController {
 	@RequestMapping("/ReadPhoto")
 	public String ReadPhoto(@RequestParam("seq") int b_no, Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
+		
 		if (session.getAttribute("id") == null) { // 로그인 전
 			model.addAttribute("userinfo", null);
 
@@ -118,7 +119,15 @@ public class photoBoardController {
 		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		ArrayList<photoBoardDTO> boardList=ipt.ReadPhotoBoard(b_no);
+		String b_con;
+		String b_title;
+		for(int i=0; i<boardList.size();i++) {
+			b_con=boardList.get(i).getB_con();
+			System.out.println(b_con );
+		}
+		
 		model.addAttribute("list",boardList);
+		model.addAttribute("b_no",b_no);
 		
 		return "ReadphotoBoard";
 	}

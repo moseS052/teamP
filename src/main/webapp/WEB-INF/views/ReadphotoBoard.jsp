@@ -194,8 +194,7 @@
 			<div class="gap"></div>
 			<div class="row gap">
 				<div class="col-md-10">
-					<input type="text" id="page"><input type="button"
-						id="page_btn">
+					<input type="hidden" id="page" value="${b_no}">
 					<div id="comments">
 						<div id="comments-list gap">
 							<div class="media">
@@ -208,8 +207,8 @@
 							<form class="form-horizontal" role="form">
 								<div class="form-group">
 									<div class="col-sm-6">
-										<input type="text" class="form-control" placeholder="작성자"
-											id="writer_1">
+										<!-- <input type="text" class="form-control" placeholder="작성자"
+											id="writer_1" readonly> -->
 									</div>
 								</div>
 								<div class="form-group">
@@ -325,9 +324,10 @@
 	})
 	
 	
-	.on('click', '#page_btn', function() {
+	.ready(function() {
 		commentLIst();
-	}).on('click', '#submit', function() {
+	})
+	.on('click', '#submit', function() {
 		let str=$('#c_con').val();
 		if(str.replace(/\s| /gi, "").length==0){
 			alert('내용없음');
@@ -495,14 +495,14 @@
 					let com = data[i];
 					html='<div class="well" style="margin:0 50px 0px 50px;">'
 		    			 +'<div class="media-heading">'
-		        		 +'<a href=#><strong>'+com['m_no']+'</strong></a>&nbsp;'
+		        		 +'<a href=#><strong>'+com['nick']+'</strong></a>&nbsp;'
 		        		 +'<small>'+com['c_date']+'</small>'
 		        		 +'<div class="dropdown pull-right">'
 		            	 +'<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
 		            	 +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
 		                 +'<a href=# class="dropdown-item" id="updatere_reply" seq1="'+com['c_no']+'"'+ 'seq2="'+com['c_pa_no']+'"'+'seq3="'+com['b_no']+'"'+'seq4="'+com['m_no']+'">수정</a><br>'
 		                 +'<a href=# class="dropdown-item" id="deletere_reply" value="'+com['c_no']+'">삭제</a>'
-		                 +'</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'+com['c_con']+'</p><a id="ansercomment" seq="'+com['m_no']+'" href="javascript:void(0);">답글</a></div>'
+		                 +'</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'+com['c_con']+'</p><a id="ansercomment" seq="'+com['nick']+'" href="javascript:void(0);">답글</a></div>'
 		                 +'</div>';
 					 $('#re_replylist'+num).append(html);
 					 if(i==doo){
@@ -540,7 +540,6 @@
 			data:{
 				b_no:$('#page').val(),
 				c_pa_no:$('#realc_no'+s).val(),
-				m_no:3,
 				c_con:$('#re_replytextArea').val()
 				  },
 			type:'post',
@@ -579,14 +578,12 @@
 			url : 'insertcomment',
 			data : {
 				b_no : $('#page').val(),
-				c_con : $('#c_con').val(),
-				m_no : $('#writer_1').val()
+				c_con : $('#c_con').val()
 			},
 			type : 'post',
 			success : function() {
 				commentLIst();
 				$('#c_con').val('');
-				$('#writer_1').val('');
 			}
 		});
 	}
@@ -596,6 +593,7 @@
 					url : 'comment',
 					data : {
 						page : $('#page').val()
+						
 					},
 					dataType : 'json',
 					type : 'get',
@@ -606,7 +604,7 @@
 						for (let i = 0; i < data.length; i++) {
 							com = data[i];
 							let list = '<div class="well" ><div class="media-heading" >'
-					        		  +'<strong>'+com['m_no']+'</strong>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
+					        		  +'<strong>'+com['nick']+'</strong>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
 					            	  +com['c_date']+'</small><div class="dropdown pull-right">'
 					            	  +'<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
 					                  +'<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
