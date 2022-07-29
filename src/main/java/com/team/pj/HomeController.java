@@ -30,7 +30,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class HomeController {
 	
-	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private SqlSession sqlSession;
 	/**
@@ -55,6 +54,9 @@ public class HomeController {
 			model.addAttribute("userinfo",session.getAttribute("id"));
 			model.addAttribute("m_no",session.getAttribute("m_no"));
 			model.addAttribute("nick",session.getAttribute("nick"));
+			iteamP ip=sqlSession.getMapper(iteamP.class);
+			String avatar=ip.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
 		
 		return "home";
@@ -184,10 +186,14 @@ public class HomeController {
 	@RequestMapping(value = "/note", method = RequestMethod.GET)
 	public String note(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("mno",req.getParameter("m_no")); //�����ʿ�
 		model.addAttribute("mpano",req.getParameter("m_pa_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
-		
+		String myAvaRoute=ip.getAvaRoute(Integer.parseInt(req.getParameter("m_no")));
+		String youAvaRoute=ip.getAvaRoute(Integer.parseInt(req.getParameter("m_pa_no")));
+		model.addAttribute("myAvaRoute",myAvaRoute);
+		model.addAttribute("youAvaRoute",youAvaRoute);
 		return "note";
 	}
 	
@@ -311,6 +317,26 @@ public class HomeController {
 	public String alarmCheck(HttpServletRequest req) {
 		iteamP ip=sqlSession.getMapper(iteamP.class);
 		ip.alarmCheck(Integer.parseInt(req.getParameter("al_no")));
+		return "";
+	}
+	
+	//Go avatar change place
+	@RequestMapping(value = "/avatar", method = RequestMethod.GET)
+	public String avatar(HttpServletRequest req,Model model) {
+		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		model.addAttribute("myAvatarRoute",ip.getAvaRoute((int)session.getAttribute("m_no")));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		return "avatar";
+	}
+	
+	//avatar change
+	@ResponseBody
+	@RequestMapping(value = "/avatarChange", produces="application/text;charset=utf8")
+	public String avatarChange(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		ip.updateAvaRoute(req.getParameter("avaRoute"),(int)session.getAttribute("m_no"));
 		return "";
 	}
 	

@@ -72,4 +72,5 @@ public interface iteamP {
 	void req_insert(int m_no,String b_title,String b_con);
 	boardDTO req_detail(int b_no);
 	String getAvaRoute(int m_no);
+	void updateAvaRoute(String avaRoute,int m_no);
 }

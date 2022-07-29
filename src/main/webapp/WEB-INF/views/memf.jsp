@@ -18,7 +18,7 @@
 </head>
 <body>
 <div>
-	<img src=<c:url value="resources/assets/img/avatar1.png"/> width="200px" height="200px" />
+	<img src=<c:url value="${avaRoute}"/> width="200px" height="200px" />
 </div>
 <c:if test="${m_no==semno }">
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
@@ -28,6 +28,7 @@
 </c:if>
 </body>
 <script>
+var popup;
 $(document)
 .ready(function(){
 	console.log(`${id}`)
@@ -48,9 +49,14 @@ $(document)
 	return false;
 })
 
-
-
-
+.on('click','#btnChangeAvatar',function(){
+	popup=window.open("avatar", "_blank", "width=460, height=400, top=110, left=1700");
+	
+	popup.onbeforeunload=function(){
+		location.reload();
+	}
+	return false;
+})
 
 
 

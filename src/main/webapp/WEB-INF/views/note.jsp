@@ -20,7 +20,7 @@
 .message-item#yourcss:after { 
     border-radius: 50%; 
     content:""; 
- 	background-image:url(resources/assets/img/avatar2.png); 
+ 	background-image:url(${youAvaRoute}); 
     background-size:21px 21px;height: 21px; 
     left: -35px; 
     position: absolute; 
@@ -31,7 +31,7 @@
 .message-item#mycss:after { 
     border-radius: 50%; 
     content:""; 
- 	background-image:url(resources/assets/img/avatar1.png); 
+ 	background-image:url(${myAvaRoute}); 
     background-size:21px 21px;height: 21px; 
     left: -35px; 
     position: absolute; 
@@ -62,7 +62,8 @@ textarea {
 <div style="margin-left:-35px">
 	<table>
 	<tr><td><textarea cols="27" rows="3" id='n_con'></textarea></td>
-		<td style="padding:5px;"><a class="btn btn-primary btn-outlined" href="#" id="btnSend">보내기</a></td></tr>
+		<td style="padding:5px;"><a class="btn btn-primary btn-outlined" href="#" id="btnSend">보내기</a><br>
+								<a class="btn btn-primary btn-outlined" href="#" id="btnClose">닫 &nbsp; 기</a></td></tr>
 	</table>
 	</div>
 <div id="divadd" style="margin-bottom:-3px;" >
@@ -101,10 +102,12 @@ $(document)
 // 	console.log($(".message-item::after").css("content"));
 })
 .on('keyup','#n_con',function(key){
-	console.log(key.keyCode);
 	if(key.keyCode==13){
 		$('#btnSend').trigger('click');
 	}
+})
+.on('click','#btnClose',function(){
+	window.close();
 })
 
 .on('click','#btnSend',function(){
@@ -159,7 +162,7 @@ function noteCon(){
 			noteCon()
 		},
 		error:function(){
-			alert('연결실패');
+// 			alert('연결실패');
 		},
 		complete:function(){}
 	})
