@@ -48,8 +48,10 @@ public class ApiController {
 	@RequestMapping(value="/open_mypost", produces="application/text;charset=utf8")
 	public String doopenmypost(@RequestParam("m_no") int m_no) {
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);
+		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);	
 		JSONArray ja =new JSONArray();
+
+		JSONArray ja1 =new JSONArray();
 		for(int i=0; i<l_list.size();i++) {
 			L_listDTO ldto = l_list.get(i);
 			JSONObject jo =new JSONObject();
@@ -60,8 +62,23 @@ public class ApiController {
 			jo.put("l_views", ldto.getL_views());
 			jo.put("nop", ldto.getNop());
 			jo.put("count", ldto.getCount());
-			ja.add(jo);
+			ja1.add(jo);
 		}
+		ArrayList<boardDTO> boardlist=team.open_board(m_no); 
+		JSONArray ja2 =new JSONArray();
+		for(int i=0; i<boardlist.size();i++) {
+			boardDTO bdto = boardlist.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("b_no", bdto.getB_no());
+			jo.put("b_type", bdto.getB_type());
+			jo.put("b_title", bdto.getB_title());
+			jo.put("b_date", bdto.getB_date());
+			jo.put("views", bdto.getViews());
+			ja2.add(jo);
+			
+		}
+		ja.add(ja1);
+		ja.add(ja2);
 		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}

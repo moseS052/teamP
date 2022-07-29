@@ -308,7 +308,7 @@ a#yesyes{
 							<div class="square pull-left">
 								<img src=<c:url value="/resources/assets/img/team/team2.jpg"/> width="120" alt="" class="" />
 							</div>
-							<h4>John Smith</h4>
+							<h4>mooooooo</h4>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Integer posuere erat a ante.</p>
 							<div class="pull-right btn-group social-profiles">

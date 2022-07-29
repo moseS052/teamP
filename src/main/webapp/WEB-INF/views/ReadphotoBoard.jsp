@@ -202,7 +202,7 @@
 							</div>
 						</div>
 						<!--/#comments-list-->
-
+						
 						<div id="comment-form" class="mt fade-up">
 							<form class="form-horizontal" role="form">
 								<div class="form-group">
@@ -210,10 +210,11 @@
 										<!-- <input type="text" class="form-control" placeholder="작성자"
 											id="writer_1" readonly> -->
 									</div>
-								</div>
+								</div><br><br><br><hr>
 								<div class="form-group">
 									<div class="col-sm-12">
-										<textarea rows="8" class="form-control" style="resize: none;"
+                        				<h4 class="widget-title">게시물댓글</h4>
+										<textarea rows="5" class="form-control" style="resize: none;"
 											placeholder="Comment" id="c_con"></textarea>
 									</div>
 								</div>
