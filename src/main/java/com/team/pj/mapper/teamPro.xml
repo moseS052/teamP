@@ -201,5 +201,8 @@
 <select id="req_detail" resultType="com.team.pj.boardDTO">
 	select b_no,b_title,nick,b_date,b_con,m_no from boardq where b_no=#{param1}
 </select>
+<select id="getAvaRoute" resultType="string">
+	select ava_route from member where m_no=#{param1};
+</select>
 </mapper>
 

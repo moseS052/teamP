@@ -170,12 +170,13 @@ public class HomeController {
 	@RequestMapping(value = "/meminfo", method = RequestMethod.GET)
 	public String meminfo(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		String avaRoute=ip.getAvaRoute(Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("semno",Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("id",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
-		
-		//占쏙옙占쏙옙
+		model.addAttribute("avaRoute",avaRoute);
 		return "memf";
 	}
 	
@@ -186,6 +187,7 @@ public class HomeController {
 		model.addAttribute("mno",req.getParameter("m_no")); //�����ʿ�
 		model.addAttribute("mpano",req.getParameter("m_pa_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
+		
 		return "note";
 	}
 	

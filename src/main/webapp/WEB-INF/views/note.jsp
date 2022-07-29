@@ -17,18 +17,28 @@
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 </head>
 <style>
-/* .message-item:after { */
-/* 	    border-radius: 50%; */
-/* 	    content:""; */
-/* 	 	background-image:url(resources/assets/img/avatar2.png); */
-/* 	    background-size:21px 21px;height: 21px; */
-/* 	    left: -35px; */
-/* 	    position: absolute; */
-/* 	    top: 10px; */
-/* 	    width: 21px; */
-/* 	    line-height: 10px; */
-/* } */
-
+.message-item#yourcss:after { 
+    border-radius: 50%; 
+    content:""; 
+ 	background-image:url(resources/assets/img/avatar2.png); 
+    background-size:21px 21px;height: 21px; 
+    left: -35px; 
+    position: absolute; 
+    top: 10px; 
+    width: 21px; 
+    line-height: 10px; 
+} 
+.message-item#mycss:after { 
+    border-radius: 50%; 
+    content:""; 
+ 	background-image:url(resources/assets/img/avatar1.png); 
+    background-size:21px 21px;height: 21px; 
+    left: -35px; 
+    position: absolute; 
+    top: 10px; 
+    width: 21px; 
+    line-height: 10px; 
+} 
 textarea {
     border: none;
     resize: none;
@@ -84,12 +94,7 @@ textarea {
 $(document)
 .ready(function(){
 	noteCon();
-	let str1='.message-item:after {'
-	    +'border-radius: 50%;content:"";'
-// 	 	+'background-image:url(resources/assets/img/avatar2.png);'
-	    +'background-size:21px 21px;height: 21px;left: -35px;'
-	    +'position: absolute;top: 10px;width: 21px;line-height: 10px;}'
-	$('style').append(str1);
+	
 // 	$('<style>.message-item:after {
 //  	background-image:url(resources/assets/img/avatar2.png);
 // 	}</style>').appendTo('head');
@@ -132,7 +137,7 @@ function noteCon(){
 // 				$('.message-item:after').css("background-image","url(resources/assets/img/avatar2.png)");
 				// 제이쿼리 css적용하기 = 아바타
 				if(notetem['m_no']==`${mno}`){
-					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#e4e4e4">'
+					let str='<div class="message-item fade-up" id="mycss" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#e4e4e4">'
 						+'<div class="message-head clearfix" style="background-color:#e4e4e4"><div class="user-detail" >'
 						+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta" >'
 						+'<div class="asker-meta" ><span class="qa-message-what"></span>'
@@ -141,7 +146,7 @@ function noteCon(){
 					$('#divadd').prepend(str);
 					
 				} else {
-					let str='<div class="message-item fade-up" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#d8d8d8">'
+					let str='<div class="message-item fade-up" id="yourcss" style="margin-bottom:5px;" ><div class="message-inner" style="background-color:#d8d8d8">'
 						+'<div class="message-head clearfix" style="background-color:#d8d8d8"><div class="user-detail" >'
 						+'<h5 class="handle">'+notetem["n_con"]+'</h5><div class="post-meta" >'
 						+'<div class="asker-meta" ><span class="qa-message-what"></span>'

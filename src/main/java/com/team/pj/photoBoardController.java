@@ -118,6 +118,7 @@ public class photoBoardController {
 		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		ArrayList<photoBoardDTO> boardList=ipt.ReadPhotoBoard(b_no);
+				
 		model.addAttribute("list",boardList);
 		
 		return "ReadphotoBoard";

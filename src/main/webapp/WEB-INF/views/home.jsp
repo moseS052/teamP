@@ -1271,12 +1271,13 @@ $(document)
 	alarmList()
 	}
 })
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
 	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
 	return false;
 })
-
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
 .on('click','#btnSendNote',function(){
 	let m_no=$(this).attr('myseq');
 	let m_pa_no=$(this).attr('yourseq');
