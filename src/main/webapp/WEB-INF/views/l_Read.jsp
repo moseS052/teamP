@@ -253,7 +253,7 @@ $(document)
 		
 	}else if(`${l_mno}`!=`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview'  value='후기작성' />"
 				$('#but').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
@@ -367,6 +367,14 @@ $(document)
     		complete:function(){}
     	});
 })
+.on('click', '#donationReview', function() {
+		if (`${userinfo}` == '') {
+			alert('로그인 후 사용가능합니다.')
+		} else {
+			document.location = '/pj/donationReviwe';
+		}
+
+	})
 function shwocheck(){
 	let ar=`${sd}`.split(',');
 	let str="";

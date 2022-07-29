@@ -156,10 +156,6 @@
 				<div class="centered gap fade-down section-heading">
 					<h2 class="main-title">사진게시판</h2>
 					<hr>
-					<div>
-						<input class="btn btn-outlined btn-primary pull-right"
-							type="button" id="donationReview" value="후기올리기">
-					</div>
 				</div>
 			</div>
 
@@ -174,15 +170,11 @@
 								<a class="preview btn btn-outlined btn-primary" href=#><i
 									class="fa fa-link"></i></a>
 							</div>
-							<div class="post-meta">
-								<span class="post-comment"><i class="fa fa-comments"></i>
-									댓글갯수</span>
-							</div>
+							
 						</div>
 						<h3>
 							<a href="#">${photo.b_title }</a>
 						</h3>
-						<div class="gap"></div>
 
 						<p>
 							<a class="btn btn-outlined btn-primary" seq="${photo.b_no}" id="readPhotoBoard">Read More</a>
@@ -273,14 +265,8 @@
 		} else {
 			document.location = '/pj/question';
 		}
-	}).on('click', '#donationReview', function() {
-		if (`${userinfo}` == '') {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-			document.location = '/pj/donationReviwe';
-		}
-
 	})
+	
 	
 </script>
 </html>

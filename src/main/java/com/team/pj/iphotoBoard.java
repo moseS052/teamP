@@ -10,4 +10,6 @@ public interface iphotoBoard {
 	int insertphotoRoute(int b_no, String b_route);
 	int getTotal();
 	ArrayList<photoBoardDTO> ReadPhotoBoard(int b_no);
+	int insertPhotoBoardView(int b_no);
+	int countCommentview(int b_no);
 }

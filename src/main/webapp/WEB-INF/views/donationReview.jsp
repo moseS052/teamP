@@ -247,32 +247,43 @@
 	})
 	.on('click','#doDonationreviewBtn', function(){
 		let formData = new FormData($('#fileForm')[0]);
-		console.log(formData);
-		$.ajax({
-			url:'insertphotoBoard',
-			data:{
-				title: $('#photoTitle').val(),
-				con: $('#photoContent').val()
-			},
-			dataType:'text',
-			type:'get',
-			async:false,
-			success : function(){
-				$.ajax({
-					url:'findb_no',
-					enctype: 'multipart/form-data',
-					processData : false,
-					contentType : false,
-					data : formData,
-					type : 'POST',
-					success:function(data){
-						console.log(data);
-						document.location = '/pj/photoBoard';
-					}
-					
-				})
-			}
-		})
+		let title=$('#photoTitle').val();
+		let content=$('#photoContent').val();
+		if($('#uploadFile').val()==''){
+			alert('사진을 올려주세요');
+		}else if(title.replace(/\s| /gi, "").length == 0){
+			alert('제목을 입력해주세요');
+		}else if(content.replace(/\s| /gi, "").length == 0){
+			alert('내용을 입력해 주세요');
+		}
+		else{
+			 $.ajax({
+				url:'insertphotoBoard',
+				data:{
+					title: $('#photoTitle').val(),
+					con: $('#photoContent').val()
+				},
+				dataType:'text',
+				type:'get',
+				async:false,
+				success : function(){
+					$.ajax({
+						url:'findb_no',
+						enctype: 'multipart/form-data',
+						processData : false,
+						contentType : false,
+						data : formData,
+						type : 'POST',
+						success:function(data){
+							console.log(data);
+							document.location = '/pj/photoBoard';
+						}
+						
+					})
+				}
+			}) 
+		}
+		 
 	})
 </script>
 </html>

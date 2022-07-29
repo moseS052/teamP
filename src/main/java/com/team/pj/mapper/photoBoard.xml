@@ -38,4 +38,10 @@
 		select * from boardp a, route b
 		where a.b_no=b.b_no and a.b_no=#{param1}
 	</select>
+	<update id="insertPhotoBoardView">
+		update board set views=views+1 where b_no=#{param1}
+	</update>
+	<select id="countCommentview" resultType="int">
+		select count(*) from comment_t where b_no=#{param1}
+	</select>
 </mapper>
