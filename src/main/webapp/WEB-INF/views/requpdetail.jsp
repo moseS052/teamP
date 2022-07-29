@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Detail</title>
+<title>Update</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -50,14 +50,7 @@
 		});
 	});
     </script>
-<style>
-	table{
-		text-align:center;
-	}
-	th {
-    	text-align:center;
-	}
-</style>		
+	
   </head>
 
   <body class="single single-post"> 
@@ -135,7 +128,7 @@
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
                 <br><br><br>
-                <h2 class="main-title">Detail</h2>
+                <h2 class="main-title">Update</h2>
                 <hr>
                 <p></p>
             </div>
@@ -147,29 +140,19 @@
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-					
-					<div class="col-md-12" >
+
+					<div class="col-md-12">
 					<table class="table table-striped" style="">
-					
-					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
-					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td></tr>
-					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td></tr>
-					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly></td>
-					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date }" readonly></td></tr>
+					<input type=hidden id=b_no name=b_no value="${bdto.b_no }">
+					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }"></td></tr>
+					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;">${bdto.b_con }</textarea></td></tr>
+					<tr><td>작성자: <input type=text id=nick name=nick  style="border:none; background-color:transparent;" value="${bdto.nick }" readonly>
+					작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date}" readonly></td></tr>
 					</table>
-					<br>
-					<input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
-					<input type=hidden id="m_no" name="m_no" value="${m_no}">
-					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
-					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
-					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined" ></form>
+					<input type=button id="up" value='수정완료' class="btn btn-primary btn-outlined">
+					<input type=reset value='취소' id=btnReset class="btn btn-primary btn-outlined">
+					<!-- <button type=submit formaction='delete' formmethod=post>삭제</button> -->
 					
-					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' white-space="nowrap" class="btn btn-primary btn-outlined">
-					</c:if>
 					
 					</div>
 				</div>
@@ -231,20 +214,21 @@
 <script>
 $(document)
 .on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/reqboard';
 })
-.on('click','#del',function(){
-	if(!confirm("정말로 글을 삭제 할까요?")) return false;
+.on('click','#up',function(){
+	if(!confirm("글을 수정하시겠습니까?")) return false;
 
 	$.ajax({
-		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val()},
+		type:'get',dataType:'text',url:'update_free',
+		data:{b_no:$('#b_no').val(),b_title:$('#b_title').val(),b_con:$('#b_con').text()},
 		beforeSend:function(){
 			console.log("b_no:"+$('#b_no').val());
+			console.log("b_con"+$('#b_con').text());
 		},
 		success:function(){	
-			alert('글을 삭제하였습니다');
-			window.location.href="<%= request.getContextPath() %>/freeboard";
+			alert('수정이 완료되었습니다');
+			window.location.href="<%= request.getContextPath() %>/reqboard";
 		}
 	}) 
 })

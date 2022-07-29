@@ -191,5 +191,15 @@
 <select id="open_mypost" resultType="com.team.pj.L_listDTO"> 
 	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a where a.m_no=#{param1}
 </select>
+<select id="reqBoard" resultType="com.team.pj.boardDTO">
+	select b_no,b_title,nick,b_date,views from boardq order by b_no desc 
+</select>
+<insert id="req_insert">
+	insert into board(b_no,b_type,m_no,b_title,b_date,b_con) 
+	values(board_sq.nextval,'Q',#{param1},#{param2},current_date,#{param3})
+</insert>
+<select id="req_detail" resultType="com.team.pj.boardDTO">
+	select b_no,b_title,nick,b_date,b_con,m_no from boardq where b_no=#{param1}
+</select>
 </mapper>
 

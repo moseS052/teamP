@@ -14,6 +14,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class boardController {
@@ -21,6 +22,7 @@ public class boardController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private SqlSession sqlSession;
+	//----------------------------------------------------free board
 	//go to free board
 	@RequestMapping(value="/freeboard", method=RequestMethod.GET)
 	public String doFreeboard(HttpServletRequest req, Model mod) {
@@ -33,8 +35,6 @@ public class boardController {
 		}else {
 			mod.addAttribute("m_no", null);
 		}
-		
-		/* System.out.println("m_no"+(int)session.getAttribute("m_no")); */
 		ArrayList<boardDTO> blist=p.listBoard();
 		mod.addAttribute("boardlist",blist);
 		return "freeboard";
@@ -61,7 +61,8 @@ public class boardController {
 		p.free_insert((int)session.getAttribute("m_no"),btitle, bcontent);
 		return "redirect:/freeboard";
 	}
-	//delete in free board
+	//delete in free board & req board
+	@ResponseBody
 	@RequestMapping("/delete_free")
 	public String doDelete_free(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
@@ -69,8 +70,7 @@ public class boardController {
 		int bseq=Integer.parseInt(req.getParameter("b_no"));
 		System.out.println("delete b_no"+bseq);
 		p.free_delete(bseq);
-		
-		return "redirect:/freeboard";
+		return "";
 	}
 	//view detail on free board
 	@RequestMapping("/freedetail")
@@ -98,7 +98,8 @@ public class boardController {
 		model.addAttribute("bdto",bdto);
 		return "updetail";
 	}
-	//update in free board
+	//update in free board & req board
+	@ResponseBody
 	@RequestMapping("/update_free")
 	public String doUpdate(HttpServletRequest req,Model model) {
 		String btitle=req.getParameter("b_title");
@@ -109,6 +110,72 @@ public class boardController {
 		System.out.println("update seqbbs="+bseq);
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		p.free_update(btitle,bcontent,bseq);		
-		return "redirect:/freeboard";
+		return "";
+	}
+	//---------------------------------------------request board
+	//go to request board
+	@RequestMapping(value="/reqboard", method=RequestMethod.GET)
+	public String doRequestboard(HttpServletRequest req, Model mod) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session =req.getSession();
+		
+		if(session.getAttribute("m_no")!=null) {
+			mod.addAttribute("m_no", session.getAttribute("m_no"));
+			mod.addAttribute("id",session.getAttribute("id"));
+		}else {
+			mod.addAttribute("m_no", null);
+		}	
+
+		ArrayList<boardDTO> blist=p.reqBoard();
+		mod.addAttribute("boardlist",blist);
+		return "reqboard";
+	}	
+	//go to new post page in request board
+	@RequestMapping("/newpost_req")
+	public String doNewrequest(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		
+		return "newpost_req";
+	}
+	//insert new post in request board
+	@RequestMapping(value="/insert_req")
+	public String doInsert_req(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session=req.getSession();
+		String btitle=req.getParameter("title");
+		String bcontent=req.getParameter("content");		
+		System.out.println("title="+btitle);
+		System.out.println("content="+bcontent);
+		System.out.println("writer="+(int)session.getAttribute("m_no"));
+		p.req_insert((int)session.getAttribute("m_no"),btitle, bcontent);
+		return "redirect:/reqboard";
+	}
+	//view detail on request board
+	@RequestMapping("/reqdetail")
+	public String doDetail_req(HttpServletRequest req ,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session =req.getSession();		
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		p.free_viewcnt(b_no);
+		boardDTO bdto=p.req_detail(b_no);
+		model.addAttribute("bdto",bdto);
+		
+		return "reqdetail";
+	}
+	//view update page on request board
+	@RequestMapping("/requpdetail")
+	public String doReq_updetail(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		HttpSession session =req.getSession();		
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		boardDTO bdto=p.req_detail(b_no);
+		model.addAttribute("bdto",bdto);
+		return "requpdetail";
 	}
 }

@@ -68,4 +68,7 @@ public interface iteamP {
 	ArrayList<Integer> findT_C_P(int t_no);
 	String findTname(int t_no);
 	int datecheck(int m_no,String l_date);
+	ArrayList<boardDTO> reqBoard();
+	void req_insert(int m_no,String b_title,String b_con);
+	boardDTO req_detail(int b_no);
 }

@@ -147,29 +147,27 @@
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-					
-					<div class="col-md-12" >
+
+					<div class="col-md-12">
 					<table class="table table-striped" style="">
-					
 					<input type=hidden name=b_no value="${bdto.b_no }">
-					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
-					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td></tr>
-					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td></tr>
+					<input type=hidden name=bdto.m_no value="${bdto.m_no }">
+					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td>
+					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td>
 					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly></td>
-					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date }" readonly></td></tr>
+					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;"  value="${bdto.b_date }" readonly></td></tr>
 					</table>
-					<br>
-					<input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
+					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
-					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
+					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
+					<form id=frmup method=get action="requpdetail">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=submit value='수정' class="btn btn-primary btn-outlined" ></form>
-					
+					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>					
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
-					<input type=button id="del" name="del" value='글삭제' white-space="nowrap" class="btn btn-primary btn-outlined">
+					<input type=button id="del" value='글삭제' class="btn btn-primary btn-outlined">
 					</c:if>
+					
 					
 					</div>
 				</div>
@@ -231,7 +229,7 @@
 <script>
 $(document)
 .on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/reqboard';
 })
 .on('click','#del',function(){
 	if(!confirm("정말로 글을 삭제 할까요?")) return false;
@@ -244,7 +242,7 @@ $(document)
 		},
 		success:function(){	
 			alert('글을 삭제하였습니다');
-			window.location.href="<%= request.getContextPath() %>/freeboard";
+			window.location.href="<%= request.getContextPath() %>/reqboard";
 		}
 	}) 
 })

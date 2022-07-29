@@ -56,17 +56,24 @@ public class HomeController {
 			model.addAttribute("m_no",session.getAttribute("m_no"));
 			model.addAttribute("nick",session.getAttribute("nick"));
 		}
+		
 		return "home";
 		
 	}
 	//濡�洹몄��
 	@RequestMapping(value="/login", method=RequestMethod.GET)
-	public String doLogin() {
+	public String doLogin(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "login";
 	}
 	//����媛���jsp
 	@RequestMapping(value="/signup", method=RequestMethod.GET)
-	public String doSignup() {
+	public String doSignup(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "signup";
 	}
 	
@@ -85,21 +92,17 @@ public class HomeController {
 		
 		if(n==0) { //濡�洹몄�� �ㅽ��			
 			session.setAttribute("m_no",null);			
-
-			
 		}else if(n!=1) { //����
 			
 		}else {	//濡�洹몄�� �깃났
 			session.setAttribute("m_no",p.getM_no1(user_id));
 			session.setAttribute("nick",p.getNickById(user_id));
 			session.setAttribute("id", user_id);
+
 			model.addAttribute("id",session.getAttribute("id"));
 			model.addAttribute("m_no",session.getAttribute("m_no"));
 			model.addAttribute("nick",session.getAttribute("nick"));
 		}
-		
-//		ArrayList<boardDTO> blist=p.listBoard();
-//		model.addAttribute("boardlist",blist);
 		return "redirect:/";
 	}
 	//濡�洹몄����

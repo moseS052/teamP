@@ -35,15 +35,26 @@
     $(document)
     .ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/plant.jpg" 
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
 		
 	});
     </script>
-	
+<style>
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+   /*  .content-wrapper{
+    	positon: absolute;
+    	width: 500px;
+    	height: 500px; 
+    	margin: auto;
+    }  */
+</style>	
   </head>
 
   <body class="single single-post"> 
@@ -62,7 +73,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -82,12 +98,10 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+                        <li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -112,25 +126,30 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	   <div id="headerwrap" class="half">
-         <div class="container">
-          <div class="gap"></div> 
-           <div id="bannertext" class="centered fade-down section-heading">
+	<div id="headerwrap" class="half">
+   		<div class="container">
+	    	<div class="gap"></div> 
+        	<div id="bannertext" class="centered fade-down section-heading">
                 <br><br><br>
                 <h2 class="main-title">Login</h2>
                 <hr>
             </div>
-      </div>
-   </div>
 
-   <div id="content-wrapper">
-       <section id="about">
-            <div class="container">
-             <div class="gap"></div>
-            <div class="row gap">
+		</div>
+	</div>
 
-               <div class="col-md-12 fade-up">
-            <div class="col-md-4 fade-up"></div><div class="col-md-4 fade-up">
+	<div id="content-wrapper">
+	    <section id="about">
+	   		<div class="container">
+		    	<div class="gap"></div>
+				<div class="row gap">
+
+					<div class="col-md-12 fade-up">
+
+					<div class="col-md-4 fade-up"></div><div class="col-md-4 fade-up">
+					
+					
+
             <form class="form-signin" method="post" action="user_check">
               <div class="form-label-group">
                 <input type="text" id="id" name="id" class="form-control" placeholder="id" required autofocus>
@@ -143,19 +162,22 @@
               <hr>
               
               <div class="form-label-group">
+              <%-- <c:if test="${n != 1 }">
+                <label>message</label>
+              </c:if> --%>
               </div>
 
               <button class="btn btn-primary btn-outlined btn-block text-uppercase" type="submit">Log in</button>
               <hr class="my-4">
               <button class="btn btn-lg btn-secondary btn-block text-uppercase" onclick="location='/pj/signup'">Join</button>
             </form>
-            </div><div class="col-md-4 fade-up"></div>
-
-               </div>
-            </div>
-         </div>   
-       </section>
-   </div>
+  						
+					</div><div class="col-md-12 fade-up"></div>
+					
+				</div>
+			</div>	
+	    </section>
+	</div>
 
 	<!-- MAIN FOOTER -->
 	<!-- <div id="footerwrap">
@@ -208,7 +230,5 @@
 		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
-<script>
 
-</script>
 </html>

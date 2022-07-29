@@ -32,8 +32,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/board2.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -50,7 +50,14 @@
 		});
 	});
     </script>
-	
+<style>
+	table{
+		text-align:center;
+	}
+	th {
+    	text-align:center;
+	}
+</style>		
   </head>
 
   <body class="single single-post"> 
@@ -94,10 +101,10 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
                     <ul class="dropdown-menu">                      
                         <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="single-post-sidebar.html">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
                         
                     </ul>
                 </li>
@@ -123,17 +130,18 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	 <div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <br><br><br>
+                <h2 class="main-title">Update</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
@@ -141,17 +149,18 @@
 				<div class="row gap">
 
 					<div class="col-md-12">
-					<form id=frmbbs method=get action="update_free">
-					<input type=hidden name=b_no value="${bdto.b_no }">
-					제목: <input type=text id=b_title name=b_title value="${bdto.b_title }"><br>
-					내용: <textarea id=b_con name=b_con rows=10 cols=70>${bdto.b_con }</textarea><br>
-					작성자: <input type=text id=nick name=nick value="${bdto.nick }" readonly>
-					작성일자: <input type=text id=b_date name=b_date value="${bdto.b_date}" readonly>
-					<input type=submit value='수정완료' class="btn btn-primary btn-outlined">
+					<table class="table table-striped" style="">
+					<input type=hidden id=b_no name=b_no value="${bdto.b_no }">
+					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }"></td></tr>
+					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;">${bdto.b_con }</textarea></td></tr>
+					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly>
+					작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date}" readonly></td></tr>
+					</table>
+					<input type=button id ="up" value='수정완료' class="btn btn-primary btn-outlined">
 					<input type=reset value='취소' id=btnReset class="btn btn-primary btn-outlined">
 					<!-- <button type=submit formaction='delete' formmethod=post>삭제</button> -->
 					
-					</form>
+					
 					</div>
 				</div>
 			</div>	
@@ -213,6 +222,22 @@
 $(document)
 .on('click','#btnReset',function(){
 	document.location='/pj/freeboard';
+})
+.on('click','#up',function(){
+	if(!confirm("글을 수정하시겠습니까?")) return false;
+
+	$.ajax({
+		type:'get',dataType:'text',url:'update_free',
+		data:{b_no:$('#b_no').val(),b_title:$('#b_title').val(),b_con:$('#b_con').text()},
+		beforeSend:function(){
+			console.log("b_no:"+$('#b_no').val());
+			console.log("b_con"+$('#b_con').text());
+		},
+		success:function(){	
+			alert('수정이 완료되었습니다');
+			window.location.href="<%= request.getContextPath() %>/freeboard";
+		}
+	}) 
 })
 </script>
 </html>

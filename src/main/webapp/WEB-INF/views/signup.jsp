@@ -29,16 +29,16 @@
 	<![endif]-->
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
-<!-- <script type="text/javascript">
+<script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/plant.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
 
-		// Map Position And Settings
+		/* // Map Position And Settings
 		$("#mapwrapper").gMap({ 
 			controls: false,
 			scrollwheel: false,
@@ -47,10 +47,49 @@
 			longitude: -73.9863,
 			zoom: 11
 
-		});
+		}); */
 	});
-    </script> -->
-	
+    </script>
+<style>
+     body {
+      /* min-height: 100vh;
+
+      background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
+      background: -webkit-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -moz-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
+      background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); */
+      align:center;
+    } 
+
+    .input-form {
+      max-width: 680px;
+
+      margin-top: 80px;
+      padding: 32px;
+
+      background: #fff;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
+      border-radius: 10px;
+      -webkit-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      -moz-box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      box-shadow: 0 8px 20px 0 rgba(0, 0, 0, 0.15);
+      
+    }
+    .container{
+    	positon: absolute;
+    	width: 800px;
+    	height:800px; 
+    	margin: auto;
+    }
+  </style>
+<style>
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    } 
+</style>
   </head>
 
   <body class="single single-post"> 
@@ -69,7 +108,12 @@
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
                 <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                
+                <c:if test="${m_no==null}">
+				<a href="login">login</a><a href="signup">회원가입</a>
+				</c:if>
+				<c:if test="${m_no!=null}">
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				</c:if>
             </div>
             <ul id="main-menu">
                 <li class="dropdown">
@@ -89,12 +133,10 @@
                     </ul>
                 </li>   
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon" aria-hidden="true"></i></a>
                     <ul class="dropdown-menu">                      
-                        <li><a href="single-post.html">Single Post</a></li>
-                        <li><a href="single-post-sidebar.html">Single Post Sidebar</a></li>
-                        <li><a href="category.html">Category Page</a></li>
-                        <li><a href="category-alt.html">Category Page Alt</a></li>
+                        <li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+                        <li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>                        
                     </ul>
                 </li>
                 <li class="dropdown">
@@ -119,25 +161,26 @@
     <!-- END NAV -->
 	
 	<!-- MAIN IMAGE SECTION -->
-	<!-- <div id="headerwrap" class="half">
+	<div id="headerwrap" class="half">
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title">About Us</h2>
+                <br><br><br>
+                <h2 class="main-title">회원가입</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
-		</div>/container
-	</div>/headerwrap
- -->
+		</div>
+	</div>
+ 
 	<div id="content-wrapper">
 	    <section id="about">
-	   		<div class="container">
+	   		<!-- <div class="container"> -->
 		    	<div class="gap"></div>
 				<div class="row gap">
 
 					<div class="col-md-12">
-						<label>ID: </label><input type=text name=pid id="pid" autofocus onkeypress='return checkBlank(event)'><br>
+						<!-- <label>ID: </label><input type=text name=pid id="pid" autofocus onkeypress='return checkBlank(event)'><br>
 						<label>비밀번호: </label><input type=password name=ppw id="ppw" onkeypress='return checkBlank(event)'><br>
 						<label class="" for="inputInvalid">비밀번호 확인: </label>
 						<input type=password name=ppw2 id="ppw2" onkeypress='return checkBlank(event)'><br>
@@ -155,7 +198,142 @@
 						<input type="checkbox" name='ptalent' value='4' id='d'>강연<br>
 						<input type="checkbox" name='ptalent' value='5' id='e'>기타<br>
 						<input type=button id="up" class="btn btn-primary btn-outlined" value='회원가입'>&nbsp;
-						<input type=button id="clean" class="btn btn-primary btn-outlined" value='비우기'>
+						<input type=button id="clean" class="btn btn-primary btn-outlined" value='비우기'> -->
+<div class="container">
+    <div class="input-form-backgroud row">
+      <div class="input-form col-md-12 mx-auto">
+        <!-- <h4 class="mb-3">회원가입</h4> -->
+       <!--  <form class="validation-form" novalidate> -->
+          <div class="row">
+            <div class="col-md-6 mb-3">
+            <label>ID</label>
+            <input type="text" class="form-control" id="pid" name="pid" placeholder="id" required autofocus onkeypress='return checkBlank(event)'>
+           <!--  <div class="invalid-feedback">
+              ID를 입력해주세요.
+            </div> -->
+          </div>
+          <div class="col-md-6 mb-3">
+              <label>모바일</label>
+              <input type="text" class="form-control" id="pphone" name="pphone" placeholder="01012345678" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
+                모바일을 입력해주세요.
+              </div> -->
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>비밀번호</label>
+              <input type="password" class="form-control" id="ppw" name="ppw" placeholder="password" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
+                비밀번호를 입력해주세요.
+              </div> -->
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>비밀번호 확인</label>
+              <input type="password" class="form-control" id="ppw2" name="ppw2" placeholder="비밀번호를 한번 더 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
+                비밀번호를 한번 더 입력해주세요.
+              </div> -->
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>이름</label>
+              <input type="text" class="form-control" id="pname" name="pname" placeholder="이름을 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
+                이름을 입력해주세요.
+              </div> -->
+            </div>
+            <div class="col-md-6 mb-3">
+              <label>닉네임</label>
+              <input type="text" class="form-control" id="pnick" name="pnick" placeholder="닉네임을 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <!-- <div class="invalid-feedback">
+                별명을 입력해주세요.
+              </div> -->
+            </div>            
+          </div>
+		
+            <div class="mb-3">
+              <label>성별</label><br>
+              <input type="radio" id="pgender" name="pgender" placeholder="" value="M" required>남
+              <input type="radio" id="pgender" name="pgender" placeholder="" value="F" required>여
+              <!-- <div class="invalid-feedback">
+                성별을 입력해주세요.
+              </div> -->
+            </div>	
+          <div class="mb-3">
+            <label>이메일</label>
+            <input type="email" class="form-control" id="pmail" name="pmail" placeholder="you@example.com" required onkeypress='return checkBlank(event)'>
+            <!-- <div class="invalid-feedback">
+              이메일을 입력해주세요.
+            </div> -->
+          </div>
+
+          <div class="mb-3">
+            <label>생년월일</label>
+            <input type="text" class="form-control" id="pbirth" name="pbirth" placeholder="19990909" required onkeypress='return checkBlank(event)'>
+            <!-- <div class="invalid-feedback">
+              생년월일을 입력해주세요.
+            </div> -->
+          </div>
+
+          <div class="mb-3">
+            <label>내가 가진 재능을 체크해 주세요</label><br>
+            <input type="checkbox" name='ptalent' value='1' id='a'>요리<br>
+			<input type="checkbox" name='ptalent' value='2' id='b'>청소<br>
+			<input type="checkbox" name='ptalent' value='3' id='c'>미용<br>
+			<input type="checkbox" name='ptalent' value='4' id='d'>강연<br>
+			<input type="checkbox" name='ptalent' value='5' id='e'>기타<br>
+            
+          </div>
+
+          <!-- <div class="row">
+            <div class="col-md-8 mb-3">
+              <label for="root">가입 경로</label>
+              <select class="custom-select d-block w-100" id="root">
+                <option value=""></option>
+                <option>검색</option>
+                <option>카페</option>
+              </select>
+              <div class="invalid-feedback">
+                가입 경로를 선택해주세요.
+              </div>
+            </div>
+            <div class="col-md-4 mb-3">
+              <label for="code">추천인 코드</label>
+              <input type="text" class="form-control" id="code" placeholder="" required>
+              <div class="invalid-feedback">
+                추천인 코드를 입력해주세요.
+              </div>
+            </div>
+          </div> -->
+          <hr class="mb-4">
+         <!--  <div class="custom-control custom-checkbox">
+            <input type="checkbox" class="custom-control-input" id="aggrement" required>
+            <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
+          </div> -->
+          <div class="mb-4"></div>
+          <input class="btn btn-primary btn-outlined btn-lg btn-block" type="button" id="up" value='Join'>
+          <input type=button id="clean" class="btn btn-lg btn-secondary btn-block text-uppercase" value='비우기'>          
+       <!--  </form> -->
+      </div>
+    </div>
+   
+  </div>
+  <!-- <script>
+    window.addEventListener('load', () => {
+      const forms = document.getElementsByClassName('validation-form');
+
+      Array.prototype.filter.call(forms, (form) => {
+        form.addEventListener('submit', function (event) {
+          if (form.checkValidity() === false) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+
+          form.classList.add('was-validated');
+        }, false);
+      });
+    }, false);
+  </script> -->
+
+
 					</div>
 				</div>
 			</div>	
@@ -341,10 +519,10 @@ function email_check(email) {
 	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	return reg.test(email);
 }
-function view(){
+/* function view(){
 	alert('19990909 형식으로 입력 해주세요');
 }
-function checkBlank(event){
+ */function checkBlank(event){
 	if(event.key == ' '){
 		alert('공백은 입력할 수 없습니다');
 		return false;
