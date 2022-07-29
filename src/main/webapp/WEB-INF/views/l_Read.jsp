@@ -97,7 +97,7 @@
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class=" fa fa-regular fa-comments menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="single-post-sidebar.html">Request Board</a></li>
@@ -175,8 +175,8 @@
 	<div id="footerwrap">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4">
-					<h4 class="widget-title">Tags</h4>
+				<div class="col-lg-1">
+					<h4 class="widget-title">댓글넣기</h4>
 					<ul class="tag-widget">
 						<li><a class="btn btn-primary btn-outlined" href="#">News</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Blog</a></li>
@@ -187,12 +187,12 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
 				</div><!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Global Coverage</h4>
+				<div class="col-lg-1">
+					<h4 class="widget-title">댓글</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
 				</div><!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Find Us</h4>
+				<div class="col-lg-8">
+					<h4 class="widget-title">게시물댓글</h4>
 					<p>New York Office,<br/>
 					New York.<br/>
 					F: +458 4808-5489<br/>

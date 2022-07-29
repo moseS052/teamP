@@ -152,8 +152,8 @@ accent-color:green;
 						<input type=hidden id="m_no" value="${m_no}">
 						현재 비밀번호<input type="password" class="form-control" id="ppwd"/>
 						새 비밀번호 입력<input type="password" class="form-control" id="npwd"/>
-						새 비밀번호 확인<input type="password" class="form-control" id="npwd1"/>
-						<input class="btn btn-outlined btn-primary" type="button" id="pwchange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="수정취소" />
+						새 비밀번호 확인<input type="password" class="form-control" id="npwd1"/><br><br>
+						<div style="text-align:center"><input class="btn btn-outlined btn-primary" type="button" id="pwchange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="취소" /></div>
 						</div>
 						
 					</div>
@@ -219,8 +219,11 @@ $(document)
 
 })
 .on('click','#can',function(){
-	alert('수정을 취소하고 홈으로이동합니다')
-	document.location='/pj/'
+	if(confirm('취소하시겠습니까?')){
+		alert('취소하고 홈으로 돌아갑니다')
+		document.location='/pj'
+	}
+	return false;
 })
 
 .on('click','#pwchange',function(){
