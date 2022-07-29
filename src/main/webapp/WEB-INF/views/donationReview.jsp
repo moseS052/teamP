@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@
 <link rel="shortcut icon"
 	href="<c:url value="/resources/assets/img/favicon.ico"/>">
 
-<title>자주 묻는 질문</title>
+<title>사진게시판</title>
 
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
 	rel="stylesheet">
@@ -53,33 +54,39 @@
 </script>
 
 </head>
-<body class="single single-post"> 
 
-  	<div id="preloader"></div>
+<body class="single single-post">
 
-    <div id="search-wrapper">
-        <div class="container">
-            <input id="search-box" placeholder="Search"><span class="close-trigger"><i class="fa fa-angle-up"></i></span>
-        </div>
-    </div>
+	<div id="preloader"></div>
 
-    <!-- END NAV -->
-    <nav class="menu" id="theMenu">
+	<div id="search-wrapper">
+		<div class="container">
+			<input id="search-box" placeholder="Search"><span
+				class="close-trigger"><i class="fa fa-angle-up"></i></span>
+		</div>
+	</div>
+
+	<!-- END NAV -->
+	<nav class="menu" id="theMenu">
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==null}">
-				<a href="login">login</a><a href="signup">회원가입</a>
+				<c:if test="${userinfo==null}">
+					<a href="login">login</a>
+					<a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${userinfo!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a
+						href='logout'>Logout</a>
 				</c:if>
 			</div>
 			<div>
-				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
+				<a href='#'><img
+					src=<c:url value="resources/assets/img/avatar1.png"/> width="20px"
+					height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -106,16 +113,17 @@
 						<li><a href="category-alt.html">Category Page Alt</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i
+						class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id="question" href="#">1:1 질문</a></li>
-					</ul></li>	
+						<li><a id='question' href="#">1:1 질문</a></li>
+					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i
 						class="fa fa-camera menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="photoBoard">사진게시판</a></li>
 						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
 						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
 						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
@@ -131,39 +139,54 @@
 			</ul>
 		</div>
 	</nav>
-    <!-- END NAV -->
-	
+	<!-- END NAV -->
+
 	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
-   		<div class="container">
-	    	<div class="gap"></div> 
-        	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title"></h2>
-                <hr>
-                <p>${qtitle}</p>
-                <hr>
-            </div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
+		<div class="container">
+			<div id="bannertext" class="centered fade-down section-heading">
 
-	<div id="content-wrapper">
-	    <section id="about">
-	   		<div class="container">
-		    	<div class="gap"></div>
-                    <div class="row gap">
-                        <div class="fade-up col-md-10 fade-up" style="margin:20px 20px 20px 60px;">
-                            <div class="centered">
-                                <p><input type="text" class="form-control" name="website" id="website" value="${qcontent }" style="text-align:center; font-size:20px;" readonly /></p>
-                                <p><textarea class="form-control"  readonly style="height:600px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qa }</textarea></p>
-                        	</div>
-                        </div>
-                    </div><!-- row -->
-			</div>	
-	    </section>
+			</div>
+		</div>
 	</div>
+	<div id="content-wrapper">
+		<div class="container">
 
+			<div class="row mt">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">후기 작성하기</h2>
+					<hr>
+					<p>후기 사진을 올려주세요</p>
+					<div class="gap">
+						
+					</div>
+					<div Style="height:90px;">
+						<input type="text" style="height:60px; font-size:25px;" id="photoTitle" class="form-control" placeholder="제목">
+						
+					</div>
+					<div>
+						<textarea style="padding:40px 40px 0 50px; height:500px;" id="photoContent" class="form-control" placeholder="내용"></textarea>
+					</div>
+					<div>
+						<form id="fileForm" method="post" enctype="multipart/form-data">
+							<input class="btn btn-primary btn-outlined" type="file" name="file" id="uploadFile" multiple="true">
+						</form>
+					</div>
+					<div>
+						<input class="btn btn-primary btn-outlined" type="button" id="doDonationreviewBtn" value="후기작성">
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt gap">
+					<div class="col-md-4 post fade-up">
+						
+					</div>
+			</div>
+		</div>
+	</div>
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -177,11 +200,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -189,38 +212,67 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
-	
-	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
+	</div> -->
+
+	<a id="gototop" class="gototop no-display" href="#"><i
+		class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
 
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
-  </body>
-
+</body>
 <script>
-$(document)
- .on('click','#question',function(){
-			if(`${userinfo}`==null){
-				alert('로그인 후 사용가능합니다.')
-			}else{
-			document.location='/pj/question';
+	$(document)
+	.on('click', '#question', function() {
+		console.log(`${userinfo}` == '')
+		if (`${userinfo}` == '') {
+			alert('로그인 후 사용가능합니다.')
+		} else {
+			document.location = '/pj/question';
+		}
+	})
+	.on('click','#doDonationreviewBtn', function(){
+		let formData = new FormData($('#fileForm')[0]);
+		console.log(formData);
+		$.ajax({
+			url:'insertphotoBoard',
+			data:{
+				title: $('#photoTitle').val(),
+				con: $('#photoContent').val()
+			},
+			dataType:'text',
+			type:'get',
+			async:false,
+			success : function(){
+				$.ajax({
+					url:'findb_no',
+					enctype: 'multipart/form-data',
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : 'POST',
+					success:function(data){
+						console.log(data);
+						document.location = '/pj/photoBoard';
+					}
+					
+				})
 			}
 		})
-	
+	})
 </script>
 </html>

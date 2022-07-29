@@ -46,8 +46,9 @@ public class HomeController {
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String home(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
-		if(session.getAttribute("id")==null) { //濡�洹몄�� ��
-			model.addAttribute("userinfo","");
+
+		if(session.getAttribute("id")==null) { //로그인 전
+			model.addAttribute("userinfo", null);
 			
 
 		}else { //濡�洹몄�� �깃났 ��

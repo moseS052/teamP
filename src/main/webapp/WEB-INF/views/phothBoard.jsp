@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page session="false"%>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,7 +13,7 @@
 <link rel="shortcut icon"
 	href="<c:url value="/resources/assets/img/favicon.ico"/>">
 
-<title>자주 묻는 질문</title>
+<title>사진게시판</title>
 
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
 	rel="stylesheet">
@@ -53,33 +54,39 @@
 </script>
 
 </head>
-<body class="single single-post"> 
 
-  	<div id="preloader"></div>
+<body class="single single-post">
 
-    <div id="search-wrapper">
-        <div class="container">
-            <input id="search-box" placeholder="Search"><span class="close-trigger"><i class="fa fa-angle-up"></i></span>
-        </div>
-    </div>
+	<div id="preloader"></div>
 
-    <!-- END NAV -->
-    <nav class="menu" id="theMenu">
+	<div id="search-wrapper">
+		<div class="container">
+			<input id="search-box" placeholder="Search"><span
+				class="close-trigger"><i class="fa fa-angle-up"></i></span>
+		</div>
+	</div>
+
+	<!-- END NAV -->
+	<nav class="menu" id="theMenu">
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==null}">
-				<a href="login">login</a><a href="signup">회원가입</a>
+				<c:if test="${userinfo==null}">
+					<a href="login">login</a>
+					<a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${userinfo!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a
+						href='logout'>Logout</a>
 				</c:if>
 			</div>
 			<div>
-				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
+				<a href='#'><img
+					src=<c:url value="resources/assets/img/avatar1.png"/> width="20px"
+					height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -106,16 +113,17 @@
 						<li><a href="category-alt.html">Category Page Alt</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i
+						class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id="question" href="#">1:1 질문</a></li>
-					</ul></li>	
+						<li><a id='question' href="#">1:1 질문</a></li>
+					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Portfolio <i
 						class="fa fa-camera menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="photoBoard?stanum=1&endnum=6">사진게시판</a></li>
 						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
 						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
 						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
@@ -131,39 +139,67 @@
 			</ul>
 		</div>
 	</nav>
-    <!-- END NAV -->
-	
+	<!-- END NAV -->
+
 	<!-- MAIN IMAGE SECTION -->
 	<div id="headerwrap" class="half">
-   		<div class="container">
-	    	<div class="gap"></div> 
-        	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title"></h2>
-                <hr>
-                <p>${qtitle}</p>
-                <hr>
-            </div>
-		</div><!-- /container -->
-	</div><!-- /headerwrap -->
+		<div class="container">
+			<div id="bannertext" class="centered fade-down section-heading">
 
-	<div id="content-wrapper">
-	    <section id="about">
-	   		<div class="container">
-		    	<div class="gap"></div>
-                    <div class="row gap">
-                        <div class="fade-up col-md-10 fade-up" style="margin:20px 20px 20px 60px;">
-                            <div class="centered">
-                                <p><input type="text" class="form-control" name="website" id="website" value="${qcontent }" style="text-align:center; font-size:20px;" readonly /></p>
-                                <p><textarea class="form-control"  readonly style="height:600px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qa }</textarea></p>
-                        	</div>
-                        </div>
-                    </div><!-- row -->
-			</div>	
-	    </section>
+			</div>
+		</div>
 	</div>
+	<div id="content-wrapper">
+		<div class="container">
 
+			<div class="row mt">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">사진게시판</h2>
+					<hr>
+					<div>
+						<input class="btn btn-outlined btn-primary pull-right"
+							type="button" id="donationReview" value="후기올리기">
+					</div>
+				</div>
+			</div>
+
+			<div class="row mt gap">
+				<c:forEach var="photo" items="${photolist}">
+					<div class="col-md-4 post fade-up">
+						<div class="item-inner">
+							<img style="width: 400px; height: 245px;"
+								src=<c:url value="${photo.b_route }"/> alt=""
+								class="img-responsive">
+							<div class="overlay">
+								<a class="preview btn btn-outlined btn-primary" href=#><i
+									class="fa fa-link"></i></a>
+							</div>
+							<div class="post-meta">
+								<span class="post-comment"><i class="fa fa-comments"></i>
+									댓글갯수</span>
+							</div>
+						</div>
+						<h3>
+							<a href="#">${photo.b_title }</a>
+						</h3>
+						<div class="gap"></div>
+
+						<p>
+							<a class="btn btn-outlined btn-primary" seq="${photo.b_no}" id="readPhotoBoard">Read More</a>
+						</p>
+					</div>
+				</c:forEach>
+
+				
+
+			</div>
+			 <div align="center" id="pageCount">
+					
+				</div> 
+		</div>
+	</div>
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -177,11 +213,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -189,38 +225,62 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
-	
-	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
+	</div> -->
+
+	<a id="gototop" class="gototop no-display" href="#"><i
+		class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
 
-    <!-- Bootstrap core JavaScript
+	<!-- Bootstrap core JavaScript
     ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
-    <script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
+	<!-- Placed at the end of the document so the pages load faster -->
+	<script src="<c:url value="/resources/assets/js/bootstrap.min.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
-  </body>
-
+</body>
 <script>
-$(document)
- .on('click','#question',function(){
-			if(`${userinfo}`==null){
-				alert('로그인 후 사용가능합니다.')
-			}else{
-			document.location='/pj/question';
-			}
-		})
+	$(document)
+	.ready(function(){
+	let a=`${total}`/6;
+	console.log(a);
+	html='';
+	for(let i=1;i<a+1;i++){
+		html+='<a href="photoBoard?stanum='+((i-1)*6+1)+'&endnum='+i*6+'" class=btn id="qqq">'+i+'</a>';
+		
+	}
+	$('#pageCount').append(html);
+	
+	})
+	.on('click','#readPhotoBoard',function(){
+		console.log($(this).attr('seq'));
+		let seq=$(this).attr('seq');
+		document.location = '/pj/ReadPhoto?seq='+ seq;
+	})
+	.on('click', '#question', function() {
+		console.log(`${userinfo}` == '')
+		if (`${userinfo}` == null) {
+			alert('로그인 후 사용가능합니다.')
+		} else {
+			document.location = '/pj/question';
+		}
+	}).on('click', '#donationReview', function() {
+		if (`${userinfo}` == '') {
+			alert('로그인 후 사용가능합니다.')
+		} else {
+			document.location = '/pj/donationReviwe';
+		}
+
+	})
 	
 </script>
 </html>
