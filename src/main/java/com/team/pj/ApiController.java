@@ -410,12 +410,21 @@ public class ApiController {
 	@RequestMapping(value="/check_ad", produces="application/text;charset=utf8")
 	public String dochead(@RequestParam("m_no") int m_no,
 						  @RequestParam("l_date") String l_date,
-						  @RequestParam("t_no") int t_no) {
+						  @RequestParam("t_no") int t_no, HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		String nick=(String) session.getAttribute("nick");
 		System.out.println("{占싱몌옙="+m_no+"}{占쏙옙짜="+l_date+"}{占쏙옙�뱄옙호="+t_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
-			int l_no = team.checkl_no(m_no,l_date);
-			System.out.println(l_no);
-			team.check_ad(l_no,t_no);
+		int l_no = team.checkl_no(m_no,l_date);
+		team.check_ad(l_no,t_no);
+		String tName=team.findTname(t_no);
+		ArrayList<Integer> arM_no= team.findT_C_P(t_no);
+		for(int i=0;i<arM_no.size();i++) {
+			if(arM_no.get(i)==m_no) continue;
+			String mes="<a href='' id='meminfo' seq='"+m_no+"'>"+nick+"</a>님께서&nbsp; '"+tName+"' 재능기부자를 찾고있습니다.(<a id='goList' href='l_Read?l_no="+l_no+"'>게시판가기</a>)";
+			team.insertAlarm(arM_no.get(i), mes);
+		}
+		
 		return "";
 	}
 	

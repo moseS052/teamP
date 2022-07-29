@@ -44,7 +44,21 @@ $(document)
 
 </script>
 </head>
-
+<style>
+a#meminfo, #btnSendNote, #goList{
+ 	display:inline; 
+	font-size:18px;
+	color:#007979;
+}
+a#goList{
+margin-left: 4px
+}
+a#yesyes{
+	display:inline;
+	font-size:14px;
+	color:#007979;
+}
+</style>
 <body>
 
 	<div id="preloader"></div>
@@ -75,8 +89,14 @@ $(document)
 			<div>
 				<c:if test="${m_no!=null}">
 				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
-				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
+				<div class="dropdown pull-right">
+				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
+		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+		        
+<!-- 		        <div class="well"><div class="square pull-right" id="but">헬로</div><h4>I'm Kim</h4></div> -->
+<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a> -->
+<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a> -->
+				</div></div>
 				</c:if>
 			</div>
 			<ul id="main-menu">
@@ -138,7 +158,7 @@ $(document)
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90'>나</a> 
+						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90' style='font-size:50px;color:yellow'>나</a> 
 <!-- 						                  여기서부터 작성할 것 버튼 누르면 바로 /meminfo?m_no=어쩌구 가는 걸로 -->
 					</h1>
 					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
@@ -1245,11 +1265,26 @@ $(document)
 
 $(document)
 .ready(function(){
-	console.log(`${m_no}`);
+	console.log(`${userinfo}`!='');
+	if(`${userinfo}`!=''){
+	alarmList()
+	}
 })
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
 	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
 	return false;
 })
 
@@ -1317,6 +1352,52 @@ $(document)
 		document.location='/pj/question';
 	}
 })
+
+.on('click','#goList, #btnSendNote, #yesyes',function(){
+	let ms=$(this).parent().parent().attr("alseq");
+	console.log(ms);
+	$.ajax({
+		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+})
+
+
+function alarmList() {
+	let str='';
+	let icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+	
+	$.ajax({
+		type:'get',url:'alarm',data:{},dataType:'json',
+		success:function(data){
+			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					icon='<img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" />';
+					break;
+				}else icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+			}
+			$('#alarmClick').append(icon);
+			for(let i=0;i<7;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:white"><div class="square pull-right" id="but" style="margin-top:-13px;"><a id="yesyes" href="">확인&nbsp;&nbsp;&nbsp;</a>'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>';
+					$('#alarmInto').append(str);
+				}else {
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:#e4e4e4"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>'
+					$('#alarmInto').append(str);
+				}
+			}
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
 
 </script>
 

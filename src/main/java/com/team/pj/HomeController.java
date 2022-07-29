@@ -208,7 +208,7 @@ public class HomeController {
 		return ja.toJSONString();
 	}
 	
-	//���� ������ ��Ʈ�ѷ�  all page need jquery because a tag
+	//note send  all page need jquery because a tag
 	@ResponseBody
 	@RequestMapping(value="/noteSend",produces="application/text;charset=utf8")
 	public String noteSend(HttpServletRequest req) {
@@ -280,15 +280,33 @@ public class HomeController {
 	}
 	
 	//alarm call
-	@RequestMapping(value = "/alarm", method = RequestMethod.GET)
-	public String alarm(HttpServletRequest req, Model model) {
+	@ResponseBody
+	@RequestMapping(value = "/alarm", produces="application/text;charset=utf8")
+	public String alarm(HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		iteamP ip=sqlSession.getMapper(iteamP.class);
 		ArrayList<alarmVO> aravo=ip.showAlarm((int)session.getAttribute("m_no"));
-		
-		model.addAttribute("aravo",aravo.get(0).getAlarm());
-		model.addAttribute("m_no",session.getAttribute("m_no"));
-		
-		return "alarm";
+		JSONArray ja=new JSONArray();
+		for(int i=0;i<aravo.size();i++) {
+			alarmVO avo=aravo.get(i);
+			JSONObject jo = new JSONObject();
+			jo.put("al_no", avo.getAl_no());
+			jo.put("m_no", avo.getM_no());
+			jo.put("alarm",avo.getAlarm());
+			jo.put("al_time", avo.getAl_time());
+			jo.put("al_check", avo.getAl_check());
+			ja.add(jo);
+		}
+		return ja.toJSONString();
 	}
+	
+	//alarm check
+	@ResponseBody
+	@RequestMapping(value = "/alarmCheck", produces="application/text;charset=utf8")
+	public String alarmCheck(HttpServletRequest req) {
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		ip.alarmCheck(Integer.parseInt(req.getParameter("al_no")));
+		return "";
+	}
+	
 }

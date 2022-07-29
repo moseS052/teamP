@@ -147,7 +147,7 @@
 	update list set l_views=l_views+1 where l_no=#{param1}
 </update>
 <update id="prUodate">
-update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4},l_time=current_date,l_name=#{param5},l_address=#{param6},l_koo=#{param7},nop=#{param8} where l_no=#{param9} 
+	update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4},l_time=current_date,l_name=#{param5},l_address=#{param6},l_koo=#{param7},nop=#{param8} where l_no=#{param9} 
 </update>
 <select id="lookup" resultType="int">
 	select count(m_no) from apply where l_no=#{param1}
@@ -156,10 +156,19 @@ update list set m_no=#{param1},l_title=#{param2},l_con=#{param3},l_date=#{param4
 	delete from talent_check_list where l_no=#{param1}
 </delete>    
 <insert id='insertAlarm'>
-	insert into alarm values(#{param1},#{param2},CURRENT_date,0)
+	insert into alarm values(al_sq.nextval,#{param1},#{param2},CURRENT_date,0)
 </insert>
 <select id='showAlarm' resultType="com.team.pj.alarmVO">
-	select * from alarm where m_no=#{param1}
+	select al_no,m_no,alarm,to_char(al_time, 'MM/DD HH24:MI') al_time,al_check from alarm where al_time in(select max(al_time) from alarm where m_no=#{param1} group by alarm) and m_no=#{param1} order by al_check, al_time desc
+</select>
+<update id='alarmCheck'>
+	update alarm set al_check=1 where al_no=#{param1}
+</update>
+<select id='findT_C_P' resultType="int">
+	select m_no from talent_check where t_no=#{param1}
+</select>
+<select id='findTname' resultType="string">
+	select t_name from talent where t_no=#{param1}
 </select>
 <select id='privacyRead' resultType="com.team.pj.memberDTO">
 	select * from member where m_no=#{param1}

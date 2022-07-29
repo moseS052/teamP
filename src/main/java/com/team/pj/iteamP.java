@@ -64,4 +64,7 @@ public interface iteamP {
 	int pwdcheck(int m_no,int pw);
 	void pwdchange(int npwd1,int m_no);
 	ArrayList<L_listDTO> open_mypost(int m_no);
+	void alarmCheck(int al_no);
+	ArrayList<Integer> findT_C_P(int t_no);
+	String findTname(int t_no);
 }
