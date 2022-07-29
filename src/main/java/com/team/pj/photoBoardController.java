@@ -105,10 +105,20 @@ public class photoBoardController {
 		return "";
 	}
 	@RequestMapping("/ReadPhoto")
-	public String ReadPhoto(@RequestParam("seq") int b_no, Model mod) {
+	public String ReadPhoto(@RequestParam("seq") int b_no, Model model, HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		if (session.getAttribute("id") == null) { // 로그인 전
+			model.addAttribute("userinfo", null);
+
+		} else { // 로그인 성공 후
+			model.addAttribute("userinfo", session.getAttribute("id"));
+
+		}
+		
+		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		ArrayList<photoBoardDTO> boardList=ipt.ReadPhotoBoard(b_no);
-		mod.addAttribute("list",boardList);
+		model.addAttribute("list",boardList);
 		
 		return "ReadphotoBoard";
 	}
