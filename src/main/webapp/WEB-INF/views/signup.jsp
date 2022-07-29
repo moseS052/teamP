@@ -310,7 +310,7 @@
           </div> -->
           <div class="mb-4"></div>
           <input class="btn btn-primary btn-outlined btn-lg btn-block" type="button" id="up" value='Join'>
-          <input type=button id="clean" class="btn btn-lg btn-secondary btn-block text-uppercase" value='비우기'>          
+          <input type=button id="clean" class="btn btn-lg btn-secondary btn-block text-uppercase" value='취소'>          
        <!--  </form> -->
       </div>
     </div>
@@ -437,9 +437,11 @@ $(document)
 	}
 })
 .on('click','#clean',function(){
-	$('#pid,#ppw,#ppw2,#pname,#pnick,#pphone,#pmail,#pbirth').val('');
-	$('input:checkbox[name="ptalent"]').prop("checked",false);
-	$('input:radio[name="pgender"]').prop("checked",false);
+	if(confirm('취소하시겠습니까?')){
+		alert('취소하고 홈으로 돌아갑니다')
+		document.location='/pj'
+	}
+	return false;
 })
 /* .on('change','#ppw',function(){
 	if($('#ppw').val()!=$('#ppw2').val() && $('#ppw2').val()==''){
