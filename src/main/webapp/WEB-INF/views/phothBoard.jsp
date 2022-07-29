@@ -43,9 +43,8 @@
 	$(document).ready(
 			function() {
 				jQuery('#headerwrap').backstretch(
-						[ "resources/assets/img/bg/bg1.jpg",
-								"resources/assets/img/bg/bg2.jpg",
-								"resources/assets/img/bg/bg3.jpg" ], {
+						[ "resources/assets/img/bg/camera.png",
+								 ], {
 							duration : 8000,
 							fade : 500
 						});
@@ -89,53 +88,49 @@
 					height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
+			<c:if test="${userinfo!=''}">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">개인정보<i
+						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="/pj">Home Agency</a></li>
-						<li><a href="index-blog.html">Home Blog</a></li>
-						<li><a href="index-single-page.html">Home Single Page</a></li>
+						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
+						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
+						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
 					</ul></li>
+					</c:if>
+				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
+					<i class="fa fa-home menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="proposal?m_no=45">봉사활동 기획서</a></li>
+					<ul class="dropdown-menu">	
+						<li>
+						<c:if test="${userinfo==''}">
+						<a href="login">봉사활동기획서</a>
+						</c:if>
+						<c:if test="${userinfo!=''}">
+						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
+						</c:if>
+						</li>
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
-						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-post.html">Single Post</a></li>
-						<li><a href="single-post-sidebar.html">Single Post
-								Sidebar</a></li>
-						<li><a href="category.html">Category Page</a></li>
-						<li><a href="category-alt.html">Category Page Alt</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						
 					</ul></li>
+				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
+					<i class="fa fa-camera menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i
-						class="fa fa-solid fa-question menu-icon"></i></a>
+					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
 						<li><a id='question' href="#">1:1 질문</a></li>
-					</ul></li>
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Portfolio <i
-						class="fa fa-camera menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="photoBoard?stanum=1&endnum=6">사진게시판</a></li>
-						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
-					</ul></li>
-				<li><a href="#" class="search-trigger">Search <i
-						class="fa fa-search menu-icon"></i></a></li>
-			</ul>
-
-			<ul id="social-icons">
-				<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li class="dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+					</ul></li>	
+				
 			</ul>
 		</div>
 	</nav>
@@ -145,7 +140,9 @@
 	<div id="headerwrap" class="half">
 		<div class="container">
 			<div id="bannertext" class="centered fade-down section-heading">
-
+				<br><br><br><br><br>
+				<h2 class="main-title">사진게시판</h2>
+				<hr>
 			</div>
 		</div>
 	</div>
@@ -154,8 +151,8 @@
 
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">사진게시판</h2>
-					<hr>
+					<!-- <h2 class="main-title">사진게시판</h2>
+					<hr> -->
 					<div>
 						<input class="btn btn-outlined btn-primary pull-right"
 							type="button" id="donationReview" value="후기올리기">

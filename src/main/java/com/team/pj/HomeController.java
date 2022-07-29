@@ -76,7 +76,7 @@ public class HomeController {
 		model.addAttribute("id",session.getAttribute("id"));
 		return "signup";
 	}
-	
+	@ResponseBody
 	@RequestMapping(value="/user_check", method=RequestMethod.POST)
 	public String doCheck(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
@@ -103,7 +103,7 @@ public class HomeController {
 			model.addAttribute("m_no",session.getAttribute("m_no"));
 			model.addAttribute("nick",session.getAttribute("nick"));
 		}
-		return "redirect:/";
+		return Integer.toString(n);
 	}
 	//濡�洹몄����
 	@RequestMapping("/logout")
