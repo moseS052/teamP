@@ -67,4 +67,5 @@ public interface iteamP {
 	void alarmCheck(int al_no);
 	ArrayList<Integer> findT_C_P(int t_no);
 	String findTname(int t_no);
+	int datecheck(int m_no,String l_date);
 }

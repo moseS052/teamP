@@ -134,7 +134,6 @@ accent-color:green;
         	<div id="bannertext" class="centered fade-down section-heading">
                 <h2 class="main-title">봉사활동작성</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
@@ -144,7 +143,7 @@ accent-color:green;
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-
+						
 					<div class="col-md-8 fade-up">
 						<h3>봉사활동작성</h3>
 						
@@ -159,7 +158,7 @@ accent-color:green;
 						   
 						   <div class="col-md-4 post fade-up">시행일자<input type="date" id="l_date" class="form-control"></div>
 						   <div class="col-md-4 post fade-up">사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple></div>
-							<div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" placeholder="선택안할시자동5입력" class="form-control"></div>
+							<div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" placeholder="선택안할시자동5입력" class="form-control" min="0"></div>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
                             <option value=''></option>
                             <option>강남구</option>
@@ -196,7 +195,7 @@ accent-color:green;
 						상세주소<input type="text" class="form-control" id="l_address"/>
 						<input type="hidden" id='hid'>
 						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
-						<div class="col-md-8 fade-up"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="등록" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
+						<div style="text-align:center"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="등록" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
 					</div>
 				</div>
 			</div>	
@@ -258,19 +257,11 @@ accent-color:green;
 
 $(document)
 .ready(function(){
+	$("#nop").keyup(function(){ $(this).val($(this).val().replace(/[^0-9:\-]/gi,"") );  }); 
 	
 })
 
 .on('click','#ad',function(){	
-	
-	console.log('이름='+$('#m_no').val());
-	console.log('제목='+$('#l_title').val());
-	console.log('내용='+$('#l_content').val());
-	console.log('날자='+$('#l_date').val());
-	console.log('사진='+$('#l_file').val());
-	console.log('신청구역='+$('#l_koo option:selected').val());
-	console.log('상호='+$('#l_name option:selected').text());
-	console.log('상세주소='+$('#l_address').val());
 	a=0;
 	if($('#nop').val()==0){
 		a=5;
@@ -281,23 +272,26 @@ $(document)
 	$.ajax({
 		type:'get',url:'new_ad',data:{nop:a,m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
 			dataType:'text',async: false,
-	  		success:function(){
-    				console.log('ann');
-	  			$("input[type=checkbox]:checked").each(function(){
-    				const value = $(this).val();
-    				$.ajax({
-    						type:'get',url:'check_ad',data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
-    						dataType:'text',
-    					  		success:function(){
-    					  		document.location='/pj/success_page'
-    				    		},
-    				    		error:function(){
-    				    			alert('데이터등록실패');
-    				    		},
-    				    		complete:function(){}
-    				    	});
-    			})
-	  			document.location='/pj/success_page'
+	  		success:function(data){
+    				if(data==1){
+    					alert('중복된 날입니다')
+    				}else{
+    					$("input[type=checkbox]:checked").each(function(){
+    	    				const value = $(this).val();
+    	    				$.ajax({
+    	    						type:'get',url:'check_ad',data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
+    	    						dataType:'text',
+    	    					  		success:function(){
+    	    					  		document.location='/pj/success_page'
+    	    				    		},
+    	    				    		error:function(){
+    	    				    			alert('데이터등록실패');
+    	    				    		},
+    	    				    		complete:function(){}
+    	    				    	});
+    	    			})
+    				}
+	  			
     		},
     		error:function(){
     		},

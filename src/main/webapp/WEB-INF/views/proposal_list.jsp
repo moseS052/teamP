@@ -56,10 +56,10 @@
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
-			 	<c:if test="${userinfo==''}">
+			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
-				<c:if test="${userinfo!=''}">
+				<c:if test="${userinfo!=null}">
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
 			</div>
@@ -71,7 +71,7 @@
 				</c:if>
 			</div>
 			<ul id="main-menu">
-			<c:if test="${userinfo!=''}">
+			<c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
@@ -88,10 +88,10 @@
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${userinfo==''}">
+						<c:if test="${userinfo==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${userinfo!=''}">
+						<c:if test="${userinfo!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>
@@ -252,10 +252,10 @@ $(document)
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
 					if(jo['count']==jo['nop']){
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
 						$('#cla').append(str);
 					}else{
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
 						$('#cla').append(str);
 					}
 	  			}
@@ -274,10 +274,10 @@ function showlist(){
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
 				if(jo['count']==jo['nop']){
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
 					$('#cla').append(str);
 				}else{
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="90"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
 					$('#cla').append(str);
 				}
 				
