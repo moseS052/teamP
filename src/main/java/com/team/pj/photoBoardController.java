@@ -125,21 +125,23 @@ public class photoBoardController {
 		String nick;
 		String date;
 		int view;
+		int m_no;
 		for(int i=0; i<boardList.size();i++) {
 			b_con=boardList.get(i).getB_con();
 			b_title=boardList.get(i).getB_title();
 			nick=boardList.get(i).getNick();
 			date=boardList.get(i).getB_date();
 			view=boardList.get(i).getViews();
+			m_no=boardList.get(i).getM_no();
 			model.addAttribute("b_con", b_con);
 			model.addAttribute("title", b_title);
 			model.addAttribute("nick",nick);
 			model.addAttribute("date",date);
 			model.addAttribute("view",view);
+			model.addAttribute("m_no", m_no);
 		}
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		
-
 		model.addAttribute("list",boardList);
 		model.addAttribute("b_no",b_no);
 		
@@ -147,5 +149,10 @@ public class photoBoardController {
 		
 		
 		return "ReadphotoBoard";
+	}
+	@RequestMapping("/delPhotoBoard")
+	public String delPhotoBoard(@RequestParam("b_no") int b_no) {
+		System.out.println(b_no);
+		return "";
 	}
 }

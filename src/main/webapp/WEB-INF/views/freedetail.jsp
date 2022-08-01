@@ -612,8 +612,7 @@ function insertComment() {
 	});
 }
 function commentLIst() {
-	$
-			.ajax({
+	$.ajax({
 				url : 'comment',
 				data : {
 					page : $('#page').val()
