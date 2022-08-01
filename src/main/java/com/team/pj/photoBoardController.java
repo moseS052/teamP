@@ -126,6 +126,7 @@ public class photoBoardController {
 			System.out.println(b_con );
 		}
 		
+
 		model.addAttribute("list",boardList);
 		model.addAttribute("b_no",b_no);
 		

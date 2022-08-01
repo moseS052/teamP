@@ -154,7 +154,7 @@
 					<input type=hidden name=bdto.m_no value="${bdto.m_no }">
 					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td>
 					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td>
-					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly></td>
+					<tr><td>작성자 :&nbsp;&nbsp;<a href='' id='meminfo' seq='${bdto.m_no}'>${bdto.nick}</a></td>
 					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;"  value="${bdto.b_date }" readonly></td></tr>
 					</table>
 					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined">
@@ -245,6 +245,24 @@ $(document)
 			window.location.href="<%= request.getContextPath() %>/reqboard";
 		}
 	}) 
+})
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
 })
 </script>
 </html>
