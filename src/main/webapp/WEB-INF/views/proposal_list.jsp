@@ -79,6 +79,7 @@
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}l">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -251,12 +252,18 @@ $(document)
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
-					if(jo['count']==jo['nop']){
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					if(getToday()>jo['l_date']){
+						let str='<div class="well" style="background-color:#E2E2E2"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>Finish'+'</p></a></div>';
 						$('#cla').append(str);
-					}else{
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-						$('#cla').append(str);
+					}
+					if(getToday()<=jo['l_date']){
+						if(jo['count']==jo['nop']){
+							let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+							$('#cla').append(str);
+						}else{
+							let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+							$('#cla').append(str);
+						}
 					}
 	  			}
     		},
@@ -273,14 +280,19 @@ function showlist(){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
-				if(jo['count']==jo['nop']){
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-					$('#cla').append(str);
-				}else{
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+				if(getToday()>jo['l_date']){
+					let str='<div class="well" style="background-color:#E2E2E2"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>Finish'+'</p></a></div>';
 					$('#cla').append(str);
 				}
-				
+				if(getToday()<=jo['l_date']){
+					if(jo['count']==jo['nop']){
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						$('#cla').append(str);
+					}else{
+						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						$('#cla').append(str);
+					}
+				}
   			}
 		},
 		error:function(){
@@ -290,6 +302,13 @@ function showlist(){
 		
 	});
 }
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
 
+    return year + "-" + month + "-" + day;
+}
 </script>
 </html>

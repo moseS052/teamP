@@ -43,6 +43,7 @@ public interface iteamP {
 	void free_update(String b_title,String b_con,int b_no);
 	void free_viewcnt(int b_no);
 	int L_del(int l_no);
+	void l_apdel(int l_no);
 	L_listDTO reto(int l_no);
 	ArrayList<Integer> bringt_no(int l_no);
 	void delcheck(int l_no);
@@ -72,4 +73,5 @@ public interface iteamP {
 	void req_insert(int m_no,String b_title,String b_con);
 	boardDTO req_detail(int b_no);
 	ArrayList<boardDTO> open_board(int m_no);
+	ArrayList<L_listDTO> open_mysubs(int m_no);
 }

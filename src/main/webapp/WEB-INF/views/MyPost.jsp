@@ -87,6 +87,7 @@
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -219,22 +220,56 @@
 <script>
 $(document)
 .ready(function(){	
-	showlist();
+	showlist()
 })
 function showlist(){
+	var ar = new Array()
+	var ar1 = new Array()
 	$.ajax({
 		url:'open_mypost', data:{m_no:`${m_no}`},dataType:'json',type:'get',
 		success:function(data){
 			$('#cla').empty();
-  			for(let i=0;i<5;i++){
-				let jo=data[0][0];
-				let jj=data[1][i];
-				console.log(jj)
-				console.log(jj['b_date']);
-				console.log(jo)
-				console.log(jo['l_date']);
-				
+  			for(let i=0;i<data.length;i++){
+				let jo=data[0][i];
+// 				console.log(jo)
+				let str='<a href="l_Read?l_no='+jo['l_no']+'">'
+				+'<div class="well" style="height:90px; padding-top:0px;">'
+				+'<div class="square pull-right" style="padding-top:10px" id="but">'+jo['l_views']+'</div>'
+				+'<h4>'+jo['l_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['l_date']+'\n'
+				+'신청현황'+jo['count']+'/'+jo['nop']+'</p></div></div></a>';
+				let ob={date:jo['l_date'],div:str}
+				ar.push(ob);
   			}
+  			for(let j=0;j<data.length;j++){
+				let jj=data[1][j];
+// 				console.log(jj['b_type'])
+				if(jj['b_type']=="Q"){
+					console.log('true');
+				}
+				if(jj['b_type']=="F"){
+					let str='<a href="freedetail?b_no='+jj['b_no']+'">'
+					+'<div class="well" style="height:90px; padding-top:0px;">'
+					+'<div class="square pull-right" style="padding-top:10px" id="but">'+jj['views']+'</div>'
+					+'<h4>'+jo['b_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['b_date']+'\n'
+					+'</p></div></div></a>';
+					let ob={date:jj['b_date'],div:str}
+					ar.push(ob);
+				}
+				else if(jj['b_type']=="Q"){
+					let str='<a href="reqdetail?b_no='+jj['b_no']+'">'
+					+'<div class="well" style="height:90px; padding-top:0px;">'
+					+'<div class="square pull-right" style="padding-top:10px" id="but">'+jj['views']+'</div>'
+					+'<h4>'+jo['b_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['b_date']+'\n'
+					+'</p></div></div></a>';
+					let ob={date:jj['b_date'],div:str}
+					ar.push(ob);
+					$('#cla').append(str);
+					
+				}
+  			}
+//   				for(let z=0; z<ar.length;z++){
+//   					console.log(ar[z].div);
+//   				}
 		},
 		error:function(){
     		alert('데이터등록실패');
