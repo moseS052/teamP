@@ -58,6 +58,9 @@ a#yesyes{
 	font-size:14px;
 	color:#007979;
 }
+#firstAvatar{
+	display:inline;
+}
 </style>
 <body>
 
@@ -75,29 +78,35 @@ a#yesyes{
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
+				<c:if test="${m_no!=null}">
+				<a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a>
+				<a href='' id="firstNick">${nick }&nbsp;님</a>
+				<div class="dropdown pull-right">
+				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
+		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+				</div></div>
+				</c:if>
+				<c:if test="${m_no==null}">
 				<h2>
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
+				</c:if>
 			 	<c:if test="${userinfo==null}">
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
 
 				<c:if test="${userinfo!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo }&nbsp;님<a href='logout'>Logout</a>
+				<a href='logout'>Logout</a>
 				</c:if>
 			</div>
 			<div>
-				<c:if test="${m_no!=null}">
-				<a href=''><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a>
-				<div class="dropdown pull-right">
-				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
-		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
-		        
-<!-- 		        <div class="well"><div class="square pull-right" id="but">헬로</div><h4>I'm Kim</h4></div> -->
-<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a> -->
-<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a> -->
-				</div></div>
-				</c:if>
+<%-- 				<c:if test="${m_no!=null}"> --%>
+<%-- 				<a href=''><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a> --%>
+<!-- 				<div class="dropdown pull-right"> -->
+<!-- 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a> -->
+<!-- 		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;"> -->
+<!-- 				</div></div> -->
+<%-- 				</c:if> --%>
 			</div>
 			<ul id="main-menu">
 			<c:if test="${userinfo!=null}">
@@ -1265,6 +1274,11 @@ $(document)
 	if(`${userinfo}`!=''){
 	alarmList()
 	}
+})
+
+.on('click','#firstNick',function(){
+	$('#meminfo').trigger('click');
+	return false;
 })
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){

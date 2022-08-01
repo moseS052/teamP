@@ -6,9 +6,29 @@ public class SearchVO {
 	private String time;
 	private int seqno;
 	private String con;
+	private int views;
+	private int m_no;
 	
 	public SearchVO() {
 	}
+	
+	
+	public int getM_no() {
+		return m_no;
+	}
+
+	public void setM_no(int m_no) {
+		this.m_no = m_no;
+	}
+	
+	public int getViews() {
+		return views;
+	}
+
+	public void setViews(int views) {
+		this.views = views;
+	}
+
 
 	public String getCon() {
 		return con;

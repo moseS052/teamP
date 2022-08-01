@@ -57,6 +57,29 @@
 	th {
     	text-align:center;
 	}
+	#searchDIV{
+		text-align:right;
+		margin-top:25px;
+	}
+	#boxboxq{
+		margin-top:-45px;
+	}
+ 	#btnSearch, #btnAll{ 
+ 		height:24px;
+ 		margin-top:-4px;
+ 		margin-left:5px;
+ 	} 
+ 	#searc,#all1{
+ 		margin-top:-7px;
+ 	}
+ 	#selSearch{
+ 		padding-top:1px;
+ 		font-size:15px;
+ 		margin-right:-2px;
+ 	}
+ 	#searching{
+ 		font-size:17px;
+ 	}
 </style>	
   </head>
 
@@ -162,14 +185,18 @@
 	<div id="content-wrapper">
 	    <section id="about">
 	   		<div class="container">
-		    	<div class="gap"></div>
-				<div class="row gap">
+		    	<div class="gap">
+		    	<div id="searchDIV">
+		    	<h5 class="fade-up" id="showAll"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
+					<input type='text' id='searching'><a class="btn btn-primary btn-outlined" href="" id="btnSearch"><p id="searc">검 &nbsp; 색</p></a></h5>
+		    	</div></div>
+				<div class="row gap" id="boxboxq">
 
 					<div class="col-md-12">
 					<!-- <h1 align="center">Free Board</h1> -->
 					<table class="table table-striped" style="">
-					<thead><tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr></thead>
-					<tbody>
+					<thead id="thd"><tr><th>게시번호</th><th>제목</th><th>작성자</th><th>작성일자</th><th>조회수</th></tr></thead>
+					<tbody id="tbd">
 					<c:forEach var="boardDTO" items="${boardlist }">
 					<tr><td>${boardDTO.b_no }</td><td><a href='freedetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
 					<td><a href='' id='meminfo' seq='${boardDTO.m_no}'>${boardDTO.nick}</a></td>
@@ -260,6 +287,76 @@ $(document)
 		return false;
 	}else{
 	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
+})
+
+.on('keyup','#searching',function(key){ // search connect enter
+	if(key.keyCode==13){
+		$('#btnSearch').trigger('click');
+	}
+	return false;
+})
+//search
+.on('click','#btnSearch',function(){
+	//검색하는 게시판의 내용이 들어가야함  view 이용해서 사용할 것!
+	let table='bfsearch';  // view 이름
+	let search=$('#searching').val(); //검색값
+	if($('#searching').val()==''){
+		alert('검색값이 없습니다.');
+		return false;
+	}
+	$('#tbd').empty();
+	$('#btnAll').detach();
+	if($('#selSearch option:selected').text()=='작성자'){
+		$.ajax({
+			type:'post',url:'searchNick',data:{table:table,search:search},dataType:'json',
+			success:function(data){
+				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
+				if(data==''){
+					alert('검색값이 없습니다');
+				}else {
+					for(let i=0;i<data.length;i++){
+						let jo=data[i];
+						let str='<tr><td>'+jo['seqno']+'</td><td><a href="freedetail?b_no='+jo['seqno']+'">'
+								+jo['title']+'</a></td><td><a href="" id="meminfo" seq="'+jo['m_no']+'">'
+								+jo['nick']+'</a></td><td>'+jo['date']+'</td><td>'+jo['views']+'</td>';
+						$('#tbd').append(str);
+					}
+				}
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard" id="btnAll"><p id="all1">전체보기</p></a>');
+	} else {
+		$('#thd').empty();
+		$('#thd').append('<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>내 용</th><th>작성일자</th><th>조회수</th></tr>');
+		$.ajax({
+			type:'post',url:'searchTNC',data:{table:table,search:search},dataType:'json',
+			success:function(data){
+				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
+				console.log(data);
+				
+				if(data==''){
+					alert('검색값이 없습니다');					
+				}else{
+					for(let i=0;i<data.length;i++){
+						let jo=data[i];
+						let str='<tr><td>'+jo['seqno']+'</td><td><a href="freedetail?b_no='+jo['seqno']+'">'
+						+jo['title']+'</a></td><td><a href="" id="meminfo" seq="'+jo['m_no']+'">'
+						+jo['nick']+'</a></td><td>'+jo['con']+'</td><td>'+jo['date']+'</td><td>'+jo['views']+'</td>';
+						$('#tbd').append(str);
+					}
+					
+				}
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard" id="btnAll"><p id="all1">전체보기</p></a>');
 	}
 	return false;
 })

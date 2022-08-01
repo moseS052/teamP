@@ -257,6 +257,8 @@ public class HomeController {
 			jo.put("date", svo.getTime());
 			jo.put("seqno", svo.getSeqno());
 			jo.put("con", svo.getCon());
+			jo.put("views", svo.getViews());
+			jo.put("m_no", svo.getM_no());
 			ja.add(jo);
 		}
 		map.clear();
@@ -283,6 +285,8 @@ public class HomeController {
 			jo.put("title", svo.getTitle());
 			jo.put("date", svo.getTime());
 			jo.put("seqno", svo.getSeqno());
+			jo.put("views", svo.getViews());
+			jo.put("m_no", svo.getM_no());
 			ja.add(jo);
 		}
 		
