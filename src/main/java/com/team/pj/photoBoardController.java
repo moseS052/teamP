@@ -139,6 +139,7 @@ public class photoBoardController {
 		}
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		
+
 		model.addAttribute("list",boardList);
 		model.addAttribute("b_no",b_no);
 		

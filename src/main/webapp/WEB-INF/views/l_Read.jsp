@@ -146,7 +146,7 @@
                         <div class="well">
                         <input type="hidden" id="l_no" value="${l_no}">
                         <input type="hidden" id="user_name" value="${userinfo}">
-                        <p>${l_nick}<div class="square pull-right">${l_views}</div></p>
+                        <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a><div class="square pull-right">${l_views}</div></p>
                         <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
@@ -303,6 +303,24 @@ $(document)
 	}
 		
 	
+})
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
 })
 .on('click','#map',function(){
 	let a=`${l_addr}`

@@ -232,6 +232,17 @@ git push -d origin 브렌치명    == 원격 브렌치 삭제
 
 ★ l_no seq = list_sq    ,   사용-  list_sq.nextval 
 
+### lcomment_t  =리스트 댓글 테이블
+
+| c_no    | l_no      | c_con    | m_no    | c_date | c_pa_no     |
+| ------- | --------- | -------- | ------- | ------ | ----------- |
+| 자체seq | 목록seq    | 내용     | 회원seq | 시간   | 상위댓글seq |
+| number  | number    | varchar2 | number  | date   | number      |
+| primary |           | NN       | NN      | NN     |             |
+
+★ c_no seq = lcomment_sq    ,   사용-  lcomment_sq.nextval  
+
+
 ### review   = 후기 테이블, 목록마다 포토테이블 b_no 
 
 |l_no    | b_no    |
