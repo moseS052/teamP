@@ -34,7 +34,7 @@ $(document)
 .ready(
 	function() {
 		jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/main.jpg", "resources/assets/img/bg/main2.png",
+				[ "resources/assets/img/bg/main.jpg", "resources/assets/img/bg/main4.jpg",
 					"resources/assets/img/bg/main3.png" ], {
 					duration : 8000,
 					fade : 500
@@ -127,27 +127,22 @@ a#yesyes{
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class=" fa fa-regular fa-comments menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
 						
 					</ul></li>
+				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
+					<i class="fa fa-camera menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
 						<li><a id='question' href="#">1:1 질문</a></li>
 					</ul></li>	
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Portfolio <i
-						class="fa fa-camera menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="photoBoard?stanum=1&endnum=6">사진게시판</a></li>
-						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
-					</ul></li>
+				
 			</ul>
 		</div>
 	</nav>

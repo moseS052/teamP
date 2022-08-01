@@ -22,7 +22,7 @@ public class questionController {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	//여서부터 작성
+	//�ъ��遺��� ����
 	/*
 	 * @RequestMapping(value = "/qna", method = RequestMethod.GET) public String
 	 * qnaPage() {
@@ -34,13 +34,13 @@ public class questionController {
 	@RequestMapping("/qna")
 	public String QnaList(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
-		if(session.getAttribute("id")==null) { //로그인 전
+		if(session.getAttribute("id")==null) { //濡�洹몄�� ��
 			model.addAttribute("userinfo",null);
 			
 
-		}else { //로그인 성공 후
+		}else { //濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo",session.getAttribute("id"));
-			
+			model.addAttribute("m_no", session.getAttribute("m_no"));
 		}
 		
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
@@ -54,13 +54,13 @@ public class questionController {
 		@RequestMapping("/qnaanswer")
 		public String QnaAnsewr(@RequestParam("q_no") int q_no, Model mod, HttpServletRequest req) {
 			HttpSession session=req.getSession();
-			if(session.getAttribute("id")==null) { //로그인 전
+			if(session.getAttribute("id")==null) { //濡�洹몄�� ��
 				mod.addAttribute("userinfo",null);
 				
 
-			}else { //로그인 성공 후
+			}else { //濡�洹몄�� �깃났 ��
 				mod.addAttribute("userinfo",session.getAttribute("id"));
-				
+				mod.addAttribute("m_no", session.getAttribute("m_no"));
 			}
 			iQuestion qa = sqlSession.getMapper(iQuestion.class);
 			qnaDTO qdto = qa.answerList(q_no);	
@@ -103,7 +103,7 @@ public class questionController {
 			
 //		return "question";
 	}
-	//1:1문의 답변
+	//1:1臾몄�� �듬�
 	@RequestMapping("/questionAnswer")
 	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod) {
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);

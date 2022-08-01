@@ -42,16 +42,21 @@
 	$(document).ready(
 			function() {
 				jQuery('#headerwrap').backstretch(
-						[ "resources/assets/img/bg/bg1.jpg",
-								"resources/assets/img/bg/bg2.jpg",
-								"resources/assets/img/bg/bg3.jpg" ], {
+						[ "resources/assets/img/bg/q.png","resources/assets/img/bg/q2.png"
+								 ], {
 							duration : 8000,
 							fade : 500
 						});
 
 			});
 </script>
-
+<style>
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
+   
+</style>
 </head>
 <body class="single single-post"> 
 
@@ -82,52 +87,49 @@
 				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Home <i class="fa fa-home menu-icon"></i></a>
+			<c:if test="${m_no!=''}">
+			<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">개인정보<i
+						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="/pj">Home Agency</a></li>
-						<li><a href="index-blog.html">Home Blog</a></li>
-						<li><a href="index-single-page.html">Home Single Page</a></li>
+						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
+						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
+						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
 					</ul></li>
+					</c:if>
+				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
+					<i class="fa fa-home menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="proposal?m_no=45">봉사활동 기획서</a></li>
+					<ul class="dropdown-menu">	
+						<li>
+						<c:if test="${m_no==''}">
+						<a href="login">봉사활동기획서</a>
+						</c:if>
+						<c:if test="${m_no!=''}">
+						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
+						</c:if>
+						</li>
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
-						<li><a href="404.html">404</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Blog <i class="fa fa-folder menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="single-post.html">Single Post</a></li>
-						<li><a href="single-post-sidebar.html">Single Post
-								Sidebar</a></li>
-						<li><a href="category.html">Category Page</a></li>
-						<li><a href="category-alt.html">Category Page Alt</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						
 					</ul></li>
+				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
+					<i class="fa fa-camera menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a href="#">1:1 질문</a></li>
+						<li><a id='question' href="#">1:1 질문</a></li>
 					</ul></li>	
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Portfolio <i
-						class="fa fa-camera menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
-						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
-					</ul></li>
-				<li><a href="#" class="search-trigger">Search <i
-						class="fa fa-search menu-icon"></i></a></li>
-			</ul>
-
-			<ul id="social-icons">
-				<li class="facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-				<li class="twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-				<li class="dribbble"><a href="#"><i class="fa fa-dribbble"></i></a></li>
+				
 			</ul>
 		</div>
 	</nav>
@@ -138,8 +140,9 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <h2 class="main-title"></h2>
-                
+                <br><br><br><br><br>
+                <h2 class="main-title">1:1 문의하기</h2>
+                <hr>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
@@ -148,9 +151,9 @@
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap">
-		    		<hr>
-                <h2><p style="text-align:center;">1:1 문의하기</p></h2>
-                <hr>
+		    		<!-- <hr>
+                <h2><p style="text-align:center;"></p></h2>
+                <hr> -->
 		    	</div>
                     <div class="row gap">
                         <div class="fade-up col-md-10 fade-up" style="margin:20px 20px 20px 60px;">
@@ -169,7 +172,7 @@
 	</div>
 
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -183,11 +186,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -195,9 +198,9 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
@@ -205,7 +208,7 @@
 		</div>
 	</div>
 	
-	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
+	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a> -->
 	<!-- END MAIN FOOTER -->
 
     <!-- Bootstrap core JavaScript
