@@ -468,7 +468,25 @@ $(document)
 			$('#re_replytextArea').val(str);
 			console.log();
 		})
-//대댓글 리스트 불러오기
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
+})
+		//대댓글 리스트 불러오기
 function rerplyList(num, doo) {
 
 	$.ajax({
@@ -535,26 +553,7 @@ function deleteRe_Reply(num) {
 		}
 	}) 
 })
-//avatar click <a href='' id='meminfo' seq='나'>nick</a>
-.on('click','#meminfo',function(){
-	let seq=$(this).attr('seq');
-	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
-	return false;
-})
-//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
-.on('click','#btnSendNote',function(){
-	let m_no=$(this).attr('myseq');
-	let m_pa_no=$(this).attr('yourseq');
-	if(`${m_no}`==''){
-		alert('로그인 후 이용해 주세요');
-		return false;
-	}else{
-	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
-	}
-	return false;
-})
-	});
-}
+
 
 function insertRe_Reply(s) {
 
