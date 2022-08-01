@@ -44,4 +44,7 @@
 	<select id="countCommentview" resultType="int">
 		select count(*) from comment_t where b_no=#{param1}
 	</select>
+	<delete id="deletePhotoBoard">
+		delete from board where b_no=#{param1} and b_type='P'
+	</delete>
 </mapper>

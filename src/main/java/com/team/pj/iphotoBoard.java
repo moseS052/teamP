@@ -12,4 +12,5 @@ public interface iphotoBoard {
 	ArrayList<photoBoardDTO> ReadPhotoBoard(int b_no);
 	int insertPhotoBoardView(int b_no);
 	int countCommentview(int b_no);
+	int deletePhotoBoard(int b_no);
 }

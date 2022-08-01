@@ -138,7 +138,7 @@ public class photoBoardController {
 			model.addAttribute("nick",nick);
 			model.addAttribute("date",date);
 			model.addAttribute("view",view);
-			model.addAttribute("m_no", m_no);
+			model.addAttribute("b_m_no", m_no);
 		}
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		
@@ -154,6 +154,8 @@ public class photoBoardController {
 	@RequestMapping("/delPhotoBoard")
 	public String delPhotoBoard(@RequestParam("b_no") int b_no) {
 		System.out.println(b_no);
-		return "1";
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		ipt.deletePhotoBoard(b_no);
+		return "";
 	}
 }

@@ -44,6 +44,12 @@
 <div id='btnDiv'>
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>&nbsp;<a class="btn btn-primary btn-outlined" href="#" id="btnCancle">취 소</a>
 </div>
+<div style="margin:10px 100px 0 0 ;">
+<form id="fileForm" method="post" enctype="multipart/form-data">
+<input  class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadAvatar">
+<input type="button" value="아바타 등록">
+</form>
+</div>
 </body>
 <script>
 $(document)
