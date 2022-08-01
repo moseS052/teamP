@@ -127,8 +127,11 @@ $(document)
 })
 
 
-
-
+.keydown(function(event) {
+    if ( event.keyCode == 27 || event.which == 27 ) {
+    	$('#btnClose').trigger('click');
+    }
+});
 
 function noteCon(){
 	$.ajax({

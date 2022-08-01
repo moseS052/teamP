@@ -58,7 +58,11 @@ $(document)
 	return false;
 })
 
-
+.keydown(function(event) {
+    if ( event.keyCode == 27 || event.which == 27 ) {
+    	window.close();
+    }
+});
 
 
 

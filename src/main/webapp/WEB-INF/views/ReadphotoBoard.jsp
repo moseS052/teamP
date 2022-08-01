@@ -51,6 +51,10 @@
 			});
 </script>
 <style>
+.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
 .swiper {
 	width: 700px;
 	height: 600px;
