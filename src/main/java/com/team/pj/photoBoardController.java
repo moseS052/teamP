@@ -41,7 +41,7 @@ public class photoBoardController {
 
 		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
-		
+		ipt.countCommentview(endnum);
 		ArrayList<photoBoardDTO> pdtolist = ipt.photoTableList(stanum, endnum);
 		int total=ipt.getTotal();
 		 model.addAttribute("photolist", pdtolist);
@@ -118,17 +118,33 @@ public class photoBoardController {
 		
 		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		ipt.insertPhotoBoardView(b_no);
 		ArrayList<photoBoardDTO> boardList=ipt.ReadPhotoBoard(b_no);
 		String b_con;
 		String b_title;
+		String nick;
+		String date;
+		int view;
 		for(int i=0; i<boardList.size();i++) {
 			b_con=boardList.get(i).getB_con();
-			System.out.println(b_con );
+			b_title=boardList.get(i).getB_title();
+			nick=boardList.get(i).getNick();
+			date=boardList.get(i).getB_date();
+			view=boardList.get(i).getViews();
+			model.addAttribute("b_con", b_con);
+			model.addAttribute("title", b_title);
+			model.addAttribute("nick",nick);
+			model.addAttribute("date",date);
+			model.addAttribute("view",view);
 		}
+		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		
 
 		model.addAttribute("list",boardList);
 		model.addAttribute("b_no",b_no);
+		
+		
+		
 		
 		return "ReadphotoBoard";
 	}

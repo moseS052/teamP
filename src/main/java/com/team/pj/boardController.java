@@ -82,7 +82,9 @@ public class boardController {
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.free_detail(b_no);
+		model.addAttribute("b_no",b_no);
 		model.addAttribute("bdto",bdto);
+		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		
 		return "freedetail";
 	}
@@ -163,7 +165,7 @@ public class boardController {
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.req_detail(b_no);
 		model.addAttribute("bdto",bdto);
-		
+		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		return "reqdetail";
 	}
 	//view update page on request board
