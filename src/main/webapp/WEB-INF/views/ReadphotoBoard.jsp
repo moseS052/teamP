@@ -522,8 +522,12 @@
 				data:{b_no : $('#page').val()},
 				dataType:'text',
 				type:'get',
-				success :  function(){
-					window.location.href:"<%=request.getContextPath()%>/photoBoard?stanum=1&endnum=6";
+				/* beforeSend : function(){
+					document.location='/pj/photoBoard?stanum=1&endnum=6';
+				}, */
+				success :  function(data){
+					console.log(data);
+					document.location='/pj/photoBoard?stanum=1&endnum=6';
 				}
 				
 			});

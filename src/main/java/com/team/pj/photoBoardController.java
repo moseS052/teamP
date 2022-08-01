@@ -150,9 +150,10 @@ public class photoBoardController {
 		
 		return "ReadphotoBoard";
 	}
+	@ResponseBody
 	@RequestMapping("/delPhotoBoard")
 	public String delPhotoBoard(@RequestParam("b_no") int b_no) {
 		System.out.println(b_no);
-		return "";
+		return "1";
 	}
 }
