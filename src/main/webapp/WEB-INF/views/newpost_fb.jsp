@@ -230,5 +230,11 @@ $(document)
 .on('click','#btnList',function(){
 	document.location='/pj/freeboard';
 })
+.on('submit','#frmfb',function(){
+	if($('#content').val()=='' || $('#title').val()==''){
+		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
+		return false;
+	}
+})	
 </script>
 </html>

@@ -51,6 +51,15 @@
 	});
     </script>
 <style>
+	@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'GangwonEdu_OTFBoldA';
+	}
 	table{
 		text-align:center;
 	}
@@ -72,7 +81,7 @@
     </div>
 
     <!-- END NAV -->
-    <nav class="menu" id="theMenu">
+    <nav class="menu" style="background-color:#fde3e9;" id="theMenu">
         <div class="menu-wrap">
             <i class="fa fa-bars menu-close"></i>
             <div id="menu-logo">
@@ -138,7 +147,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -184,7 +193,7 @@
 					</c:forEach></tbody>
 					</table>
 					<c:if test="${m_no!=null}">
-					<p align="center"><a href='newpost_write'>새글쓰기</a></p>
+					<p align="center"><a href='newpost_fb'>새글쓰기</a></p>
 					</c:if>
 					</div>
 				</div>

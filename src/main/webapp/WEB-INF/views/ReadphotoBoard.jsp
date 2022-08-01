@@ -527,7 +527,7 @@
 				dataType:'text',
 				type:'get',
 				success :  function(){
-					window.location.href:"<%=request.getContextPath()%>/photoBoard?stanum=1&endnum=6";
+					window.location.href="<%=request.getContextPath()%>/photoBoard?stanum=1&endnum=6";
 				}
 				
 			});

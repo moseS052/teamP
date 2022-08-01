@@ -94,7 +94,7 @@ public class questionController {
 		}
 		
 			
-			
+	  model.addAttribute("m_no", session.getAttribute("m_no"));
 	  model.addAttribute("userinfo",session.getAttribute("id"));		
 	  model.addAttribute("list", ja); 
 	  model.addAttribute("datalist", ja); 
@@ -114,11 +114,15 @@ public class questionController {
 		mod.addAttribute("qdate", qdto.getQ_date());
 		mod.addAttribute("qmno", qdto.getQ_a());
 		mod.addAttribute("qa", qdto.getQ_a());
+		//mod.addAttribute("m_no", session.getAttribute("m_no"));
 		return "questionAnswer";
 	}
 	//1:1contact us
 	@RequestMapping("/contactus")
-	public String Contactus() {
+	public String Contactus(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "conTactus";
 	}
 	@ResponseBody
