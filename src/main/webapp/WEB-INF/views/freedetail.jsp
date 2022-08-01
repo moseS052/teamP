@@ -487,6 +487,7 @@ $(document)
 	return false;
 })
 		//대댓글 리스트 불러오기
+
 function rerplyList(num, doo) {
 
 	$.ajax({
@@ -551,9 +552,11 @@ function deleteRe_Reply(num) {
 			console.log(data);
 			rerplyList(s);
 		}
-	}) 
-})
 
+	}); 
+}
+
+	
 
 function insertRe_Reply(s) {
 
@@ -611,8 +614,7 @@ function insertComment() {
 	});
 }
 function commentLIst() {
-	$
-			.ajax({
+	$.ajax({
 				url : 'comment',
 				data : {
 					page : $('#page').val()

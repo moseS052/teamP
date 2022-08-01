@@ -362,10 +362,7 @@ $(document)
 			console.log(s);
 			rerplyList(s, doo);
 		})
-		.on(
-				'click',
-				'#re_reply',
-				function() {
+		.on('click','#re_reply',function() {
 					let s = parseInt($(this).attr('reseq'));
 					console.log($(this).attr('reseq'));
 					let t = $(this).text().split('&nbsp;');
@@ -388,10 +385,7 @@ $(document)
 					}
 					;
 				})
-		.on(
-				'click',
-				'#re_replyaddbtn',
-				function() {
+		.on('click', '#re_replyaddbtn',	function() {
 					let str = $('#re_replytextArea').val();
 					if (str.replace(/\s| /gi, "").length == 0) {
 						alert('내용없음');
@@ -491,7 +485,12 @@ $(document)
 	}
 	return false;
 })
+<<<<<<< HEAD
 		//대댓글 리스트 불러오기
+=======
+	
+//대댓글 리스트 불러오기
+>>>>>>> choong
 function rerplyList(num, doo) {
 
 	$.ajax({
@@ -556,8 +555,14 @@ function deleteRe_Reply(num) {
 			console.log(data);
 			rerplyList(s);
 		}
+<<<<<<< HEAD
 	}) 
 })
+
+=======
+	});
+}
+>>>>>>> choong
 
 
 function insertRe_Reply(s) {
