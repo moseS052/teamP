@@ -88,7 +88,7 @@ a#yesyes{
 			</div>
 			<div>
 				<c:if test="${m_no!=null}">
-				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
+				<a href=''><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a>
 				<div class="dropdown pull-right">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -100,7 +100,7 @@ a#yesyes{
 				</c:if>
 			</div>
 			<ul id="main-menu">
-			<c:if test="${userinfo!=''}">
+			<c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
@@ -117,10 +117,10 @@ a#yesyes{
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${userinfo==''}">
+						<c:if test="${userinfo==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${userinfo!=''}">
+						<c:if test="${userinfo!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>
@@ -1258,7 +1258,7 @@ a#yesyes{
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-
+var popup;
 $(document)
 .ready(function(){
 	console.log(`${userinfo}`!='');
@@ -1266,12 +1266,13 @@ $(document)
 	alarmList()
 	}
 })
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
 	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
 	return false;
 })
-
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
 .on('click','#btnSendNote',function(){
 	let m_no=$(this).attr('myseq');
 	let m_pa_no=$(this).attr('yourseq');
@@ -1279,9 +1280,19 @@ $(document)
 		alert('로그인 후 이용해 주세요');
 		return false;
 	}else{
-	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	popup=window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	
+	popup.onbeforeunload=function(){
+		location.reload(); 
+	}
 	}
 	return false;
+})
+
+.on('keyup','#searching',function(key){ // search connect enter
+	if(key.keyCode==13){
+		$('#btnSearch').trigger('click');
+	}
 })
 
 .on('click','#btnSearch',function(){
@@ -1349,12 +1360,13 @@ $(document)
 	}
 })
 
-.on('click','#goList, #btnSendNote, #yesyes',function(){
+.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
 	console.log(ms);
 	$.ajax({
 		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
 		success:function(){
+			
 		},
 		error:function(){
 		},

@@ -98,7 +98,7 @@
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class=" fa fa-regular fa-comments menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="single-post-sidebar.html">Request Board</a></li>

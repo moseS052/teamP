@@ -97,7 +97,7 @@
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class=" fa fa-regular fa-comments menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="single-post-sidebar.html">Request Board</a></li>
@@ -146,7 +146,7 @@
                         <div class="well">
                         <input type="hidden" id="l_no" value="${l_no}">
                         <input type="hidden" id="user_name" value="${userinfo}">
-                        <p>${l_nick}<div class="square pull-right">${l_views}</div></p>
+                        <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a><div class="square pull-right">${l_views}</div></p>
                         <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
@@ -175,8 +175,8 @@
 	<div id="footerwrap">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-4">
-					<h4 class="widget-title">Tags</h4>
+				<div class="col-lg-1">
+					<h4 class="widget-title">댓글넣기</h4>
 					<ul class="tag-widget">
 						<li><a class="btn btn-primary btn-outlined" href="#">News</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Blog</a></li>
@@ -187,12 +187,12 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
 				</div><!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Global Coverage</h4>
+				<div class="col-lg-1">
+					<h4 class="widget-title">댓글</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
 				</div><!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Find Us</h4>
+				<div class="col-lg-8">
+					<h4 class="widget-title">게시물댓글</h4>
 					<p>New York Office,<br/>
 					New York.<br/>
 					F: +458 4808-5489<br/>
@@ -253,7 +253,7 @@ $(document)
 		
 	}else if(`${l_mno}`!=`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview'  value='후기작성' />"
 				$('#but').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
@@ -303,6 +303,24 @@ $(document)
 	}
 		
 	
+})
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
 })
 .on('click','#map',function(){
 	let a=`${l_addr}`
@@ -367,6 +385,14 @@ $(document)
     		complete:function(){}
     	});
 })
+.on('click', '#donationReview', function() {
+		if (`${userinfo}` == '') {
+			alert('로그인 후 사용가능합니다.')
+		} else {
+			document.location = '/pj/donationReviwe';
+		}
+
+	})
 function shwocheck(){
 	let ar=`${sd}`.split(',');
 	let str="";

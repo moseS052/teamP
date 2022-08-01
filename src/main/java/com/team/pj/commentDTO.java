@@ -8,6 +8,7 @@ public class commentDTO {
 	private String c_date;
 	private int c_pa_no;
 	private int replycount;
+	private String nick;
 
 	public commentDTO() {
 	}
@@ -68,4 +69,13 @@ public class commentDTO {
 		this.replycount = replycount;
 	}
 
+	public String getNick() {
+		return nick;
+	}
+
+	public void setNick(String nick) {
+		this.nick = nick;
+	}
+
+	
 }

@@ -155,8 +155,8 @@ accent-color:green;
 						닉네임<input type="text" class="form-control" id="prinick" value="${nick}"/><input class="btn btn-outlined btn-primary" type="button" id="nickcheck" value="중복확인" /><br>
 						이름<input type="text" class="form-control" id="priname" value="${name}"/>
 						전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
-						이메일<input type="text" class="form-control" id="primail" value="${mail}"/>
-						<input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="수정취소" />
+						이메일<input type="text" class="form-control" id="primail" value="${mail}"/><br><br>
+						<div style="text-align:center"><input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="취소" /></div>
 						</div>
 						
 					</div>
@@ -223,8 +223,11 @@ $(document)
 })
 
 .on('click','#can',function(){
-	alert('수정을 취소하고 홈으로이동합니다')
-	document.location='/pj/'
+	if(confirm('취소하시겠습니까?')){
+		alert('취소하고 홈으로 돌아갑니다')
+		document.location='/pj'
+	}
+	return false;
 })
 .on('click','#prichange',function(){
 	if(`${nick}`==$('#prinick').val()){
