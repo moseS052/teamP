@@ -73,4 +73,6 @@ public interface iteamP {
 	boardDTO req_detail(int b_no);
 	String getAvaRoute(int m_no);
 	void updateAvaRoute(String avaRoute,int m_no);
+	int insertI_routetable(int l_no, String i_route);
+	int findMaxb_no(int m_no);
 }

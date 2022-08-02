@@ -34,6 +34,7 @@
 }
 </style>
 <body>
+<input id='avatarChanger' type='hidden' value="1">
 <div id='avtarView'>
 	<img id='avatarMain' src=<c:url value="${myAvatarRoute}"/> width="200px" height="200px" />
 	<a href='' sbc="resources/assets/img/avatar/avatar1.png"><img src=<c:url value="resources/assets/img/avatar/avatar1.png"/> width="80px" height="80px" /></a>&nbsp;&nbsp;
@@ -45,10 +46,7 @@
 <a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>&nbsp;<a class="btn btn-primary btn-outlined" href="#" id="btnCancle">취 소</a>
 </div>
 <div style="margin:10px 100px 0 0 ;">
-<form id="fileForm" method="post" enctype="multipart/form-data">
-<input  class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadAvatar">
-<input type="button" value="아바타 등록">
-</form>
+<input  class="btn btn-primary btn-outlined" type="file" name="file1" id="file1" accept="image/*" id="uploadAvatar">
 </div>
 </body>
 <script>
@@ -61,25 +59,48 @@ $(document)
 	$('#avatarMain').attr("src",$(this).attr("sbc"));
 	return false;
 })
-.on('click','#btnChangeAvatar',function(){
- 	if(confirm('아바타를 변경하시겠습니까?')){
- 		$.ajax({
-			type:'get',url:'avatarChange',data:{avaRoute:$('#avatarMain').attr("src")},dataType:'text',
-			success:function(){
-				alert('아바타가 변경되었습니다.');
-				window.close();
-			},
-			error:function(){
-				alert('아바타 변경 실패');
-			},
-			complete:function(){}
-		})
- 	}else return false;
+.on('change','#file1',function(){
+	$('#avatarChanger').val('2');
+	 $('#avatarMain').attr("src",window.URL.createObjectURL(this.files[0]));
 })
+.on('click','#btnChangeAvatar',function(){
+	if(confirm('아바타를 변경하시겠습니까?')){
+		if($('#avatarChanger').val()=='1'){
+			$.ajax({
+				type:'post',url:'avatarChange',data:{avaRoute:$('#avatarMain').attr("src")},dataType:'text',
+				success:function(){
+					alert('아바타가 변경되었습니다.');
+					window.close();
+				},
+				error:function(){
+					alert('아바타 변경 실패');
+				},
+				complete:function(){}
+			})
+	 	
+		}else if($('#avatarChanger').val()=='2'){
+			let form = new FormData();
+			form.append("file1", $('#file1')[0].files[0]);
+			console.log(form);
+		 	$.ajax({
+				url:'avatarChange_01',
+				processData : false,
+				contentType : false,
+				data : form,
+				type : 'POST',
+				success:function(){
+					alert('아바타가 변경되었습니다.');
+					window.close();
+				}
+			
+			}); 
+		}
+	}else return false;
+ 	 
+}) 
 .on('click','#btnCancle',function(){
 	window.close();
 })
-
 .keydown(function(event) {
     if ( event.keyCode == 27 || event.which == 27 ) {
     	window.close();

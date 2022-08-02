@@ -159,15 +159,21 @@
 
 					<div class="col-md-12">
 					
-					<form id=frmfb method=get action="insert_free">
 					<table class="table table-striped" style="">
 					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="50"></td></tr>
 					<tr><td>내용: <textarea id=content name=content rows=10 cols=90 style="border:none; background-color:transparent; resize:none;"></textarea></td></tr>
-					<br></table><input type=submit value='작성완료' class="btn btn-primary btn-outlined">&nbsp;
+					<br></table>
+					
+					<input type=submit value='작성완료' id="insertPhotoFreeboard" class="btn btn-primary btn-outlined">&nbsp;
 					<input type=reset value='목록' id=btnList class="btn btn-primary btn-outlined">
-					
+					<br>
+					 <div id="preview">
+						
+					</div>
+					<br>
+					<form id="fileForm" method="post" enctype="multipart/form-data">
+							<input class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile" multiple="true">
 					</form>
-					
 					</div>
 				</div>
 			</div>	
@@ -230,5 +236,44 @@ $(document)
 .on('click','#btnList',function(){
 	document.location='/pj/freeboard';
 })
+.on('change','#uploadFile',function(){
+	$("#preview").html('');
+	for(var i=0; i<$(this)[0].files.length; i++){
+		$("#preview").append('<img style="height:150px; width:150px;" src="'+window.URL.createObjectURL(this.files[i])+'"/>'+'&nbsp;')
+	}			
+})
+.on('click','#insertPhotoFreeboard',function(){
+	$.ajax({
+		url:'insert_free',
+		async: false,
+		data:{
+			title:$('#title').val(),
+			content:$('#content').val()	
+		},
+		type:'get',
+		success:function(){
+			if($('#uploadFile')[0].files.length>0){
+				insertFreeboardPhoto();	
+			}else{
+				document.location = '/pj/freeboard';
+			}
+			
+		}
+	});  
+})
+function insertFreeboardPhoto(){
+	let formData = new FormData($('#fileForm')[0]);
+	$.ajax({
+		url:'freeBoard_inPhoto',
+		enctype: 'multipart/form-data',
+		processData : false,
+		contentType : false,
+		data : formData,
+		type : 'POST',
+		success:function(){
+			document.location = '/pj/freeboard';
+			}
+	});
+}
 </script>
 </html>

@@ -1,6 +1,10 @@
 package com.team.pj;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,6 +19,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class boardController {
@@ -49,6 +55,7 @@ public class boardController {
 		return "newpost_fb";
 	}
 	//insert new post in free board
+	@ResponseBody
 	@RequestMapping(value="/insert_free")
 	public String doInsert_free(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
@@ -59,7 +66,7 @@ public class boardController {
 		System.out.println("content="+bcontent);
 		System.out.println("writer="+(int)session.getAttribute("m_no"));
 		p.free_insert((int)session.getAttribute("m_no"),btitle, bcontent);
-		return "redirect:/freeboard";
+		return "";
 	}
 	//delete in free board & req board
 	@ResponseBody
@@ -179,5 +186,37 @@ public class boardController {
 		boardDTO bdto=p.req_detail(b_no);
 		model.addAttribute("bdto",bdto);
 		return "requpdetail";
+	}
+	//freeboard in Photo
+	@ResponseBody
+	@RequestMapping(value="/freeBoard_inPhoto", method=RequestMethod.POST,  produces = "application/text;charset=utf8")
+	public String freeBoard_insertPhoto(HttpServletRequest req, MultipartHttpServletRequest request) {
+		HttpSession session =req.getSession();
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int maxb_no=p.findMaxb_no((int)session.getAttribute("m_no"));
+		System.out.println("제발="+maxb_no);
+		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		String realDataFolder = "/resources/assets/freeBoard/";
+		List<MultipartFile> filelist = request.getFiles("file");
+		for (MultipartFile mf : filelist) {
+			String fileRealName = mf.getOriginalFilename();
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			UUID uuid = UUID.randomUUID();
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			File saveFile = new File(uploadFolder + uniqueName + fileExtension);
+			try {
+				 mf.transferTo(saveFile);
+				 ipt.insertphotoRoute(maxb_no, realDataFolder + uniqueName + fileExtension);
+				 
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return"";
 	}
 }

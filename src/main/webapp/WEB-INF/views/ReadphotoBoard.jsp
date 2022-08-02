@@ -210,7 +210,7 @@
 								<input type=button id="delPhotoBoard" name="del" value='글삭제' white-space="nowrap" class="btn btn-primary btn-outlined">
 							</div>
 							</c:if>
-						
+						<input type="hidden" readonly id="comment_cno">
 						<div class="gap"></div>
 						<div class="col-md-10">
 							<input type="hidden" id="page" value="${b_no }">
@@ -402,7 +402,7 @@
 		$.ajax({
 			url : 'update_comment',
 			data : {
-				c_no : $('#modifycomment').attr('tseq'),
+				c_no : $('#comment_cno').val(),
 				c_con : $('#modifycomment').val()
 			},
 			dataType : 'json',

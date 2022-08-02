@@ -209,5 +209,12 @@
 <update id="updateAvaRoute">
 	update member set ava_route=#{param1} where m_no=#{param2}
 </update>
+<insert id="insertI_routetable">
+	insert into l_route values(#{param1},#{param2})
+</insert>
+<select id="findMaxb_no" resultType="int">
+ select max(b_no) from boardf
+		where m_no=#{param1}
+</select>
 </mapper>
 

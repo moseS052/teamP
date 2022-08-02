@@ -157,7 +157,11 @@ accent-color:green;
 						   <p class="well">재능기부신청<br><input type="checkbox" value="1">요리&nbsp;<input type="checkbox" value="2">청소&nbsp;<input type="checkbox" value="3">미용&nbsp;<input type="checkbox" value="4">강연&nbsp;<input type="checkbox" value="5">기타</p>
 						   
 						   <div class="col-md-4 post fade-up">시행일자<input type="date" id="l_date" class="form-control"></div>
-						   <div class="col-md-4 post fade-up">사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple></div>
+						   <div class="col-md-4 post fade-up">사진추가
+						  <form id="fileForm" method="post" enctype="multipart/form-data">
+						   <input type="file" id="l_file" name="file" class="form-control" accept="image/*" required multiple="true">
+						   </form>
+						   </div>
 							<div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" placeholder="선택안할시자동5입력" class="form-control" min="0"></div>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
                             <option value=''></option>
@@ -196,7 +200,7 @@ accent-color:green;
 						<input type="hidden" id='hid'>
 						<input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" /></p><br>
 						<div style="text-align:center"><p><input class="btn btn-outlined btn-primary" type="button" id="ad" value="등록" /><input class="btn btn-outlined btn-primary" type="button" id="ca" value="취소" /></p></div>						
-					</div>
+					</div><div class="col-md-4 fade-up" id="preview"></div>
 				</div>
 			</div>	
 	    </section>
@@ -260,7 +264,13 @@ $(document)
 	$("#nop").keyup(function(){ $(this).val($(this).val().replace(/[^0-9:\-]/gi,"") );  }); 
 	
 })
-
+.on('change','#l_file',function(){
+	$("#preview").html('');
+	for(var i=0; i<$(this)[0].files.length; i++){
+		$("#preview").append('<img style="height:150px; width:150px;" src="'+window.URL.createObjectURL(this.files[i])+'"/>'+'&nbsp;');
+	};			
+	
+})
 .on('click','#ad',function(){	
 	a=0;
 	if($('#nop').val()==0){
@@ -270,7 +280,17 @@ $(document)
 	}	
 		console.log(a)
 	$.ajax({
-		type:'get',url:'new_ad',data:{nop:a,m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
+		type:'get',
+		url:'new_ad',
+		data:{
+			nop:a,m_no:$('#m_no').val(),
+			l_title:$('#l_title').val(),
+			l_content:$('#l_content').val(),
+			l_date:$('#l_date').val(),
+			l_file:$('#l_file').val(),
+			l_koo:$('#l_koo option:selected').val(),
+			l_name:$('#l_name option:selected').text(),
+			l_address:$('#l_address').val()},
 			dataType:'text',async: false,
 	  		success:function(data){
     				if(data==1){
@@ -287,7 +307,9 @@ $(document)
     	    				    		error:function(){
     	    				    			alert('데이터등록실패');
     	    				    		},
-    	    				    		complete:function(){}
+    	    				    		complete:function(){
+    	    				    			insertListPhoto();
+    	    				    		}
     	    				    	});
     	    			})
     				}
@@ -335,6 +357,18 @@ $(document)
     		complete:function(){}
     	});
 })
-
+function insertListPhoto(){
+	let formData = new FormData($('#fileForm')[0]);
+	$.ajax({
+		url : 'insertl_loute',
+		enctype: 'multipart/form-data',
+		processData : false,
+		contentType : false,
+		type : 'POST',
+		data : formData,
+		success:function(result){
+		}
+	});
+}
 </script>
 </html>
