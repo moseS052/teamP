@@ -38,13 +38,13 @@
 	
   </head>
   <style>
- a:link {
-  color :black;
-}
-  a:visited {
-  color : black;
-}
- </style>
+/*  a:link { */
+/*   color :grey; */
+/* } */
+/*   a:visited { */
+/*   color : grey; */
+/* } */
+<!--  </style> -->
 
   <body class="single single-post"> 
 
@@ -150,18 +150,16 @@
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
+					<div class="col-lg-2"></div><div class="col-lg-8">
 						<h3>내가 신청한 게시판 목록</h3>
-						<div id="cla">
-						
-                        </div>
-						
-						<p>신청구역(서울)</p>
-                        
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
+						<div>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>게시판타입</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+						</table>
+                        </div>	
 					</div>
+					<div class="col-lg-2"></div>
 				</div>
 			</div>	
 	    </section>
@@ -230,16 +228,16 @@ function showlist(){
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
 				if(getToday()>jo['l_date']){
-					let str='<div class="well" style="background-color:#E2E2E2"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>Finish'+'</p></a></div>';
-					$('#cla').append(str);
+					let str='<tr style="background-color:#E2E2E2"><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td><td>종료</td></tr>'
+					$('#mytable > tbody:last').append(str);
 				}
 				if(getToday()<=jo['l_date']){
 					if(jo['count']==jo['nop']){
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-						$('#cla').append(str);
+						let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
+						$('#mytable > tbody:last').append(str);
 					}else{
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-						$('#cla').append(str);
+						let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
+						$('#mytable > tbody:last').append(str);
 					}
 				}
   			}

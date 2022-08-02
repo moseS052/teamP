@@ -78,7 +78,7 @@
 					<ul class="dropdown-menu">
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
-						<li><a href="MyPost?m_no=${m_no}l">내가쓴게시물찾기</a></li>
+						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
 						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
@@ -141,11 +141,13 @@
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-
-					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
-						<h3>재능기부신청 게시판</h3>
-						<p>신청구역(서울)<select id="l_koo" class="form-control">
-                            <option value=''></option>
+					<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">재능기부신청 게시판</h2>
+					</div>
+					<div class="col-lg-2"></div><div class="col-lg-8">
+						<p>신청구역(서울)
+						<select id="l_koo" class="form-control">
+                            <option value=''>전체</option>
                             <option>강남구</option>
                             <option>강동구</option>
                             <option>강북구</option>
@@ -171,17 +173,12 @@
                             <option>종로구</option>
                             <option>중구</option>
                             <option>중랑구</option>
-                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" /><br>
+                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" />
                         </select>
                         <div id="cla">
+                        	
                         </div>
-						
-						<p>신청구역(서울)</p>
-                        
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
-
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
-					</div>
+					</div><div class="col-lg-2"></div>
 				</div>
 			</div>	
 	    </section>
@@ -245,6 +242,9 @@ $(document)
 })
 .on('click','#find',function(){
 	console.log($('#l_koo option:selected').text());
+	if($('#l_koo option:selected').text()=='전체'){
+		showlist();
+	}
 	$.ajax({
 		type:'get',url:'find_list',data:{l_koo:$('#l_koo option:selected').text()},
 			dataType:'json',
@@ -253,15 +253,27 @@ $(document)
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
 					if(getToday()>jo['l_date']){
-						let str='<div class="well" style="background-color:#E2E2E2"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>Finish'+'</p></a></div>';
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 						$('#cla').append(str);
 					}
 					if(getToday()<=jo['l_date']){
 						if(jo['count']==jo['nop']){
-							let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+							+'<div class="item-inner">'
+							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
 							$('#cla').append(str);
 						}else{
-							let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+							+'<div class="item-inner">'
+							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
 							$('#cla').append(str);
 						}
 					}
@@ -281,15 +293,27 @@ function showlist(){
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
 				if(getToday()>jo['l_date']){
-					let str='<div class="well" style="background-color:#E2E2E2"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>Finish'+'</p></a></div>';
+					let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+					+'<div class="item-inner">'
+					+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+					+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+					+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 					$('#cla').append(str);
 				}
 				if(getToday()<=jo['l_date']){
 					if(jo['count']==jo['nop']){
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
 						$('#cla').append(str);
 					}else{
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
 						$('#cla').append(str);
 					}
 				}

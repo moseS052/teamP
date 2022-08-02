@@ -84,7 +84,7 @@ public class ApiController {
 		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);	
 		ArrayList<boardDTO> boardlist=team.open_board(m_no);
 		JSONArray ja =new JSONArray();
-
+		
 		JSONArray ja1 =new JSONArray();
 		for(int i=0; i<l_list.size();i++) {
 			L_listDTO ldto = l_list.get(i);
@@ -409,6 +409,7 @@ public class ApiController {
 			L_listDTO ldto = l_list.get(i);
 			JSONObject jo =new JSONObject();
 			jo.put("l_no", ldto.getL_no());
+			jo.put("l_name", ldto.getL_name());
 			jo.put("m_no", ldto.getM_no());
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());

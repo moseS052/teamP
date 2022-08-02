@@ -37,14 +37,14 @@
     </script>
 	
   </head>
-  <style>
- a:link {
-  color :black;
-}
-  a:visited {
-  color : black;
-}
- </style>
+<!--   <style> -->
+/*  a:link { */
+/*   color :green; */
+/* } */
+/*   a:visited { */
+/*   color : grey; */
+/* } */
+<!--  </style> -->
 
   <body class="single single-post"> 
 
@@ -152,15 +152,15 @@
 
 					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
 						<h3>내가 쓴 게시물 목록</h3>
-						<div id="cla">
-						
+						<div>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>게시판타입</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+						</table>
                         </div>
 						
-						<p>신청구역(서울)</p>
                         
-						<p>Their could can widen ten she any. As so we smart those money in. Am wrote up whole so tears sense oh. Absolute required of reserved in offering no. How sense found our those gay again taken the. Had mrs outweigh desirous sex overcame. Improved property reserved disposal do offering me. Day handsome addition horrible sensible goodness two contempt. Evening for married his account removal. Estimable me disposing of be moonlight cordially curiosity. Delay rapid joy share allow age manor six. Went why far saw many knew. Exquisite excellent son gentleman acuteness her. Do is voice total power mr ye might round still. </p>
 
-						<p>Whole every miles as tiled at seven or. Wished he entire esteem mr oh by. Possible bed you pleasure civility boy elegance ham. He prevent request by if in pleased. Picture too and concern has was comfort. Ten difficult resembled eagerness nor. Same park bore on be. Warmth his law design say are person. Pronounce suspected in belonging conveying ye repulsive.</p>
 					</div>
 				</div>
 			</div>	
@@ -224,52 +224,45 @@ $(document)
 })
 function showlist(){
 	var ar = new Array()
-	var ar1 = new Array()
 	$.ajax({
 		url:'open_mypost', data:{m_no:`${m_no}`},dataType:'json',type:'get',
 		success:function(data){
 			$('#cla').empty();
-  			for(let i=0;i<data.length;i++){
+  			for(let i=0;i<data[0].length;i++){
 				let jo=data[0][i];
-// 				console.log(jo)
-				let str='<a href="l_Read?l_no='+jo['l_no']+'">'
-				+'<div class="well" style="height:90px; padding-top:0px;">'
-				+'<div class="square pull-right" style="padding-top:10px" id="but">'+jo['l_views']+'</div>'
-				+'<h4>'+jo['l_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['l_date']+'\n'
-				+'신청현황'+jo['count']+'/'+jo['nop']+'</p></div></div></a>';
+				let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
 				let ob={date:jo['l_date'],div:str}
 				ar.push(ob);
   			}
-  			for(let j=0;j<data.length;j++){
+  			for(let j=0;j<data[1].length;j++){
 				let jj=data[1][j];
-// 				console.log(jj['b_type'])
-				if(jj['b_type']=="Q"){
-					console.log('true');
-				}
+				
 				if(jj['b_type']=="F"){
-					let str='<a href="freedetail?b_no='+jj['b_no']+'">'
-					+'<div class="well" style="height:90px; padding-top:0px;">'
-					+'<div class="square pull-right" style="padding-top:10px" id="but">'+jj['views']+'</div>'
-					+'<h4>'+jo['b_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['b_date']+'\n'
-					+'</p></div></div></a>';
-					let ob={date:jj['b_date'],div:str}
+					let str='<tr><td>Free Board</td><td><a href="freedetail?b_no='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
+					let ob={date:jj['l_date'],div:str}
 					ar.push(ob);
-				}
-				else if(jj['b_type']=="Q"){
-					let str='<a href="reqdetail?b_no='+jj['b_no']+'">'
-					+'<div class="well" style="height:90px; padding-top:0px;">'
-					+'<div class="square pull-right" style="padding-top:10px" id="but">'+jj['views']+'</div>'
-					+'<h4>'+jo['b_title']+'</h4><div class="pull-right btn-group social-profiles"><p>'+jo['b_date']+'\n'
-					+'</p></div></div></a>';
-					let ob={date:jj['b_date'],div:str}
+				}else if(jj['b_type']=="Q"){
+					let str='<tr><td>Request Board</td><td><a href="reqdetail?b_no='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
+					let ob={date:jj['l_date'],div:str}
 					ar.push(ob);
-					$('#cla').append(str);
-					
+				}else{
+					let str='<tr><td>PHOTO</td><td><a href="ReadPhoto?seq='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
+					let ob={date:jj['l_date'],div:str}
+					ar.push(ob);
 				}
   			}
-//   				for(let z=0; z<ar.length;z++){
-//   					console.log(ar[z].div);
-//   				}
+			console.log(ar[0].div);
+			ar.sort(function(a, b){
+				if(a.date>b.date){
+					return -1;
+				}else if(a.date<b.date){
+					return 1;
+				}else return 0;
+			});
+  				
+  			for(let z=0; z<ar.length;z++){
+  				$('#mytable > tbody:last').append(ar[z].div);
+  			}
 		},
 		error:function(){
     		alert('데이터등록실패');
@@ -278,6 +271,7 @@ function showlist(){
 		
 	});
 }
+
 
 
 

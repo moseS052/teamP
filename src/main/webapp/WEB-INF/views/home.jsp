@@ -589,7 +589,7 @@ a#yesyes{
 		<div class="container">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Blog</h2>
+					<h2 class="main-title">여기인가?</h2>
 					<hr>
 					<p>She evil face fine calm have now. Separate screened he
 						outweigh of distance landlord.</p>
@@ -613,7 +613,7 @@ a#yesyes{
 						</div>
 					</div>
 					<h3>
-						<a href="#">Blog Article Title</a>
+						<a href="#">슈벌탱</a>
 					</h3>
 					<p>Sentiments projection particular companions interested do at
 						my delightful. Listening newspaper in advantage frankness to
