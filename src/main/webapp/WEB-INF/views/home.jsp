@@ -59,7 +59,31 @@ a#yesyes{
 	color:#007979;
 }
 #firstAvatar{
-	display:inline;
+	display:inline; 
+	margin-left: -3px;
+	margin-top: 0px;
+}
+#firstNick{
+	display:inline; 
+	font-size:16px;
+}
+#menu-logo{
+	margin-top:-8px;
+}
+#undm{
+	padding-top: 8px !important;
+}
+#undk,#undd{
+	display:inline; 
+	font-size:14px;
+	margin-left:-8px;
+}
+#avaung{
+	margin-top:-32px;
+}
+#lout{
+	padding-left:25px;
+	padding-top:400px;
 }
 </style>
 <body>
@@ -79,25 +103,23 @@ a#yesyes{
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
 				<c:if test="${m_no!=null}">
-				<a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a>
-				<a href='' id="firstNick">${nick }&nbsp;님</a>
-				<div class="dropdown pull-right">
+				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
+				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a></h2>
+				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
 				</div></div>
 				</c:if>
 				<c:if test="${m_no==null}">
-				<h2>
+				<h2 id="undm">
 					<span class="pe-7s-chat logo-icon"></span> Quote
 				</h2>
 				</c:if>
 			 	<c:if test="${userinfo==null}">
-				<a href="login">login</a><a href="signup">회원가입</a>
+				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
 				</c:if>
+				
 
-				<c:if test="${userinfo!=null}">
-				<a href='logout'>Logout</a>
-				</c:if>
 			</div>
 			<div>
 <%-- 				<c:if test="${m_no!=null}"> --%>
@@ -153,7 +175,14 @@ a#yesyes{
 					</ul></li>	
 				
 			</ul>
+			<div id="lout">
+			<c:if test="${m_no!=null}">
+			<h2 ><a href='logout' id="undk">Logout</a><a href='' id="undd"></a></h2>
+			</c:if>
+			</div>
 		</div>
+		
+		
 	</nav>
 	<!-- END NAV -->
 
