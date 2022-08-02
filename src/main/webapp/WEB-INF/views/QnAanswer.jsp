@@ -51,6 +51,18 @@
 			});
 </script>
 <style>
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
 	.form-control:focus {
         border-color: #28a745;
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);

@@ -105,7 +105,8 @@ public class questionController {
 	}
 	//1:1臾몄�� �듬�
 	@RequestMapping("/questionAnswer")
-	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod) {
+	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod, HttpServletRequest req) {
+		HttpSession session=req.getSession();
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
 		qnaDTO qdto = qa.answerList(q_no);	
 		mod.addAttribute("qno", qdto.getQ_no());
@@ -114,7 +115,8 @@ public class questionController {
 		mod.addAttribute("qdate", qdto.getQ_date());
 		mod.addAttribute("qmno", qdto.getQ_a());
 		mod.addAttribute("qa", qdto.getQ_a());
-		//mod.addAttribute("m_no", session.getAttribute("m_no"));
+		mod.addAttribute("m_no", session.getAttribute("m_no"));
+		mod.addAttribute("id",session.getAttribute("id"));
 		return "questionAnswer";
 	}
 	//1:1contact us

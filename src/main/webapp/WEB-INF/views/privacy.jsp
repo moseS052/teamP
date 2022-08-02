@@ -29,8 +29,8 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/heart.jpg"
+					 ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -38,6 +38,22 @@
     </script> 
   </head>
 <style>
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
 input[type="checkbox"]{
 accent-color:green;
 }
@@ -102,26 +118,21 @@ accent-color:green;
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="single-post-sidebar.html">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						
 					</ul></li>
+				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
+					<i class="fa fa-camera menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Portfolio <i
-						class="fa fa-camera menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
-						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
-					</ul></li>
 			</ul>
 		</div>
 	</nav>
@@ -132,9 +143,10 @@ accent-color:green;
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br><br><br>
                 <h2 class="main-title">개인정보수정</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->

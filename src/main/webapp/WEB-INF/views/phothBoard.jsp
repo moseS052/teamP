@@ -51,7 +51,23 @@
 
 			});
 </script>
-
+<style>
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
+	a{
+		font-family: 'Binggrae';
+	}
+</style>
 </head>
 
 <body class="single single-post">
@@ -151,8 +167,8 @@
 
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">사진게시판</h2>
-					<hr>
+					<!-- <h2 class="main-title">사진게시판</h2>
+					<hr> -->
 				</div>
 			</div>
 
