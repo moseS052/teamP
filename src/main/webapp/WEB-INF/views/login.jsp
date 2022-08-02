@@ -256,7 +256,7 @@ $(document)
 })
 .on('click','#login',function(){
 	$.ajax({
-		type:'post',dataType:'text',url:'user_check',async:false,
+		type:'post',dataType:'text',url:'user_check',
 		data:{id:$('#id').val(),pw:$('#pw').val()},
 		success:function(data){
 			let cnt=data;

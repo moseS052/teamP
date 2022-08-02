@@ -209,5 +209,11 @@
 <update id="updateAvaRoute">
 	update member set ava_route=#{param1} where m_no=#{param2}
 </update>
+<select id="getMnoByBno" resultType="int">
+	select m_no from board where b_no=#{param1}
+</select>
+<select id="getMnoByCno" resultType="int">
+	select m_no from comment_t where c_no=#{param1}
+</select>
 </mapper>
 

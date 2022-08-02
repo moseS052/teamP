@@ -64,7 +64,7 @@ public class ComController {
 			jo.put("nick", cdto.getNick());
 			ja.add(jo);
 		}
-		System.out.println(ja.toJSONString());
+//		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
 
@@ -77,7 +77,7 @@ public class ComController {
 		int m_no=(int)session.getAttribute("m_no");
 		iteamP tp = sqlSession.getMapper(iteamP.class);
 		tp.insertcomment(b_no, c_con, m_no);
-
+		
 	}
 
 	// 댓글 삭제
@@ -161,12 +161,51 @@ public class ComController {
 		return Integer.toString(reccount);
 	}
 	
+	//alarm comment  
+	@ResponseBody
+	@RequestMapping(value = "/alarmComT", produces = "application/json;charset=utf-8")
+	public String alarmComT(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		iteamP ip = sqlSession.getMapper(iteamP.class);
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		String boardName=req.getParameter("boardName");
+		int you=ip.getMnoByBno(b_no);
+		String mes="";
+		if(boardName.equals("F")) {
+			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 게시글에 답글이 작성되었습니다.(<a id='goList' href='freedetail?b_no="+b_no+"'>게시판가기</a>)";
+		}else if(boardName.equals("Q")) {
+			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 게시글에 답글이 작성되었습니다.(<a id='goList' href='reqdetail?b_no="+b_no+"'>게시판가기</a>)";
+		}
+		
+		ip.insertAlarm(you, mes);
+		return "";
+	}
 	
-	
-	
-	
-	
-
-	
+	//alarm comment and t
+	@ResponseBody
+	@RequestMapping(value = "/alarmComTnt", produces = "application/json;charset=utf-8")
+	public String alarmComTnt(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		iteamP ip = sqlSession.getMapper(iteamP.class);
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		int c_no=Integer.parseInt(req.getParameter("c_no"));
+		String boardName=req.getParameter("boardName");
+		int you=ip.getMnoByCno(c_no);
+		String mes="";
+		if(boardName.equals("F")) {
+			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 답글에 답글이 작성되었습니다.(<a id='goList' href='freedetail?b_no="+b_no+"'>게시판가기</a>)";
+		}else if(boardName.equals("Q")) {
+			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 답글에 답글이 작성되었습니다.(<a id='goList' href='reqdetail?b_no="+b_no+"'>게시판가기</a>)";
+		}
+		
+		ip.insertAlarm(you, mes);
+		return "";
+	}
 }
+
+
+
+
+
+
 

@@ -73,4 +73,6 @@ public interface iteamP {
 	boardDTO req_detail(int b_no);
 	String getAvaRoute(int m_no);
 	void updateAvaRoute(String avaRoute,int m_no);
+	int getMnoByBno(int b_no);
+	int getMnoByCno(int c_no);
 }

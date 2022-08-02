@@ -78,16 +78,13 @@ public class HomeController {
 		model.addAttribute("id",session.getAttribute("id"));
 		return "signup";
 	}
+	//login
 	@ResponseBody
 	@RequestMapping(value="/user_check", method=RequestMethod.POST)
-	public String doCheck(HttpServletRequest req,Model model) {
+	public String doCheck(HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		ArrayList<memberDTO> mlist=p.listMember();
-		model.addAttribute("signlist",mlist);
 		int n=p.login_count(req.getParameter("id"),Integer.parseInt(req.getParameter("pw")));
-		model.addAttribute("cnt",n);
-		System.out.println("cnt="+n);
 		
 		String user_id=req.getParameter("id");
 		String password=req.getParameter("pw");
@@ -101,9 +98,6 @@ public class HomeController {
 			session.setAttribute("nick",p.getNickById(user_id));
 			session.setAttribute("id", user_id);
 
-			model.addAttribute("id",session.getAttribute("id"));
-			model.addAttribute("m_no",session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
 		}
 		return Integer.toString(n);
 	}

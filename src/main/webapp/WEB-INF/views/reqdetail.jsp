@@ -624,6 +624,7 @@ function insertComment() {
 		success : function() {
 			commentLIst();
 			$('#c_con').val('');
+			alarmComT($('#page').val());
 		}
 	});
 }
@@ -666,6 +667,17 @@ function commentLIst() {
 			}
 		}
 	});
+}
+function alarmComT(bno){
+	console.log(bno);
+	$.ajax({
+		type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,boardName:'Q'},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
 }
 </script>
 </html>

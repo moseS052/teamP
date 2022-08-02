@@ -583,6 +583,8 @@ function insertRe_Reply(s) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
+			alarmComTnt($('#page').val(),$('#realc_no' + s).val());
+			
 		}
 
 	});
@@ -604,6 +606,8 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
+			alarmComTnt($('#page').val(),cno);
+			//cno 들어가는 것 찾아낼 것! 상대 m_no ,, html 어딘가에는 있는 듯
 		}
 	});
 }
@@ -619,6 +623,7 @@ function insertComment() {
 		success : function() {
 			commentLIst();
 			$('#c_con').val('');
+			alarmComT($('#page').val());
 		}
 	});
 }
@@ -661,6 +666,26 @@ function commentLIst() {
 			}
 		}
 	});
+}
+function alarmComT(bno){
+	$.ajax({
+		type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,boardName:'F'},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
+function alarmComTnt(bno,cno){
+	$.ajax({
+		type:'get',url:'alarmComTnt',dataType:'text',data:{b_no:bno,c_no:cno,boardName:'F'},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
 }
 </script>
 </html>
