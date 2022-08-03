@@ -118,7 +118,8 @@
 					<ul class="dropdown-menu">
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
-						<li><a href="MyPost?m_no=${m_no}l">내가쓴게시물찾기</a></li>
+						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -181,12 +182,13 @@
 		    	</div>
 		    	</div>
 				<div class="row gap">
-				
-
-					<div class="col-lg-1"></div><div class="col-lg-1" ></div><div class="col-lg-8" id="gugu">
-						<h3>재능기부신청 게시판</h3>
-						<p>신청구역(서울)<select id="l_koo" class="form-control">
-                            <option value=''></option>
+					<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">재능기부신청 게시판</h2>
+					</div>
+					<div class="col-lg-2"></div><div class="col-lg-8">
+						<p>신청구역(서울)
+						<select id="l_koo" class="form-control">
+                            <option value=''>전체</option>
                             <option>강남구</option>
                             <option>강동구</option>
                             <option>강북구</option>
@@ -212,17 +214,12 @@
                             <option>종로구</option>
                             <option>중구</option>
                             <option>중랑구</option>
-                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" /><br>
+                            <input class="btn btn-outlined btn-primary" type="button" id="find" value="찾기" />
                         </select>
                         <div id="cla">
+                        	
                         </div>
-						
-						<p>신청구역(서울)</p>
-                        
-						<p></p>
-
-						<p></p>
-					</div>
+					</div><div class="col-lg-2"></div>
 				</div>
 			</div>	
 	    </section>
@@ -352,6 +349,9 @@ $(document)
 })
 .on('click','#find',function(){
 	console.log($('#l_koo option:selected').text());
+	if($('#l_koo option:selected').text()=='전체'){
+		showlist();
+	}
 	$.ajax({
 		type:'get',url:'find_list',data:{l_koo:$('#l_koo option:selected').text()},
 			dataType:'json',
@@ -359,12 +359,30 @@ $(document)
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
-					if(jo['count']==jo['nop']){
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+					if(getToday()>jo['l_date']){
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 						$('#cla').append(str);
-					}else{
-						let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-						$('#cla').append(str);
+					}
+					if(getToday()<=jo['l_date']){
+						if(jo['count']==jo['nop']){
+							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+							+'<div class="item-inner">'
+							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
+							$('#cla').append(str);
+						}else{
+							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+							+'<div class="item-inner">'
+							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
+							$('#cla').append(str);
+						}
 					}
 	  			}
     		},
@@ -381,14 +399,31 @@ function showlist(){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
-				if(jo['count']==jo['nop']){
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청마감'+jo['count']+'/'+jo['nop']+'</p></a></div>';
-					$('#cla').append(str);
-				}else{
-					let str='<div class="well"><div class="square pull-right" id="but">'+jo['l_views']+'</div><a href="l_Read?l_no='+jo['l_no']+'"><div class="square pull-left"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div><h4>'+jo['l_title']+'</h4><p>'+jo['l_date']+'<br>신청현황'+jo['count']+'/'+jo['nop']+'</p></a></div>';
+				if(getToday()>jo['l_date']){
+					let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+					+'<div class="item-inner">'
+					+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+					+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+					+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 					$('#cla').append(str);
 				}
-				
+				if(getToday()<=jo['l_date']){
+					if(jo['count']==jo['nop']){
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
+						$('#cla').append(str);
+					}else{
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						+'<div class="item-inner">'
+						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
+						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
+						$('#cla').append(str);
+					}
+				}
   			}
 		},
 		error:function(){
@@ -398,6 +433,13 @@ function showlist(){
 		
 	});
 }
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
 
+    return year + "-" + month + "-" + day;
+}
 </script>
 </html>

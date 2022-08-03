@@ -49,14 +49,24 @@ public class ApiController {
 	@Autowired
 	private SqlSession sqlSession;
 	
+	@RequestMapping("/Mysubs")
+	public String dosubs(HttpServletRequest req,Model model) {
+		int m_no = Integer.parseInt(req.getParameter("m_no"));
+		System.out.println("회원번호="+m_no);
+		HttpSession session=req.getSession();
+		model.addAttribute("userinfo",session.getAttribute("id"));
+		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("nick",session.getAttribute("nick"));
+		return "Mysubs";
+	}
 	@ResponseBody
-	@RequestMapping(value="/open_mypost", produces="application/text;charset=utf8")
-	public String doopenmypost(@RequestParam("m_no") int m_no) {
+	@RequestMapping(value="/open_mysubs", produces="application/text;charset=utf8")
+	public String doOpen_mysubs(@RequestParam("m_no") int m_no) {
 		iteamP team=sqlSession.getMapper(iteamP.class);
-		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);
+		ArrayList<L_listDTO> mysbus=team.open_mysubs(m_no);	
 		JSONArray ja =new JSONArray();
-		for(int i=0; i<l_list.size();i++) {
-			L_listDTO ldto = l_list.get(i);
+		for(int i=0; i<mysbus.size();i++) {
+			L_listDTO ldto = mysbus.get(i);
 			JSONObject jo =new JSONObject();
 			jo.put("l_no", ldto.getL_no());
 			jo.put("m_no", ldto.getM_no());
@@ -67,6 +77,47 @@ public class ApiController {
 			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
+		System.out.println(ja.toJSONString());
+		return ja.toJSONString();
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping(value="/open_mypost", produces="application/text;charset=utf8")
+	public String doopenmypost(@RequestParam("m_no") int m_no) {
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO> l_list=team.open_mypost(m_no);	
+		ArrayList<boardDTO> boardlist=team.open_board(m_no);
+		JSONArray ja =new JSONArray();
+		
+		JSONArray ja1 =new JSONArray();
+		for(int i=0; i<l_list.size();i++) {
+			L_listDTO ldto = l_list.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("l_no", ldto.getL_no());
+			jo.put("m_no", ldto.getM_no());
+			jo.put("l_title", ldto.getL_title());
+			jo.put("l_date", ldto.getL_date());
+			jo.put("l_views", ldto.getL_views());
+			jo.put("nop", ldto.getNop());
+			jo.put("count", ldto.getCount());
+			ja1.add(jo);
+		}
+		 
+		JSONArray ja2 =new JSONArray();
+		for(int i=0; i<boardlist.size();i++) {
+			boardDTO bdto = boardlist.get(i);
+			JSONObject jo =new JSONObject();
+			jo.put("b_no", bdto.getB_no());
+			jo.put("b_type", bdto.getB_type());
+			jo.put("b_title", bdto.getB_title());
+			jo.put("b_date", bdto.getB_date());
+			jo.put("views", bdto.getViews());
+			ja2.add(jo);
+			
+		}
+		ja.add(ja1);
+		ja.add(ja2);
 		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
@@ -287,6 +338,7 @@ public class ApiController {
 	public String dol_del(@RequestParam("l_no") int l_no) {
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		team.tal_che_li_del(l_no);
+		team.l_apdel(l_no);
 		int reccount = team.L_del(l_no);
 		return Integer.toString(reccount);
 	}
@@ -362,6 +414,7 @@ public class ApiController {
 			L_listDTO ldto = l_list.get(i);
 			JSONObject jo =new JSONObject();
 			jo.put("l_no", ldto.getL_no());
+			jo.put("l_name", ldto.getL_name());
 			jo.put("m_no", ldto.getM_no());
 			jo.put("l_title", ldto.getL_title());
 			jo.put("l_date", ldto.getL_date());

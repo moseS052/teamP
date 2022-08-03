@@ -102,6 +102,7 @@
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -159,6 +160,7 @@
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
+				
 
 					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
 						<h3></h3>
@@ -174,16 +176,12 @@
                         </div>
 						<p>내용:${l_con}</p>
                         <div class="square pull-right" id="but">
-						<p>
-						신청현황<br>
-						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}
-						</p>
+							<p>신청현황<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}</p>
 						
-						<c:if test="${userinfo!=null && l_mno eq m_no}">
-						신청인원(아이디)<select id="l_name" class="form-control">
-                            
-                        	 		</select> 
-						</c:if>
+							<c:if test="${userinfo!=null && l_mno eq m_no}">	
+							신청인원(아이디)<select id="l_name" class="form-control"></select> 
+							</c:if>
                         </div>
 						<div class="col-md-10">
 							<input type="hidden" readonly id="comment_cno">
@@ -224,30 +222,9 @@
 	<div id="footerwrap">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-1">
-					<h4 class="widget-title">댓글넣기</h4>
-					<ul class="tag-widget">
-						<li><a class="btn btn-primary btn-outlined" href="#">News</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Blog</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Photos</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Gallery</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Celeb</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
-					</ul>	
-				</div><!--col-lg-4-->
-				<div class="col-lg-1">
-					<h4 class="widget-title">댓글</h4>
-					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				<div class="col-lg-1"></div><div class="col-lg-1"></div><!--col-lg-1-->
 				<div class="col-lg-8">
-					<h4 class="widget-title">게시물댓글</h4>
-					<p>New York Office,<br/>
-					New York.<br/>
-					F: +458 4808-5489<br/>
-					E: <a href="mailto:#">hello@quoteguys.com</a>
-					</p>
-				</div><!--col-lg-4-->
+									</div><!--col-lg-8-->
 			</div><!-- row -->
 		</div><!-- container -->
 		<div id="footer-copyright">

@@ -148,6 +148,7 @@ a#yesyes{
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -350,7 +351,7 @@ a#yesyes{
 							<div class="square pull-left">
 								<img src=<c:url value="/resources/assets/img/team/team2.jpg"/> width="120" alt="" class="" />
 							</div>
-							<h4>John Smith</h4>
+							<h4>mooooooo</h4>
 							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
 								Integer posuere erat a ante.</p>
 							<div class="pull-right btn-group social-profiles">
@@ -630,7 +631,7 @@ a#yesyes{
 		<div class="container">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Blog</h2>
+					<h2 class="main-title">여기인가?</h2>
 					<hr>
 					<p>She evil face fine calm have now. Separate screened he
 						outweigh of distance landlord.</p>
@@ -654,7 +655,7 @@ a#yesyes{
 						</div>
 					</div>
 					<h3>
-						<a href="#">Blog Article Title</a>
+						<a href="#">슈벌탱</a>
 					</h3>
 					<p>Sentiments projection particular companions interested do at
 						my delightful. Listening newspaper in advantage frankness to

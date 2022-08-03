@@ -28,31 +28,18 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/heart.jpg"
-					 ], {
+				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
+					"resources/assets/img/bg/bg3.jpg" ], {
 					duration : 8000,
 					fade : 500
 				});
 	});
     </script>
-<style>
-	@font-face {
-    font-family: 'Binggrae';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
-	}
-	body{
-		font-family: 'Binggrae';
-	}
-	h2{
-		font-family: 'Binggrae';
-	}	
-</style>	
+	
   </head>
-<!--   <style> -->
+  <style>
 /*  a:link { */
-/*   color :green; */
+/*   color :grey; */
 /* } */
 /*   a:visited { */
 /*   color : grey; */
@@ -120,21 +107,26 @@
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
-						
+						<li><a href="single-post-sidebar.html">Request Board</a></li>
 					</ul></li>
-				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
-					<i class="fa fa-camera menu-icon"></i></a>
-				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
 						<li><a id='question' href="#">1:1 질문</a></li>
 					</ul></li>	
+				<li class="dropdown"><a href="#" class="dropdown-toggle"
+					data-toggle="dropdown">Portfolio <i
+						class="fa fa-camera menu-icon"></i></a>
+					<ul class="dropdown-menu">
+						<li><a href="single-project.html">Single Project</a></li>
+						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
+						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
+						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
+					</ul></li>
 			</ul>
 		</div>
 	</nav>
@@ -145,10 +137,9 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
-                <br><br><br><br><br>
-                <h2 class="main-title">내가 쓴 게시물</h2>
+                <h2 class="main-title">내가 신청한 게시물</h2>
                 <hr>
-                <p></p>
+                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
@@ -159,18 +150,16 @@
 		    	<div class="gap"></div>
 				<div class="row gap">
 
-					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
-						<h3>내가 쓴 게시물 목록</h3>
+					<div class="col-lg-2"></div><div class="col-lg-8">
+						<h3>내가 신청한 게시판 목록</h3>
 						<div>
 						<table id='mytable' class="table table-striped">
 						<thead><tr><th>게시판타입</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
 							<tbody></tbody>
 						</table>
-                        </div>
-						
-                        
-
+                        </div>	
 					</div>
+					<div class="col-lg-2"></div>
 				</div>
 			</div>	
 	    </section>
@@ -229,48 +218,28 @@
 <script>
 $(document)
 .ready(function(){	
-	showlist()
+	showlist();
 })
 function showlist(){
-	var ar = new Array()
 	$.ajax({
-		url:'open_mypost', data:{m_no:`${m_no}`},dataType:'json',type:'get',
+		url:'open_mysubs', data:{m_no:`${m_no}`},dataType:'json',type:'get',
 		success:function(data){
 			$('#cla').empty();
-  			for(let i=0;i<data[0].length;i++){
-				let jo=data[0][i];
-				let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
-				let ob={date:jo['l_date'],div:str}
-				ar.push(ob);
-  			}
-  			for(let j=0;j<data[1].length;j++){
-				let jj=data[1][j];
-				
-				if(jj['b_type']=="F"){
-					let str='<tr><td>Free Board</td><td><a href="freedetail?b_no='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
-					let ob={date:jj['l_date'],div:str}
-					ar.push(ob);
-				}else if(jj['b_type']=="Q"){
-					let str='<tr><td>Request Board</td><td><a href="reqdetail?b_no='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
-					let ob={date:jj['l_date'],div:str}
-					ar.push(ob);
-				}else{
-					let str='<tr><td>PHOTO</td><td><a href="ReadPhoto?seq='+jj['b_no']+'">'+jj['b_title']+'</a></td><td>'+jj['b_date']+'</td><td>'+jj['views']+'</td></tr>'
-					let ob={date:jj['l_date'],div:str}
-					ar.push(ob);
+  			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(getToday()>jo['l_date']){
+					let str='<tr style="background-color:#E2E2E2"><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td><td>종료</td></tr>'
+					$('#mytable > tbody:last').append(str);
 				}
-  			}
-			console.log(ar[0].div);
-			ar.sort(function(a, b){
-				if(a.date>b.date){
-					return -1;
-				}else if(a.date<b.date){
-					return 1;
-				}else return 0;
-			});
-  				
-  			for(let z=0; z<ar.length;z++){
-  				$('#mytable > tbody:last').append(ar[z].div);
+				if(getToday()<=jo['l_date']){
+					if(jo['count']==jo['nop']){
+						let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
+						$('#mytable > tbody:last').append(str);
+					}else{
+						let str='<tr><td>봉사활동기획서</td><td><a href="l_Read?l_no='+jo['l_no']+'">'+jo['l_title']+'</a></td><td>'+jo['l_date']+'</td><td>'+jo['l_views']+'</td></tr>'
+						$('#mytable > tbody:last').append(str);
+					}
+				}
   			}
 		},
 		error:function(){
@@ -280,8 +249,14 @@ function showlist(){
 		
 	});
 }
+function getToday(){
+    var date = new Date();
+    var year = date.getFullYear();
+    var month = ("0" + (1 + date.getMonth())).slice(-2);
+    var day = ("0" + date.getDate()).slice(-2);
 
-
+    return year + "-" + month + "-" + day;
+}
 
 
 </script>

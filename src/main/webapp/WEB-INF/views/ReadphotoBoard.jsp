@@ -252,11 +252,6 @@
 								<!--/#comment-form-->
 							</div>
 							<!--/#comments-->
-
-
-
-
-
 						</div>
 					</div>
 				</div>
