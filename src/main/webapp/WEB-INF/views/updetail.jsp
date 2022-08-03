@@ -51,11 +51,32 @@
 	});
     </script>
 <style>
+	@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'GangwonEdu_OTFBoldA';
+	}
 	table{
 		text-align:center;
 	}
 	th {
     	text-align:center;
+	}
+	.menu,#theMenu{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
 	}
 </style>		
   </head>
@@ -137,7 +158,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -240,20 +261,26 @@ $(document)
 	document.location='/pj/freeboard';
 })
 .on('click','#up',function(){
-	if(!confirm("글을 수정하시겠습니까?")) return false;
+	if($('#b_con').val()=='' || $('#b_title').val()==''){
+		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
+		return false;
+	}else{
+		if(!confirm("글을 수정하시겠습니까?")) return false;
 
-	$.ajax({
-		type:'get',dataType:'text',url:'update_free',
-		data:{b_no:$('#b_no').val(),b_title:$('#b_title').val(),b_con:$('#b_con').val()},
-		beforeSend:function(){
-			console.log("b_no:"+$('#b_no').val());
-			console.log("b_con"+$('#b_con').text());
-		},
-		success:function(){	
-			alert('수정이 완료되었습니다');
-			window.location.href="<%= request.getContextPath() %>/freeboard";
-		}
-	}) 
+		$.ajax({
+			type:'get',dataType:'text',url:'update_free',
+			data:{b_no:$('#b_no').val(),b_title:$('#b_title').val(),b_con:$('#b_con').val()},
+			beforeSend:function(){
+				console.log("b_no:"+$('#b_no').val());
+				console.log("b_con"+$('#b_con').text());
+			},
+			success:function(){	
+				alert('수정이 완료되었습니다');
+				window.location.href="<%= request.getContextPath() %>/freeboard";
+			}
+		}) 
+	}
+	
 })
 </script>
 </html>

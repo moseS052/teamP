@@ -30,12 +30,12 @@ public class photoBoardController {
 			@RequestParam("stanum") int stanum,
 			@RequestParam("endnum") int endnum) {
 		HttpSession session = req.getSession();
-		if (session.getAttribute("id") == null) { // 로그인 전
+		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
 			model.addAttribute("userinfo", null);
 
-		} else { // 로그인 성공 후
+		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
-
+			model.addAttribute("m_no", session.getAttribute("m_no"));	
 		}
 		
 
@@ -54,12 +54,12 @@ public class photoBoardController {
 	@RequestMapping("/donationReviwe")
 	String donationReview(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
-		if (session.getAttribute("id") == null) { // 로그인 전
+		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
 			model.addAttribute("userinfo", null);
 
-		} else { // 로그인 성공 후
+		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
-
+			model.addAttribute("m_no", session.getAttribute("m_no"));	
 		}
 
 		return "donationReview";
@@ -108,12 +108,12 @@ public class photoBoardController {
 	public String ReadPhoto(@RequestParam("seq") int b_no, Model model, HttpServletRequest req) {
 		HttpSession session = req.getSession();
 		
-		if (session.getAttribute("id") == null) { // 로그인 전
+		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
 			model.addAttribute("userinfo", null);
 
-		} else { // 로그인 성공 후
+		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
-
+			model.addAttribute("m_no", session.getAttribute("m_no"));
 		}
 		
 		

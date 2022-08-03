@@ -50,7 +50,36 @@
 		});
 	});
     </script>
-	
+<style>
+
+    @font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'GangwonEdu_OTFBoldA';
+	}
+	table{
+		text-align:center;
+	}
+	th {
+    	text-align:center;
+	}
+	.menu,#theMenu{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
+</style>	
   </head>
 
   <body class="single single-post"> 
@@ -226,6 +255,12 @@
 $(document)
 .on('click','#btnList',function(){
 	document.location='/pj/reqboard';
+})
+.on('submit','#frmfb',function(){
+	if($('#content').val()=='' || $('#title').val()==''){
+		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
+		return false;
+	}
 })
 </script>
 </html>

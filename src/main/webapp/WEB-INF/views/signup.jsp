@@ -51,7 +51,13 @@
 	});
     </script>
 <style>
-     body {
+     @font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	 body {
       /* min-height: 100vh;
 
       background: -webkit-gradient(linear, left bottom, right top, from(#92b5db), to(#1d466c));
@@ -60,8 +66,11 @@
       background: -o-linear-gradient(bottom left, #92b5db 0%, #1d466c 100%);
       background: linear-gradient(to top right, #92b5db 0%, #1d466c 100%); */
       align:center;
+      font-family: 'Binggrae';
     } 
-
+	h2{
+		font-family: 'Binggrae';
+	}
     .input-form {
       max-width: 680px;
 
@@ -169,7 +178,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -238,14 +247,14 @@
             </div>
             <div class="col-md-6 mb-3">
               <label>비밀번호</label>
-              <input type="password" class="form-control" id="ppw" name="ppw" placeholder="password" value="" required onkeypress='return checkBlank(event)'>
+              <input type="password" class="form-control" id="ppw" name="ppw" placeholder="password" style="font-family:auto" value="" required onkeypress='return checkBlank(event)'>
               <!-- <div class="invalid-feedback">
                 비밀번호를 입력해주세요.
               </div> -->
             </div>
             <div class="col-md-6 mb-3">
               <label>비밀번호 확인</label>
-              <input type="password" class="form-control" id="ppw2" name="ppw2" placeholder="비밀번호를 한번 더 입력해주세요" value="" required onkeypress='return checkBlank(event)'>
+              <input type="password" class="form-control" id="ppw2" name="ppw2" placeholder="비밀번호를 한번 더 입력해주세요" style="font-family:auto" value="" required onkeypress='return checkBlank(event)'>
               <!-- <div class="invalid-feedback">
                 비밀번호를 한번 더 입력해주세요.
               </div> -->
@@ -300,31 +309,9 @@
             
           </div>
 
-          <!-- <div class="row">
-            <div class="col-md-8 mb-3">
-              <label for="root">가입 경로</label>
-              <select class="custom-select d-block w-100" id="root">
-                <option value=""></option>
-                <option>검색</option>
-                <option>카페</option>
-              </select>
-              <div class="invalid-feedback">
-                가입 경로를 선택해주세요.
-              </div>
-            </div>
-            <div class="col-md-4 mb-3">
-              <label for="code">추천인 코드</label>
-              <input type="text" class="form-control" id="code" placeholder="" required>
-              <div class="invalid-feedback">
-                추천인 코드를 입력해주세요.
-              </div>
-            </div>
-          </div> -->
+          
           <hr class="mb-4">
-         <!--  <div class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" id="aggrement" required>
-            <label class="custom-control-label" for="aggrement">개인정보 수집 및 이용에 동의합니다.</label>
-          </div> -->
+        
           <div class="mb-4"></div>
           <input class="btn btn-primary btn-outlined btn-lg btn-block" type="button" id="up" value='Join'>
           <input type=button id="clean" class="btn btn-lg btn-secondary btn-block text-uppercase" value='취소'>          
@@ -541,10 +528,7 @@ function email_check(email) {
 	var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 	return reg.test(email);
 }
-/* function view(){
-	alert('19990909 형식으로 입력 해주세요');
-}
- */function checkBlank(event){
+function checkBlank(event){
 	if(event.key == ' '){
 		alert('공백은 입력할 수 없습니다');
 		return false;

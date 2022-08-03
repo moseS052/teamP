@@ -94,7 +94,7 @@ public class questionController {
 		}
 		
 			
-			
+	  model.addAttribute("m_no", session.getAttribute("m_no"));
 	  model.addAttribute("userinfo",session.getAttribute("id"));		
 	  model.addAttribute("list", ja); 
 	  model.addAttribute("datalist", ja); 
@@ -105,7 +105,8 @@ public class questionController {
 	}
 	//1:1臾몄�� �듬�
 	@RequestMapping("/questionAnswer")
-	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod) {
+	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod, HttpServletRequest req) {
+		HttpSession session=req.getSession();
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
 		qnaDTO qdto = qa.answerList(q_no);	
 		mod.addAttribute("qno", qdto.getQ_no());
@@ -114,11 +115,16 @@ public class questionController {
 		mod.addAttribute("qdate", qdto.getQ_date());
 		mod.addAttribute("qmno", qdto.getQ_a());
 		mod.addAttribute("qa", qdto.getQ_a());
+		mod.addAttribute("m_no", session.getAttribute("m_no"));
+		mod.addAttribute("id",session.getAttribute("id"));
 		return "questionAnswer";
 	}
 	//1:1contact us
 	@RequestMapping("/contactus")
-	public String Contactus() {
+	public String Contactus(HttpServletRequest req, Model model) {
+		HttpSession session=req.getSession();
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		model.addAttribute("id",session.getAttribute("id"));
 		return "conTactus";
 	}
 	@ResponseBody

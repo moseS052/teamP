@@ -15,6 +15,17 @@
 <link href="<c:url value="/resources/assets/css/font-awesome.min.css"/>" rel="stylesheet">
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
+<style>
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	a{
+		font-family: 'Binggrae';
+	}
+</style>
 </head>
 <body>
 <div>

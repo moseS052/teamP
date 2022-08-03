@@ -55,11 +55,32 @@
         border-color: #28a745;
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
     }
+	@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'GangwonEdu_OTFBoldA';
+	}
 	table{
 		text-align:center;
 	}
 	th {
     	text-align:center;
+	}
+	.menu,#theMenu{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
 	}
 </style>		
   </head>
@@ -141,7 +162,7 @@
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -177,7 +198,7 @@
 					<tr><td>작성자 :&nbsp;&nbsp;<a href='' id='meminfo' seq='${bdto.m_no}'>${bdto.nick}</a></td>
 					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;"  value="${bdto.b_date }" readonly></td></tr>
 					</table>
-					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined" onclick="location.href='<%= request.getContextPath() %>/freeboard'">
+					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined"<%--  onclick="location.href='<%= request.getContextPath() %>/freeboard'" --%>>
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
 					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">

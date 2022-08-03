@@ -46,7 +46,7 @@ public class boardController {
 		return "freeboard";
 	}	
 	//go to new post page in free board
-	@RequestMapping("/newpost_write")
+	@RequestMapping("/newpost_fb")
 	public String doNewPost(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
