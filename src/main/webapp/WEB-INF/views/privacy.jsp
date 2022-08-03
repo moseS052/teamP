@@ -251,8 +251,8 @@ $(document)
 			type:'get',url:'prichange',data:{m_no:`${m_no}`,nick:$('#prinick').val(),name:$('#priname').val(),phone:$('#priphone').val(),mail:$('#primail').val()},
 				dataType:'text',
 		  		success:function(){
-		  			alert('수정되었습니다')
-		  			document.location='/pj/'
+		  			alert('수정되었습니다 다시 로그인해주세요')
+		  			document.location='/pj/logout'
 	    		},
 	    		error:function(){
 	    		},

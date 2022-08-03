@@ -16,7 +16,6 @@ public class L_listDTO {
 	 int l_views;
 	 int nop;
 	 int count;
-	 
 	public int getCount() {
 		return count;
 	}

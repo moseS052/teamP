@@ -52,7 +52,6 @@ public class ApiController {
 	@RequestMapping("/Mysubs")
 	public String dosubs(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
-		System.out.println("회원번호="+m_no);
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
@@ -126,7 +125,6 @@ public class ApiController {
 	@RequestMapping("/MyPost")
 	public String domypost(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
-		System.out.println("회원번호="+m_no);
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
@@ -140,7 +138,6 @@ public class ApiController {
 	@RequestMapping(value="/pwdchange", produces="application/text;charset=utf8")
 	public String dopwdchange(@RequestParam("m_no") int m_no,
 							 @RequestParam("npwd1") int npwd1) {
-		System.out.println("{목록번호="+m_no+"}"+npwd1);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			team.pwdchange(npwd1,m_no);
 		return "";
@@ -151,7 +148,6 @@ public class ApiController {
 	@RequestMapping(value="/pwdcheck", produces="application/text;charset=utf8")
 	public String dopwdcheck(@RequestParam("m_no") int m_no,
 							 @RequestParam("pw") int pw) {
-		System.out.println("{목록번호="+m_no+"}"+pw);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			int a=team.pwdcheck(m_no,pw);
 		return Integer.toString(a);
@@ -161,7 +157,6 @@ public class ApiController {
 	@RequestMapping("/pwchange")
 	public String dopasswordchange(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
-		System.out.println("회원번호="+m_no);
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
@@ -178,7 +173,6 @@ public class ApiController {
 								 @RequestParam("name") String name,
 								 @RequestParam("phone") String phone,
 								 @RequestParam("mail") String mail) {
-		System.out.println("{회원번호="+m_no+"}"+"{닉넴="+nick+"}"+"{이름="+name+"}"+"{번호="+phone+"}"+"{메일="+mail+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			team.prichange(name,nick,phone,mail,m_no);
 		return "";
@@ -189,7 +183,6 @@ public class ApiController {
 	@ResponseBody
 	@RequestMapping(value="/nickcheck",produces="application/text;charset=utf8")
 	public String donickcheck(@RequestParam("nick") String nick) {
-		System.out.println("{목록번호="+nick+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			int a=team.nickcheck(nick);
 		return Integer.toString(a);
@@ -200,7 +193,6 @@ public class ApiController {
 	@RequestMapping("/privacy")
 	public String doprivacy(HttpServletRequest req,Model model) {
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
-		System.out.println("회원번호="+m_no);
 		HttpSession session=req.getSession();
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
@@ -221,7 +213,6 @@ public class ApiController {
 	@RequestMapping(value="/applydel", produces="application/text;charset=utf8")
 	public String doappdel(@RequestParam("l_no") int l_no,
 							@RequestParam("m_no") int m_no) {
-		System.out.println("{목록번호="+l_no+"}{체크="+m_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			team.applydel(l_no,m_no);
 		return "";
@@ -233,7 +224,6 @@ public class ApiController {
 	@RequestMapping(value="/applynew", produces="application/text;charset=utf8")
 	public String doappnew(@RequestParam("l_no") int l_no,
 							@RequestParam("m_no") int m_no) {
-		System.out.println("{목록번호="+l_no+"}{체크="+m_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			team.applyad(l_no,m_no);
 		return "";
@@ -244,7 +234,6 @@ public class ApiController {
 	@ResponseBody
 	@RequestMapping(value="/applylist", produces="application/text;charset=utf8")
 	public String doapplylist(@RequestParam("l_no") int l_no) {
-		System.out.println("{목록번호="+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			ArrayList<L_listDTO>re=team.applist(l_no);
 			JSONArray ja =new JSONArray();
@@ -306,7 +295,6 @@ public class ApiController {
 	//update read//
 	@RequestMapping(value="/l_retouch", produces="application/text;charset=utf8")
 	public String doRetouch(@RequestParam("l_no") int l_no,HttpServletRequest req,Model model) {
-//		System.out.println("목록번호"+l_no);
 		HttpSession session=req.getSession();
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
@@ -421,6 +409,7 @@ public class ApiController {
 			jo.put("l_views", ldto.getL_views());
 			jo.put("nop", ldto.getNop());
 			jo.put("count", ldto.getCount());
+			jo.put("l_route", ldto.getL_route());
 			ja.add(jo);
 		}
 //		System.out.println(ja.toJSONString());
@@ -471,7 +460,6 @@ public class ApiController {
 						  @RequestParam("t_no") int t_no, HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		String nick=(String) session.getAttribute("nick");
-		System.out.println("{占싱몌옙="+m_no+"}{占쏙옙짜="+l_date+"}{占쏙옙�뱄옙호="+t_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		int l_no = team.checkl_no(m_no,l_date);
 		session.setAttribute("l_no", l_no);
@@ -499,7 +487,7 @@ public class ApiController {
 						  @RequestParam("l_koo") String l_koo, 
 						  @RequestParam("l_name") String l_name,
 						  @RequestParam("l_address") String l_address) {
-		System.out.println(nop);
+		System.out.println("사진값은="+l_file);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 			int a=team.datecheck(m_no,l_date);
 			if(a==1) {
@@ -562,7 +550,25 @@ public class ApiController {
 		
 		return "redirect:/find";
 	}
-	//--占쏙옙占쏙옙회占쏙옙 占쏙옙회 API--// 
+	//--占쏙옙占쏙옙회占쏙옙 占쏙옙회 API--//
+	@ResponseBody
+	@RequestMapping(value="/insertno_img",method = RequestMethod.GET, produces="application/text;charset=utf8")
+	public String Insert_no_img(HttpServletRequest req) {
+		int nope = Integer.parseInt(req.getParameter("a"));
+		System.out.println(nope);
+		HttpSession session=req.getSession();
+		int l_no=(int) session.getAttribute("l_no");
+		System.out.println("l_no="+l_no);
+		String img="resources/assets/img/No-img.jpg";
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		if(nope==1) {
+			team.insertno_img(l_no,img);
+			return "";
+		}
+		session.removeAttribute("l_no");
+		
+		return"";
+	}
 	@ResponseBody
 	@RequestMapping(value="/insertl_loute",method = RequestMethod.POST, produces="application/text;charset=utf8")
 	public String Insert_loute(MultipartHttpServletRequest request,HttpServletRequest req) {
