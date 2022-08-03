@@ -28,8 +28,7 @@
 <script type="text/javascript">
     $(document).ready(function(){
     	jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/bg1.jpg", "resources/assets/img/bg/bg2.jpg",
-					"resources/assets/img/bg/bg3.jpg" ], {
+				[ "resources/assets/img/bg/heart.jpg" ], {
 					duration : 8000,
 					fade : 500
 				});
@@ -38,13 +37,25 @@
 	
   </head>
   <style>
+	@font-face {
+    font-family: 'Binggrae';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_one@1.0/Binggrae.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	body{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}  
 /*  a:link { */
 /*   color :grey; */
 /* } */
 /*   a:visited { */
 /*   color : grey; */
 /* } */
-<!--  </style> -->
+<!--  </style>
 
   <body class="single single-post"> 
 
@@ -107,26 +118,20 @@
 						<li><a href="proposal_list">봉사활동 현황목록</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
+					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
 						<li><a href="single-post-sidebar.html">Request Board</a></li>
 					</ul></li>
+				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
+					<i class="fa fa-camera menu-icon"></i></a>
+				</li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
 						<li><a id='question' href="#">1:1 질문</a></li>
 					</ul></li>	
-				<li class="dropdown"><a href="#" class="dropdown-toggle"
-					data-toggle="dropdown">Portfolio <i
-						class="fa fa-camera menu-icon"></i></a>
-					<ul class="dropdown-menu">
-						<li><a href="single-project.html">Single Project</a></li>
-						<li><a href="portfolio-4-column.html">Portfolio 4 Column</a></li>
-						<li><a href="portfolio-3-column.html">Portfolio 3 Column</a></li>
-						<li><a href="portfolio-2-column.html">Portfolio 2 Column</a></li>
-					</ul></li>
 			</ul>
 		</div>
 	</nav>
@@ -137,9 +142,10 @@
    		<div class="container">
 	    	<div class="gap"></div> 
         	<div id="bannertext" class="centered fade-down section-heading">
+                <br><br><br><br><br>
                 <h2 class="main-title">내가 신청한 게시물</h2>
                 <hr>
-                <p>She evil face fine calm have now. Separate screened he outweigh of distance landlord.</p>
+                <p></p>
             </div>
 		</div><!-- /container -->
 	</div><!-- /headerwrap -->
@@ -165,7 +171,7 @@
 	    </section>
 	</div>
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -179,11 +185,11 @@
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -191,15 +197,15 @@
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->

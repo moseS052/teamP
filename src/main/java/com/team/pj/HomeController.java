@@ -74,6 +74,7 @@ public class HomeController {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "login";
 	}
 	//����媛���jsp
@@ -82,6 +83,7 @@ public class HomeController {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "signup";
 	}
 	//login

@@ -75,14 +75,17 @@
 	#searchDIV{
 		text-align:right;
 		margin-top:25px;
+		font-family: 'GangwonEdu_OTFBoldA';
 	}
 	#boxboxq{
 		margin-top:-45px;
+		font-family: 'GangwonEdu_OTFBoldA';
 	}
  	#btnSearch, #btnAll{ 
  		height:24px;
  		margin-top:-4px;
  		margin-left:5px;
+ 		font-family: 'Binggrae'; 		
  	} 
  	#searc,#all1{
  		margin-top:-7px;
@@ -91,9 +94,12 @@
  		padding-top:1px;
  		font-size:15px;
  		margin-right:-2px;
+ 		font-family: 'Binggrae';
+ 		height:25px;
  	}
  	#searching{
  		font-size:17px;
+ 		font-family: 'Binggrae';
  	}
 	.menu,#theMenu{
 		font-family: 'Binggrae';
@@ -125,7 +131,7 @@
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${m_no!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${nick}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
             </div>
              <div>

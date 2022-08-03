@@ -27,7 +27,8 @@
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
-<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
+<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script> 
+<script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>  
 <script type="text/javascript">
 
 $(document)
@@ -114,6 +115,7 @@ a#yesyes{
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
 				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a></h2>
+				<%-- <% naver_id_login.getProfileData('name')%> --%>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -1461,7 +1463,27 @@ function alarmList() {
 }
 
 </script>
-
+<script type="text/javascript">
+        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+        
+        // 접근 토큰 값 출력
+        //alert(naver_id_login.oauthParams.access_token);
+        
+        // 네이버 사용자 프로필 조회
+        naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        
+        // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+        function naverSignInCallback() {
+            alert(naver_id_login.getProfileData('email'));
+            alert(naver_id_login.getProfileData('nickname'));
+            alert(naver_id_login.getProfileData('age'));
+            alert(naver_id_login.getProfileData('name'));
+            alert(naver_id_login.getProfileData('birthyear'));
+            alert(naver_id_login.getProfileData('gender'));
+            alert(naver_id_login.getProfileData('id'));
+            alert(naver_id_login.getProfileData('mobile'));
+        }
+</script>
 <%-- <script type="text/javascript">
 function logIn() { 
 	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
@@ -1470,7 +1492,4 @@ function logIn() {
 	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
 	  }
 </script>    --%>  
-
-
-
 </html>

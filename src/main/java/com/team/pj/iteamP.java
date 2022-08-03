@@ -80,4 +80,5 @@ public interface iteamP {
 	int findMaxb_no(int m_no);
 	ArrayList<boardDTO> open_board(int m_no);
 	ArrayList<L_listDTO> open_mysubs(int m_no);
+	void member_out(int m_no);
 }
