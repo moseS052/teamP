@@ -74,10 +74,9 @@ public interface iteamP {
 	boardDTO req_detail(int b_no);
 	String getAvaRoute(int m_no);
 	void updateAvaRoute(String avaRoute,int m_no);
-	int getMnoByBno(int b_no);
-	int getMnoByCno(int c_no);
 	int insertI_routetable(int l_no, String i_route);
 	int findMaxb_no(int m_no);
 	ArrayList<boardDTO> open_board(int m_no);
 	ArrayList<L_listDTO> open_mysubs(int m_no);
+	ArrayList<Integer> getApplyMem(int l_no);
 }

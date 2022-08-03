@@ -250,6 +250,8 @@
 			</div>
 				
 	    </section>
+	    <input type="hidden" id="potato1" value="${bdto.m_no}">
+	    <input type="hidden" id="potato">
 	</div>
 
 	<!-- MAIN FOOTER -->
@@ -404,9 +406,9 @@ $(document)
 })
 .on('click','#re_reply',function() {
 	let s = parseInt($(this).attr('reseq'));
-	console.log($(this).attr('reseq'));
+	$('#potato').val($(this).attr('mno'));
 	let t = $(this).text().split('&nbsp;');
-	console.log($('#reply_controll' + s).val());
+// 	console.log($('#reply_controll' + s).val());
 
 	if ($('#reply_controll' + s).val() == 'close') {
 		rerplyList(s, doo);
@@ -503,8 +505,8 @@ $(document)
 })
 .on('click', '#ansercomment', function() {
 	let str = '@' + $(this).attr('seq') + ' ';
+	$('#potato').val($(this).attr('mno'));
 	$('#re_replytextArea').val(str);
-	console.log();
 })
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
@@ -557,7 +559,7 @@ function rerplyList(num, doo) {
 						+ '</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'
 						+ com['c_con']
 						+ '</p><a id="ansercomment" seq="'
-						+ com['nick']
+						+ com['nick']+'" mno="'+com['m_no']
 						+ '" href="javascript:void(0);">답글</a></div>'
 						+ '</div>';
 				$('#re_replylist' + num).append(html);
@@ -593,6 +595,7 @@ function deleteRe_Reply(num) {
 	
 
 function insertRe_Reply(s) {
+	
 	$.ajax({
 		url : 're_replyinsert',
 		data : {
@@ -606,7 +609,7 @@ function insertRe_Reply(s) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
-			alarmComTnt($('#page').val(),$('#realc_no' + s).val());
+			alarmComTnt($('#page').val());
 			
 		}
 
@@ -629,8 +632,7 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
-			alarmComTnt($('#page').val(),cno);
-			//cno 들어가는 것 찾아낼 것! 상대 m_no ,, html 어딘가에는 있는 듯
+			alarmComTnt($('#page').val());
 		}
 	});
 }
@@ -679,7 +681,7 @@ function commentLIst() {
 						+ '<div id="comment_board'+com['c_no']+'"><p id="comment_content'+com['c_no']+'">'
 						+ com['c_con']
 						+ '</p>'
-						+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'">답글&nbsp;'
+						+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'" mno="'+com['m_no']+'">답글&nbsp;'
 						+ '<span id="counts'+com['c_no']+'">'
 						+ com['count']
 						+ '</span>'
@@ -692,7 +694,7 @@ function commentLIst() {
 }
 function alarmComT(bno){
 	$.ajax({
-		type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,boardName:'F'},
+		type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,m_no:$('#potato1').val(),boardName:'F'},
 		success:function(){
 		},
 		error:function(){
@@ -700,9 +702,9 @@ function alarmComT(bno){
 		complete:function(){}
 	})
 }
-function alarmComTnt(bno,cno){
+function alarmComTnt(bno){
 	$.ajax({
-		type:'get',url:'alarmComTnt',dataType:'text',data:{b_no:bno,c_no:cno,boardName:'F'},
+		type:'get',url:'alarmComTnt',dataType:'text',data:{b_no:bno,m_no:$('#potato').val(),boardName:'F'},
 		success:function(){
 		},
 		error:function(){

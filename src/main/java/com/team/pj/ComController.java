@@ -168,15 +168,14 @@ public class ComController {
 		HttpSession session=req.getSession();
 		iteamP ip = sqlSession.getMapper(iteamP.class);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		int you=Integer.parseInt(req.getParameter("m_no"));
 		String boardName=req.getParameter("boardName");
-		int you=ip.getMnoByBno(b_no);
 		String mes="";
 		if(boardName.equals("F")) {
 			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 게시글에 답글이 작성되었습니다.(<a id='goList' href='freedetail?b_no="+b_no+"'>게시판가기</a>)";
 		}else if(boardName.equals("Q")) {
 			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 게시글에 답글이 작성되었습니다.(<a id='goList' href='reqdetail?b_no="+b_no+"'>게시판가기</a>)";
 		}
-		
 		ip.insertAlarm(you, mes);
 		return "";
 	}
@@ -188,9 +187,8 @@ public class ComController {
 		HttpSession session=req.getSession();
 		iteamP ip = sqlSession.getMapper(iteamP.class);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
-		int c_no=Integer.parseInt(req.getParameter("c_no"));
+		int you=Integer.parseInt(req.getParameter("m_no"));
 		String boardName=req.getParameter("boardName");
-		int you=ip.getMnoByCno(c_no);
 		String mes="";
 		if(boardName.equals("F")) {
 			mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님의 답글에 답글이 작성되었습니다.(<a id='goList' href='freedetail?b_no="+b_no+"'>게시판가기</a>)";

@@ -212,12 +212,6 @@
 <update id="updateAvaRoute">
 	update member set ava_route=#{param1} where m_no=#{param2}
 </update>
-<select id="getMnoByBno" resultType="int">
-	select m_no from board where b_no=#{param1}
-</select>
-<select id="getMnoByCno" resultType="int">
-	select m_no from comment_t where c_no=#{param1}
-</select>
 <insert id="insertI_routetable">
 	insert into l_route values(#{param1},#{param2})
 </insert>
@@ -230,6 +224,9 @@
 </select>
 <select id="open_mysubs" resultType="com.team.pj.L_listDTO">
 	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a  where l_no in(select l_no from apply where m_no=90) order by l_date desc
+</select>
+<select id="getApplyMem" resultType="int">
+	select m_no from apply where l_no=#{param1}
 </select>
 </mapper>
 

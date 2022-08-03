@@ -259,7 +259,7 @@ $(document)
 	applylist()
 	if(`${l_mno}`==`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button' id='0' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='작성할때필요' value='후기작성' />"
+			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button' id='0' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview' value='후기작성' />"
 			$('#but').append(str);
 			}else{let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
 			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
@@ -414,10 +414,11 @@ $(document)
     	});
 })
 .on('click', '#donationReview', function() {
+		console.log(`${applyMem}`);//들어오는 값 비교해서 후기 작성 할수 있는 사람 비교 후 알림작업
 		if (`${userinfo}` == '') {
 			alert('로그인 후 사용가능합니다.')
 		} else {
-			document.location = '/pj/donationReviwe';
+// 			document.location = '/pj/donationReviwe';
 		}
 
 	})

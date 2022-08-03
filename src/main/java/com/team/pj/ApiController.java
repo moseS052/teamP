@@ -367,6 +367,8 @@ public class ApiController {
 		model.addAttribute("l_mno",re.m_no);
 		model.addAttribute("l_views",re.l_views);
 		model.addAttribute("nop",re.nop);
+		ArrayList<Integer> appMem=team.getApplyMem(l_no);
+		model.addAttribute("applyMem",appMem);
 		ArrayList<String>sd=team.bringt_name(l_no);
 		String str="";
 		for(int i=0;i<sd.size();i++) {
