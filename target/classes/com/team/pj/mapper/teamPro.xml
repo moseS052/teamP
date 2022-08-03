@@ -215,5 +215,12 @@
 <select id="getMnoByCno" resultType="int">
 	select m_no from comment_t where c_no=#{param1}
 </select>
+<insert id="insertI_routetable">
+	insert into l_route values(#{param1},#{param2})
+</insert>
+<select id="findMaxb_no" resultType="int">
+ select max(b_no) from boardf
+		where m_no=#{param1}
+</select>
 </mapper>
 

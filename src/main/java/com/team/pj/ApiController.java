@@ -1,13 +1,17 @@
 package com.team.pj;
 
 
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
 
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import org.apache.ibatis.session.SqlSession;
 
@@ -29,7 +33,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -416,6 +421,7 @@ public class ApiController {
 		System.out.println("{占싱몌옙="+m_no+"}{占쏙옙짜="+l_date+"}{占쏙옙�뱄옙호="+t_no+"}");
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		int l_no = team.checkl_no(m_no,l_date);
+		session.setAttribute("l_no", l_no);
 		team.check_ad(l_no,t_no);
 		String tName=team.findTname(t_no);
 		ArrayList<Integer> arM_no= team.findT_C_P(t_no);
@@ -504,5 +510,38 @@ public class ApiController {
 		return "redirect:/find";
 	}
 	//--占쏙옙占쏙옙회占쏙옙 占쏙옙회 API--// 
+	@ResponseBody
+	@RequestMapping(value="/insertl_loute",method = RequestMethod.POST, produces="application/text;charset=utf8")
+	public String Insert_loute(MultipartHttpServletRequest request,HttpServletRequest req) {
+		HttpSession session=req.getSession();
+		int l_no=(int) session.getAttribute("l_no");
+		System.out.println("l_no="+l_no);
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		
+		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/L_route/";
+		String realDataFolder = "/resources/assets/L_route/";
+		List<MultipartFile> filelist = request.getFiles("file");
+		for (MultipartFile mf : filelist) {
+			String fileRealName = mf.getOriginalFilename();
+			System.out.println("fileRealName="+fileRealName);
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			UUID uuid = UUID.randomUUID();
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			File saveFile = new File(uploadFolder + uniqueName + fileExtension);
+			try {
+				mf.transferTo(saveFile);
+				team.insertI_routetable(l_no, realDataFolder+uniqueName+fileExtension);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		session.removeAttribute("l_no");
+		
+		return"";
+	}
 }
 

@@ -161,8 +161,9 @@
             </div>
 		</div>
 	</div>
- 
+ 	
 	<div id="content-wrapper">
+	
 	    <section id="about">
 	   		<div class="container">
 		    	<div class="gap"></div>
@@ -192,6 +193,7 @@
 					</c:if>
 					<div></div>
 				<div class="col-md-10">
+					<input type="hidden" readonly id="comment_cno">
 					<input type="hidden" id="page" value="${b_no}">
 					<div id="comments">
 						<div id="comments-list gap">

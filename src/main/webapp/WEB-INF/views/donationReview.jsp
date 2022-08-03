@@ -157,18 +157,26 @@
 					<div class="gap">
 						
 					</div>
-					<div Style="height:90px;">
-						<input type="text" style="height:60px; font-size:25px;" id="photoTitle" class="form-control" placeholder="제목">
+					<div align="center" Style="height:90px;">
+						<input type="text" style="height:45px; width:300px; font-size:15px;" id="photoTitle" class="form-control" placeholder="제목">
 						
 					</div>
-					<div>
-						<textarea style="padding:40px 40px 0 50px; height:500px;" id="photoContent" class="form-control" placeholder="내용"></textarea>
+					
+					<div id="preview">
+						
 					</div>
-					<div>
+					<div align="center" >
 						<form id="fileForm" method="post" enctype="multipart/form-data">
-							<input class="btn btn-primary btn-outlined" type="file" name="file" id="uploadFile" multiple="true">
+							<input class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile" multiple="true">
 						</form>
+						<ul style="text-align:center;list-style:none;" id="fileList"></ul>
 					</div>
+					<div align="center">
+						<textarea style="padding:40px 40px 0 50px; height:150px; width:600px; resize:none;" id="photoContent" class="form-control"  placeholder="내용"></textarea>
+					</div>
+					
+					
+					
 					<div>
 						<input class="btn btn-primary btn-outlined" type="button" id="doDonationreviewBtn" value="후기작성">
 					</div>
@@ -233,54 +241,65 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-	$(document)
-	.on('click', '#question', function() {
-		console.log(`${userinfo}` == '')
-		if (`${userinfo}` == '') {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-			document.location = '/pj/question';
-		}
-	})
-	.on('click','#doDonationreviewBtn', function(){
-		let formData = new FormData($('#fileForm')[0]);
-		let title=$('#photoTitle').val();
-		let content=$('#photoContent').val();
-		if($('#uploadFile').val()==''){
-			alert('사진을 올려주세요');
-		}else if(title.replace(/\s| /gi, "").length == 0){
-			alert('제목을 입력해주세요');
-		}else if(content.replace(/\s| /gi, "").length == 0){
-			alert('내용을 입력해 주세요');
-		}
-		else{
-			 $.ajax({
-				url:'insertphotoBoard',
-				data:{
-					title: $('#photoTitle').val(),
-					con: $('#photoContent').val()
-				},
-				dataType:'text',
-				type:'get',
-				async:false,
-				success : function(){
-					$.ajax({
-						url:'findb_no',
-						enctype: 'multipart/form-data',
-						processData : false,
-						contentType : false,
-						data : formData,
-						type : 'POST',
-						success:function(data){
-							console.log(data);
-							document.location = '/pj/photoBoard';
+$(document)
+.ready(function(){
+	$('#uploadFile').change(function(){
+		$("#preview").html('');
+		$('#fileList').html('');
+		for(var i=0; i<$(this)[0].files.length; i++){
+			$("#preview").append('<img style="height:250px; width:300px;" src="'+window.URL.createObjectURL(this.files[i])+'"/>'+'&nbsp;')
+			console.log(this.files[i].name);
+			 $('#fileList').append('<li>'+this.files[i].name+'</li>'); 
+		}			
+	});
+})
+.on('click', '#question', function() {
+	console.log(`${userinfo}` == '')
+	if (`${userinfo}` == '') {
+		alert('로그인 후 사용가능합니다.')
+	} else {
+		document.location = '/pj/question';
+	}
+})
+.on('click','#doDonationreviewBtn', function(){
+	let formData = new FormData($('#fileForm')[0]);
+	let title=$('#photoTitle').val();
+	let content=$('#photoContent').val();
+	console.log(formData);
+	 if($('#uploadFile').val()==''){
+		alert('사진을 올려주세요');
+	}else if(title.replace(/\s| /gi, "").length == 0){
+		alert('제목을 입력해주세요');
+	}else if(content.replace(/\s| /gi, "").length == 0){
+		alert('내용을 입력해 주세요');
+	}
+	else{
+		 $.ajax({
+			url:'insertphotoBoard',
+			data:{
+				title: $('#photoTitle').val(),
+				con: $('#photoContent').val()
+			},
+			dataType:'text',
+			type:'get',
+			async:false,
+			success : function(){
+				$.ajax({
+					url:'findb_no',
+					enctype: 'multipart/form-data',
+					processData : false,
+					contentType : false,
+					data : formData,
+					type : 'POST',
+					success:function(data){
+						console.log(data);
+						document.location = '/pj/photoBoard?stanum=1&endnum=6';
 						}
-						
-					})
-				}
-			}) 
-		}
+				})
+			}
+		}); 
+	} 
 		 
-	})
+})
 </script>
 </html>

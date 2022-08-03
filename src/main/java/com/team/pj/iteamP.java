@@ -75,4 +75,6 @@ public interface iteamP {
 	void updateAvaRoute(String avaRoute,int m_no);
 	int getMnoByBno(int b_no);
 	int getMnoByCno(int c_no);
+	int insertI_routetable(int l_no, String i_route);
+	int findMaxb_no(int m_no);
 }

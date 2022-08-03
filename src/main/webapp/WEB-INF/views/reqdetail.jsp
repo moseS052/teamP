@@ -190,7 +190,7 @@
 					
 					
 					</div>
-					
+					<input type="hidden" readonly id="comment_cno">
 					<div class="col-md-10">
 					<input type="hidden" id="page" value="${bdto.b_no }">
 					<div id="comments">

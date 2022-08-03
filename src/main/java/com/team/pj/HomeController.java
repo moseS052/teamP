@@ -1,11 +1,15 @@
 package com.team.pj;
 
+import java.io.File;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -22,6 +26,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
 /**
@@ -337,5 +343,34 @@ public class HomeController {
 		ip.updateAvaRoute(req.getParameter("avaRoute"),(int)session.getAttribute("m_no"));
 		return "";
 	}
-	
+	@ResponseBody
+	@RequestMapping(value = "/avatarChange_01", method = RequestMethod.POST, produces="application/text;charset=utf8")
+	public String avatarChange_01(@RequestParam("file1")MultipartFile multi, HttpServletRequest req) {
+		System.out.println("들어오나요");
+		HttpSession session=req.getSession();
+		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/img/avatar/";
+		String realDataFolder = "resources/assets/img/avatar/";
+		String fileRealName = multi.getOriginalFilename();
+		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+		UUID uuid = UUID.randomUUID();
+		String[] uuids = uuid.toString().split("-");
+		String uniqueName = uuids[0];
+		String realRoute=realDataFolder+uniqueName + fileExtension;
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		File saveFile = new File(uploadFolder + uniqueName + fileExtension);
+			try {
+				multi.transferTo(saveFile);
+				ip.updateAvaRoute(realRoute, (int)session.getAttribute("m_no"));
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		
+		
+		
+		
+		return "";
+	}
 }
