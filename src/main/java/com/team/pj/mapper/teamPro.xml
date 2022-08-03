@@ -10,9 +10,15 @@
 	insert into note values(note_sq.nextval,#{param1},#{param3},current_date,#{param2})
 </insert>
 <select id="comlist" resultType="com.team.pj.commentDTO">
-	select a.c_no, a.b_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick 
-		from comment_t a, member b
-		where b_no=#{param1} and c_pa_no is null and a.m_no=b.m_no order by c_date
+	<![CDATA[
+	select * from(    
+    select rownum as rn, temp.* from(
+    (select a.c_no, a.b_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick
+        from comment_t a, member b
+        where a.m_no=b.m_no and a.b_no=#{param2} and c_pa_no is null order by a.c_date)temp
+    )
+    ) where rn>(#{param1}-1)*5 and rn<=#{param1}*5
+         ]]>
 </select>
 <insert id="insertcomment">
 	insert into comment_t(c_no, b_no, c_con, m_no, c_date) 
@@ -230,6 +236,9 @@
 </select>
 <select id="open_mysubs" resultType="com.team.pj.L_listDTO">
 	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a  where l_no in(select l_no from apply where m_no=90) order by l_date desc
+</select>
+<select id="countComment_t" resultType="int">
+	select count(*) countcomment from comment_t where b_no=#{param1}
 </select>
 </mapper>
 

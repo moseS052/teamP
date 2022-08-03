@@ -183,11 +183,14 @@
 							신청인원(아이디)<select id="l_name" class="form-control"></select> 
 							</c:if>
                         </div>
-						<div class="col-md-10">
+					</div>
+					
+				</div>
+				<div class="col-md-8" style="margin:0 0 0 200px;">
 							<input type="hidden" readonly id="comment_cno">
-							<input type="hidden" id="page" value="${b_no}">
+							<input type="hidden" id="page" value="${l_no}">
 							<div id="comments">
-								<div id="comments-list gap">
+								<div id="comments-list">
 									<div class="media">
 										<div class="media-body fade-left" id="replyList"></div>
 									</div>
@@ -197,7 +200,7 @@
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
 											<div class="col-sm-12">
-												<textarea rows="8" class="form-control" style="resize: none;"
+												<textarea rows="4" class="form-control" style="resize: none;"
 													placeholder="Comment" id="c_con"></textarea>
 											</div>
 										</div>
@@ -209,8 +212,6 @@
 							</div>
 							<!--/#comments-->
 						</div>
-					</div>
-				</div>
 			</div>
 				
 	    </section>
@@ -438,7 +439,7 @@ $(document)
 	if(`${sessionm_no}`==comm_no){
 		if (confirm('댓글을 삭제하시겠습니까')) {
 			$.ajax({
-				url : 'delete_comment',
+				url : 'delete_Lcomment',
 				data : {
 					c_no : s
 				},
@@ -463,7 +464,7 @@ $(document)
 	console.log(t);
 	let p = $('#page').val();
 	let str = $('#comment_content' + t).text();
-	let html = '<textarea id="modifycomment" tseq="'+t+'" style="width:800px; height:100px; resize:none;">'
+	let html = '<textarea id="modifycomment" tseq="'+t+'" style="width:500px; height:100px; resize:none;">'
 			+ str
 			+ '</textarea><br>'
 			+ '<a class="pull-left btn btn-primary btn-outlined" id="reply_revice">댓글수정</a>';
@@ -478,7 +479,7 @@ $(document)
 	console.log($('#modifycomment').attr('tseq'));
 	console.log($('#modifycomment').val());
 	$.ajax({
-		url : 'update_comment',
+		url : 'update_Lcomment',
 		data : {
 			c_no : $('#comment_cno').val(),
 			c_con : $('#modifycomment').val()
@@ -556,15 +557,15 @@ $(document)
 .on('click','#updatere_reply',	function() {
 			let c_no = $(this).attr('seq1');
 			let c_pa_no = $(this).attr('seq2');
-			let b_no = $(this).attr('seq3');
+			let l_no = $(this).attr('seq3');
 			let m_no = $(this).attr('seq4');
 		if(m_no==`${sessionm_no}`){
 			let str = $('#rerplycontent' + c_no).text();
-			let html = '<textarea id="rereplyUpdateContent" style="width:500px; resize:none;">'
+			let html = '<textarea id="rereplyUpdateContent" style="width:300px; resize:none;">'
 					+ str
 					+ '</textarea>&nbsp;&nbsp;&nbsp;'
 					+ '<a class="btn btn-primary btn-outlined" id="rerply_update"'
-	 				+'seq1="' + c_no +'"'+ 'seq2="' + c_pa_no + '"' + 'seq3="' + b_no + '"' + 'seq4="' + m_no
+	 				+'seq1="' + c_no +'"'+ 'seq2="' + c_pa_no + '"' + 'seq3="' + l_no + '"' + 'seq4="' + m_no
 	 				+'">답글수정</a>';
 			$('#replycontentBoard' + c_no).html(html)
 		}else{
@@ -575,14 +576,14 @@ $(document)
 	let c_no = $(this).attr('seq1');
 	console.log(c_no);
 	let c_pa_no = $(this).attr('seq2');
-	let b_no = $(this).attr('seq3');
+	let l_no = $(this).attr('seq3');
 	let m_no = $(this).attr('seq4');
 	let c_con = $('#rereplyUpdateContent').val();
 	$.ajax({
-		url : 're_replyupdate',
+		url : 'Lre_replyupdate',
 		data : {
 			c_no : c_no,
-			b_no : b_no,
+			l_no : l_no,
 			c_con : c_con,
 			m_no : m_no,
 			c_pa_no : c_pa_no
@@ -672,7 +673,7 @@ function getToday(){
 //대댓글 리스트 불러오기
 function rerplyList(num, doo) {
 	$.ajax({
-		url : 're_reply',
+		url : 'Lre_reply',
 		data : {
 			c_no : num
 		},
@@ -696,7 +697,7 @@ function rerplyList(num, doo) {
 						+ '<div class="dropdown pull-right">'
 						+ '<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
 						+ '<div class="dropdown-menu" style="opacity: 0.5; left: 0; padding:10px 10px 10px 10px;">'
-						+ '<a class="btn dropdown-item" id="updatere_reply" seq1="'+com['c_no']+'"'+ 'seq2="'+com['c_pa_no']+'"'+'seq3="'+com['b_no']+'"'+'seq4="'+com['m_no']+'">수정</a><br>'
+						+ '<a class="btn dropdown-item" id="updatere_reply" seq1="'+com['c_no']+'"'+ 'seq2="'+com['c_pa_no']+'"'+'seq3="'+com['l_no']+'"'+'seq4="'+com['m_no']+'">수정</a><br>'
 						+ '<a class="btn dropdown-item" id="deletere_reply" value="'+com['c_no']+'" seq="'+com['m_no']+'">삭제</a>'
 						+ '</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'
 						+ com['c_con']
@@ -720,7 +721,7 @@ function minus() {
 function deleteRe_Reply(num) {
 	let s = $('#re_replynum').val();
 	$.ajax({
-		url : 're_replydelete',
+		url : 'Lre_replydelete',
 		data : {
 			c_no : num
 		},
@@ -738,9 +739,9 @@ function deleteRe_Reply(num) {
 
 function insertRe_Reply(s) {
 	$.ajax({
-		url : 're_replyinsert',
+		url : 'Lre_replyinsert',
 		data : {
-			b_no : $('#page').val(),
+			l_no : $('#page').val(),
 			c_pa_no : $('#realc_no' + s).val(),
 			c_con : $('#re_replytextArea').val()
 		},
@@ -758,11 +759,10 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 	let html = '<a href=# style="font-weight:bold">' + tag + '</a>'
 			+ sliceStr;
 	$.ajax({
-		url : 're_replyinsert',
+		url : 'Lre_replyinsert',
 		data : {
-			b_no : $('#page').val(),
+			l_no : $('#page').val(),
 			c_pa_no : $('#realc_no' + s).val(),
-			m_no : 3,
 			c_con : html
 		},
 		type : 'post',
@@ -777,9 +777,9 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 
 function insertComment() {
 	$.ajax({
-		url : 'insertcomment',
+		url : 'insertL_comment',
 		data : {
-			b_no : $('#page').val(),
+			l_no : $('#page').val(),
 			c_con : $('#c_con').val()
 		},
 		type : 'post',
@@ -791,7 +791,7 @@ function insertComment() {
 }
 function commentLIst() {
 	$.ajax({
-		url : 'comment',
+		url : 'LcommentList',
 		data : {
 			page : $('#page').val()
 

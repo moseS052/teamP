@@ -227,10 +227,12 @@
 								<div id="comments-list gap">
 									<div class="media">
 										<div class="media-body fade-left" id="replyList"></div>
+										<input type=hidden value=1 id="pagenum">
+										<div id="commentPaging"></div>
 									</div>
 								</div>
 								<!--/#comments-list-->
-
+								
 								<div id="comment-form" class="mt fade-up">
 									<form class="form-horizontal" role="form">
 										<div class="form-group">
@@ -347,6 +349,19 @@
 	let b_no = '${detail.b_no}';//게시글 번호
 	$(document)
 	.ready(function() {
+	    let a=`${countComment}`/5;
+		console.log(a);
+		html='';
+		for(let i=1;i<a+1;i++){
+			html+='<a class=btn seq="'+i+'" id="commentPagingnation">'+i+'</a>';
+			
+		}
+		$('#commentPaging').append(html);
+		commentLIst();
+	})
+	.on('click','#commentPagingnation',function(){
+		let seq=$(this).attr('seq');
+		$('#pagenum').val(seq);
 		commentLIst();
 	})
 	.on('click', '#submit', function() {
@@ -672,9 +687,12 @@ function rerplyList(num, doo) {
 		});
 	}
 	function commentLIst() {
+		console.log($('#pagenum').val());
+		console.log($('#page').val());
 		$.ajax({
 			url : 'comment',
 			data : {
+				pagenum : $('#pagenum').val(),
 				page : $('#page').val()
 				},
 			dataType : 'json',

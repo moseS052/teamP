@@ -220,6 +220,8 @@
 						<div id="comments-list gap">
 							<div class="media">
 								<div class="media-body fade-left" id="replyList"></div>
+								<input type=hidden value=1 id="pagenum">
+										<div id="commentPaging"></div>
 							</div>
 						</div>
 						<!--/#comments-list-->
@@ -307,7 +309,20 @@
 let doo = 4;
 $(document)
 .ready(function() {
+	let a=`${countComment}`/5;
+	console.log(a);
+	html='';
+	for(let i=1;i<a+1;i++){
+		html+='<a class=btn seq="'+i+'" id="commentPagingnation">'+i+'</a>';
+		
+	}
+	$('#commentPaging').append(html);
 	commentLIst();
+})
+.on('click','#commentPagingnation',function(){
+		let seq=$(this).attr('seq');
+		$('#pagenum').val(seq);
+		commentLIst();
 })
 .on('click','#btnReset',function(){
 	document.location='/pj/freeboard';
@@ -620,7 +635,6 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 		data : {
 			b_no : $('#page').val(),
 			c_pa_no : $('#realc_no' + s).val(),
-			m_no : 3,
 			c_con : html
 		},
 		type : 'post',
@@ -654,6 +668,7 @@ function commentLIst() {
 	$.ajax({
 		url : 'comment',
 		data : {
+			pagenum : $('#pagenum').val(),
 			page : $('#page').val()
 
 		},
