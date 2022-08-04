@@ -1467,21 +1467,34 @@ function alarmList() {
         var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
         
         // 접근 토큰 값 출력
-        //alert(naver_id_login.oauthParams.access_token);
+        const token=naver_id_login.oauthParams.access_token;
         
         // 네이버 사용자 프로필 조회
         naver_id_login.get_naver_userprofile("naverSignInCallback()");
         
         // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
         function naverSignInCallback() {
-            alert(naver_id_login.getProfileData('email'));
-            alert(naver_id_login.getProfileData('nickname'));
-            alert(naver_id_login.getProfileData('age'));
-            alert(naver_id_login.getProfileData('name'));
-            alert(naver_id_login.getProfileData('birthyear'));
-            alert(naver_id_login.getProfileData('gender'));
-            alert(naver_id_login.getProfileData('id'));
-            alert(naver_id_login.getProfileData('mobile'));
+            const email=naver_id_login.getProfileData('email');
+            console.log("email: "+email);
+        	console.log(naver_id_login.getProfileData('email'));
+            const nickname=naver_id_login.getProfileData('nickname');
+            console.log(naver_id_login.getProfileData('age'));
+            console.log(naver_id_login.getProfileData('name'));
+            console.log(naver_id_login.getProfileData('birthyear'));
+            console.log(naver_id_login.getProfileData('gender'));
+            console.log(naver_id_login.getProfileData('id'));
+            console.log(naver_id_login.getProfileData('mobile'));
+            $.ajax({
+        		type:'post',url:'naver',dataType:'text',
+        		data:{mail:email,nick:nickname,token:token},
+        		success:function(){
+        			alert('wow');
+        			window.location.href="<%= request.getContextPath() %>/";
+        		},
+        		error:function(){
+        		},
+        		complete:function(){}
+        	})
         }
 </script>
 <%-- <script type="text/javascript">

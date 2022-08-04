@@ -1,7 +1,11 @@
 package com.team.pj;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -109,13 +113,62 @@ public class HomeController {
 		}
 		return Integer.toString(n);
 	}
+	@ResponseBody
+	@RequestMapping(value="/naver", method=RequestMethod.POST)
+	public String doN(HttpServletRequest req) {
+		HttpSession session=req.getSession();
+//		iteamP p=sqlSession.getMapper(iteamP.class);
+		int n=1;
+		
+		String user_id=req.getParameter("mail");
+			session.setAttribute("m_no",1);
+			session.setAttribute("nick",req.getParameter("nick"));
+			session.setAttribute("id", user_id);
+			session.setAttribute("n",n);
+			session.setAttribute("token",req.getParameter("token"));
+			System.out.println("mail="+user_id);	
+		
+		return Integer.toString(n);
+	}
 	//濡�洹몄����
 	@RequestMapping("/logout")
-	public String doLogout(HttpServletRequest req) {
+	public String doLogout(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
+		
+		if(session.getAttribute("n")==null){
+			
+		}else if((int)session.getAttribute("n")==1) {
+			String token=(String)session.getAttribute("token");
+			System.out.println("token: "+token);
+			//String result = getHTML("https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=w9CWsYucH5U3OO9SqFPI&client_secret=b4wN_t5bWN&access_token="+token+"&service_provider=NAVER");
+			String result = getHTML("https://nid.naver.com/nidlogin.logout?returl=localhost%3A8080%2Fpj%2F");
+			//String result= getHTML("http://nid.naver.com/nidlogin.logout");
+			System.out.println("result: "+result);			
+		} 
 		session.invalidate();
 		return "redirect:/";
 	}
+	public static String getHTML(String urlToRead) {
+	      URL url; // The URL to read
+	      HttpURLConnection conn; // The actual connection to the web page
+	      BufferedReader rd; // Used to read results from the web page
+	      String line; // An individual line of the web page HTML
+	      String result = ""; // A long string containing all the HTML
+	      try {
+	         url = new URL(urlToRead);
+	         conn = (HttpURLConnection) url.openConnection();
+	         conn.setRequestMethod("GET");
+	         rd = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+	         while ((line = rd.readLine()) != null) {
+	            result += line;
+	         }
+	         rd.close();
+	      } catch (Exception e) {
+	         e.printStackTrace();
+	      }
+	      return result;
+	   }
+
 	//����媛���
 	@ResponseBody
 	@RequestMapping(value="/sign", method=RequestMethod.POST, produces="application/text;charset=utf8")
