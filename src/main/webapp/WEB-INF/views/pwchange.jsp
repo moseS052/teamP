@@ -53,6 +53,9 @@
 input[type="checkbox"]{
 accent-color:green;
 }
+input[type="password"]{
+	font-family: 'pass', 'Roboto', Helvetica, Arial, sans-serif ;
+}
 </style>
   <body class="single single-post"> 
 
@@ -158,7 +161,7 @@ accent-color:green;
 						<h3>비밀번호변경</h3>
 						
 						<div id="cla">
-						<input type=hidden id="m_no" value="${m_no}">
+						<p><input type=hidden id="m_no" value="${m_no}"></p>
 						현재 비밀번호<input type="password" class="form-control" id="ppwd"/>
 						새 비밀번호 입력<input type="password" class="form-control" id="npwd"/>
 						새 비밀번호 확인<input type="password" class="form-control" id="npwd1"/><br><br>

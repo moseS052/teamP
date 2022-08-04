@@ -79,4 +79,5 @@ public interface iteamP {
 	ArrayList<boardDTO> open_board(int m_no);
 	ArrayList<L_listDTO> open_mysubs(int m_no);
 	ArrayList<Integer> getApplyMem(int l_no);
+	void insertno_img(int l_no,String img);
 }

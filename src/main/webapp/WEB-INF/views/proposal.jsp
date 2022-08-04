@@ -315,7 +315,7 @@ $(document)
     					$("input[type=checkbox]:checked").each(function(){
     	    				const value = $(this).val();
     	    				$.ajax({
-    	    						type:'get',url:'check_ad',data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
+    	    						type:'get',url:'check_ad',async: false,data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
     	    						dataType:'text',
     	    					  		success:function(){
     	    					  		document.location='/pj/success_page'
@@ -324,10 +324,15 @@ $(document)
     	    				    			alert('데이터등록실패');
     	    				    		},
     	    				    		complete:function(){
-    	    				    			insertListPhoto();
+    	    				    			
     	    				    		}
     	    				    	});
     	    			})
+    	    				if($('#l_file').val()==''){
+    	    					insertnoimg();
+		    				}else{
+		    					insertListPhoto();
+		    				}
     				}
 	  			
     		},
@@ -339,6 +344,7 @@ $(document)
 .on('click','#ca',function(){
 	$('#hid,#l_no,#l_addresss,#l_name,#l_koo,#l_title,#l_content,#l_date,#nop').val('');
 	
+	console.log();
 })
 .on('click','#map',function(){
 	let aa=$('#hid').val()
@@ -385,6 +391,18 @@ function insertListPhoto(){
 		success:function(result){
 		}
 	});
+}
+function insertnoimg(){
+	$.ajax({
+		url:'insertno_img', data:{a:1},dataType:'text',type:'get',
+		success:function(){
+	  			
+    		},
+    		error:function(){
+    			alert('데이터등록실패123456');
+    		},
+    		complete:function(){}
+    	});
 }
 </script>
 </html>

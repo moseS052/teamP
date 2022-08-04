@@ -362,7 +362,7 @@ $(document)
 					if(getToday()>jo['l_date']){
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 						$('#cla').append(str);
@@ -371,14 +371,14 @@ $(document)
 						if(jo['count']==jo['nop']){
 							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 							+'<div class="item-inner">'
-							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
 							$('#cla').append(str);
 						}else{
 							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 							+'<div class="item-inner">'
-							+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+							+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
 							$('#cla').append(str);
@@ -393,32 +393,34 @@ $(document)
     	});
 })
 function showlist(){
+// 	var ar = new Array()
 	$.ajax({
 		url:'open_list', data:'',dataType:'json',type:'get',
 		success:function(data){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
+				console.log(jo['l_route'])
 				if(getToday()>jo['l_date']){
-					let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+					let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up" style="background-color:#B2B2B2">'
 					+'<div class="item-inner">'
-					+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+					+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
 					+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 					+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
-					$('#cla').append(str);
+					$('#cla').after(str);
 				}
 				if(getToday()<=jo['l_date']){
 					if(jo['count']==jo['nop']){
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
 						$('#cla').append(str);
 					}else{
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
 						$('#cla').append(str);
