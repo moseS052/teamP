@@ -23,6 +23,10 @@
 	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
+<link rel="stylesheet"
+	href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
@@ -57,7 +61,11 @@
 	.form-control:focus {
         border-color: #28a745;
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
-    }	
+    }
+.swiper {
+   width: 380px;
+   height: 350px;
+}	
 </style>
   </head>
 
@@ -160,33 +168,44 @@
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-				
-
-					<div class="col-lg-1"></div><div class="col-lg-1"></div><div class="col-lg-8">
-						<h3></h3>
-						
+					<div class="col-md-8">
                         <div class="well">
-                        <input type="hidden" id="l_no" value="${l_no}">
+                        <input type="hidden" id="l_no" value="${l_no}"><div class="square pull-right">${l_views}</div>
                         <input type="hidden" id="user_name" value="${userinfo}">
-                        <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a><div class="square pull-right">${l_views}</div></p>
-                        <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div>
+                        <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a></p>
+                        <h3>${l_title}</h3>
                         <h3>일시${l_date}</h3>                        
                         <h3>장소${l_name}</h3>
                         <h3 id="cbox">주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
                         </div>
 						<p>내용:${l_con}</p>
-                        <div class="square pull-right" id="but">
-							<p>신청현황<br>
-							&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}</p>
-						
-							<c:if test="${userinfo!=null && l_mno eq m_no}">	
-							신청인원(아이디)<select id="l_name" class="form-control"></select> 
-							</c:if>
-                        </div>
+                        	<div class="square pull-right" id="but">
+								<p>신청현황
+								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}<br>
+								<c:if test="${userinfo!=null && l_mno eq m_no}">	
+								신청인원(아이디)<select id="l_name" class="form-control"></select> 
+								</c:if>
+								</p>
+                       		</div>
 					</div>
-					
+						<div class="col-md-4">
+						<div class="swiper">
+                                 <div class="swiper-wrapper">
+                                    <c:forEach var="photo" items="${list}">
+                                       <div class="swiper-slide">
+                                          <img style="width: 380px; height: 350px;"
+                                             src=<c:url value="${photo}"/> alt="">
+                                       </div>
+                                    </c:forEach>
+                                 </div>
+                                 <div class="swiper-pagination"></div>
+                                 <div class="swiper-button-prev"></div>
+                                 <div class="swiper-button-next"></div>
+                                 <div class="swiper-scrollbar"></div>
+                              </div>
+						</div>
 				</div>
-				<div class="col-md-8" style="margin:0 0 0 200px;">
+				<div class="col-md-8" style="margin:0 0 0 0;">
 							<input type="hidden" readonly id="comment_cno">
 							<input type="hidden" id="page" value="${l_no}">
 							<div id="comments">
@@ -250,12 +269,33 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+const swiper = new Swiper('.swiper', {
+	// Optional parameters
+	direction : 'horizontal',
+	loop : true,
+	
+	// If we need pagination
+	pagination : {
+		el : '.swiper-pagination',
+	},
+
+	// Navigation arrows
+	navigation : {
+		nextEl : '.swiper-button-next',
+		prevEl : '.swiper-button-prev',
+	},
+
+// And if we need scrollbar
+/* scrollbar: {
+  el: '.swiper-scrollbar',
+}, */
+});
 let doo = 4;
 $(document)
 .ready(function(){
 	commentLIst();
-	console.log('오늘'+getToday());
-	console.log('예약'+`${l_date}`)
+// 	console.log('오늘'+getToday());
+// 	console.log('예약'+`${l_date}`)
 	shwocheck();
 	applylist()
 	if(`${l_mno}`==`${m_no}`){
@@ -290,7 +330,7 @@ $(document)
 					type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
 						dataType:'json',
 				  		success:function(data){
-				  			console.log('데이타는='+data)
+// 				  			console.log('데이타는='+data)
 				  			if(data==1){
 				  				let str="<input class='btn btn-outlined btn-primary'  type='button' value='신청마감' />"
 				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
@@ -310,7 +350,7 @@ $(document)
 					type:'get',url:'butdiff',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
 						dataType:'json',
 				  		success:function(data){
-				  			console.log('데이타는='+data)
+// 				  			console.log('데이타는='+data)
 				  			if(data==1){
 				  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
 				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
@@ -354,19 +394,19 @@ $(document)
 .on('click','#map',function(){
 	let a=`${l_addr}`
 	let ar =a.split("("); 
-	console.log(ar[0]);
-	console.log('"'+'map?key='+ar[0]+'"');
+// 	console.log(ar[0]);
+// 	console.log('"'+'map?key='+ar[0]+'"');
  	window.open('http://192.168.0.2:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
 	return false;
 	// 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
 })
 .on('click','#l_del',function(){
-	console.log($('#l_no').val());
+// 	console.log($('#l_no').val());
 	$.ajax({
 		type:'get',url:'l_del',data:{l_no:$('#l_no').val()},
 			dataType:'json',
 	  		success:function(data){
-	  			console.log(data);
+// 	  			console.log(data);
 	  			alert('삭제되었습니다');
 	  			document.location='/pj/proposal_list'
     		},
@@ -378,13 +418,13 @@ $(document)
 })
 
 .on('click','#l_retouch',function(){
-	console.log($('#l_no').val());
+// 	console.log($('#l_no').val());
 	
 	document.location='/pj/l_retouch?l_no='+$('#l_no').val()
 })
 .on('click','#called',function(){
-	console.log(`${m_no}`);
-	console.log(`${l_no}`);
+// 	console.log(`${m_no}`);
+// 	console.log(`${l_no}`);
 	$.ajax({
 		type:'get',url:'applynew',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
 			dataType:'text',
@@ -399,8 +439,6 @@ $(document)
     	});
 })
 .on('click','#apdel',function(){
-	console.log(`${m_no}`);
-	console.log(`${l_no}`);
 	$.ajax({
 		type:'get',url:'applydel',data:{l_no:$('#l_no').val(),m_no:`${m_no}`},
 			dataType:'text',

@@ -28,6 +28,7 @@ public interface iteamP {
 	ArrayList<L_listDTO> Openl_list();
 	ArrayList<L_listDTO> getL_list(String l_koo);
 	L_listDTO l_read(int l_no);
+	ArrayList<String> l_routeRead(int l_no);
 	void new_ad(int m_no,String l_title,String l_con,String l_date,String l_name, String l_address,String l_koo,int nop);
 	int checkl_no(int l_no,String l_date);
 	void check_ad(int l_no,int t_no);
