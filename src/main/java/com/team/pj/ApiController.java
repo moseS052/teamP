@@ -29,6 +29,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -338,6 +339,10 @@ public class ApiController {
 		HttpSession session=req.getSession();
 		int l_no =Integer.parseInt(req.getParameter("l_no"));
 		iteamP team=sqlSession.getMapper(iteamP.class);
+		iLcomment lcom=sqlSession.getMapper(iLcomment.class);
+		int lcount = lcom.countLComment_t(l_no);
+		System.out.println("댓글 개수=="+ lcount);
+		model.addAttribute("countLComment",lcount);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
@@ -449,6 +454,8 @@ public class ApiController {
 	@RequestMapping("/success_page")
 	public String doSuccess(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
+		String boardType=req.getParameter("b");
+		model.addAttribute("boardType", boardType);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));

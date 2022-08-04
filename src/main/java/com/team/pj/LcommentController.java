@@ -35,10 +35,10 @@ public class LcommentController {
 		
 		@ResponseBody
 		@RequestMapping(value = "/LcommentList", produces = "application/json;charset=utf-8")
-		public String comment(@RequestParam("page") int page) {
+		public String comment(@RequestParam("page") int page, @RequestParam("pagenum") int pagenum) {
 			iLcomment ltp = sqlSession.getMapper(iLcomment.class);
 			
-			ArrayList<LcommentDTO> Lcomlist = ltp.Lcomlist(page);
+			ArrayList<LcommentDTO> Lcomlist = ltp.Lcomlist(pagenum,page);
 			JSONArray ja = new JSONArray();
 			for (int i = 0; i < Lcomlist.size(); i++) {
 				LcommentDTO lcdto = Lcomlist.get(i);

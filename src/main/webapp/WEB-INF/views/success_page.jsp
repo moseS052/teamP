@@ -158,7 +158,12 @@
 					<div class="col-lg-8">
 						<h3>성공적으로 작성되었습니다.</h3>
 						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
+						<c:if test="${boardType eq 'l'}">
 							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</c:if>
+						<c:if test="${boardType eq 'p'}">
+							<a href="photoBoard?stanum=1&endnum=6"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</c:if>
 						</p>	
 					</div>
 

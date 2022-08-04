@@ -8,9 +8,15 @@
 		values(lcomment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date)
 </insert>
 <select id="Lcomlist" resultType="com.team.pj.LcommentDTO">
-	select a.c_no, a.l_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick 
-		from lcomment_t a, member b
-		where l_no=#{param1} and c_pa_no is null and a.m_no=b.m_no order by c_date
+	<![CDATA[
+	select * from(    
+    select rownum as rn, temp.* from(
+    (select a.c_no, a.l_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick
+        from lcomment_t a, member b
+        where a.m_no=b.m_no and a.l_no=#{param2} and c_pa_no is null order by a.c_date)temp
+    )
+    ) where rn>(#{param1}-1)*5 and rn<=#{param1}*5
+         ]]>
 </select>
 <select id="countLre_replylist" resultType="int">
 	select count(c_pa_no) lreplycount from lcomment_t where c_pa_no=#{param1}
@@ -35,4 +41,7 @@
 <delete id="deleteLcomment">
 	delete lcomment_t where c_no=#{param1} OR c_pa_no=#{param1}
 </delete>
+<select id="countLComment_t" resultType="int">
+	select count(*) countLcomment from lcomment_t where l_no=#{param1} and c_pa_no is null
+</select>
 </mapper>

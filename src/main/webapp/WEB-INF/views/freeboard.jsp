@@ -231,7 +231,14 @@
 					</tr>
 					</c:forEach></tbody>
 					</table>
-					<c:if test="${m_no!=null}">
+					<div align="center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination" id="paginationClass">
+								
+							</ul>
+						</nav>
+					</div>
+						<c:if test="${m_no!=null}">
 					<p align="center"><a href='newpost_fb'>새글쓰기</a></p>
 					</c:if>
 					</div>
@@ -287,12 +294,27 @@
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+
 </body>
 <script>
+let m=parseInt(`${pagenum}`);
+let b=Math.ceil(`${countFree_board}`/20);
 $(document)
+.ready(function(){
+	console.log(b);
+	if(m>=b-2 && m>2) m=b-2;
+	if(m<=b) m=1;
+	shtt(m);
+})
+.on('click','#rightsheet',function(){
+	if(m+2==b||m+2>b) return false;
+	shtt(++m);
+})
+.on('click','#leftsheet',function(){
+	if(m==1) return false;
+	shtt(--m);
+})
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
@@ -381,6 +403,27 @@ $(document)
 	}
 	return false;
 })
+function shtt(a){
+	$('#paginationClass').empty();
+	let html='<li class="page-item"><a id="leftsheet" class="page-link" href="#"aria-label="Previous" onclick="return false;"><span aria-hidden="true">&laquo;</span></a></li>';
+	html+=sheet(a);
+	html+='<li class="page-item"><a id="rightsheet" class="page-link" href="#"	aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>';
+	$('#paginationClass').append(html);
+}
+function sheet(a){
+	var html='';
+	 let k=0; 
+	 if(a+3>b){
+		k=b;
+	}else if(a+3<=b){
+		k=a+2;
+	}
+	
+	for(let i=a; i<=k;i++){
+	html+='<li class="page-item"><a class="page-link" href="freeboard?pagenum='+i+'">'+i+'</a></li>';
+	};
+	return html;
+}
 </script>
 
 </html>

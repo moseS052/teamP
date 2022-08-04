@@ -324,28 +324,20 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-	const swiper = new Swiper('.swiper', {
-		// Optional parameters
-		direction : 'horizontal',
-		loop : true,
-
-		// If we need pagination
-		pagination : {
+	const swiper = new Swiper('.swiper', 
+			{direction : 'horizontal',
+				  loop : true,
+			pagination : {
 			el : '.swiper-pagination',
-		},
+			},
 
-		// Navigation arrows
 		navigation : {
 			nextEl : '.swiper-button-next',
 			prevEl : '.swiper-button-prev',
 		},
 
-	// And if we need scrollbar
-	/* scrollbar: {
-	  el: '.swiper-scrollbar',
-	}, */
 	});
-	let doo = 5;
+	let doo = 4;
 	let b_no = '${detail.b_no}';//게시글 번호
 	$(document)
 	.ready(function() {

@@ -193,6 +193,8 @@
 								<div id="comments-list">
 									<div class="media">
 										<div class="media-body fade-left" id="replyList"></div>
+										<input type=hidden value=1 id="pagenum">
+										<div id="commentPaging"></div>
 									</div>
 								</div>
 								<!--/#comments-list-->
@@ -253,6 +255,14 @@
 let doo = 4;
 $(document)
 .ready(function(){
+	let a=`${countLComment}`/5;
+	console.log(a);
+	html='';
+	for(let i=1;i<a+1;i++){
+		html+='<a class=btn seq="'+i+'" id="commentPagingnation">'+i+'</a>';
+		
+	}
+	$('#commentPaging').append(html);
 	commentLIst();
 	console.log('오늘'+getToday());
 	console.log('예약'+`${l_date}`)
@@ -333,6 +343,11 @@ $(document)
 		
 	
 })
+.on('click','#commentPagingnation',function(){
+		let seq=$(this).attr('seq');
+		$('#pagenum').val(seq);
+		commentLIst();
+	})
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
@@ -419,7 +434,7 @@ $(document)
 		if (`${userinfo}` == '') {
 			alert('로그인 후 사용가능합니다.')
 		} else {
-// 			document.location = '/pj/donationReviwe';
+ 			document.location = '/pj/donationReviwe';
 		}
 
 	})
@@ -794,6 +809,7 @@ function commentLIst() {
 	$.ajax({
 		url : 'LcommentList',
 		data : {
+			pagenum : $('#pagenum').val(),
 			page : $('#page').val()
 
 		},

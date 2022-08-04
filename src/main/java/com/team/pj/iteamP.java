@@ -36,7 +36,8 @@ public interface iteamP {
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(Map map);
 	ArrayList<SearchVO> searchNick(Map map);
-	ArrayList<boardDTO> listBoard();
+	ArrayList<boardDTO> listBoard(int pagenum);
+	int countFree_board();
 	void free_insert(int m_no,String b_title,String b_con);
 	void free_delete(int b_no);
 	boardDTO free_detail(int b_no);

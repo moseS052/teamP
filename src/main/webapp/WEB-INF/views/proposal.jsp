@@ -318,7 +318,7 @@ $(document)
     	    						type:'get',url:'check_ad',async: false,data:{m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
     	    						dataType:'text',
     	    					  		success:function(){
-    	    					  		document.location='/pj/success_page'
+    	    					  		document.location='success_page?b=l'
     	    				    		},
     	    				    		error:function(){
     	    				    			alert('데이터등록실패');
