@@ -140,11 +140,12 @@ public class photoBoardController {
 			model.addAttribute("view",view);
 			model.addAttribute("b_m_no", m_no);
 		}
+		iteamP ip = sqlSession.getMapper(iteamP.class);
+		int count=ip.countComment_t(b_no);
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		
 		model.addAttribute("list",boardList);
 		model.addAttribute("b_no",b_no);
-		
+		model.addAttribute("countComment",count);
 		
 		
 		

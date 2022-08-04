@@ -92,7 +92,8 @@ public class boardController {
 		model.addAttribute("b_no",b_no);
 		model.addAttribute("bdto",bdto);
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		
+		int count=p.countComment_t(b_no);
+		model.addAttribute("countComment",count);
 		return "freedetail";
 	}
 	//view update page on free board
@@ -169,10 +170,12 @@ public class boardController {
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		int count=p.countComment_t(b_no);
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.req_detail(b_no);
 		model.addAttribute("bdto",bdto);
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
+		model.addAttribute("countComment",count);
 		return "reqdetail";
 	}
 	//view update page on request board

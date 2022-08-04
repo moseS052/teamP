@@ -8,7 +8,7 @@ import java.util.Map;
 public interface iteamP {
 	ArrayList<noteVO> getNoteCon(int m_no,int m_pa_no);
 	void noteSend(int me,int you,String con);
-	ArrayList<commentDTO> comlist(int b_no);
+	ArrayList<commentDTO> comlist(int pagenum,int b_no);
 	void insertcomment(int b_no, String c_con, int m_no);
 	int deletecomment(int c_no);
 	int updatecomment(String c_con, int c_no);
@@ -80,4 +80,5 @@ public interface iteamP {
 	ArrayList<L_listDTO> open_mysubs(int m_no);
 	ArrayList<Integer> getApplyMem(int l_no);
 	void insertno_img(int l_no,String img);
+	int countComment_t(int b_no);
 }

@@ -340,6 +340,7 @@ public class ApiController {
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
+		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
 		team.l_views(l_no);
 		int lookapp=team.lookup(l_no);

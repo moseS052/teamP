@@ -218,6 +218,8 @@
 						<div id="comments-list gap">
 							<div class="media">
 								<div class="media-body fade-left" id="replyList"></div>
+								<input type=hidden value=1 id="pagenum">
+										<div id="commentPaging"></div>
 							</div>
 						</div>
 						<!--/#comments-list-->
@@ -304,16 +306,27 @@
 	<script src="<c:url value="/resources/assets/js/plugins.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
-	<script type="text/javascript"
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
 let doo = 4;
 $(document)
 .ready(function() {
+	let a=`${countComment}`/5;
+	console.log(a);
+	html='';
+	for(let i=1;i<a+1;i++){
+		html+='<a class=btn seq="'+i+'" id="commentPagingnation">'+i+'</a>';
+		
+	}
+	$('#commentPaging').append(html);
 	commentLIst();
 })
+.on('click','#commentPagingnation',function(){
+		let seq=$(this).attr('seq');
+		$('#pagenum').val(seq);
+		commentLIst();
+	})
 .on('click','#btnReset',function(){
 	document.location='/pj/reqboard';
 })
@@ -658,6 +671,7 @@ function commentLIst() {
 	$.ajax({
 		url : 'comment',
 		data : {
+			pagenum : $('#pagenum').val(),
 			page : $('#page').val()
 
 		},

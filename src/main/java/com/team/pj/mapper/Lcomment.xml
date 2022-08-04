@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.team.pj.iLcomment">
+<insert id="insertL_comment">
+	insert into lcomment_t(c_no, l_no, c_con, m_no, c_date) 
+		values(lcomment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date)
+</insert>
+<select id="Lcomlist" resultType="com.team.pj.LcommentDTO">
+	select a.c_no, a.l_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick 
+		from lcomment_t a, member b
+		where l_no=#{param1} and c_pa_no is null and a.m_no=b.m_no order by c_date
+</select>
+<select id="countLre_replylist" resultType="int">
+	select count(c_pa_no) lreplycount from lcomment_t where c_pa_no=#{param1}
+</select>
+<insert id="insertL_ReRply">
+	insert into lcomment_t values(lcomment_sq.nextval,#{param1},#{param2},#{param3},CURRENT_date,#{param4})
+</insert>
+<delete id="deleteL_ReReply">
+	delete lcomment_t where c_no=#{param1}
+</delete>
+<select id="Lre_replylist" resultType="com.team.pj.LcommentDTO">
+	select a.c_no, a.l_no, a.c_con, a.m_no, a.c_date, a.c_pa_no, b.nick
+		from lcomment_t a, member b
+		where c_pa_no=#{param1} and a.m_no=b.m_no order by c_date
+</select>
+<update id="updateLReReply">
+	update lcomment_t set c_con=#{param3} where c_no=#{param1} AND l_no=#{param2} AND m_no=#{param4} AND c_pa_no=#{param5}
+</update>
+<update id="updateLcomment">
+	update lcomment_t set c_con=#{param1} where c_no=#{param2}
+</update>
+<delete id="deleteLcomment">
+	delete lcomment_t where c_no=#{param1} OR c_pa_no=#{param1}
+</delete>
+</mapper>

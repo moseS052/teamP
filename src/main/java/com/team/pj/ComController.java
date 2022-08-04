@@ -46,10 +46,10 @@ public class ComController {
 	// 댓글 리스트 불러오기
 	@ResponseBody
 	@RequestMapping(value = "/comment", produces = "application/json;charset=utf-8")
-	public String comment(@RequestParam("page") int page) {
+	public String comment(@RequestParam("page") int b_no, @RequestParam("pagenum") int pagenum) {
 		iteamP tp = sqlSession.getMapper(iteamP.class);
 		
-		ArrayList<commentDTO> comlist = tp.comlist(page);
+		ArrayList<commentDTO> comlist = tp.comlist(pagenum, b_no);
 		JSONArray ja = new JSONArray();
 		for (int i = 0; i < comlist.size(); i++) {
 			commentDTO cdto = comlist.get(i);
@@ -64,7 +64,7 @@ public class ComController {
 			jo.put("nick", cdto.getNick());
 			ja.add(jo);
 		}
-//		System.out.println(ja.toJSONString());
+		System.out.println("나오나요"+ja.toJSONString());
 		return ja.toJSONString();
 	}
 

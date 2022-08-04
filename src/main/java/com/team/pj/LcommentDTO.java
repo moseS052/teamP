@@ -1,8 +1,8 @@
 package com.team.pj;
 
-public class commentDTO {
+public class LcommentDTO {
 	private int c_no;
-	private int b_no;
+	private int l_no;
 	private String c_con;
 	private int m_no;
 	private String c_date;
@@ -10,11 +10,8 @@ public class commentDTO {
 	private int replycount;
 	private String nick;
 
-
-	public commentDTO() {
+	public LcommentDTO() {
 	}
-
-
 
 	public int getC_no() {
 		return c_no;
@@ -24,12 +21,12 @@ public class commentDTO {
 		this.c_no = c_no;
 	}
 
-	public int getB_no() {
-		return b_no;
+	public int getL_no() {
+		return l_no;
 	}
 
-	public void setB_no(int b_no) {
-		this.b_no = b_no;
+	public void setL_no(int l_no) {
+		this.l_no = l_no;
 	}
 
 	public String getC_con() {
