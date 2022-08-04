@@ -37,30 +37,31 @@ public class photoBoardController {
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));	
 		}
-		
-
-		
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
-		ipt.countCommentview(endnum);
-		ArrayList<photoBoardDTO> pdtolist = ipt.photoTableList(stanum, endnum);
-		int total=ipt.getTotal();
-		 model.addAttribute("photolist", pdtolist);
-		 model.addAttribute("total", total);
+//		System.out.println(req.getParameter("l_no"));
+		if(req.getParameter("l_no")==null) {
+			ipt.countCommentview(endnum);
+			ArrayList<photoBoardDTO> pdtolist = ipt.photoTableList(stanum, endnum);
+			int total=ipt.getTotal();
+			model.addAttribute("photolist", pdtolist);
+			model.addAttribute("total", total);
+		}else {
+			int l_no=Integer.parseInt(req.getParameter("l_no"));
+			ArrayList<photoBoardDTO> pdtolist = ipt.goReview(l_no);
+			model.addAttribute("photolist", pdtolist);		
+		}
 		
-
 		return "phothBoard";
 	}
 
 	@RequestMapping("/donationReviwe")
 	String donationReview(HttpServletRequest req, Model model) {
 		HttpSession session = req.getSession();
-		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
-			model.addAttribute("userinfo", null);
-
-		} else { // 濡�洹몄�� �깃났 ��
-			model.addAttribute("userinfo", session.getAttribute("id"));
-			model.addAttribute("m_no", session.getAttribute("m_no"));	
-		}
+		model.addAttribute("userinfo", session.getAttribute("id"));
+		model.addAttribute("m_no", session.getAttribute("m_no"));	
+		model.addAttribute("l_no",Integer.parseInt(req.getParameter("l_no")));
+		model.addAttribute("lmno",Integer.parseInt(req.getParameter("lmno")));
+		model.addAttribute("nick",session.getAttribute("nick"));
 
 		return "donationReview";
 	}
@@ -81,7 +82,7 @@ public class photoBoardController {
 		HttpSession session = req.getSession();
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		int a = ipt.maxB_noFind((int) session.getAttribute("m_no"));
-		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
+		String uploadFolder = "C:/Users/admin/eclipse-workspace/teamP/src/main/webapp/resources/assets/userimg/";
 		String realDataFolder = "/resources/assets/userimg/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
@@ -101,7 +102,6 @@ public class photoBoardController {
 			}
 
 		}
-
 		return "";
 	}
 	@RequestMapping("/ReadPhoto")
@@ -157,6 +157,28 @@ public class photoBoardController {
 		System.out.println(b_no);
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		ipt.deletePhotoBoard(b_no);
+		return "";
+	}
+	
+	//setReview
+	@ResponseBody
+	@RequestMapping(value = "/setReview", produces = "application/text;charset=utf8")
+	public String setReview(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		iteamP ip=sqlSession.getMapper(iteamP.class);
+		int l_no=Integer.parseInt(req.getParameter("l_no"));
+		int lmno=Integer.parseInt(req.getParameter("lmno"));
+		int m_no = (int) session.getAttribute("m_no");
+		int b_no=ipt.maxB_noFind(m_no);
+		ipt.setReview(l_no, b_no);
+		ArrayList<Integer> apMem= ip.getApplyMem(l_no);
+		apMem.add(lmno);
+		for(int i=0;i<apMem.size();i++) {
+			if(m_no==apMem.get(i)) continue;
+			String mes="&nbsp;&nbsp;&nbsp;&nbsp;회원님께서 참여하신 활동의 후기가 올라왔습니다.(<a id='goList' href='ReadPhoto?seq="+b_no+"'>게시판가기</a>)";
+			ip.insertAlarm(apMem.get(i), mes);
+		}
 		return "";
 	}
 }

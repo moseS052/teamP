@@ -57,9 +57,13 @@ public class HomeController {
 			
 
 		}else { //濡�洹몄�� �깃났 ��
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
 			model.addAttribute("userinfo",session.getAttribute("id"));
 			model.addAttribute("m_no",session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
+			model.addAttribute("nick",nick);
 			iteamP ip=sqlSession.getMapper(iteamP.class);
 			String avatar=ip.getAvaRoute((int)session.getAttribute("m_no"));
 			model.addAttribute("avatar",avatar);
@@ -229,7 +233,10 @@ public class HomeController {
 		int you=Integer.parseInt(req.getParameter("youseq"));
 		int me=(int) session.getAttribute("m_no");
 		ip.noteSend(me, you, con);
-		String nick=(String) session.getAttribute("nick");		
+		String nick=(String) session.getAttribute("nick");	
+		if(nick.length()>3) {
+			nick=nick.substring(0, 3)+"..";
+		}
 		String mes="<a href='' id='meminfo' seq='"+me+"'>"+nick+"</a>님께서 <a href='' id='btnSendNote' myseq='"+you+"' yourseq='"+me+"'>메세지</a>를 보냈습니다.";
 		ip.insertAlarm(you, mes);
 		return "";

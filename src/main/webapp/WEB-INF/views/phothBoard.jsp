@@ -173,6 +173,10 @@
 			</div>
 
 			<div class="row mt gap">
+				<c:if test="${photolist[0]==null}">
+				작성된 후기가 없습니다.
+				</c:if>
+				<c:if test="${photolist!=null}">
 				<c:forEach var="photo" items="${photolist}">
 					<div class="col-md-4 post fade-up">
 						<div class="item-inner">
@@ -196,7 +200,7 @@
 				</c:forEach>
 
 				
-
+				</c:if>
 			</div>
 			 <div align="center" id="pageCount">
 					

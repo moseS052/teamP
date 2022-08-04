@@ -11,7 +11,7 @@
 <meta name="author" content="">
 
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Team Project</title>
+<title>Team Project1</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -167,6 +167,7 @@
 						
                         <div class="well">
                         <input type="hidden" id="l_no" value="${l_no}">
+                        <input type="hidden" id="lmno" value="${l_mno}">
                         <input type="hidden" id="user_name" value="${userinfo}">
                         <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a><div class="square pull-right">${l_views}</div></p>
                         <h3>${l_title}</h3><div class="square pull-right"><img src=<c:url value="/resources/assets/img/portfolio/folio13.jpg"/> width="150px" height="135px"/></div>
@@ -260,7 +261,7 @@ $(document)
 	applylist()
 	if(`${l_mno}`==`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button' id='0' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview' value='후기작성' />"
+			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button' id='goReview' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview1' value='후기작성' />"
 			$('#but').append(str);
 			}else{let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
 			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
@@ -268,7 +269,7 @@ $(document)
 			
 	}else if(`${userinfo}`== ""){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
+			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
 			$('#but').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
@@ -282,7 +283,7 @@ $(document)
 		
 	}else if(`${l_mno}`!=`${m_no}`){
 		if(getToday()>`${l_date}`){
-			let str="<a href='후기페이지jsp입력'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview'  value='후기작성' />"
+			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview'  value='후기작성' />"
 				$('#but').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
@@ -415,14 +416,24 @@ $(document)
     	});
 })
 .on('click', '#donationReview', function() {
-		console.log(`${applyMem}`);//들어오는 값 비교해서 후기 작성 할수 있는 사람 비교 후 알림작업
-		if (`${userinfo}` == '') {
-			alert('로그인 후 사용가능합니다.')
-		} else {
-// 			document.location = '/pj/donationReviwe';
+	let ar=`${applyMem}`.replace("[","").replace("]","").split(', ');
+	if (`${userinfo}` == '') {
+		alert('로그인 후 사용가능합니다.');
+	} else {
+		for(let i=0;i<ar.length;i++){
+			if(ar[i]==`${m_no}`){
+				document.location = '/pj/donationReviwe?l_no='+$('#l_no').val()+'&lmno='+$('#lmno').val();
+				return false;
+			}
 		}
-
-	})
+		alert('작성 권한이 없습니다.');
+	}
+// 	console.log(ar[2]);//들어오는 값 비교해서 후기 작성 할수 있는 사람 비교 후 알림작업
+	return false;
+})
+.on('click', '#donationReview1', function() {
+	document.location = '/pj/donationReviwe?l_no='+$('#l_no').val()+'&lmno='+$('#lmno').val();
+})
 .on('click', '#submit', function() {
 	let str = $('#c_con').val();
 	if (str.replace(/\s| /gi, "").length == 0) {

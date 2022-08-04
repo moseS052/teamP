@@ -376,6 +376,8 @@ public class ApiController {
 //		System.out.println(l_koo);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		ArrayList<L_listDTO> l_list=team.getL_list(l_koo);
+		System.out.println(l_list);
+		
 		JSONArray ja =new JSONArray();
 		for(int i=0; i<l_list.size();i++) {
 			L_listDTO ldto = l_list.get(i);
@@ -389,7 +391,6 @@ public class ApiController {
 			jo.put("count", ldto.getCount());
 			ja.add(jo);
 		}
-//		System.out.println(ja.toJSONString());
 		return ja.toJSONString();
 	}
 	//--占쏙옙 占쏙옙황--//
@@ -463,6 +464,9 @@ public class ApiController {
 						  @RequestParam("t_no") int t_no, HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>3) {
+			nick=nick.substring(0, 3)+"..";
+		}
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		int l_no = team.checkl_no(m_no,l_date);
 		session.setAttribute("l_no", l_no);

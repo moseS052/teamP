@@ -94,6 +94,9 @@ a#yesyes{
 	padding-left:25px;
 	padding-top:400px;
 }
+#alarmDiv{
+	width:100%;
+}
 </style>
 <body>
 
@@ -116,7 +119,7 @@ a#yesyes{
 				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a></h2>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
-		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
 				</div></div>
 				</c:if>
 				<c:if test="${m_no==null}">

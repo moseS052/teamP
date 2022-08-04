@@ -47,4 +47,15 @@
 	<delete id="deletePhotoBoard">
 		delete from board where b_no=#{param1} and b_type='P'
 	</delete>
+	<insert id="setReview">
+		insert into review values(#{param1},#{param2})
+	</insert>
+	<select id="goReview" resultType="com.team.pj.photoBoardDTO">
+		select A.*, b.b_route
+		from boardP A
+		left join (select * from route where rowid in(select max(rowid)from route
+		group by b_no))B
+        on (A.b_no=B.b_no) 
+        where a.b_no in (select b_no from review where l_no=#{param1}) order by b_date desc
+	</select>
 </mapper>

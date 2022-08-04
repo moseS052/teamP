@@ -351,11 +351,13 @@ $(document)
 	console.log($('#l_koo option:selected').text());
 	if($('#l_koo option:selected').text()=='전체'){
 		showlist();
+		console.log('str=');
 	}
 	$.ajax({
 		type:'get',url:'find_list',data:{l_koo:$('#l_koo option:selected').text()},
 			dataType:'json',
 	  		success:function(data){
+	  			
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
@@ -366,6 +368,7 @@ $(document)
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 						$('#cla').append(str);
+						
 					}
 					if(getToday()<=jo['l_date']){
 						if(jo['count']==jo['nop']){
@@ -375,6 +378,7 @@ $(document)
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
 							$('#cla').append(str);
+							
 						}else{
 							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 							+'<div class="item-inner">'
@@ -382,6 +386,7 @@ $(document)
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
 							$('#cla').append(str);
+							
 						}
 					}
 	  			}
@@ -393,6 +398,7 @@ $(document)
     	});
 })
 function showlist(){
+	console.log('str=');
 // 	var ar = new Array()
 	$.ajax({
 		url:'open_list', data:'',dataType:'json',type:'get',

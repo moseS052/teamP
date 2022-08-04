@@ -239,6 +239,8 @@
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+<input type="hidden" id="lno" value="${l_no}">
+<input type="hidden" id="lmno" value="${lmno}">
 </body>
 <script>
 $(document)
@@ -284,6 +286,7 @@ $(document)
 			type:'get',
 			async:false,
 			success : function(){
+				setReview()
 				$.ajax({
 					url:'findb_no',
 					enctype: 'multipart/form-data',
@@ -301,5 +304,15 @@ $(document)
 	} 
 		 
 })
+function setReview(){
+	$.ajax({
+		type:'get',url:'setReview',dataType:'text',data:{l_no:$('#lno').val(),lmno:$('#lmno').val()},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
 </script>
 </html>
