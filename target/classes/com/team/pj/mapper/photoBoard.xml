@@ -19,6 +19,18 @@
 		]]>
 		
 	</select>
+		<select id="home_photoList"
+		resultType="com.team.pj.photoBoardDTO">
+		<![CDATA[
+		select * from(
+    	select A.*, b.b_route
+		from boardP A
+		left join (select * from route where rowid in(select max(rowid)from route
+		group by b_no))B
+		on (A.b_no=B.b_no) order by a.b_date desc) where rownum<=6
+		]]>
+		
+	</select>
 	<insert id="insertPhotoBoard">
 		insert into board(b_no, b_type, m_no, b_title,
 		b_date, b_con)

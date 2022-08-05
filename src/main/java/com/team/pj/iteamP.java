@@ -90,4 +90,5 @@ public interface iteamP {
 	void naver_talent_insert(int m_no);
 	int getM_noBymail(String mail);
 	String getNickBym_no(int m_no);
+	ArrayList<L_listDTO> home_proposal();
 }
