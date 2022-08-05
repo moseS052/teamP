@@ -249,6 +249,8 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 	
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
+<input type="hidden" id="potato1" value="${l_mno}">
+<input type="hidden" id="potato">
 </body>
 <script>
 let doo = 4;
@@ -511,7 +513,7 @@ $(document)
 })
 .on('click','#re_reply',function() {
 	let s = parseInt($(this).attr('reseq'));
-	console.log($(this).attr('reseq'));
+	$('#potato').val($(this).attr('mno'));
 	let t = $(this).text().split('&nbsp;');
 	console.log($('#reply_controll' + s).val());
 
@@ -610,6 +612,7 @@ $(document)
 })
 .on('click', '#ansercomment', function() {
 	let str = '@' + $(this).attr('seq') + ' ';
+	$('#potato').val($(this).attr('mno'));
 	$('#re_replytextArea').val(str);
 	console.log();
 })
@@ -714,7 +717,7 @@ function rerplyList(num, doo) {
 						+ '</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'
 						+ com['c_con']
 						+ '</p><a id="ansercomment" seq="'
-						+ com['nick']
+						+ com['nick']+'" mno="'+com['m_no']
 						+ '" href="javascript:void(0);">답글</a></div>'
 						+ '</div>';
 				$('#re_replylist' + num).append(html);
@@ -763,6 +766,7 @@ function insertRe_Reply(s) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
+			alarmComTnt($('#page').val());
 		}
 
 	});
@@ -783,6 +787,7 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 			console.log(data);
 			$('#re_replytextArea').val('');
 			rerplyList(s);
+			alarmComTnt($('#page').val());
 		}
 	});
 }
@@ -798,6 +803,7 @@ function insertComment() {
 		success : function() {
 			commentLIst();
 			$('#c_con').val('');
+			alarmComT($('#page').val());
 		}
 	});
 }
@@ -830,7 +836,7 @@ function commentLIst() {
 						+ '<div id="comment_board'+com['c_no']+'"><p id="comment_content'+com['c_no']+'">'
 						+ com['c_con']
 						+ '</p>'
-						+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'">답글&nbsp;'
+						+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'" mno="'+com['m_no']+'">답글&nbsp;'
 						+ '<span id="counts'+com['c_no']+'">'
 						+ com['count']
 						+ '</span>'
@@ -840,6 +846,26 @@ function commentLIst() {
 			}
 		}
 	});
+}
+function alarmComT(bno){
+	$.ajax({
+		type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,m_no:$('#potato1').val(),boardName:'L'},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
+function alarmComTnt(bno){
+	$.ajax({
+		type:'get',url:'alarmComTnt',dataType:'text',data:{b_no:bno,m_no:$('#potato').val(),boardName:'L'},
+		success:function(){
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
 }
 </script>
 </html>
