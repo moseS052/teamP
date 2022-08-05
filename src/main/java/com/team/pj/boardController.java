@@ -139,9 +139,12 @@ public class boardController {
 		}else {
 			mod.addAttribute("m_no", null);
 		}	
-
-		ArrayList<boardDTO> blist=p.reqBoard();
+		int pagenum=Integer.parseInt(req.getParameter("pagenum"));
+		int countboardq=p.countBoardq();
+		ArrayList<boardDTO> blist=p.reqBoard(pagenum);
 		mod.addAttribute("boardlist",blist);
+		mod.addAttribute("countboardq",countboardq);
+		mod.addAttribute("pagenum",pagenum);
 		return "reqboard";
 	}	
 	//go to new post page in request board

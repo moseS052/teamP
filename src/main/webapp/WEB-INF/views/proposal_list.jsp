@@ -141,8 +141,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
@@ -219,7 +219,18 @@
                         <div id="cla">
                         	
                         </div>
-					</div><div class="col-lg-2"></div>
+                        <div align="center">
+						<nav aria-label="Page navigation example">
+							<ul class="pagination" id="paginationClass">
+								<li class="page-item"><a id="leftsheet" class="page-link" href="#"aria-label="Previous" onclick="return false;"><span aria-hidden="true">&laquo;</span></a></li>
+								<li class="page-item"><a id="rightsheet" class="page-link" href="#"	aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
+							</ul>
+						</nav>
+						</div>
+					</div>
+					<div class="col-lg-2">
+						
+					</div>
 				</div>
 			</div>	
 	    </section>
