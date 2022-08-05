@@ -200,9 +200,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>작성자: <input type=text id=nick name=nick
-									style="border: none; background-color: transparent;"
-									 value="${nick }" readonly></td>
+								<td>작성자: <a href='' id='meminfo' seq='${b_m_no}'>${nick }</a></td>
 								<td>작성일자: <input type=text id=b_date name=b_date
 									style="border: none; background-color: transparent;"
 									 value="${date }" readonly></td>
@@ -222,7 +220,7 @@
 						<input type="hidden" readonly id="comment_cno">
 						<div class="gap"></div>
 						<div class="col-md-10">
-							<input type="hidden" id="page" value="${b_no }">
+							<input type="hidden" id="page" value="${b_no}">
 							<div id="comments">
 								<div id="comments-list gap">
 									<div class="media">
@@ -322,6 +320,8 @@
 	<script src="<c:url value="/resources/assets/js/imagesloaded.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/prettyPhoto.js"/>"></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+<input type="hidden" id="potato1" value="${b_m_no}">
+<input type="hidden" id="potato">
 </body>
 <script>
 	const swiper = new Swiper('.swiper', 
@@ -350,6 +350,24 @@
 		}
 		$('#commentPaging').append(html);
 		commentLIst();
+	})
+	//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+	.on('click','#meminfo',function(){
+		let seq=$(this).attr('seq');
+		window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+		return false;
+	})
+	//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+	.on('click','#btnSendNote',function(){
+		let m_no=$(this).attr('myseq');
+		let m_pa_no=$(this).attr('yourseq');
+		if(`${m_no}`==''){
+			alert('로그인 후 이용해 주세요');
+			return false;
+		}else{
+		window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+		}
+		return false;
 	})
 	.on('click','#commentPagingnation',function(){
 		let seq=$(this).attr('seq');
@@ -431,13 +449,13 @@
 	})
 	.on('click', '#re_reply', function() {
 		let s = parseInt($(this).attr('reseq'));
-		console.log($(this).attr('reseq'));
+		$('#potato').val($(this).attr('mno'));
 		let t = $(this).text().split('&nbsp;');
 		console.log($('#reply_controll' + s).val());
 		if ($('#reply_controll' + s).val() == 'close') {
 				rerplyList(s, doo);
 				$('#reply_controll' + s).val('open');
-				let strs = '<div style="display:inline-block; overflow:hiddlen; white-space:nowrap;"><textarea style="width:400px; height:50px; resize:none;" id="re_replytextArea"></textarea>'
+				let strs = '<div id="kk" style="display:inline-block; overflow:hiddlen; white-space:nowrap;"><textarea style="width:400px; height:50px; resize:none;" id="re_replytextArea"></textarea>'
 						+ '&nbsp;&nbsp;<input type="button" id="re_replyaddbtn" class="btn btn-primary btn-outlined" value="답글추가"><input type="hidden" id="re_replynum" value="'+s+'">'
 						+ '</div>';
 				$('#re_replyadd' + s).append(strs);
@@ -527,8 +545,8 @@
 	})
 	.on('click', '#ansercomment', function() {
 		let str = '@' + $(this).attr('seq') + ' ';
-		$('#re_replytextArea').val(str);
-		console.log();
+		$('#potato').val($(this).attr('mno'));
+		$(this).parent().parent().parent().parent().find('textarea').val(str);
 	})
 	.on('click','#delPhotoBoard', function(){
 		if(confirm("삭제 하시겠습니까")){
@@ -578,7 +596,7 @@ function rerplyList(num, doo) {
 					let com = data[i];
 					html = '<div class="well" style="margin:0 50px 0px 50px;">'
 							+ '<div class="media-heading">'
-							+ '<a href=#><strong>'
+							+ '<a href="" id="meminfo" seq="'+com['m_no']+'"><strong>'
 							+ com['nick']
 							+ '</strong></a>&nbsp;'
 							+ '<small>'
@@ -592,7 +610,7 @@ function rerplyList(num, doo) {
 							+ '</div></div></div><div id="replycontentBoard'+com['c_no']+'"><p id="rerplycontent'+com['c_no']+'">'
 							+ com['c_con']
 							+ '</p><a id="ansercomment" seq="'
-							+ com['nick']
+							+ com['nick']+'" mno="'+com['m_no']
 							+ '" href="javascript:void(0);">답글</a></div>'
 							+ '</div>';
 					$('#re_replylist' + num).append(html);
@@ -638,12 +656,13 @@ function rerplyList(num, doo) {
 				console.log(data);
 				$('#re_replytextArea').val('');
 				rerplyList(s);
+				alarmComTnt($('#page').val());
 			}
 
 		});
 	}
 	function insertRe_ReplyTag(s, tag, sliceStr) {
-		let html = '<a href=# style="font-weight:bold">' + tag + '</a>'
+		let html = '<a href="" id="meminfo" seq="'+$('#potato').val()+'" style="font-weight:bold">' + tag + '</a>'
 				+ sliceStr;
 		$.ajax({
 			url : 're_replyinsert',
@@ -659,6 +678,7 @@ function rerplyList(num, doo) {
 				console.log(data);
 				$('#re_replytextArea').val('');
 				rerplyList(s);
+				alarmComTnt($('#page').val());
 			}
 
 		});
@@ -675,6 +695,7 @@ function rerplyList(num, doo) {
 			success : function() {
 				commentLIst();
 				$('#c_con').val('');
+				alarmComT($('#page').val());
 			}
 		});
 	}
@@ -696,9 +717,9 @@ function rerplyList(num, doo) {
 				for (let i = 0; i < data.length; i++) {
 					com = data[i];
 					let list = '<div class="well" ><div class="media-heading" >'
-							+ '<strong>'
+							+ '<a href="" id="meminfo" seq="'+com['m_no']+'"><strong>'
 							+ com['nick']
-							+ '</strong>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
+							+ '</strong></a>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
 							+ com['c_date']
 							+ '</small><div class="dropdown pull-right">'
 							+ '<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'
@@ -709,7 +730,7 @@ function rerplyList(num, doo) {
 							+ '<div id="comment_board'+com['c_no']+'"><p id="comment_content'+com['c_no']+'">'
 							+ com['c_con']
 							+ '</p>'
-							+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'">답글&nbsp;'
+							+ '<a class="pull-left btn btn-primary btn-outlined" id="re_reply" reseq="'+com['c_no']+'" mno="'+com['m_no']+'">답글&nbsp;'
 							+ '<span id="counts'+com['c_no']+'">'
 							+ com['count']
 							+ '</span>'
@@ -719,6 +740,26 @@ function rerplyList(num, doo) {
 				}
 			}
 		});
+	}
+	function alarmComT(bno){
+		$.ajax({
+			type:'get',url:'alarmComT',dataType:'text',data:{b_no:bno,m_no:$('#potato1').val(),boardName:'P'},
+			success:function(){
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
+	}
+	function alarmComTnt(bno){
+		$.ajax({
+			type:'get',url:'alarmComTnt',dataType:'text',data:{b_no:bno,m_no:$('#potato').val(),boardName:'P'},
+			success:function(){
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
 	}
 </script>
 </html>

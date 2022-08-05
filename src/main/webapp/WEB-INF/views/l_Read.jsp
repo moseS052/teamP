@@ -665,8 +665,7 @@ $(document)
 .on('click', '#ansercomment', function() {
 	let str = '@' + $(this).attr('seq') + ' ';
 	$('#potato').val($(this).attr('mno'));
-	$('#re_replytextArea').val(str);
-	console.log();
+	$(this).parent().parent().parent().parent().find('textarea').val(str);
 })
 
 function shwocheck(){
@@ -737,9 +736,9 @@ function rerplyList(num, doo) {
 				let com = data[i];
 				html = '<div class="well" style="margin:0 50px 0px 50px;">'
 						+ '<div class="media-heading">'
-						+ '<a href=#><strong>'
+						+ '<a href="" id="meminfo" seq="'+com['m_no']+'"><strong>'
 						+ com['nick']
-						+ '</strong></a>&nbsp;'
+						+ '</strong></a></a>&nbsp;'
 						+ '<small>'
 						+ com['c_date']
 						+ '</small>'
@@ -806,7 +805,7 @@ function insertRe_Reply(s) {
 	});
 }
 function insertRe_ReplyTag(s, tag, sliceStr) {
-	let html = '<a href=# style="font-weight:bold">' + tag + '</a>'
+	let html = '<a href="" id="meminfo" seq="'+$('#potato').val()+'" style="font-weight:bold">' + tag + '</a>'
 			+ sliceStr;
 	$.ajax({
 		url : 'Lre_replyinsert',
@@ -858,9 +857,9 @@ function commentLIst() {
 			for (let i = 0; i < data.length; i++) {
 				com = data[i];
 				let list = '<div class="well" ><div class="media-heading" >'
-						+ '<strong>'
+						+ '<a href="" id="meminfo" seq="'+com['m_no']+'"><strong>'
 						+ com['nick']
-						+ '</strong>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
+						+ '</strong></a>&nbsp; <small><input type="hidden" value="close" id="reply_controll'+com['c_no']+'"><input type="hidden" id="realc_no'+com['c_no']+'" value="'+com['c_no']+'">'
 						+ com['c_date']
 						+ '</small><div class="dropdown pull-right">'
 						+ '<a href="#" class="dropdown-toggle fa fa-gear menu-icon" data-toggle="dropdown"></a>'

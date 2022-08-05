@@ -289,7 +289,6 @@
 <script>
 $(document)
 .ready(function(){	
-// 	console.log(`${userinfo==null}`);
 	showlist();
 })
 .on('keyup','#searching',function(key){ // search connect enter
@@ -411,7 +410,7 @@ $(document)
     	});
 })
 function showlist(){
-	console.log('str=');
+// 	console.log('str=');
 // 	var ar = new Array()
 	$.ajax({
 		url:'open_list', data:'',dataType:'json',type:'get',
@@ -445,7 +444,7 @@ function showlist(){
 						$('#cla').prepend(str);
 					}
 				}
-  			}
+  			} 
 		},
 		error:function(){
     		alert('데이터등록실패');

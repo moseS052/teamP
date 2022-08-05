@@ -134,13 +134,6 @@ a#yesyes{
 
 			</div>
 			<div>
-<%-- 				<c:if test="${m_no!=null}"> --%>
-<%-- 				<a href=''><img src=<c:url value="${avatar}"/> width="30px" height="30px" id='meminfo' seq="${m_no}" /></a> --%>
-<!-- 				<div class="dropdown pull-right"> -->
-<!-- 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a> -->
-<!-- 		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;"> -->
-<!-- 				</div></div> -->
-<%-- 				</c:if> --%>
 			</div>
 			<ul id="main-menu">
 			<c:if test="${userinfo!=null}">
@@ -205,8 +198,7 @@ a#yesyes{
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE<a href='' id='meminfo' seq='90' style='font-size:50px;color:yellow'>나</a> 
-<!-- 						                  여기서부터 작성할 것 버튼 누르면 바로 /meminfo?m_no=어쩌구 가는 걸로 -->
+						<span class="pe-7s-chat"></span> QUOTE 
 					</h1>
 					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
 					<input type='text' id='searching'><input type='button' id='btnSearch' value='검색 알고리즘'></h2>

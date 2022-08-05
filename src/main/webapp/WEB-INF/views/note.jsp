@@ -70,7 +70,7 @@ textarea {
 
 <div style="margin-left:-35px">
 	<table>
-	<tr><td><textarea cols="27" rows="3" id='n_con'></textarea></td>
+	<tr><td><textarea cols="22" rows="3" id='n_con'></textarea></td>
 		<td style="padding:5px;"><a class="btn btn-primary btn-outlined" href="#" id="btnSend">보내기</a><br>
 								<a class="btn btn-primary btn-outlined" href="#" id="btnClose">닫 &nbsp; 기</a></td></tr>
 	</table>
