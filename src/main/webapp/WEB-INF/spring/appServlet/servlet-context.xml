@@ -59,8 +59,5 @@
 		<beans:property name="maxUploadSize" value="-1" />
 		<beans:property name="defaultEncoding" value="utf-8" />
 	</beans:bean>
- 	<!-- <beans:bean id="uploadPath" class="java.lang.String">
- 		<beans:constructor-arg value="/resources/userimage/"/>
- 	</beans:bean>  -->
 
 </beans:beans>

@@ -132,8 +132,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
@@ -213,6 +213,8 @@
 								<div id="comments-list">
 									<div class="media">
 										<div class="media-body fade-left" id="replyList"></div>
+										<input type=hidden value=1 id="pagenum">
+										<div id="commentPaging"></div>
 									</div>
 								</div>
 								<!--/#comments-list-->
@@ -296,6 +298,14 @@ const swiper = new Swiper('.swiper', {
 let doo = 4;
 $(document)
 .ready(function(){
+	let a=`${countLComment}`/5;
+	console.log(a);
+	html='';
+	for(let i=1;i<a+1;i++){
+		html+='<a class=btn seq="'+i+'" id="commentPagingnation">'+i+'</a>';
+		
+	}
+	$('#commentPaging').append(html);
 	commentLIst();
 // 	console.log('오늘'+getToday());
 // 	console.log('예약'+`${l_date}`)
@@ -376,6 +386,11 @@ $(document)
 		
 	
 })
+.on('click','#commentPagingnation',function(){
+		let seq=$(this).attr('seq');
+		$('#pagenum').val(seq);
+		commentLIst();
+	})
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
@@ -468,7 +483,6 @@ $(document)
 		}
 		alert('작성 권한이 없습니다.');
 	}
-// 	console.log(ar[2]);//들어오는 값 비교해서 후기 작성 할수 있는 사람 비교 후 알림작업
 	return false;
 })
 .on('click', '#donationReview1', function() {
@@ -654,24 +668,6 @@ $(document)
 	$('#re_replytextArea').val(str);
 	console.log();
 })
-//avatar click <a href='' id='meminfo' seq='나'>nick</a>
-.on('click','#meminfo',function(){
-	let seq=$(this).attr('seq');
-	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
-	return false;
-})
-//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
-.on('click','#btnSendNote',function(){
-	let m_no=$(this).attr('myseq');
-	let m_pa_no=$(this).attr('yourseq');
-	if(`${m_no}`==''){
-		alert('로그인 후 이용해 주세요');
-		return false;
-	}else{
-	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
-	}
-	return false;
-})
 
 function shwocheck(){
 	let ar=`${sd}`.split(',');
@@ -849,6 +845,7 @@ function commentLIst() {
 	$.ajax({
 		url : 'LcommentList',
 		data : {
+			pagenum : $('#pagenum').val(),
 			page : $('#page').val()
 
 		},

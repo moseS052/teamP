@@ -117,8 +117,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
@@ -158,7 +158,12 @@
 					<div class="col-lg-8">
 						<h3>성공적으로 작성되었습니다.</h3>
 						<p><a href="/pj"> <input class="btn btn-outlined btn-primary" type="button" id="home" value="홈으로" /></a>
+						<c:if test="${boardType eq 'l'}">
 							<a href="proposal_list"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</c:if>
+						<c:if test="${boardType eq 'p'}">
+							<a href="photoBoard?stanum=1&endnum=6"><input class="btn btn-outlined btn-primary" type="button" id="l_list" value="목록보기" /></a>
+						</c:if>
 						</p>	
 					</div>
 

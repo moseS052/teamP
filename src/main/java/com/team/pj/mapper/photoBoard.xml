@@ -14,7 +14,7 @@
 		from boardP A
 		left join (select * from route where rowid in(select max(rowid)from route
 		group by b_no))B
-		on (A.b_no=B.b_no) order by a.b_no)C)d
+		on (A.b_no=B.b_no) order by a.b_no desc)C)d
 		where rn between #{param1} and #{param2}
 		]]>
 		

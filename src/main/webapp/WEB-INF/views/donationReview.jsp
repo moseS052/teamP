@@ -117,8 +117,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" class="dropdown-toggle">Photo 
@@ -165,11 +165,11 @@
 					<div id="preview">
 						
 					</div>
-					<div align="center" >
+					<div align="center">
 						<form id="fileForm" method="post" enctype="multipart/form-data">
-							<input class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile" multiple="true">
+								<input style="display:inline;" class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile"><a id="photoplus" class="btn">사진추가</a><a id="photoDel" class="btn">삭제</a>
 						</form>
-						<ul style="text-align:center;list-style:none;" id="fileList"></ul>
+						<!-- <ul style="text-align:center;list-style:none;" id="fileList"></ul> -->
 					</div>
 					<div align="center">
 						<textarea style="padding:40px 40px 0 50px; height:150px; width:600px; resize:none;" id="photoContent" class="form-control"  placeholder="내용"></textarea>
@@ -245,15 +245,21 @@
 <script>
 $(document)
 .ready(function(){
-	$('#uploadFile').change(function(){
+	/*  $('#uploadFile').change(function(){
 		$("#preview").html('');
-		$('#fileList').html('');
+		 $('#fileList').html(''); 
 		for(var i=0; i<$(this)[0].files.length; i++){
 			$("#preview").append('<img style="height:250px; width:300px;" src="'+window.URL.createObjectURL(this.files[i])+'"/>'+'&nbsp;')
 			console.log(this.files[i].name);
-			 $('#fileList').append('<li>'+this.files[i].name+'</li>'); 
+			  $('#fileList').append('<li>'+this.files[i].name+'</li>');
 		}			
-	});
+	});  */
+})
+.on('click','#photoplus',function(){
+	$('#fileForm').append('<div><input style="display:inline;" class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile"><a style="display:inline;" id="photoplus" class="btn">사진추가</a><a style="display:inline;" id="photoDel" class="btn">삭제</a></div>');
+})
+.on('click','#photoDel',function(){
+	$(this).parent('div').remove();
 })
 .on('click', '#question', function() {
 	console.log(`${userinfo}` == '')
@@ -296,7 +302,7 @@ $(document)
 					type : 'POST',
 					success:function(data){
 						console.log(data);
-						document.location = '/pj/photoBoard?stanum=1&endnum=6';
+						document.location = 'success_page?b=p';
 						}
 				})
 			}

@@ -134,8 +134,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa-pencil menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="<%= request.getContextPath() %>/reqboard">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 						
 					</ul></li>
 				<li class="dropdown"><a href="/pj/photoBoard?stanum=1&endnum=6" id="photoboardclick" class="dropdown-toggle">Photo 
@@ -324,28 +324,20 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
-	const swiper = new Swiper('.swiper', {
-		// Optional parameters
-		direction : 'horizontal',
-		loop : true,
-
-		// If we need pagination
-		pagination : {
+	const swiper = new Swiper('.swiper', 
+			{direction : 'horizontal',
+				  loop : true,
+			pagination : {
 			el : '.swiper-pagination',
-		},
+			},
 
-		// Navigation arrows
 		navigation : {
 			nextEl : '.swiper-button-next',
 			prevEl : '.swiper-button-prev',
 		},
 
-	// And if we need scrollbar
-	/* scrollbar: {
-	  el: '.swiper-scrollbar',
-	}, */
 	});
-	let doo = 5;
+	let doo = 4;
 	let b_no = '${detail.b_no}';//게시글 번호
 	$(document)
 	.ready(function() {

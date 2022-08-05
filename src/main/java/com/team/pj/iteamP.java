@@ -37,7 +37,8 @@ public interface iteamP {
 	int getM_no(String id);
 	ArrayList<SearchVO> searchTNC(Map map);
 	ArrayList<SearchVO> searchNick(Map map);
-	ArrayList<boardDTO> listBoard();
+	ArrayList<boardDTO> listBoard(int pagenum);
+	int countFree_board();
 	void free_insert(int m_no,String b_title,String b_con);
 	void free_delete(int b_no);
 	boardDTO free_detail(int b_no);
@@ -70,7 +71,7 @@ public interface iteamP {
 	ArrayList<Integer> findT_C_P(int t_no);
 	String findTname(int t_no);
 	int datecheck(int m_no,String l_date);
-	ArrayList<boardDTO> reqBoard();
+	ArrayList<boardDTO> reqBoard(int pagenum);
 	void req_insert(int m_no,String b_title,String b_con);
 	boardDTO req_detail(int b_no);
 	String getAvaRoute(int m_no);
@@ -82,4 +83,5 @@ public interface iteamP {
 	ArrayList<Integer> getApplyMem(int l_no);
 	void insertno_img(int l_no,String img);
 	int countComment_t(int b_no);
+	int countBoardq();
 }

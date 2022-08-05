@@ -109,8 +109,8 @@
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Board <i class="fa fa- menu-icon"></i></a>
 					<ul class="dropdown-menu">
-						<li><a href="<%= request.getContextPath() %>/freeboard">Free Board</a></li>
-						<li><a href="single-post-sidebar.html">Request Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/freeboard?pagenum=1">Free Board</a></li>
+						<li><a href="<%= request.getContextPath() %>/reqboard?pagenum=1">Request Board</a></li>
 					</ul></li>
 				<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
