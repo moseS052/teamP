@@ -252,7 +252,7 @@ location.replace("http://localhost:8080/pj/");
               <br>
               	
       				
-              	<div id="button_area"> 
+              	<div id="button_area" > 
         			<div id="naver_id_login"></div>
       			</div>
 				

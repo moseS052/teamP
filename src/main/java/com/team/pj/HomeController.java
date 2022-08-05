@@ -113,31 +113,75 @@ public class HomeController {
 		}
 		return Integer.toString(n);
 	}
+//	//load naver privacy
+//	@ResponseBody
+//	@RequestMapping(value="/naver", method=RequestMethod.POST)
+//	public String doN(HttpServletRequest req) {
+//		HttpSession session=req.getSession();
+////		iteamP p=sqlSession.getMapper(iteamP.class);
+//		int n=1;
+//		
+//		String naver_id=req.getParameter("mail");
+//		session.setAttribute("m_no",1);
+//		session.setAttribute("nick",req.getParameter("nick"));
+//		session.setAttribute("id", naver_id);
+//		session.setAttribute("naver",n); //when you login naver id, session naver==1
+//		//session.setAttribute("token",req.getParameter("token"));
+//		session.setAttribute("phone",req.getParameter("phone"));
+//		System.out.println("mail="+naver_id);	
+//		
+//		return Integer.toString(n);
+//	}
+	//check member overlap when login naver id
 	@ResponseBody
-	@RequestMapping(value="/naver", method=RequestMethod.POST)
-	public String doN(HttpServletRequest req) {
-		HttpSession session=req.getSession();
-//		iteamP p=sqlSession.getMapper(iteamP.class);
-		int n=1;
-		
-		String user_id=req.getParameter("mail");
-			session.setAttribute("m_no",1);
-			session.setAttribute("nick",req.getParameter("nick"));
-			session.setAttribute("id", user_id);
-			session.setAttribute("n",n);
-			session.setAttribute("token",req.getParameter("token"));
-			System.out.println("mail="+user_id);	
-		
-		return Integer.toString(n);
+	@RequestMapping(value="/navercheck", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	public String doNavercheck(@RequestParam("mail") String naver, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int navercnt=p.naver_count(naver);
+		System.out.println("navercnt="+navercnt);
+		return Integer.toString(navercnt);		
 	}
-	//濡�洹몄����
+	//insert member when login naver id
+	@ResponseBody
+	@RequestMapping(value="/naversign", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	public String doNaversign(@RequestParam("mail") String id,@RequestParam("name") String name,
+			@RequestParam("nick") String nick, @RequestParam("phone") String phone,HttpServletRequest req) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		System.out.println("naverid="+id);
+		System.out.println("navernick="+nick);
+		p.naver_member_insert(id,name,nick,phone,id);
+		p.naver_talent_insert(p.getM_no1(id));
+		
+		HttpSession session=req.getSession();
+		session.setAttribute("m_no",p.getM_no1(id));
+		session.setAttribute("nick",p.getNickById(id));
+		session.setAttribute("id",id);
+		
+		return "";
+	}
+	//find m_no of existing member when login naver id
+	@ResponseBody
+	@RequestMapping(value="/ex_member", method=RequestMethod.POST, produces="application/text;charset=utf8")
+	public String doExist(@RequestParam("mail") String mail, Model model,HttpServletRequest req) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int m_no=p.getM_noBymail(mail);
+		System.out.println("find m_no="+m_no);
+		
+		HttpSession session=req.getSession();
+		session.setAttribute("m_no",m_no);
+		session.setAttribute("nick",p.getNickBym_no(m_no));
+		session.setAttribute("id",p.getID(m_no));
+		
+		return "";		
+	}
+	//logout
 	@RequestMapping("/logout")
 	public String doLogout(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
 		
-		if(session.getAttribute("n")==null){
+		if(session.getAttribute("naver")==null){
 			
-		}else if((int)session.getAttribute("n")==1) {
+		}else if((int)session.getAttribute("naver")==1) {
 			String token=(String)session.getAttribute("token");
 			System.out.println("token: "+token);
 			//String result = getHTML("https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=w9CWsYucH5U3OO9SqFPI&client_secret=b4wN_t5bWN&access_token="+token+"&service_provider=NAVER");
@@ -148,6 +192,7 @@ public class HomeController {
 		session.invalidate();
 		return "redirect:/";
 	}
+	//load naver logout page
 	public static String getHTML(String urlToRead) {
 	      URL url; // The URL to read
 	      HttpURLConnection conn; // The actual connection to the web page
@@ -197,7 +242,7 @@ public class HomeController {
 		
 		return "";
 	}
-	//���대�� 以�蹂듭껜��
+	//check id overlap 
 	@ResponseBody
 	@RequestMapping(value="/idcheck", method=RequestMethod.GET, produces="application/text;charset=utf8")
 	public String doIdcheck(@RequestParam("id") String id, Model model) {
@@ -206,7 +251,7 @@ public class HomeController {
 		System.out.println("idcnt="+idcnt);
 		return Integer.toString(idcnt);		
 	}
-	//���ㅼ�� 以�蹂듭껜��
+	//check nick overlap
 	@ResponseBody
 	@RequestMapping(value="/nickcheck", method=RequestMethod.GET, produces="application/text;charset=utf8")
 	public String doNickcheck(@RequestParam("nick") String nick, Model model) {

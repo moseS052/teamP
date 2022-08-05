@@ -55,6 +55,12 @@ $(document)
 	body{
 		font-family: 'Binggrae';
 	}
+	a{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
 a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
@@ -1474,22 +1480,74 @@ function alarmList() {
         
         // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
         function naverSignInCallback() {
-            const email=naver_id_login.getProfileData('email');
-            console.log("email: "+email);
-        	console.log(naver_id_login.getProfileData('email'));
-            const nickname=naver_id_login.getProfileData('nickname');
-            console.log(naver_id_login.getProfileData('age'));
-            console.log(naver_id_login.getProfileData('name'));
-            console.log(naver_id_login.getProfileData('birthyear'));
-            console.log(naver_id_login.getProfileData('gender'));
-            console.log(naver_id_login.getProfileData('id'));
-            console.log(naver_id_login.getProfileData('mobile'));
-            $.ajax({
-        		type:'post',url:'naver',dataType:'text',
-        		data:{mail:email,nick:nickname,token:token},
-        		success:function(){
-        			alert('wow');
-        			window.location.href="<%= request.getContextPath() %>/";
+            let mail=naver_id_login.getProfileData('email');
+            let nickname=naver_id_login.getProfileData('nickname');
+        	let name=naver_id_login.getProfileData('name');
+        	let phone=naver_id_login.getProfileData('mobile');
+        	console.log("mail: "+mail);
+        	console.log("nickname: "+nickname);
+        	console.log("name: "+name);
+        	console.log("phone: "+phone);
+        	
+        	var a=[];
+        	a.push(mail);
+        	a.push(nickname);
+        	a.push(name);
+        	a.push(phone);
+        	for(let i=0;i<a.length;i++){
+        		if(a[i]==null||a[i]==''||a[i]==undefined){
+            		a[i]="0";
+            		console.log("처리 후 a["+i+"]는"+a[i]);
+            	}
+        	}
+        	
+        	$.ajax({
+        		type:'post',url:'navercheck',dataType:'text',async: false,
+        		data:{mail:mail},
+        		success:function(data){
+        			console.log("navercheck_count: "+data);
+        			alert('중복체크 완료');        			
+        			if(parseInt(data) == 0){//new member
+        				$.ajax({
+        	        		type:'post',url:'naversign',async: false,
+        	        		data:{
+        	        			mail:a[0],
+        	        			nick:a[1],
+        	        			name:a[2],        	        			
+        	        			phone:a[3] },
+        	        		beforeSend:function(){
+        	        			console.log("보내기 전 naver 완전신규 id는"+a[0]);
+        	        			console.log("보내기 전 naver 완전신규 nick는"+a[1]);
+        	        			console.log("보내기 전 naver 완전신규 name는"+a[2]);
+        	        			console.log("보내기 전 naver 완전신규 phone는"+a[3]);
+        	        			
+        	        			alert('보내기전');
+        	        		},
+        	        		success:function(){
+        	        			console.log("naver 완전신규 id는"+mail);
+        	        			alert('naver로 접속하신 걸 환영합니다');  
+        	        			
+        	        		},
+        	        		error:function(){
+        	        			alert('error!!!!!!!naver로 로그인 불가'); 
+        	        		},
+        	        		complete:function(){}
+        	        	})
+        			} else{//existing member
+        				$.ajax({
+        	        		type:'post',url:'ex_member',dataType:'text',async: false,
+        	        		data:{mail:mail},
+        	        		success:function(){
+        	        			
+        	        			alert('기존회원이시네요 환영합니다');
+        	        			
+        	        		},
+        	        		error:function(){
+        	        		},
+        	        		complete:function(){}
+        	        	})
+        			} 
+        			window.location.href="<%= request.getContextPath() %>/"; 
         		},
         		error:function(){
         		},
@@ -1497,12 +1555,4 @@ function alarmList() {
         	})
         }
 </script>
-<%-- <script type="text/javascript">
-function logIn() { 
-	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
-	  }
-  function joinMember() { 
-	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
-	  }
-</script>    --%>  
 </html>

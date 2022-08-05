@@ -234,5 +234,21 @@
 <delete id="member_out">
 	delete from member where m_no=#{param1}
 </delete>
+<select id='naver_count' resultType="int">
+	select count(mail) mailcnt from member where mail=#{param1}
+</select>
+<insert id="naver_member_insert">
+	insert into member(m_no,id,pw,name,nick,phone,gender,mail,birth)
+	values(member_sq.nextval,#{param1},'0',#{param2},#{param3},#{param4},'0',#{param5},'0')	
+</insert>
+<insert id="naver_talent_insert">
+	insert into talent_check values(#{param1},5)
+</insert>
+<select id="getM_noBymail" resultType="int">
+	select m_no from member where mail=#{param1}
+</select>
+<select id="getNickBym_no" resultType="String">
+	select nick from member where m_no=#{param1}
+</select>
 </mapper>
 
