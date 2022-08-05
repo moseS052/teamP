@@ -278,7 +278,7 @@
 <script>
 $(document)
 .ready(function(){	
-	console.log(`${userinfo==null}`);
+// 	console.log(`${userinfo==null}`);
 	showlist();
 })
 .on('keyup','#searching',function(key){ // search connect enter
@@ -348,7 +348,7 @@ $(document)
 	return false;
 })
 .on('click','#find',function(){
-	console.log($('#l_koo option:selected').text());
+	console.log('선택된구1='+$('#l_koo option:selected').text());
 	if($('#l_koo option:selected').text()=='전체'){
 		showlist();
 		console.log('str=');
@@ -361,10 +361,13 @@ $(document)
 	  			$('#cla').empty();
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
+					if(jo['l_koo']==$('#l_koo option:selected').text()){
+						console.log('들어온구='+jo['l_koo']);
+						console.log('선택된구2='+$('#l_koo option:selected').text());
 					if(getToday()>jo['l_date']){
-						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
+						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up" style="background-color:#B2B2B2">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="'+jo['l_route']+'"/> alt="" class="img-responsive2"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
 						$('#cla').append(str);
@@ -374,21 +377,20 @@ $(document)
 						if(jo['count']==jo['nop']){
 							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 							+'<div class="item-inner">'
-							+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
+							+'<img src=<c:url value="'+jo['l_route']+'"/> alt="" class="img-responsive2"></div>'
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
-							$('#cla').append(str);
-							
+							$('#cla').prepend(str);
 						}else{
 							let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 							+'<div class="item-inner">'
-							+'<img src=<c:url value="/resources/assets/img/No-img.jpg"/> alt="" class="img-responsive"></div>'
+							+'<img src=<c:url value="'+jo['l_route']+'"/> alt="" class="img-responsive2"></div>'
 							+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 							+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
-							$('#cla').append(str);
-							
+							$('#cla').prepend(str);
+							}
 						}
-					}
+	  				}
 	  			}
     		},
     		error:function(){
@@ -406,30 +408,30 @@ function showlist(){
 			$('#cla').empty();
   			for(let i=0;i<data.length;i++){
 				let jo=data[i];
-				console.log(jo['l_route'])
+// 				console.log(jo['l_route'])
 				if(getToday()>jo['l_date']){
 					let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up" style="background-color:#B2B2B2">'
 					+'<div class="item-inner">'
-					+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
+					+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive2"></div>'
 					+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 					+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>종료</p></div></a>';
-					$('#cla').after(str);
+					$('#cla').append(str);
 				}
 				if(getToday()<=jo['l_date']){
 					if(jo['count']==jo['nop']){
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive2"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>신청마감</p></div></a>';
-						$('#cla').append(str);
+						$('#cla').prepend(str);
 					}else{
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up">'
 						+'<div class="item-inner">'
-						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive"></div>'
+						+'<img src=<c:url value="'+jo['l_route']+'" /> alt="" class="img-responsive2"></div>'
 						+'<div class="square pull-right" id="but">'+jo['l_views']+'</div>'
 						+'<p>'+jo['l_title']+'<br>'+jo['l_date']+'<br>현황'+jo['count']+'/'+jo['nop']+'</p></div></a>';
-						$('#cla').append(str);
+						$('#cla').prepend(str);
 					}
 				}
   			}

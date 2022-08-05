@@ -342,6 +342,8 @@ public class ApiController {
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));
+		ArrayList<String> pho=team.l_routeRead(l_no);
+		model.addAttribute("list",pho);
 		team.l_views(l_no);
 		int lookapp=team.lookup(l_no);
 		model.addAttribute("lookapp",lookapp);
@@ -382,6 +384,7 @@ public class ApiController {
 		for(int i=0; i<l_list.size();i++) {
 			L_listDTO ldto = l_list.get(i);
 			JSONObject jo =new JSONObject();
+			jo.put("l_koo", ldto.getL_koo());
 			jo.put("l_no", ldto.getL_no());
 			jo.put("m_no", ldto.getM_no());
 			jo.put("l_title", ldto.getL_title());
@@ -389,6 +392,7 @@ public class ApiController {
 			jo.put("l_views", ldto.getL_views());
 			jo.put("nop", ldto.getNop());
 			jo.put("count", ldto.getCount());
+			jo.put("l_route", ldto.getL_route());
 			ja.add(jo);
 		}
 		return ja.toJSONString();
@@ -584,8 +588,8 @@ public class ApiController {
 		System.out.println("l_no="+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		
-		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/L_route/";
-		String realDataFolder = "/resources/assets/L_route/";
+		String uploadFolder = "C:/Users/admin/git/teamP/src/main/webapp/resources/assets/L_route/";
+		String realDataFolder = "resources/assets/L_route/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
 			String fileRealName = mf.getOriginalFilename();
@@ -608,6 +612,9 @@ public class ApiController {
 		session.removeAttribute("l_no");
 		
 		return"";
+		
 	}
+	
+	
 }
 

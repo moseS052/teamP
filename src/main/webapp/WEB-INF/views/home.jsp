@@ -1114,7 +1114,7 @@ a#yesyes{
 			<div class="row gap flat">
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan1 flip-in">
-						<li class="plan-name">Basic</li>
+						<li class="plan-name">기획서작성</li>
 						<li class="plan-price"><strong>£19</strong> / month</li>
 						<li><strong>5GB</strong> Storage</li>
 						<li><strong>1GB</strong> RAM</li>
@@ -1128,7 +1128,7 @@ a#yesyes{
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan2 featured flip-in">
-						<li class="plan-name">Standard</li>
+						<li class="plan-name">사진게시판</li>
 						<li class="plan-price"><strong>£39</strong> / month</li>
 						<li><strong>5GB</strong> Storage</li>
 						<li><strong>1GB</strong> RAM</li>
@@ -1142,7 +1142,7 @@ a#yesyes{
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan3 flip-in">
-						<li class="plan-name">Advanced</li>
+						<li class="plan-name">질문게시판</li>
 						<li class="plan-price"><strong>£199</strong> / month</li>
 						<li><strong>50GB</strong> Storage</li>
 						<li><strong>8GB</strong> RAM</li>
@@ -1156,7 +1156,7 @@ a#yesyes{
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan4 flip-in">
-						<li class="plan-name">Deluxe</li>
+						<li class="plan-name">기획서목록</li>
 						<li class="plan-price"><strong>£999</strong> / month</li>
 						<li><strong>50GB</strong> Storage</li>
 						<li><strong>8GB</strong> RAM</li>
