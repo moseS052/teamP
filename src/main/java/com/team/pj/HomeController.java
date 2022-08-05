@@ -68,7 +68,12 @@ public class HomeController {
 			String avatar=ip.getAvaRoute((int)session.getAttribute("m_no"));
 			model.addAttribute("avatar",avatar);
 		}
-		
+		iteamP team=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO>home_pro=team.home_proposal();
+		model.addAttribute("l_list",home_pro);
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		ArrayList<photoBoardDTO> homepho = ipt.home_photoList();
+		model.addAttribute("p_list",homepho);
 		return "home";
 		
 	}
@@ -373,11 +378,7 @@ public class HomeController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-
-		
-		
-		
-		
+	
 		return "";
 	}
 }

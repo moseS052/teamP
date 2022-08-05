@@ -97,6 +97,14 @@ a#yesyes{
 #alarmDiv{
 	width:100%;
 }
+.img-responsive3{
+	width: 100%;
+    height: 100px;
+}
+.img-responsive4{
+	width: 100%;
+    height: 250px;
+}
 </style>
 <body>
 
@@ -449,185 +457,64 @@ a#yesyes{
 			<div class="container">
 				<div class="gap"></div>
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Examples Of Excellence</h2>
+					<h2 class="main-title">이제부터 사진</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
 				</div>
-				<ul class="portfolio-filter fade-down centered">
-					<li><a class="btn btn-outlined btn-primary active" href="#"
-						data-filter="*">All</a></li>
-					<li><a class="btn btn-outlined btn-primary" href="#"
-						data-filter=".apps">Apps</a></li>
-					<li><a class="btn btn-outlined btn-primary" href="#"
-						data-filter=".nature">Nature</a></li>
-					<li><a class="btn btn-outlined btn-primary" href="#"
-						data-filter=".design">Design</a></li>
-				</ul>
 				<!--/#portfolio-filter-->
-
 				<ul class="portfolio-items col-3 isotope fade-up gap">
+				<c:forEach var="p_list" items="${p_list}">
 					<li class="portfolio-item apps isotope-item">
+						<a href="/pj/ReadPhoto?seq=${p_list.b_no}">
 						<div class="item-inner">
-							<img src="assets/img/demo/14.jpg" alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href="assets/img/demo/1.jpg" data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
+							<img src=<c:url value="${p_list.b_route}"/> alt="" class="img-responsive4">
 						</div>
+						</a>
 					</li>
+				</c:forEach>
 					<!--/.portfolio-item-->
-					<li class="portfolio-item joomla nature isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/2.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/2.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a> a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item bootstrap design isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/3.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/3.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a> >
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item joomla design apps isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/5.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/5.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item joomla apps isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/6.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/6.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item wordpress nature isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/7.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/7.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item joomla design apps isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/8.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/8.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item joomla nature isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/9.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/9.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
-					<li class="portfolio-item wordpress design isotope-item">
-						<div class="item-inner">
-							<img src=<c:url value="/resources/assets/img/demo/10.jpg"/> alt="">
-							<div class="overlay">
-								<a class="preview btn btn-outlined btn-primary"
-									href=<c:url value="/resources/assets/img/demo/10.jpg"/> data-rel="prettyPhoto"><i
-									class="fa fa-eye"></i></a> <a
-									class="preview btn btn-outlined btn-primary"
-									href="single-project.html"><i class="fa fa-link"></i></a>
-							</div>
-						</div>
-					</li>
-					<!--/.portfolio-item-->
+					
 				</ul>
 			</div>
 		</section>
 
 		<section id="testimonials" class="divider-wrapper">
-			<div class="container">
-				<div class="gap"></div>
-				<div class="col-md-8 col-md-offset-2 gap">
-					<div id="testimonial-carousel">
-						<div class="testimonial">
-							<div class="media centered fade-down">
-								<a href="#" class="animated rotateIn"> <img
-									src=<c:url value="/resources/assets/img/team/team1.jpg"/> width="" class="" alt="Avatar" />
-								</a>
-								<div class="media-body bounce-in">
-									<h3>John Smith</h3>
-									<em>CEO, <a href="#">MicroCorp</a></em>
+		<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">신청</h2>
+					<hr>
+				</div>
+		<div class="col-md-12">
+		<div class="row gap">
+					<c:forEach var="l_list" items="${l_list}">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12 post fade-up">
+							<div class="row">
+								<div class="col-md-12">
+									<h3>
+										<a href="l_Read?l_no=${l_list.l_no}" class="post-title">${l_list.l_title}</a>
+									</h3>
 								</div>
 							</div>
-							<div class="bubble bounce-in">On it differed repeated
-								wandered required in. Then girl neat why yet knew rose spot.
-								Moreover property we he kindness greatest be oh striking
-								laughter. In me he at collecting affronting principles
-								apartments. Has visitor law attacks pretend you calling own
-								excited painted</div>
-						</div>
-						<div class="testimonial">
-							<div class="media centered fade-down">
-								<a href="#" class="animated rotateIn"> <img
-									src=<c:url value="/resources/assets/img/team/team2.jpg"/> width="" class="" alt="Avatar" />
-								</a>
-								<div class="media-body bounce-in">
-									<h3>John Smith</h3>
-									<em>Sales, <a href="#">MicroCorp</a></em>
+							<div class="row post-content">
+								<div class="col-md-3">
+									<div class="item-inner">
+										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
+									</div>
+								</div>
+								<div class="col-md-9">
+									<p>${l_list.l_con}</p>
+									<p>
+										<a class="btn btn-outlined btn-primary pull-right"
+											href="l_Read?l_no=${l_list.l_no}">Read more</a>
+									</p>
 								</div>
 							</div>
-							<div class="bubble bounce-in">Contented attending smallness
-								it oh ye unwilling. Turned favour man two but lovers. Suffer
-								should if waited common person little oh. Improved civility
-								graceful sex few smallest screened settling. Likely active her
-								warmly has.</div>
 						</div>
 					</div>
 				</div>
+				</c:forEach>
 			</div>
-			<!-- container -->
+		</div>
 		</section>
 
 		<!-- BLOG POSTS -->
@@ -802,205 +689,7 @@ a#yesyes{
 		<!-- container -->
 
 		<div class="container post-list gap">
-			<div class="row gap">
-				<div class="col-md-6">
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/1.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
 					</div>
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/2.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/3.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/4.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/5.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="single-post.html" class="post-title">Another
-											Article</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="/resources/assets/img/demo/6.jpg"/> alt="" class="img-responsive">
-										<div class="overlay">
-											<a class="preview btn btn-outlined btn-primary"
-												href="single-post.html"><i class="fa fa-link"></i></a>
-										</div>
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>Lorem ipsum dolor sit amet, id nec conceptam
-										conclusionemque. Et eam tation option. Utinam salutatus ex
-										eum. Ne mea dicit tibique facilisi.</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="single-post.html">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
 
 		<section id="stats" class="divider-wrapper">
 			<div class="container">

@@ -265,5 +265,11 @@
 <select id="countComment_t" resultType="int">
 	select count(*) countcomment from comment_t where b_no=#{param1} and c_pa_no is null
 </select>
+<select id="home_proposal" resultType="com.team.pj.L_listDTO"> 
+	<![CDATA[select * from (select a.l_time,substr(a.l_con,0,20)l_con,substr(a.l_title,0,15) l_title,a.l_no,to_char(a.l_date, 'YYYY-MM-DD') l_date,b.l_route from list a left join 
+		(select * from l_route where rowid in(select max(rowid)from l_route
+      	group by l_no))b
+      	on (a.l_no=b.l_no) where a.l_date>=current_date order by l_date) where rownum <=6 ]]>
+</select>
 </mapper>
 

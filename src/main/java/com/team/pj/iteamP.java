@@ -84,4 +84,5 @@ public interface iteamP {
 	void insertno_img(int l_no,String img);
 	int countComment_t(int b_no);
 	int countBoardq();
+	ArrayList<L_listDTO> home_proposal();
 }

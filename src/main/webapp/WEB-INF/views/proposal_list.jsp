@@ -373,8 +373,6 @@ $(document)
 	  			for(let i=0;i<data.length;i++){
 					let jo=data[i];
 					if(jo['l_koo']==$('#l_koo option:selected').text()){
-						console.log('들어온구='+jo['l_koo']);
-						console.log('선택된구2='+$('#l_koo option:selected').text());
 					if(getToday()>jo['l_date']){
 						let str='<a href="l_Read?l_no='+jo['l_no']+'"><div class="col-md-4 post fade-up" style="background-color:#B2B2B2">'
 						+'<div class="item-inner">'
