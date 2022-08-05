@@ -167,7 +167,7 @@ public class boardController {
 		System.out.println("content="+bcontent);
 		System.out.println("writer="+(int)session.getAttribute("m_no"));
 		p.req_insert((int)session.getAttribute("m_no"),btitle, bcontent);
-		return "redirect:/reqboard";
+		return "redirect:/reqboard?pagenum=1";
 	}
 	//view detail on request board
 	@RequestMapping("/reqdetail")

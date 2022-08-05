@@ -166,7 +166,9 @@
 						<thead><tr><th>게시판타입</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
 							<tbody></tbody>
 						</table>
+						<input class="btn form-control btn-outlined btn-primary" type="button" id="listPagingBtn" value="더보기">
                         </div>
+                        
 						
                         
 
@@ -227,9 +229,20 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+let pageNum=9;
 $(document)
 .ready(function(){	
 	showlist()
+})
+.on('click','#listPagingBtn',function(){
+	pageNum=pageNum+10;
+	$('#mytable > tbody > tr:lt('+pageNum+')').show();
+	console.log($('#mytable > tbody > tr').size());
+	console.log($('#mytable > tbody > tr:visible').size())
+	if($('#mytable > tbody > tr').size()==$('#mytable > tbody > tr:visible').size()){
+		$('#mytable > tbody > tr:lt('+pageNum+')').show();
+		alert('게시물이 더이상 없습니다.');
+	}
 })
 function showlist(){
 	var ar = new Array()
@@ -272,6 +285,7 @@ function showlist(){
   			for(let z=0; z<ar.length;z++){
   				$('#mytable > tbody:last').append(ar[z].div);
   			}
+  			$('#mytable > tbody > tr:gt('+pageNum+')').hide();
 		},
 		error:function(){
     		alert('데이터등록실패');

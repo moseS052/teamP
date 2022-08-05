@@ -254,7 +254,7 @@
 <script>
 $(document)
 .on('click','#btnList',function(){
-	document.location='/pj/reqboard';
+	document.location='/pj/reqboard?pagenum=1';
 })
 .on('submit','#frmfb',function(){
 	if($('#content').val()=='' || $('#title').val()==''){
