@@ -219,13 +219,9 @@
                         <div id="cla">
                         	
                         </div>
-                        <div align="center">
-						<nav aria-label="Page navigation example">
-							<ul class="pagination" id="paginationClass">
-								<li class="page-item"><a id="leftsheet" class="page-link" href="#"aria-label="Previous" onclick="return false;"><span aria-hidden="true">&laquo;</span></a></li>
-								<li class="page-item"><a id="rightsheet" class="page-link" href="#"	aria-label="Next"> <span aria-hidden="true">&raquo;</span></a></li>
-							</ul>
-						</nav>
+                        <div>
+                        <br>
+                        <input class="btn form-control btn-outlined btn-primary" type="button" id="listPagingBtn" value="더보기">
 						</div>
 					</div>
 					<div class="col-lg-2">
@@ -287,9 +283,11 @@
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+let pageNum=8;
 $(document)
 .ready(function(){	
 	showlist();
+	
 })
 .on('keyup','#searching',function(key){ // search connect enter
 	if(key.keyCode==13){
@@ -409,6 +407,12 @@ $(document)
     		complete:function(){}
     	});
 })
+.on('click','#listPagingBtn',function(){
+	pageNum=pageNum+3;
+	$('#cla').children('a:lt('+pageNum+')').show();
+	
+	
+})
 function showlist(){
 // 	console.log('str=');
 // 	var ar = new Array()
@@ -444,7 +448,8 @@ function showlist(){
 						$('#cla').prepend(str);
 					}
 				}
-  			} 
+  			};
+  			$('#cla').children('a:gt('+pageNum+')').hide();
 		},
 		error:function(){
     		alert('데이터등록실패');

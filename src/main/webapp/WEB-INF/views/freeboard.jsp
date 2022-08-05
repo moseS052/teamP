@@ -377,7 +377,7 @@ $(document)
 			},
 			complete:function(){}
 		})
-		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard" id="btnAll"><p id="all1">전체보기</p></a>');
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard?pagenum=1" id="btnAll"><p id="all1">전체보기</p></a>');
 	} else {
 		$('#thd').empty();
 		$('#thd').append('<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>내 용</th><th>작성일자</th><th>조회수</th></tr>');
@@ -404,7 +404,7 @@ $(document)
 			},
 			complete:function(){}
 		})
-		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard" id="btnAll"><p id="all1">전체보기</p></a>');
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/freeboard?pagenum=1" id="btnAll"><p id="all1">전체보기</p></a>');
 	}
 	return false;
 })
