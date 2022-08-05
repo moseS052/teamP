@@ -38,6 +38,7 @@ public class boardController {
 		if(session.getAttribute("m_no")!=null) {
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
 			mod.addAttribute("id",session.getAttribute("id"));
+			mod.addAttribute("nick",session.getAttribute("nick"));
 		}else {
 			mod.addAttribute("m_no", null);
 		}
@@ -55,6 +56,7 @@ public class boardController {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		
 		return "newpost_fb";
 	}
@@ -90,6 +92,7 @@ public class boardController {
 		HttpSession session =req.getSession();		
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.free_detail(b_no);
@@ -107,6 +110,7 @@ public class boardController {
 		HttpSession session =req.getSession();		
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		boardDTO bdto=p.free_detail(b_no);
 		model.addAttribute("bdto",bdto);
@@ -136,6 +140,7 @@ public class boardController {
 		if(session.getAttribute("m_no")!=null) {
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
 			mod.addAttribute("id",session.getAttribute("id"));
+			mod.addAttribute("nick",session.getAttribute("nick"));
 		}else {
 			mod.addAttribute("m_no", null);
 		}	
@@ -153,6 +158,7 @@ public class boardController {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		
 		return "newpost_req";
 	}
@@ -176,6 +182,7 @@ public class boardController {
 		HttpSession session =req.getSession();		
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		int count=p.countComment_t(b_no);
 		p.free_viewcnt(b_no);
@@ -192,6 +199,7 @@ public class boardController {
 		HttpSession session =req.getSession();		
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		boardDTO bdto=p.req_detail(b_no);
 		model.addAttribute("bdto",bdto);
@@ -205,7 +213,7 @@ public class boardController {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		int maxb_no=p.findMaxb_no((int)session.getAttribute("m_no"));
-		System.out.println("제발="+maxb_no);
+		System.out.println("��諛�="+maxb_no);
 		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
 		String realDataFolder = "/resources/assets/freeBoard/";
 		List<MultipartFile> filelist = request.getFiles("file");

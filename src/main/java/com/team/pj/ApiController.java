@@ -621,7 +621,15 @@ public class ApiController {
 		return"";
 		
 	}
-	
-	
+	//withdraw membership
+	@ResponseBody
+	@RequestMapping("/member_x")
+	public String doMember_x(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
+		int mseq=Integer.parseInt(req.getParameter("m_no"));
+		System.out.println("delete m_no"+mseq);
+		p.member_out(mseq);
+		return "";
+	}
 }
 

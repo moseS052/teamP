@@ -169,7 +169,8 @@ accent-color:green;
 						이름<input type="text" class="form-control" id="priname" value="${name}"/>
 						전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
 						이메일<input type="text" class="form-control" id="primail" value="${mail}"/><br><br>
-						<div style="text-align:center"><input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="취소" /></div>
+						<div style="text-align:center"><input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="취소" />
+						<input class="btn btn-outlined btn-primary" type="button" id="out" value="회원탈퇴" /></div>
 						</div>
 						
 					</div>
@@ -287,6 +288,24 @@ $(document)
 	    	});
 
 	}
+})
+.on('click','#out',function(){
+	if(!confirm('탈퇴하시면 더이상 이용할 수 없습니다 그래도 탈퇴하시겠습니까?')){
+		return false;
+	} else{
+		$.ajax({
+			type:'get',dataType:'text',url:'member_x',
+			data:{m_no:$('#m_no').val()},
+			beforeSend:function(){
+				console.log("m_no:"+$('#m_no').val());
+			},
+			success:function(){	
+				alert('탈퇴가 완료되었습니다');
+				window.location.href="<%= request.getContextPath() %>/logout";
+			}
+		})
+	}
+	
 })
 </script>
 </html>

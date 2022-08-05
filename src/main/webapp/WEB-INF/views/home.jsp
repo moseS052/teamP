@@ -27,7 +27,8 @@
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
-<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
+<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script> 
+<script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>  
 <script type="text/javascript">
 
 $(document)
@@ -52,6 +53,12 @@ $(document)
     font-style: normal;
 	}
 	body{
+		font-family: 'Binggrae';
+	}
+	a{
+		font-family: 'Binggrae';
+	}
+	h2{
 		font-family: 'Binggrae';
 	}
 a#meminfo, #btnSendNote, #goList{
@@ -117,6 +124,7 @@ a#yesyes{
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
 				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a></h2>
+				<%-- <% naver_id_login.getProfileData('name')%> --%>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -1456,16 +1464,90 @@ function alarmList() {
 }
 
 </script>
-
-<%-- <script type="text/javascript">
-function logIn() { 
-	  window.open("<%= request.getContextPath() %>/login", "login", "width=400, height=300, left=100, top=50") 
-	  }
-  function joinMember() { 
-	  window.open("<%= request.getContextPath() %>/signup", "signup", "width=400, height=500, left=100, top=50") 
-	  }
-</script>    --%>  
-
-
-
+<script type="text/javascript">
+        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+        
+        // 접근 토큰 값 출력
+        const token=naver_id_login.oauthParams.access_token;
+        
+        // 네이버 사용자 프로필 조회
+        naver_id_login.get_naver_userprofile("naverSignInCallback()");
+        
+        // 네이버 사용자 프로필 조회 이후 프로필 정보를 처리할 callback function
+        function naverSignInCallback() {
+            let mail=naver_id_login.getProfileData('email');
+            let nickname=naver_id_login.getProfileData('nickname');
+        	let name=naver_id_login.getProfileData('name');
+        	let phone=naver_id_login.getProfileData('mobile');
+        	console.log("mail: "+mail);
+        	console.log("nickname: "+nickname);
+        	console.log("name: "+name);
+        	console.log("phone: "+phone);
+        	
+        	var a=[];
+        	a.push(mail);
+        	a.push(nickname);
+        	a.push(name);
+        	a.push(phone);
+        	for(let i=0;i<a.length;i++){
+        		if(a[i]==null||a[i]==''||a[i]==undefined){
+            		a[i]="0";
+            		console.log("처리 후 a["+i+"]는"+a[i]);
+            	}
+        	}
+        	
+        	$.ajax({
+        		type:'post',url:'navercheck',dataType:'text',async: false,
+        		data:{mail:mail},
+        		success:function(data){
+        			console.log("navercheck_count: "+data);
+        			alert('중복체크 완료');        			
+        			if(parseInt(data) == 0){//new member
+        				$.ajax({
+        	        		type:'post',url:'naversign',async: false,
+        	        		data:{
+        	        			mail:a[0],
+        	        			nick:a[1],
+        	        			name:a[2],        	        			
+        	        			phone:a[3] },
+        	        		beforeSend:function(){
+        	        			console.log("보내기 전 naver 완전신규 id는"+a[0]);
+        	        			console.log("보내기 전 naver 완전신규 nick는"+a[1]);
+        	        			console.log("보내기 전 naver 완전신규 name는"+a[2]);
+        	        			console.log("보내기 전 naver 완전신규 phone는"+a[3]);
+        	        			
+        	        			alert('보내기전');
+        	        		},
+        	        		success:function(){
+        	        			console.log("naver 완전신규 id는"+mail);
+        	        			alert('naver로 접속하신 걸 환영합니다');  
+        	        			
+        	        		},
+        	        		error:function(){
+        	        			alert('error!!!!!!!naver로 로그인 불가'); 
+        	        		},
+        	        		complete:function(){}
+        	        	})
+        			} else{//existing member
+        				$.ajax({
+        	        		type:'post',url:'ex_member',dataType:'text',async: false,
+        	        		data:{mail:mail},
+        	        		success:function(){
+        	        			
+        	        			alert('기존회원이시네요 환영합니다');
+        	        			
+        	        		},
+        	        		error:function(){
+        	        		},
+        	        		complete:function(){}
+        	        	})
+        			} 
+        			window.location.href="<%= request.getContextPath() %>/"; 
+        		},
+        		error:function(){
+        		},
+        		complete:function(){}
+        	})
+        }
+</script>
 </html>

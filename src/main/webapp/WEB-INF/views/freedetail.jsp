@@ -105,7 +105,7 @@
 				<a href="login">login</a><a href="signup">회원가입</a>
 				</c:if>
 				<c:if test="${m_no!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${nick}&nbsp;님<a href='logout'>Logout</a>
 				</c:if>
             </div>
             <div>

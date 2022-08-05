@@ -30,7 +30,59 @@
 	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
 	<![endif]-->
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
-<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
+<script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>
+<script src="https://static.nid.naver.com/js/naverLogin_implicit-1.0.3.js" charset="utf-8"></script>
+
+<!-- <script>
+
+var naverLogin = new naver.LoginWithNaverId(
+		{
+			clientId: "w9CWsYucH5U3OO9SqFPI", //내 애플리케이션 정보에 cliendId를 입력해줍니다.
+			callbackUrl: "http://localhost:8080/pj/", // 내 애플리케이션 API설정의 Callback URL 을 입력해줍니다.
+			loginButton: {color: "green", type: 2, height: 40}
+		}
+	);	
+
+naverLogin.init();
+naverLogin.getLoginStatus(function (status) {
+  if (status) {
+      const nickName=naverLogin.user.getNickName();
+      const age=naverLogin.user.getAge();
+      const birthday=naverLogin.user.getBirthday();
+
+      if(nickName===null||nickName===undefined ){
+        alert("별명이 필요합니다. 정보제공을 동의해주세요.");
+        naverLogin.reprompt();
+        return ;  
+     }else{
+      setLoginStatus();
+     }
+}
+});
+console.log(naverLogin);
+
+
+function setLoginStatus(){
+
+  const message_area=document.getElementById('message');
+  message_area.innerHTML=`
+  <h3> Login 성공 </h3>
+  <div>user Nickname : ${naverLogin.user.nickname}</div>
+  <div>user Age(범위) : ${naverLogin.user.age}</div>
+  <div>user Birthday : ${naverLogin.user.birthday}</div>
+  `;
+ 
+  const button_area=document.getElementById('button_area');
+  button_area.innerHTML="<button id='btn_logout'>로그아웃</button>";
+
+  const logout=document.getElementById('btn_logout');
+  logout.addEventListener('click',(e)=>{
+    naverLogin.logout();
+location.replace("http://localhost:8080/pj/");
+  })
+}
+</script>  -->  
+
 <script type="text/javascript">
     $(document)
     .ready(function(){
@@ -197,6 +249,13 @@
               </div>
 
               <button class="btn btn-primary btn-outlined btn-block text-uppercase" id="login" type="submit">Log in</button>
+              <br>
+              	
+      				
+              	<div id="button_area" > 
+        			<div id="naver_id_login"></div>
+      			</div>
+				
               <hr class="my-4">
               <button class="btn btn-lg btn-secondary btn-block text-uppercase" id="join" onclick="location='/pj/signup'">Join</button>
             <!-- </form> -->
@@ -260,6 +319,19 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script type="text/javascript">
+
+
+var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/");    // Client ID, CallBack URL 삽입
+                                   // 단 'localhost'가 포함된 CallBack URL
+var state = naver_id_login.getUniqState();
+
+naver_id_login.setButton("white", 4, 40);
+naver_id_login.setDomain("http://localhost:8080/pj/login");    //  URL
+naver_id_login.setState(state);
+//naver_id_login.setPopup();
+naver_id_login.init_naver_id_login();
+
+
 $(document)
 .on('keypress','#pw',function(e){
 	if(e.which == 13){

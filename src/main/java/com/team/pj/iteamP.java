@@ -84,4 +84,10 @@ public interface iteamP {
 	void insertno_img(int l_no,String img);
 	int countComment_t(int b_no);
 	int countBoardq();
+	void member_out(int m_no);
+	int naver_count(String mail);
+	void naver_member_insert(String id,String name,String nick,String phone,String mail);
+	void naver_talent_insert(int m_no);
+	int getM_noBymail(String mail);
+	String getNickBym_no(int m_no);
 }

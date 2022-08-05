@@ -35,7 +35,8 @@ public class photoBoardController {
 
 		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
-			model.addAttribute("m_no", session.getAttribute("m_no"));	
+			model.addAttribute("m_no", session.getAttribute("m_no"));
+			model.addAttribute("nick",session.getAttribute("nick"));
 		}
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 //		System.out.println(req.getParameter("l_no"));
@@ -114,6 +115,7 @@ public class photoBoardController {
 		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
+			model.addAttribute("nick",session.getAttribute("nick"));
 		}
 		
 		

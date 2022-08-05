@@ -41,6 +41,7 @@ public class questionController {
 		}else { //濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo",session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
+			model.addAttribute("nick",session.getAttribute("nick"));
 		}
 		
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
@@ -61,6 +62,7 @@ public class questionController {
 			}else { //濡�洹몄�� �깃났 ��
 				mod.addAttribute("userinfo",session.getAttribute("id"));
 				mod.addAttribute("m_no", session.getAttribute("m_no"));
+				mod.addAttribute("nick",session.getAttribute("nick"));
 			}
 			iQuestion qa = sqlSession.getMapper(iQuestion.class);
 			qnaDTO qdto = qa.answerList(q_no);	
@@ -95,7 +97,8 @@ public class questionController {
 		
 			
 	  model.addAttribute("m_no", session.getAttribute("m_no"));
-	  model.addAttribute("userinfo",session.getAttribute("id"));		
+	  model.addAttribute("userinfo",session.getAttribute("id"));
+	  model.addAttribute("nick",session.getAttribute("nick"));
 	  model.addAttribute("list", ja); 
 	  model.addAttribute("datalist", ja); 
 	  model.addAttribute("answerlist", ja);
@@ -117,6 +120,7 @@ public class questionController {
 		mod.addAttribute("qa", qdto.getQ_a());
 		mod.addAttribute("m_no", session.getAttribute("m_no"));
 		mod.addAttribute("id",session.getAttribute("id"));
+		mod.addAttribute("nick",session.getAttribute("nick"));
 		return "questionAnswer";
 	}
 	//1:1contact us
@@ -125,6 +129,7 @@ public class questionController {
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
+		model.addAttribute("nick",session.getAttribute("nick"));
 		return "conTactus";
 	}
 	@ResponseBody
