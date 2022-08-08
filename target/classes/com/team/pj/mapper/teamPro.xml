@@ -112,10 +112,10 @@
 	select m_no from member where id=#{param1}
 </select>
 <select id='searchTNC' parameterType="hashMap" resultType="com.team.pj.SearchVO">
-	select nick,title,time,seqno,substr(con,instr(con,${search}),10) con,views,m_no from ${table} where (title like  '%'||${search}||'%') or (con like '%'||${search}||'%')
+	select nick,title,time,seqno,substr(con,instr(con,${search}),10) con,views,m_no from ${table} where (title like  '%'||${search}||'%') or (con like '%'||${search}||'%') order by time desc
 </select>
 <select id='searchNick' parameterType="hashMap" resultType="com.team.pj.SearchVO">
-	select nick,title,time,seqno,views,m_no from ${table} where nick like '%'||#{search}||'%'
+	select nick,title,time,seqno,views,m_no from ${table} where nick like '%'||#{search}||'%' order by time desc
 </select>
 <select id="listBoard" resultType="com.team.pj.boardDTO">
 	<![CDATA[

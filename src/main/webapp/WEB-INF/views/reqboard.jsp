@@ -231,7 +231,7 @@
 					</tr>
 					</c:forEach></tbody>
 					</table>
-					<div align="center">
+					<div align="center" id="plusLine">
 						<nav aria-label="Page navigation example">
 							<ul class="pagination" id="paginationClass">
 								<li class="page-item"><a id="leftsheet" class="page-link" href="#"aria-label="Previous" onclick="return false;"><span aria-hidden="true">&laquo;</span></a></li>
@@ -299,6 +299,7 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
+let pageNum=15;
 let m=parseInt(`${pagenum}`);
 let b=Math.ceil(`${countboardq}`/20);
 console.log(b);
@@ -343,6 +344,8 @@ $(document)
 		alert('검색값이 없습니다.');
 		return false;
 	}
+	pageNum=15;
+	$('#plusLine').empty();
 	$('#tbd').empty();
 	$('#btnAll').detach();
 	if($('#selSearch option:selected').text()=='작성자'){
@@ -357,16 +360,17 @@ $(document)
 						let jo=data[i];
 						let str='<tr><td>'+jo['seqno']+'</td><td><a href="freedetail?b_no='+jo['seqno']+'">'
 								+jo['title']+'</a></td><td><a href="" id="meminfo" seq="'+jo['m_no']+'">'
-								+jo['nick']+'</a></td><td>'+jo['date']+'</td><td>'+jo['views']+'</td>';
+								+jo['nick']+'</a></td><td>'+jo['date']+'</td><td>'+jo['views']+'</td></tr>';
 						$('#tbd').append(str);
 					}
+					$('#tbd').children('tr:gt(14)').hide();
 				}
 			},
 			error:function(){
 			},
 			complete:function(){}
 		})
-		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/reqboard" id="btnAll"><p id="all1">전체보기</p></a>');
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/reqboard?pagenum=1" id="btnAll"><p id="all1">전체보기</p></a>');
 	} else {
 		$('#thd').empty();
 		$('#thd').append('<tr><th>게시번호</th><th>제목</th><th>작성자</th><th>내 용</th><th>작성일자</th><th>조회수</th></tr>');
@@ -383,20 +387,28 @@ $(document)
 						let jo=data[i];
 						let str='<tr><td>'+jo['seqno']+'</td><td><a href="freedetail?b_no='+jo['seqno']+'">'
 						+jo['title']+'</a></td><td><a href="" id="meminfo" seq="'+jo['m_no']+'">'
-						+jo['nick']+'</a></td><td>'+jo['con']+'</td><td>'+jo['date']+'</td><td>'+jo['views']+'</td>';
+						+jo['nick']+'</a></td><td>'+jo['con']+'</td><td>'+jo['date']+'</td><td>'+jo['views']+'</td></tr>';
 						$('#tbd').append(str);
 					}
-					
+					$('#tbd').children('tr:gt(14)').hide();
 				}
 			},
 			error:function(){
 			},
 			complete:function(){}
 		})
-		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/reqboard" id="btnAll"><p id="all1">전체보기</p></a>');
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/reqboard?pagenum=1" id="btnAll"><p id="all1">전체보기</p></a>');
 	}
+	$('#paginationClass').empty();
+	$('#plusLine').append('<input class="btn form-control btn-outlined btn-primary" type="button" id="listPagingBtn" value="더보기">');
 	return false;
 })
+.on('click','#listPagingBtn',function(){
+	pageNum=pageNum+10;
+	$('#tbd').children('tr:lt('+pageNum+')').show();
+});
+
+
 function shtt(a){
 	$('#paginationClass').empty();
 	let html='<li class="page-item"><a id="leftsheet" class="page-link" href="#"aria-label="Previous" onclick="return false;"><span aria-hidden="true">&laquo;</span></a></li>';

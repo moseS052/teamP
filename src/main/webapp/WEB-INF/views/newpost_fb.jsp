@@ -284,11 +284,17 @@ $(document)
 			if($('#uploadFile')[0].files.length>0){
 				insertFreeboardPhoto();	
 			}else{
-				document.location = '/pj/freeboard';
+				document.location = '/pj/freeboard?pagenum=1';
 			}
 			
 		}
 	});  
+})
+.on('submit','#frmfb',function(){
+	if($('#content').val()=='' || $('#title').val()==''){
+		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
+		return false;
+	}
 })
 function insertFreeboardPhoto(){
 	let formData = new FormData($('#fileForm')[0]);
@@ -300,15 +306,10 @@ function insertFreeboardPhoto(){
 		data : formData,
 		type : 'POST',
 		success:function(){
-			document.location = '/pj/freeboard';
+			document.location = '/pj/freeboard?pagenum=1';
 			}
 	});
 }
-.on('submit','#frmfb',function(){
-	if($('#content').val()=='' || $('#title').val()==''){
-		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
-		return false;
-	}
-})	
+
 </script>
 </html>

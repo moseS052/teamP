@@ -2,6 +2,7 @@ package com.team.pj;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 public interface iphotoBoard {
 	ArrayList<photoBoardDTO> home_photoList();	
@@ -16,4 +17,7 @@ public interface iphotoBoard {
 	int deletePhotoBoard(int b_no);
 	void setReview(int l_no,int b_no);
 	ArrayList<photoBoardDTO> goReview(int l_no);
+	ArrayList<SearchPhoVO> searchPoNick(Map map);
+	ArrayList<SearchPhoVO> searchPoTNC(Map map);
+	ArrayList<SearchPhoVO> searchLiTNC(Map map);
 }

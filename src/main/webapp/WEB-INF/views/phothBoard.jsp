@@ -67,6 +67,30 @@
 	a{
 		font-family: 'Binggrae';
 	}
+	#searchDIV{
+		text-align:right;
+		margin-top:25px;
+		font-family: 'GangwonEdu_OTFBoldA';
+	}
+	#btnSearch, #btnAll{ 
+ 		height:24px;
+ 		margin-top:-4px;
+ 		margin-left:5px;
+ 		font-family: 'Binggrae';
+ 	} 
+ 	#searc,#all1{
+ 		margin-top:-7px;
+ 	}
+ 	#selSearch{
+ 		padding-top:1px;
+ 		font-size:15px;
+ 		margin-right:-2px;
+ 		font-family: 'Binggrae';
+ 	}
+ 	#searching{
+ 		font-size:17px;
+ 		font-family: 'Binggrae';
+ 	}
 </style>
 </head>
 
@@ -166,13 +190,13 @@
 		<div class="container">
 
 			<div class="row mt">
-				<div class="centered gap fade-down section-heading">
-					<!-- <h2 class="main-title">사진게시판</h2>
-					<hr> -->
-				</div>
+				<div id="searchDIV">
+		    	<h5 class="fade-up" id="showAll"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
+					<input type='text' id='searching'><a class="btn btn-primary btn-outlined" href="" id="btnSearch"><p id="searc">검 &nbsp; 색</p></a></h5>
+		    	</div>
 			</div>
 
-			<div class="row mt gap">
+			<div class="row mt gap" id="photozone">
 				<c:if test="${photolist[0]==null}">
 				작성된 후기가 없습니다.
 				</c:if>
@@ -258,6 +282,7 @@
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
 </body>
 <script>
+let pageNum=6;
 	$(document)
 	.ready(function(){
 	let a=`${total}`/6;
@@ -283,7 +308,90 @@
 			document.location = '/pj/question';
 		}
 	})
-	
-	
+
+.on('keyup','#searching',function(key){ // search connect enter
+	if(key.keyCode==13){
+		$('#btnSearch').trigger('click');
+	}
+	return false;
+})
+//search
+.on('click','#btnSearch',function(){
+	//검색하는 게시판의 내용이 들어가야함  view 이용해서 사용할 것!
+	let table='bpsearch';  // view 이름
+	let search=$('#searching').val(); //검색값
+	if($('#searching').val()==''){
+		alert('검색값이 없습니다.');
+		return false;
+	}
+	pageNum=6;
+	$('#pageCount').empty();
+	$('#photozone').empty();
+	$('#btnAll').detach();
+	if($('#selSearch option:selected').text()=='작성자'){
+		$.ajax({
+			type:'post',url:'searchPoNick',data:{table:table,search:search,board:'P'},dataType:'json',
+			success:function(data){
+				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
+				if(data==''){
+					alert('검색값이 없습니다');
+				}else {
+					for(let i=0;i<data.length;i++){
+						let jo=data[i];
+						let str='<div class="col-md-4 post fade-up"><div class="item-inner">'
+						+'<img style="width: 400px; height: 245px;"	src=<c:url value="/'+jo['route']+'"/> alt=""'
+						+'class="img-responsive"><div class="overlay"><a class="preview btn btn-outlined btn-primary" href=#>'
+						+'<i class="fa fa-link"></i></a></div></div><h3>'
+						+'<a href="#">'+jo['title']+'</a><br><a href="">작성자 : '+jo['nick']
+						+'</a></h3><p><a class="btn btn-outlined btn-primary" seq="'+jo['b_no']+'" id="readPhotoBoard">Read More</a>'
+						+'</p></div>'
+						$('#photozone').append(str);
+					}
+					$('#photozone').children('div:gt(5)').hide();
+				}
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/photoBoard?stanum=1&endnum=6" id="btnAll"><p id="all1">전체보기</p></a>');
+	} else {
+		$.ajax({
+			type:'post',url:'searchPoTNC',data:{search:search},dataType:'json',
+			success:function(data){
+				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
+				console.log(data);
+				
+				if(data==''){
+					alert('검색값이 없습니다');					
+				}else{
+					for(let i=0;i<data.length;i++){
+						let jo=data[i];
+						let str='<div class="col-md-4 post fade-up"><div class="item-inner">'
+							+'<img style="width: 400px; height: 245px;"	src=<c:url value="/'+jo['route']+'"/> alt=""'
+							+'class="img-responsive"><div class="overlay"><a class="preview btn btn-outlined btn-primary" href=#>'
+							+'<i class="fa fa-link"></i></a></div></div><h3>'
+							+'<a href="#">'+jo['title']+'</a><br><a href="">내용 : '+jo['con']
+							+'</a></h3><p><a class="btn btn-outlined btn-primary" seq="'+jo['b_no']+'" id="readPhotoBoard">Read More</a>'
+							+'</p></div>'
+						$('#photozone').append(str);
+					}
+					$('#photozone').children('div:gt(5)').hide();	
+				}
+			},
+			error:function(){
+			},
+			complete:function(){}
+		})
+		$('#showAll').append('<a class="btn btn-primary btn-outlined" href="/pj/photoBoard?stanum=1&endnum=6" id="btnAll"><p id="all1">전체보기</p></a>');
+	}
+	$('#pageCount').append('<input class="btn form-control btn-outlined btn-primary" type="button" id="listPagingBtn" value="더보기">');
+	return false;
+})
+.on('click','#listPagingBtn',function(){
+	pageNum=pageNum+3;
+	$('#photozone').children('div:lt('+pageNum+')').show();
+})
+
 </script>
 </html>

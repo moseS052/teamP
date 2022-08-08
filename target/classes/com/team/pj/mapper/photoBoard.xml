@@ -70,4 +70,16 @@
         on (A.b_no=B.b_no) 
         where a.b_no in (select b_no from review where l_no=#{param1}) order by b_date desc
 	</select>
+	<select id='searchPoTNC' parameterType="hashMap" resultType="com.team.pj.SearchPhoVO">
+		select b_no,m_no,title,nick,time,route,substr(con,instr(con,${search}),10) con from bpsearch where (title like  '%'||${search}||'%') or (con like '%'||${search}||'%')
+	</select>
+	<select id='searchLiTNC' parameterType="hashMap" resultType="com.team.pj.SearchPhoVO">
+		select l_no,m_no,title,nick,time,route,l_koo,nop,substr(con,instr(con,${search}),10) con from listsearch where (title like  '%'||${search}||'%') or (con like '%'||${search}||'%')
+	</select>
+	<select id='searchPoNick' parameterType="hashMap" resultType="com.team.pj.SearchPhoVO">
+		select * from ${table} where nick like '%'||#{search}||'%'
+	</select>
 </mapper>
+
+
+

@@ -3,13 +3,17 @@ package com.team.pj;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.ibatis.session.SqlSession;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -183,4 +187,103 @@ public class photoBoardController {
 		}
 		return "";
 	}
+	
+	//search nick
+	@ResponseBody
+	@RequestMapping(value="/searchPoNick",produces="application/text;charset=utf8",method = RequestMethod.POST)
+	public String searchPoNick(HttpServletRequest req) {
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		String table=req.getParameter("table");
+		String search=req.getParameter("search");
+		String board=req.getParameter("board");
+		Map map=new HashMap();
+		map.put("table", table);
+		map.put("search", search);
+		ArrayList<SearchPhoVO> arsvo=ipt.searchPoNick(map);
+		JSONArray ja=new JSONArray();
+		if(board.equals("P")) {
+			for(int i=0;i<arsvo.size();i++) {
+				SearchPhoVO spo=arsvo.get(i);
+				JSONObject jo = new JSONObject();
+				jo.put("b_no", spo.getB_no());
+				jo.put("nick", spo.getNick());
+				jo.put("route", spo.getRoute());
+				jo.put("title", spo.getTitle());
+				ja.add(jo);
+			}
+		}else if(board.equals("L")) {
+			for(int i=0;i<arsvo.size();i++) {
+				SearchPhoVO spo=arsvo.get(i);
+				JSONObject jo = new JSONObject();
+				jo.put("l_no", spo.getL_no());
+				jo.put("nick", spo.getNick());
+				jo.put("route", spo.getRoute());
+				jo.put("title", spo.getTitle());
+				jo.put("time", spo.getTime());
+				jo.put("koo", spo.getL_koo());
+				ja.add(jo);
+			}
+		}
+		
+		
+		map.clear();
+		return ja.toJSONString();
+	}
+	
+	//search TNC photo
+	@ResponseBody
+	@RequestMapping(value="/searchPoTNC",produces="application/text;charset=utf8",method = RequestMethod.POST)
+	public String searchPoTNC(HttpServletRequest req) {
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		String search="'"+req.getParameter("search")+"'";
+		
+		Map map=new HashMap();
+		map.put("search", search);
+		
+		ArrayList<SearchPhoVO> arsvo=ipt.searchPoTNC(map);
+		JSONArray ja=new JSONArray();
+		for(int i=0;i<arsvo.size();i++) {
+			SearchPhoVO spo=arsvo.get(i);
+			JSONObject jo = new JSONObject();
+			jo.put("b_no", spo.getB_no());
+			jo.put("route", spo.getRoute());
+			jo.put("title", spo.getTitle());
+			jo.put("con", spo.getCon());
+			ja.add(jo);
+		}
+		
+		map.clear();
+		return ja.toJSONString();
+	}
+	
+	//search TNC list
+		@ResponseBody
+		@RequestMapping(value="/searchLiTNC",produces="application/text;charset=utf8",method = RequestMethod.POST)
+		public String searchLiTNC(HttpServletRequest req) {
+			iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+			String search="'"+req.getParameter("search")+"'";
+			
+			Map map=new HashMap();
+			map.put("search", search);
+			
+			ArrayList<SearchPhoVO> arsvo=ipt.searchLiTNC(map);
+			JSONArray ja=new JSONArray();
+			for(int i=0;i<arsvo.size();i++) {
+				SearchPhoVO spo=arsvo.get(i);
+				JSONObject jo = new JSONObject();
+				jo.put("l_no", spo.getL_no());
+				jo.put("route", spo.getRoute());
+				jo.put("title", spo.getTitle());
+				jo.put("con", spo.getCon());
+				jo.put("nick", spo.getNick());
+				jo.put("time", spo.getTime());
+				jo.put("koo", spo.getL_koo());
+				ja.add(jo);
+			}
+			
+			map.clear();
+			return ja.toJSONString();
+		}
+	
+	
 }
