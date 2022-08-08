@@ -78,6 +78,9 @@ public class HomeController {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		ArrayList<photoBoardDTO> homepho = ipt.home_photoList();
 		model.addAttribute("p_list",homepho);
+		iQuestion fre=sqlSession.getMapper(iQuestion.class);
+		ArrayList<boardDTO> F_board = fre.f_BoardRead();
+		model.addAttribute("F_board",F_board);
 		return "home";
 		
 	}

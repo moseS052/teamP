@@ -7,4 +7,5 @@ public interface iQuestion {
 	qnaDTO answerList(int q_no);
 	ArrayList<qnaDTO> question(int m_no);
 	int insertContactus(String title, String contact, int m_no);
+	ArrayList<boardDTO>f_BoardRead();
 }

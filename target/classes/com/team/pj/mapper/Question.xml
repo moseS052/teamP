@@ -17,4 +17,10 @@
 		values(questions_sq.nextval, #{param1}, #{param2}, CURRENT_date,
         #{param3})
 </insert>
+
+<select id="f_BoardRead" resultType="com.team.pj.boardDTO"> 
+	<![CDATA[select * from(
+   				select a.b_no , b.nick , a.b_title ,a.views, a.b_date from board a, member b 
+   				where a.m_no=b.m_no and a.b_type='F' order by a.views desc) where rownum <=6 ]]>
+</select>
 </mapper>

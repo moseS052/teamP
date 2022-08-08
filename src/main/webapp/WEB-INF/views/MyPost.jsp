@@ -50,14 +50,7 @@
 	}	
 </style>	
   </head>
-<!--   <style> -->
-/*  a:link { */
-/*   color :green; */
-/* } */
-/*   a:visited { */
-/*   color : grey; */
-/* } */
-<!--  </style> -->
+
 
   <body class="single single-post"> 
 

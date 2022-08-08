@@ -28,15 +28,47 @@
 </style>
 </head>
 <body>
-<div>
-	<img src=<c:url value="${avaRoute}"/> width="200px" height="200px" />
-</div>
-<c:if test="${m_no==semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
-</c:if>
-<c:if test="${m_no!=semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
-</c:if>
+<div class="container">
+			<div class="row mt">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">회원정보</h2>
+					<div>
+						<img src=<c:url value="${avaRoute}"/> width="200px" height="200px" />
+					</div>
+					<c:if test="${m_no==semno }">
+					<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
+					</c:if>
+					<strong>닉네임: 허춘삼</strong> &nbsp;&nbsp;
+					<c:if test="${m_no!=semno }">
+					<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
+					</c:if><br>
+					<strong>이메일주소:</strong><strong>12345@naver.com</strong>
+				</div>
+			</div>
+			<!-- row -->
+				<div>
+						<h3 class="main-title">최근활동내역</h3>
+						<br>
+						<h4>기획서부분</h4>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>제목</th><th></th><th></th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+							<c:forEach var="F_board" items="${F_board}">
+							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							</c:forEach>
+						</table>
+						<h4>참여부분</h4>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>제목</th><th></th><th></th><th></th></tr></thead>
+							<tbody></tbody>
+							<c:forEach var="F_board" items="${F_board}">
+							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							</c:forEach>
+						</table>
+              	</div>
+			
+			<!-- row -->
+		</div>
 </body>
 <script>
 var popup;
