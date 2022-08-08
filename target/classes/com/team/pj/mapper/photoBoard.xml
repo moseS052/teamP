@@ -70,4 +70,15 @@
         on (A.b_no=B.b_no) 
         where a.b_no in (select b_no from review where l_no=#{param1}) order by b_date desc
 	</select>
+	<select id="updatePhotoBoard_Read" resultType="com.team.pj.photoBoardDTO">
+		select a.*, b.*
+			from boardp a, route b
+				where a.b_no=b.b_no and a.b_no=#{param1}
+	</select>
+	<delete id="updateDelPhotoBoard">
+		delete from route where b_no=#{param1} and b_route=#{param2}
+	</delete>
+	<update id="updatePhotoTitle_and_con">
+		update board set b_title=#{param2}, b_con=#{param3}  where b_type='P' and b_no=#{param1}
+	</update>
 </mapper>
