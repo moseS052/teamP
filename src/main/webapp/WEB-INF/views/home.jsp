@@ -44,7 +44,7 @@ $(document)
 	});
 
 </script>
-</head>
+
 <style>
 	@font-face {
     font-family: 'Binggrae';
@@ -60,7 +60,7 @@ $(document)
 	}
 	h2{
 		font-family: 'Binggrae';
-	}
+	}	
 a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
@@ -94,13 +94,14 @@ a#yesyes{
 	font-size:14px;
 	margin-left:-8px;
 }
-#avaung{
-	margin-top:-32px;
+#avaung{ /* alarm position */
+	margin-top:-13px;
+	margin-right:-18px;
 }
-#lout{
+/* #lout{
 	padding-left:25px;
 	padding-top:400px;
-}
+} */
 #alarmDiv{
 	width:100%;
 }
@@ -113,6 +114,7 @@ a#yesyes{
     height: 250px;
 }
 </style>
+</head>
 <body>
 
 	<div id="preloader"></div>
@@ -129,28 +131,23 @@ a#yesyes{
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
+				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
-				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a></h2>
-				<%-- <% naver_id_login.getProfileData('name')%> --%>
+				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
-				</div></div>
-				</c:if>
-				<c:if test="${m_no==null}">
-				<h2 id="undm">
-					<span class="pe-7s-chat logo-icon"></span> Quote
-				</h2>
-				</c:if>
-			 	<c:if test="${userinfo==null}">
-				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
-				</c:if>
+				</div>
+				</div>
+				<br><a href='logout' align=left>Logout</a></h2>
 				
-
+				</c:if>				
+			 	<c:if test="${m_no==null}">
+				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
+				</c:if>				
 			</div>
-			<div>
-			</div>
+			
 			<ul id="main-menu">
 			<c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -197,11 +194,11 @@ a#yesyes{
 					</ul></li>	
 				
 			</ul>
-			<div id="lout">
+			<%-- <div id="lout">
 			<c:if test="${m_no!=null}">
 			<h2 ><a href='logout' id="undk">Logout</a><a href='' id="undd"></a></h2>
 			</c:if>
-			</div>
+			</div> --%>
 		</div>
 		
 		
@@ -1190,7 +1187,7 @@ function alarmList() {
         		data:{mail:mail},
         		success:function(data){
         			console.log("navercheck_count: "+data);
-        			alert('중복체크 완료');        			
+        			alert('naver로 로그인합니다');        			
         			if(parseInt(data) == 0){//new member
         				$.ajax({
         	        		type:'post',url:'naversign',async: false,
@@ -1205,7 +1202,7 @@ function alarmList() {
         	        			console.log("보내기 전 naver 완전신규 name는"+a[2]);
         	        			console.log("보내기 전 naver 완전신규 phone는"+a[3]);
         	        			
-        	        			alert('보내기전');
+        	        			//alert('보내기전');
         	        		},
         	        		success:function(){
         	        			console.log("naver 완전신규 id는"+mail);

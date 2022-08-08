@@ -113,30 +113,26 @@
 
     <!-- END NAV -->
     <nav class="menu" id="theMenu">
-        <div class="menu-wrap">
-            <i class="fa fa-bars menu-close"></i>
-            <div id="menu-logo">
-                <h2><span class="pe-7s-chat logo-icon"></span> Q</h2>
-                <c:if test="${m_no==null}">
-				<a href="login">login</a><a href="signup">회원가입</a>
-				</c:if>
+		<div class="menu-wrap">
+			<i class="fa fa-bars menu-close"></i>
+			<div id="menu-logo">
+				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${id}&nbsp;님<a href='logout'>Logout</a>
-				</c:if>
-            </div>
-            <div>
-				<c:if test="${m_no!=null}">
-				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<div class="dropdown pull-right">
+				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
+				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
-		        <div id="alarmInto" class="dropdown-menu" style="width:707px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
-		        
-<!-- 		        <div class="well"><div class="square pull-right" id="but">헬로</div><h4>I'm Kim</h4></div> -->
-<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a> -->
-<!-- 				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a> -->
-				</div></div>
-				</c:if>
+		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+				</div>
+				</div>
+				<br><a href='logout' align=left>Logout</a></h2>
+				
+				</c:if>				
+			 	<c:if test="${m_no==null}">
+				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
+				</c:if>				
 			</div>
+			
             <ul id="main-menu">
             <c:if test="${m_no!=''}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -146,6 +142,7 @@
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 

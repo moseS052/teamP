@@ -36,9 +36,15 @@ public class boardController {
 		HttpSession session =req.getSession();
 		
 		if(session.getAttribute("m_no")!=null) {
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
 			mod.addAttribute("id",session.getAttribute("id"));
-			mod.addAttribute("nick",session.getAttribute("nick"));
+			mod.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			mod.addAttribute("avatar",avatar);
 		}else {
 			mod.addAttribute("m_no", null);
 		}
@@ -53,10 +59,17 @@ public class boardController {
 	//go to new post page in free board
 	@RequestMapping("/newpost_fb")
 	public String doNewPost(HttpServletRequest req, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		
 		return "newpost_fb";
 	}
@@ -89,10 +102,16 @@ public class boardController {
 	@RequestMapping("/freedetail")
 	public String doDetail(HttpServletRequest req ,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();		
+		HttpSession session =req.getSession();	
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.free_detail(b_no);
@@ -107,10 +126,16 @@ public class boardController {
 	@RequestMapping("/updetail")
 	public String doUpdetail(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();		
+		HttpSession session =req.getSession();	
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		boardDTO bdto=p.free_detail(b_no);
 		model.addAttribute("bdto",bdto);
@@ -138,9 +163,15 @@ public class boardController {
 		HttpSession session =req.getSession();
 		
 		if(session.getAttribute("m_no")!=null) {
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
 			mod.addAttribute("id",session.getAttribute("id"));
-			mod.addAttribute("nick",session.getAttribute("nick"));
+			mod.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			mod.addAttribute("avatar",avatar);
 		}else {
 			mod.addAttribute("m_no", null);
 		}	
@@ -155,10 +186,17 @@ public class boardController {
 	//go to new post page in request board
 	@RequestMapping("/newpost_req")
 	public String doNewrequest(HttpServletRequest req, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		
 		return "newpost_req";
 	}
@@ -179,10 +217,16 @@ public class boardController {
 	@RequestMapping("/reqdetail")
 	public String doDetail_req(HttpServletRequest req ,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();		
+		HttpSession session =req.getSession();	
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		int count=p.countComment_t(b_no);
 		p.free_viewcnt(b_no);
@@ -196,10 +240,16 @@ public class boardController {
 	@RequestMapping("/requpdetail")
 	public String doReq_updetail(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();		
+		HttpSession session =req.getSession();	
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		boardDTO bdto=p.req_detail(b_no);
 		model.addAttribute("bdto",bdto);

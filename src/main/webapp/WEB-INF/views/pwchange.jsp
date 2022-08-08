@@ -49,12 +49,67 @@
 	}
 	h2{
 		font-family: 'Binggrae';
+	}
+	a{
+		font-family: 'Binggrae';
 	}	
 input[type="checkbox"]{
 accent-color:green;
 }
 input[type="password"]{
 	font-family: 'pass', 'Roboto', Helvetica, Arial, sans-serif ;
+}
+a#meminfo, #btnSendNote, #goList{
+ 	display:inline; 
+	font-size:18px;
+	color:#007979;
+}
+a#goList{
+margin-left: 4px
+}
+a#yesyes{
+	display:inline;
+	font-size:14px;
+	color:#007979;
+}
+#firstAvatar{
+	display:inline; 
+	margin-left: -3px;
+	margin-top: 0px;
+}
+#firstNick{
+	display:inline; 
+	font-size:16px;
+}
+#menu-logo{
+	margin-top:-8px;
+}
+#undm{
+	padding-top: 8px !important;
+}
+#undk,#undd{
+	display:inline; 
+	font-size:14px;
+	margin-left:-8px;
+}
+#avaung{ /* alarm position */
+	margin-top:-13px;
+	margin-right:-18px;
+}
+/* #lout{
+	padding-left:25px;
+	padding-top:400px;
+} */
+#alarmDiv{
+	width:100%;
+}
+.img-responsive3{
+	width: 100%;
+    height: 100px;
+}
+.img-responsive4{
+	width: 100%;
+    height: 250px;
 }
 </style>
   <body class="single single-post"> 
@@ -72,23 +127,23 @@ input[type="password"]{
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
-				<h2>
-					<span class="pe-7s-chat logo-icon"></span> Quote
-				</h2>
-			 	<c:if test="${userinfo==''}">
-				<a href="login">login</a><a href="signup">회원가입</a>
-				</c:if>
-				<c:if test="${userinfo!=''}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
-				</c:if>
-			</div>
-			<div>
+				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
-				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
-				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
-				</c:if>
+				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
+				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<div class="dropdown pull-right" id="avaung">
+				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
+		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+				</div>
+				</div>
+				<br><a href='logout' align=left>Logout</a></h2>
+				
+				</c:if>				
+			 	<c:if test="${m_no==null}">
+				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
+				</c:if>				
 			</div>
+			
 			<ul id="main-menu">
 			<c:if test="${userinfo!=''}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
