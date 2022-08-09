@@ -25,10 +25,17 @@
 	a{
 		font-family: 'Binggrae';
 	}
+	body{
+		margin:0;
+		padding:0;
+	}
+	#ma{
+		margin-top:-30px;
+	}
 </style>
 </head>
 <body>
-<div class="container">
+<div class="container" id="ma">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
 					<h2 class="main-title">회원정보</h2>
@@ -38,11 +45,11 @@
 					<c:if test="${m_no==semno }">
 					<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
 					</c:if>
-					<strong>닉네임: 허춘삼</strong> &nbsp;&nbsp;
+					<strong>닉네임:${nick1}</strong> &nbsp;&nbsp;
 					<c:if test="${m_no!=semno }">
 					<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
 					</c:if><br>
-					<strong>이메일주소:</strong><strong>12345@naver.com</strong>
+					<strong>이메일주소:</strong><strong>${mail}</strong>
 				</div>
 			</div>
 			<!-- row -->
@@ -53,17 +60,22 @@
 						<table id='mytable' class="table table-striped">
 						<thead><tr><th>제목</th><th></th><th></th><th>조회수</th></tr></thead>
 							<tbody></tbody>
-							<c:forEach var="F_board" items="${F_board}">
-							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							<c:if test="${lst!=null}">
+							<c:forEach var="lst" items="${lst}">
+							<tr><td>${lst.l_title}</td><td></td><td></td><td>${lst.l_views}</td></tr>
 							</c:forEach>
+							</c:if>
 						</table>
 						<h4>참여부분</h4>
 						<table id='mytable' class="table table-striped">
 						<thead><tr><th>제목</th><th></th><th></th><th></th></tr></thead>
 							<tbody></tbody>
-							<c:forEach var="F_board" items="${F_board}">
-							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							<c:if test="${ast!=null}">					
+							<c:forEach var="ast" items="${ast}">
+							<tr><td>${ast.l_title}</td><td></td><td></td><td></td></tr>
 							</c:forEach>
+							</c:if>
+							
 						</table>
               	</div>
 			

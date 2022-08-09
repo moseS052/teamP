@@ -290,5 +290,14 @@
       	group by l_no))b
       	on (a.l_no=b.l_no) where a.l_date>=current_date order by l_date) where rownum <=6 ]]>
 </select>
+<select id="l_infor" resultType="com.team.pj.L_listDTO"> 
+	<![CDATA[select * from(
+   select substr(a.l_title,0,15)l_title,a.l_views,b.nick ,b.mail from list a ,member b where a.m_no=b.m_no and a.m_no=#{param1}) where rownum <=3 ]]>
+</select>
+<select id="a_infor" resultType="com.team.pj.L_listDTO"> 
+	<![CDATA[select * from(
+   				select substr(l_title,0,15)l_title from list  where l_no in
+   				(select l_no from apply where m_no=#{param1})) where rownum <=3 ]]>
+</select>
 </mapper>
 

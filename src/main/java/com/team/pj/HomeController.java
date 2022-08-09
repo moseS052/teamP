@@ -285,6 +285,18 @@ public class HomeController {
 	public String meminfo(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
 		iteamP ip=sqlSession.getMapper(iteamP.class);
+		ArrayList<L_listDTO> me = ip.l_infor(Integer.parseInt(req.getParameter("m_no")));
+		model.addAttribute("lst",me);
+		ArrayList<L_listDTO> mi = ip.a_infor(Integer.parseInt(req.getParameter("m_no")));
+		model.addAttribute("ast",mi);
+		String nick1;
+		String mail;
+		for(int i=0; i<me.size();i++) {
+			nick1=me.get(i).getNick();
+			mail=me.get(i).getMail();
+			model.addAttribute("nick1", nick1);
+			model.addAttribute("mail", mail);
+		}
 		String avaRoute=ip.getAvaRoute(Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("semno",Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("id",session.getAttribute("id"));

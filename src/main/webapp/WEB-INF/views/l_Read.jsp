@@ -175,8 +175,8 @@
                         <input type="hidden" id="user_name" value="${userinfo}">
                         <p><a href='' id='meminfo' seq='${l_mno}'>${l_nick}</a></p>
                         <h3>${l_title}</h3>
-                        <h3>일시${l_date}</h3>                        
-                        <h3>장소${l_name}</h3>
+                        <h3>일시:${l_date}</h3>                        
+                        <h3>장소:${l_name}</h3>
                         <h3 id="cbox">주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
                         </div>
 						<p>내용:${l_con}</p>
@@ -394,7 +394,7 @@ $(document)
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
-	window.open("meminfo?m_no="+seq, "_blank", "width=500, height=700, top=40, left=1340");
+	window.open("meminfo?m_no="+seq, "_blank", "width=430, height=400, top=40, left=1340");
 	return false;
 })
 //note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>

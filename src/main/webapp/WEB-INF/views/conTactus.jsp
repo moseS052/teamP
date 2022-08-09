@@ -99,7 +99,7 @@
 				<a href='#'><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' /></a>
 			</div>
 			<ul id="main-menu">
-			<c:if test="${m_no!=''}">
+			<c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
@@ -107,6 +107,7 @@
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -116,10 +117,10 @@
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${m_no==''}">
+						<c:if test="${m_no==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${m_no!=''}">
+						<c:if test="${m_no!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>

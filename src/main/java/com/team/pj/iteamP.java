@@ -91,4 +91,6 @@ public interface iteamP {
 	int getM_noBymail(String mail);
 	String getNickBym_no(int m_no);
 	ArrayList<L_listDTO> home_proposal();
+	ArrayList<L_listDTO> l_infor(int m_no);
+	ArrayList<L_listDTO> a_infor(int m_no);
 }
