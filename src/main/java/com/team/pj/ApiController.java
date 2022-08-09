@@ -484,15 +484,20 @@ public class ApiController {
 	public String doList(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
-		model.addAttribute("userinfo",session.getAttribute("id"));
-		model.addAttribute("m_no",session.getAttribute("m_no"));
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+		if(session.getAttribute("id")==null) { //로그인 전
+			model.addAttribute("userinfo", null);
+			model.addAttribute("m_no", null);
+		}else {
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
+			model.addAttribute("userinfo",session.getAttribute("id"));
+			model.addAttribute("m_no",session.getAttribute("m_no"));
+			model.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
 		return "proposal_list";
 	}
 	//--占쏙옙占쏙옙활占쏙옙 占쌜쇽옙占쏙옙황占쌉쏙옙占쏙옙 占쏙옙占쏙옙--//

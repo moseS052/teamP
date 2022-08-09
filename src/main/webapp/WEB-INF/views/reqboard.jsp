@@ -462,7 +462,7 @@ $(document)
 .on('click','#listPagingBtn',function(){
 	pageNum=pageNum+10;
 	$('#tbd').children('tr:lt('+pageNum+')').show();
-});
+})
 
 
 .on('click','#question',function(){	

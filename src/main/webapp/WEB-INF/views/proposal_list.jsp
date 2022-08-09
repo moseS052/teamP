@@ -379,7 +379,7 @@ a#yesyes{
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
-let pageNum=8;
+let pageNum=9;
 $(document)
 .ready(function(){	
 	showlist();
@@ -425,7 +425,7 @@ $(document)
 		alert('검색값이 없습니다.');
 		return false;
 	}
-	pageNum=8;
+	pageNum=9;
 	$('#anbox').empty();
 	$('#anbox').append('<div id="cla"></div>');
 	$('#btnAll').detach();
@@ -558,9 +558,8 @@ $(document)
 .on('click','#listPagingBtn',function(){
 	pageNum=pageNum+3;
 	$('#cla').children('a:lt('+pageNum+')').show();
-	
-	
 })
+
 .on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
 	console.log(ms);
@@ -643,7 +642,7 @@ function showlist(){
 					}
 				}
   			};
-  			$('#cla').children('a:gt('+pageNum+')').hide();
+  			$('#cla').children('a:gt(8)').hide();
 		},
 		error:function(){
     		alert('데이터등록실패');

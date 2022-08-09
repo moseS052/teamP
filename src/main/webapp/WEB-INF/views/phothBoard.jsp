@@ -471,7 +471,7 @@ let pageNum=6;
 	$('#photozone').children('div:lt('+pageNum+')').show();
 })
 
-	.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
+.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
 	console.log(ms);
 	$.ajax({
