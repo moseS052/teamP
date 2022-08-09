@@ -211,7 +211,7 @@ a#yesyes{
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE 
+						<span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span>  
 					</h1>
 					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
 					<input type='text' id='searching'><input type='button' id='btnSearch' value='검색 알고리즘'></h2>

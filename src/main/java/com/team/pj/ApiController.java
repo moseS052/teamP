@@ -223,13 +223,13 @@ public class ApiController {
 		if(nick.length()>5) {
 			nick=nick.substring(0, 5)+"..";
 		}
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
 		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
 		model.addAttribute("avatar",avatar);
 		memberDTO re=team.privacyRead(m_no);
 		model.addAttribute("id",re.id);
 		model.addAttribute("name",re.name);
-		model.addAttribute("nick",re.nick);
+		//model.addAttribute("nick",re.nick);
 		model.addAttribute("phone",re.phone);
 		model.addAttribute("mail",re.mail);
 		return "privacy";
@@ -505,12 +505,19 @@ public class ApiController {
 	//insert占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙//
 	@RequestMapping("/success_page")
 	public String doSuccess(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
 		String boardType=req.getParameter("b");
 		model.addAttribute("boardType", boardType);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "success_page";
 	}
 	//insert占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙//
@@ -642,7 +649,7 @@ public class ApiController {
 		System.out.println("l_no="+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		
-		String uploadFolder = "C:/Users/admin/git/teamP/src/main/webapp/resources/assets/L_route/";
+		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/L_route/";
 		String realDataFolder = "resources/assets/L_route/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {

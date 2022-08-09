@@ -214,9 +214,13 @@ public class photoBoardController {
 			model.addAttribute("userinfo", null);
 
 		} else { // 濡�洹몄�� �깃났 ��
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
+			model.addAttribute("nick",nick);
 			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
 			model.addAttribute("avatar",avatar);
 		}
