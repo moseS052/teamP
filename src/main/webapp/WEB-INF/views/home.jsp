@@ -80,6 +80,7 @@ a#yesyes{
 	margin-top: 0px;
 }
 #firstNick{
+	margin-left:18px;
 	display:inline; 
 	font-size:16px;
 }
@@ -134,7 +135,7 @@ a#yesyes{
 				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
-				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<a href='' id="firstNick">${nick }&nbsp;님</a>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -213,9 +214,7 @@ a#yesyes{
 					<h1 class="fade-down gap">
 						<span class="pe-7s-chat"></span> QUOTE 
 					</h1>
-					<h2 class="fade-up"><select id='selSearch'><option>제목+내용</option><option>작성자</option></select> 
-					<input type='text' id='searching'><input type='button' id='btnSearch' value='검색 알고리즘'></h2>
-					
+									
 					<div class="spacer"></div>
 				</div>
 			</div>
@@ -886,67 +885,6 @@ $(document)
 	}
 	}
 	return false;
-})
-
-.on('keyup','#searching',function(key){ // search connect enter
-	if(key.keyCode==13){
-		$('#btnSearch').trigger('click');
-	}
-})
-
-.on('click','#btnSearch',function(){
-	//검색하는 게시판의 내용이 들어가야함  view 이용해서 사용할 것!
-	let table='listSearch';  // view 이름
-	let search=$('#searching').val(); //검색값
-	if($('#searching').val()==''){
-		alert('검색값이 없습니다.');
-		return false;
-	}
-	if($('#selSearch option:selected').text()=='작성자'){
-		$.ajax({
-			type:'post',url:'searchNick',data:{table:table,search:search},dataType:'json',
-			success:function(data){
-				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
-				if(data==''){
-					alert('검색값이 없습니다');
-				}else {
-					for(let i=0;i<data.length;i++){
-						let jo=data[i];
-						let str='<textarea cols="27" rows="3">'+jo['nick']+', '+jo['title']+', '+jo['date']+', '+jo['seqno']+'</textarea>'
-						$('#bannertext').append(str);
-	// 					console.log(str);
-					}
-				}
-			},
-			error:function(){
-			},
-			complete:function(){}
-		})
-	} else {
-		
-		$.ajax({
-			type:'post',url:'searchTNC',data:{table:table,search:search},dataType:'json',
-			success:function(data){
-				//받은 데이터 보여줄 장소 지정, 실제 작성중 id 말고 닉네임이 맞을 듯
-				console.log(data);
-				
-				if(data==''){
-					alert('검색값이 없습니다');					
-				}else{
-					for(let i=0;i<data.length;i++){
-						let jo=data[i];
-						let str='<textarea cols="27" rows="3">'+jo['nick']+', '+jo['title']+', '+jo['date']+', '+jo['seqno']+', '+jo['con']+'</textarea>'
-						$('#bannertext').append(str);
-					}
-					
-				}
-			},
-			error:function(){
-			},
-			complete:function(){}
-		})
-	}
-	
 })
 
 

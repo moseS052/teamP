@@ -102,6 +102,7 @@ a#yesyes{
 	margin-top: 0px;
 }
 #firstNick{
+	margin-left:18px;
 	display:inline; 
 	font-size:16px;
 }
@@ -152,7 +153,7 @@ a#yesyes{
 				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
-				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<a href='' id="firstNick">${nick }&nbsp;님</a>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -492,6 +493,7 @@ $(document)
 	rerplyList(s, doo);
 })
 .on('click','#re_reply',function() {
+	$('textarea').val('');
 	let s = parseInt($(this).attr('reseq'));
 	$('#potato').val($(this).attr('mno'));
 	let t = $(this).text().split('&nbsp;');
@@ -590,6 +592,7 @@ $(document)
 	});
 })
 .on('click', '#ansercomment', function() {
+	$('textarea').val('');
 	let str = '@' + $(this).attr('seq') + ' ';
 	$('#potato').val($(this).attr('mno'));
 	$(this).parent().parent().parent().parent().find('textarea').val(str);

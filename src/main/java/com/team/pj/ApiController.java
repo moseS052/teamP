@@ -223,13 +223,13 @@ public class ApiController {
 		if(nick.length()>5) {
 			nick=nick.substring(0, 5)+"..";
 		}
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("nick",nick);
 		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
 		model.addAttribute("avatar",avatar);
 		memberDTO re=team.privacyRead(m_no);
 		model.addAttribute("id",re.id);
 		model.addAttribute("name",re.name);
-		model.addAttribute("nick",re.nick);
+		model.addAttribute("Rnick",re.nick);
 		model.addAttribute("phone",re.phone);
 		model.addAttribute("mail",re.mail);
 		return "privacy";
@@ -325,6 +325,13 @@ public class ApiController {
 	public String doRetouch(@RequestParam("l_no") int l_no,HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
 		iteamP team=sqlSession.getMapper(iteamP.class);
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("Snick",nick);
+		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("nick",session.getAttribute("nick"));

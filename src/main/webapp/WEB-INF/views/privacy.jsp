@@ -72,6 +72,7 @@ a#yesyes{
 	margin-top: 0px;
 }
 #firstNick{
+	margin-left:18px;
 	display:inline; 
 	font-size:16px;
 }
@@ -131,7 +132,7 @@ accent-color:green;
 				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
 				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
-				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<a href='' id="firstNick">${nick }&nbsp;님</a>
 				<div class="dropdown pull-right" id="avaung">
 				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
 		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
@@ -220,7 +221,7 @@ accent-color:green;
 						<input type=hidden id="m_no" value="${m_no}">
 						<input type=hidden id="nick0" value=0>
 						ID<input type="text" class="form-control" id="priid" placeholder="아이디" value="${id}" disabled/>
-						닉네임<input type="text" class="form-control" id="prinick" value="${nick}"/><input class="btn btn-outlined btn-primary" type="button" id="nickcheck" value="중복확인" /><br>
+						닉네임<input type="text" class="form-control" id="prinick" value="${Rnick}"/><input class="btn btn-outlined btn-primary" type="button" id="nickcheck" value="중복확인" /><br>
 						이름<input type="text" class="form-control" id="priname" value="${name}"/>
 						전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
 						이메일<input type="text" class="form-control" id="primail" value="${mail}"/><br><br>
@@ -301,7 +302,7 @@ $(document)
 	return false;
 })
 .on('click','#prichange',function(){
-	if(`${nick}`==$('#prinick').val()){
+	if(`${Rnick}`==$('#prinick').val()){
 		$('#nick0').val(0);
 	}
 	if($('#nick0').val()==0){
@@ -322,7 +323,7 @@ $(document)
 	}
 })
 .on('click','#nickcheck',function(){
-	if(`${nick}`==$('#prinick').val()){
+	if(`${Rnick}`==$('#prinick').val()){
 		alert('닉네임이 동일합니다')
 		$('#nick0').val(0);
 	}else{

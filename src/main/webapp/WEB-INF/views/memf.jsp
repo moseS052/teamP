@@ -35,16 +35,6 @@
 </style>
 </head>
 <body>
-<div>
-	<img src=<c:url value="${avaRoute}"/> width="200px" height="200px" />
-</div>
-<c:if test="${m_no==semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
-</c:if>
-<c:if test="${m_no!=semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
-</c:if>
-<input type="hidden" id="chp">
 <div class="container" id="ma">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
@@ -91,6 +81,7 @@
 			
 			<!-- row -->
 		</div>
+<input type="hidden" id="chp">
 </body>
 <script>
 var popup;
