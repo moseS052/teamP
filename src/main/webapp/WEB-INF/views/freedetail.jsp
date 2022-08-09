@@ -22,11 +22,7 @@
 	rel='stylesheet' type='text/css'>
 <link href='http://fonts.googleapis.com/css?family=Lato:400,300,700'
 	rel='stylesheet' type='text/css'>
-<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-<!--[if lt IE 9]>
-	  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-	  <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-	<![endif]-->
+
 <script src="<c:url value="/resources/assets/js/jquery.js"/>"></script>  
 <script src="<c:url value="/resources/assets/js/modernizr.custom.js"/>"></script>   
 <script type="text/javascript">
@@ -82,6 +78,7 @@
         border-color: #28a745;
         box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
     }
+    
 </style>		
   </head>
 
@@ -196,7 +193,16 @@
 					<input type=hidden name=b_no value="${bdto.b_no }">
 					<input type=hidden name=btdo.m_no value="${bdto.m_no }">
 					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }" readonly></td></tr>
-					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td></tr>
+					<tr><td colspan="2"> 
+					<c:if test="${boardPhotoList!=null}">
+							<c:forEach var="boardphoto" items="${boardPhotoList}">
+								<div class="swiper-slide">
+									<img name="photoImagecount" style="width: 600px; height:300px;"
+										src=<c:url value="${boardphoto.b_route}"/>>
+								</div>
+							</c:forEach>				
+					</c:if>
+					<textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;" readonly>${bdto.b_con }</textarea></td></tr>
 					<tr><td>작성자 :&nbsp;&nbsp;<a href='' id='meminfo' seq='${bdto.m_no}'>${bdto.nick}</a></td>
 					<td>작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date }" readonly></td></tr>
 					</table>
@@ -327,22 +333,28 @@ $(document)
 		commentLIst();
 })
 .on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/freeboard?pagenum=1';
 })
 .on('click','#del',function(){
-	if(!confirm("정말로 글을 삭제 할까요?")) return false;
+	let arr=[];
+	for(let i=0 ; i<parseInt($('img[name=photoImagecount]').length); i++){
+		arr.push($('img[name=photoImagecount]').eq(i).attr('src'));
+		console.log(arr[i]);
+	}
+ 	<%-- if(!confirm("정말로 글을 삭제 할까요?")) return false;
 
-	$.ajax({
+	 $.ajax({
 		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val()},
+		data:{b_no:$('#b_no').val(), route:arr},
+		traditional : true,
 		beforeSend:function(){
 			console.log("b_no:"+$('#b_no').val());
 		},
 		success:function(){	
 			alert('글을 삭제하였습니다');
-			window.location.href="<%= request.getContextPath() %>/freeboard";
+ 			window.location.href="<%= request.getContextPath() %>/freeboard?pagenum=1";
 		}
-	}) 
+	})  --%>
 }) 
 .on('click', '#submit', function() {
 	let str = $('#c_con').val();

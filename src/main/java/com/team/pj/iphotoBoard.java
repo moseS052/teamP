@@ -19,4 +19,5 @@ public interface iphotoBoard {
 	ArrayList<photoBoardDTO> updatePhotoBoard_Read(int b_no);
 	void updateDelPhotoBoard(int b_no, String b_route);
 	void updatePhotoTitle_and_con(int b_no, String title, String con);
+	void deleteRoutePhoto(int b_no, String route);
 }

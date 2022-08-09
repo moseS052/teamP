@@ -325,7 +325,7 @@ $(document)
 		console.log($(this).val());
 	});
 	console.log(arr.length);
-	 if(arr.length>0){
+	  if(arr.length>0){
 		 $.ajax({
 		url:'updatePhotoBoard',
 		data:{route:arr,
@@ -350,7 +350,7 @@ $(document)
 				}
 		});
 	};
-	updatePhotoBoardTitle_and_con(); 
+	updatePhotoBoardTitle_and_con();
 		
 })
 .on('click','#doDonationreviewBtn', function(){

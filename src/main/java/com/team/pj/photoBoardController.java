@@ -101,8 +101,8 @@ public class photoBoardController {
 			 arr2=arr1[i].split("/");
 			System.out.println("스플릿="+arr2[4]);
 			File file= new File(deleteFolder+arr2[4]);
-			file.delete(); ipb.updateDelPhotoBoard(b_no, arr1[i]);
-			System.out.println(deleteFolder+arr2[4]);
+			file.delete();
+			ipb.updateDelPhotoBoard(b_no, arr1[i]);
 			}
 		return "";
 	}
@@ -219,7 +219,7 @@ public class photoBoardController {
 			m_no=boardList.get(i).getM_no();
 			model.addAttribute("b_con", b_con);
 			model.addAttribute("title", b_title);
-			model.addAttribute("nick",nick);
+			model.addAttribute("photo_nick",nick);
 			model.addAttribute("date",date);
 			model.addAttribute("view",view);
 			model.addAttribute("b_m_no", m_no);
@@ -237,10 +237,20 @@ public class photoBoardController {
 	}
 	@ResponseBody
 	@RequestMapping("/delPhotoBoard")
-	public String delPhotoBoard(@RequestParam("b_no") int b_no) {
-		System.out.println(b_no);
+	public String delPhotoBoard(HttpServletRequest req) {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		String[] arr1=req.getParameterValues("route");
+		String[] arr2;
+		String deleteFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
 		ipt.deletePhotoBoard(b_no);
+		for(int i=0; i<arr1.length; i++) {
+			ipt.deleteRoutePhoto(b_no, arr1[i]);
+			arr2=arr1[i].split("/");
+			System.out.println(arr2[5]);
+			File file= new File(deleteFolder+arr2[5]);
+			file.delete();
+		}
 		return "";
 	}
 	

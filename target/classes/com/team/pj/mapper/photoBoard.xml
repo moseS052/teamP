@@ -59,6 +59,9 @@
 	<delete id="deletePhotoBoard">
 		delete from board where b_no=#{param1} and b_type='P'
 	</delete>
+	<delete id="deleteRoutePhoto">
+		delete from route where b_no=#{param1} and b_route=#{param2}
+	</delete>
 	<insert id="setReview">
 		insert into review values(#{param1},#{param2})
 	</insert>
