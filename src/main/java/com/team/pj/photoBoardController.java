@@ -154,7 +154,7 @@ public class photoBoardController {
 			m_no=boardList.get(i).getM_no();
 			model.addAttribute("b_con", b_con);
 			model.addAttribute("title", b_title);
-			model.addAttribute("nick",nick);
+			model.addAttribute("photo_nick",nick);
 			model.addAttribute("date",date);
 			model.addAttribute("view",view);
 			model.addAttribute("b_m_no", m_no);

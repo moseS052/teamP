@@ -237,7 +237,7 @@ a#yesyes{
 					<div class="col-md-12">
 					
 					<table class="table table-striped" style="">
-					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="50"></td></tr>
+					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="30"></td></tr>
 					<tr><td>내용: <textarea id=content name=content rows=10 cols=90 style="border:none; background-color:transparent; resize:none;"></textarea></td></tr>
 					<br></table>
 					

@@ -318,13 +318,14 @@ $(document)
 	}
 	return false;
 })
- .on('click','#question',function(){
-			if(`${userinfo}`==null){
-				alert('로그인 후 사용가능합니다.')
-			}else{
-			document.location='/pj/question';
-			}
-		})
+ .on('click','#question',function(){	
+	if(`${m_no}`==''){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
+	}
+})
 .on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
 	console.log(ms);

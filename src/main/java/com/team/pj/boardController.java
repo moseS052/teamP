@@ -103,15 +103,21 @@ public class boardController {
 	public String doDetail(HttpServletRequest req ,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session =req.getSession();	
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+		
+		if(session.getAttribute("m_no")!=null) {
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
+			model.addAttribute("m_no", session.getAttribute("m_no"));
+			model.addAttribute("id",session.getAttribute("id"));
+			model.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
+		}else {
+			model.addAttribute("m_no", null);
 		}
-		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
+
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
 		boardDTO bdto=p.free_detail(b_no);
@@ -218,15 +224,21 @@ public class boardController {
 	public String doDetail_req(HttpServletRequest req ,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session =req.getSession();	
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
-		}
-		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
+		
+		if(session.getAttribute("m_no")!=null) {
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
+			model.addAttribute("m_no", session.getAttribute("m_no"));
+			model.addAttribute("id",session.getAttribute("id"));
+			model.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
+		}else {
+			model.addAttribute("m_no", null);
+		}	
+		
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		int count=p.countComment_t(b_no);
 		p.free_viewcnt(b_no);

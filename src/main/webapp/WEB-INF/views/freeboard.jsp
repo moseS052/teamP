@@ -240,7 +240,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a href="/pj/question">1:1 질문</a></li>
+						<li><a id=question href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -279,13 +279,7 @@ a#yesyes{
 					<c:forEach var="boardDTO" items="${boardlist }">
 					<tr><td>${boardDTO.b_no }</td><td><a href='freedetail?b_no=${boardDTO.b_no}'>${boardDTO.b_title }</a></td>
 					<td><a href='' id='meminfo' seq='${boardDTO.m_no}'>${boardDTO.nick}</a></td>
-					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>
-					<%-- <td><form id=frmup method=get action="updetail">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='수정'></form></td><td>
-					<form id=frmdel method=get action="delete_free">
-					<input type=hidden id="b_no" name="b_no" value="${boardDTO.b_no }">
-					<input type=submit value='삭제'></form></td> --%>
+					<td>${boardDTO.b_date }</td><td>${boardDTO.views }</td>					
 					</tr>
 					</c:forEach></tbody>
 					</table>
@@ -482,7 +476,14 @@ $(document)
 		complete:function(){}
 	})
 })
-
+.on('click','#question',function(){	
+	if(`${m_no}`==''){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
+	}
+})
 
 function alarmList() {
 	let str='';

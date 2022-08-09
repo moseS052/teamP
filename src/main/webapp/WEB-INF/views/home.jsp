@@ -1189,6 +1189,23 @@ function alarmList() {
         			console.log("navercheck_count: "+data);
         			alert('naver로 로그인합니다');        			
         			if(parseInt(data) == 0){//new member
+        				//nickname overlap check
+        				$.ajax({
+        					type:'post',url:'nickcheck',async: false,
+        					data:{nick:a[1]},
+        					success:function(data){
+        						console.log("닉넴중복 수는 "+data);
+        						if(parseInt(data)!=0){//nickname overlap
+        	        				for(i=0;i<data.length;i++){
+        	        					a[1]=a[1]+'.';
+        	        				}
+        	        			} 
+        	        		},
+        	        		error:function(){
+        	        			alert('닉넴중복 체크불가');
+        	        		},
+        	        		complete:function(){}
+        				})
         				$.ajax({
         	        		type:'post',url:'naversign',async: false,
         	        		data:{

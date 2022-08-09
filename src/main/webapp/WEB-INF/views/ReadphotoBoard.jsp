@@ -78,7 +78,7 @@ a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
 	color:#007979;
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 a#goList{
 margin-left: 4px
@@ -204,7 +204,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a href="/pj/question">1:1 질문</a></li>
+						<li><a id=question href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>
@@ -259,7 +259,7 @@ a#yesyes{
 								</td>
 							</tr>
 							<tr>
-								<td>작성자: <a href='' id='meminfo' seq='${b_m_no}'>${nick }</a></td>
+								<td>작성자: <a href='' id='meminfo' seq='${b_m_no}'>${photo_nick }</a></td>
 								<td>작성일자: <input type=text id=b_date name=b_date
 									style="border: none; background-color: transparent;"
 									 value="${date }" readonly></td>
@@ -414,6 +414,14 @@ a#yesyes{
 			alarmList()
 		}
 	})
+	.on('click','#question',function(){	
+	if(`${m_no}`==''){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
+	}
+})
 	.on('click','#firstNick',function(){
 	$('#meminfo').trigger('click');
 	return false;

@@ -286,10 +286,10 @@ a#yesyes{
   </body>
 
 <script>
-var popup;
+//var popup;
 	$(document)
 	.ready(function(){
-		if(`${userinfo}`!=''){
+		if(`${m_no}`!=''){
 			alarmList()
 			}
 	})
@@ -335,15 +335,10 @@ var popup;
 		alert('로그인 후 이용해 주세요');
 		return false;
 	}else{
-	popup=window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
-	
-	popup.onbeforeunload=function(){
-		location.reload(); 
-	}
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
 	}
 	return false;
 })
-
 function alarmList() {
 	let str='';
 	let icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
@@ -374,6 +369,6 @@ function alarmList() {
 		},
 		complete:function(){}
 	})
-}	
+}
 </script>
 </html>

@@ -154,7 +154,7 @@ location.replace("http://localhost:8080/pj/");
 			</div>
 			
             <ul id="main-menu">
-            <c:if test="${m_no!=''}">
+            <c:if test="${m_no!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>

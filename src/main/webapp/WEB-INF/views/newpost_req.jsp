@@ -238,7 +238,7 @@ a#yesyes{
 					<div class="col-md-12">
 					<form id=frmfb method=get action="insert_req">
 					<table class="table table-striped" style="">
-					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="50" autofocus></td></tr>
+					<tr><td>제목: <input type=text id=title name=title size=90 style="border:none; background-color:transparent;" maxlength="30" autofocus></td></tr>
 					<tr><td>내용: <textarea id=content name=content rows=10 cols=90 style="border:none; background-color:transparent; resize:none;"></textarea></td></tr>
 					</table><input type=submit value='작성완료' class="btn btn-primary btn-outlined">&nbsp;
 					<input type=reset value='목록' id=btnList class="btn btn-primary btn-outlined">
