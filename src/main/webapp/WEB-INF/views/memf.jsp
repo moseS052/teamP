@@ -35,15 +35,7 @@
 </style>
 </head>
 <body>
-<div>
-	<img src=<c:url value="${avaRoute}"/> width="200px" height="200px" />
-</div>
-<c:if test="${m_no==semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnChangeAvatar">아바타 변경</a>
-</c:if>
-<c:if test="${m_no!=semno }">
-<a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
-</c:if>
+
 <input type="hidden" id="chp">
 <div class="container" id="ma">
 			<div class="row mt">
@@ -78,11 +70,11 @@
 						</table>
 						<h4>참여부분</h4>
 						<table id='mytable' class="table table-striped">
-						<thead><tr><th>제목</th><th></th><th></th><th></th></tr></thead>
+						<thead><tr><th>제목</th><th></th><th></th><th>활동일자</th></tr></thead>
 							<tbody></tbody>
 							<c:if test="${ast!=null}">					
 							<c:forEach var="ast" items="${ast}">
-							<tr><td>${ast.l_title}</td><td></td><td></td><td></td></tr>
+							<tr><td>${ast.l_title}</td><td></td><td></td><td>${ast.l_date}</td></tr>
 							</c:forEach>
 							</c:if>
 							
@@ -96,9 +88,8 @@
 var popup;
 $(document)
 .ready(function(){
-	console.log(`${id}`)
-	console.log(`${m_no}`)
-	console.log(`${nick}`)
+	console.log(`${nick1}`)
+	console.log(`${mail}`)
 })
 
 

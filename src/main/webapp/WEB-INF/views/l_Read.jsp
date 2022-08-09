@@ -775,9 +775,9 @@ function shwocheck(){
 	let str="";
 // 	console.log(ar[1]);
 	for(let i=0; i<ar.length; i++){
-		str+=ar[i];
+		str+=ar[i]+' ';
 	}
-		$('#cbox').append('<h3>재능:'+str+'</h3>');
+		$('#cbox').append('<h3>재능: '+str+'</h3>');
 }
 function usercheck(){
 	$.ajax({
