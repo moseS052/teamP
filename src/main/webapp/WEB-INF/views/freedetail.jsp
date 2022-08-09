@@ -260,10 +260,9 @@ a#yesyes{
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
 					<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="updetail">
+					<form id=frmup method=get action="updetail" style="display:inline;">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=submit value='수정' class="btn btn-primary btn-outlined" ></form>
-					
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=button id="del" name="del" value='글삭제' white-space="nowrap" class="btn btn-primary btn-outlined">
 					</c:if>
@@ -396,16 +395,18 @@ $(document)
 	document.location='/pj/freeboard?pagenum=1';
 })
 .on('click','#del',function(){
+	console.log($('img[name=photoImagecount]').length);
+	if($('img[name=photoImagecount]').length>0){
 	let arr=[];
 	for(let i=0 ; i<parseInt($('img[name=photoImagecount]').length); i++){
 		arr.push($('img[name=photoImagecount]').eq(i).attr('src'));
 		console.log(arr[i]);
 	}
- 	<%-- if(!confirm("정말로 글을 삭제 할까요?")) return false;
+ 	 if(!confirm("정말로 글을 삭제 할까요?")) return false;
 
 	 $.ajax({
 		type:'get',dataType:'text',url:'delete_free',
-		data:{b_no:$('#b_no').val(), route:arr},
+		data:{b_no:$('#b_no').val(), route:arr, current:'S'},
 		traditional : true,
 		beforeSend:function(){
 			console.log("b_no:"+$('#b_no').val());
@@ -414,7 +415,22 @@ $(document)
 			alert('글을 삭제하였습니다');
 			window.location.href="<%= request.getContextPath() %>/freeboard?pagenum=1";
 		}
-	})  --%>
+	})
+	}else{
+		 if(!confirm("정말로 글을 삭제 할까요?")) return false;
+
+		 $.ajax({
+			type:'get',dataType:'text',url:'delete_free',
+			data:{b_no:$('#b_no').val(), current:'Y'},
+			beforeSend:function(){
+				console.log("b_no:"+$('#b_no').val());
+			},
+			success:function(){	
+				alert('글을 삭제하였습니다');
+				window.location.href="<%= request.getContextPath() %>/freeboard?pagenum=1";
+			}
+		})
+	}
 }) 
 .on('click', '#submit', function() {
 	let str = $('#c_con').val();

@@ -96,4 +96,5 @@ public interface iteamP {
 	void freeboardPhotoRouteDel(int b_no);
 	ArrayList<L_listDTO> l_infor(int m_no);
 	ArrayList<L_listDTO> a_infor(int m_no);
+	void deleteFreeboardPhotoRoute(int b_no, String b_route);
 }
