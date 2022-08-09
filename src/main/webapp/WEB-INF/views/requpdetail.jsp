@@ -166,7 +166,7 @@ a#yesyes{
 			</div>
 			
             <ul id="main-menu">
-            <c:if test="${m_no!=''}">
+            <c:if test="${userinfo!=null}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
 					data-toggle="dropdown">개인정보<i
 						 class="fa fa-user menu-icon" aria-hidden="true"></i></a>
@@ -184,10 +184,10 @@ a#yesyes{
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${m_no==''}">
+						<c:if test="${m_no==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${m_no!=''}">
+						<c:if test="${m_no!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>

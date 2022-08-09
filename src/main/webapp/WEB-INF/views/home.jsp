@@ -157,7 +157,7 @@ a#yesyes{
 						<li><a href="privacy?m_no=${m_no}">개인정보수정</a></li>
 						<li><a href="pwchange?m_no=${m_no}">비밀번호변경</a></li>
 						<li><a href="MyPost?m_no=${m_no}">내가쓴게시물찾기</a></li>
-						<li><a href="Mysubs?m_no=${m_no}">내가신청한게시물찾기</a></li>
+						<li><a href="Mysubs?m_no=${m_no}">내가한게시물찾기</a></li>
 					</ul></li>
 					</c:if>
 				<li class="dropdown"><a href="/pj" class="dropdown-toggle">Home 
@@ -452,9 +452,10 @@ a#yesyes{
 
 		<section id="portfolio" class="white">
 			<div class="container">
+			
 				<div class="gap"></div>
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">이제부터 사진</h2>
+					<h2 class="main-title">활동 후기</h2>
 					<hr>
 				</div>
 				<!--/#portfolio-filter-->
@@ -469,14 +470,18 @@ a#yesyes{
 					</li>
 				</c:forEach>
 					<!--/.portfolio-item-->
-					
 				</ul>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="photoBoard?stanum=1&endnum=6"><input class="btn form-control btn-outlined btn-primary" type="button" value="후기보러가기"></a>
+				</div>
 			</div>
+				
 		</section>
 
 		<section id="testimonials" class="divider-wrapper">
 		<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">신청</h2>
+					<h2 class="main-title">신청 목록</h2>
 					<hr>
 				</div>
 		<div class="col-md-12">
@@ -510,6 +515,10 @@ a#yesyes{
 					</div>
 				</div>
 				</c:forEach>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="proposal_list"><input class="btn form-control btn-outlined btn-primary" type="button" value="신청게시판가기"></a>
+				</div>
 			</div>
 		</div>
 		</section>
@@ -518,169 +527,26 @@ a#yesyes{
 		<div class="container">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">여기인가?</h2>
+					<h2 class="main-title">게시글</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
 				</div>
 			</div>
 			<!-- row -->
-
-			<div class="row mt gap">
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/14.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">슈벌탱</a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
+				<div>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>작성자</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+							<c:forEach var="F_board" items="${F_board}">
+							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							</c:forEach>
+						</table>
+						<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="freeboard?pagenum=1"><input class="btn form-control btn-outlined btn-primary" type="button" value="게시글더보러가기"></a>
 				</div>
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/13.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">Blog </a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
-				</div>
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/12.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">Blog Article </a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
-				</div>
-			</div>
-			<!-- row -->
-			<div class="row gap">
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/12.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">Blog Article Title</a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
-				</div>
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/10.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">Blog Article Title</a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
-				</div>
-				<div class="col-md-4 post fade-up">
-					<div class="item-inner">
-						<img src=<c:url value="/resources/assets/img/demo/9.jpg"/> alt="" class="img-responsive">
-						<div class="overlay">
-							<a class="preview btn btn-outlined btn-primary"
-								href="single-post.html"><i class="fa fa-link"></i></a>
-						</div>
-						<div class="post-meta">
-							<span class="post-date">18</span>
-							<p>May</p>
-							<span class="post-comment"><i class="fa fa-comments"></i>
-								5</span>
-						</div>
-					</div>
-					<h3>
-						<a href="#">Blog Article Title</a>
-					</h3>
-					<p>Sentiments projection particular companions interested do at
-						my delightful. Listening newspaper in advantage frankness to
-						concluded unwilling.</p>
-					<p>
-						<a class="btn btn-outlined btn-primary" href="single-post.html">Read
-							More</a>
-					</p>
-				</div>
-			</div>
+						
+              	</div>
+			
 			<!-- row -->
 		</div>
 		<!-- container -->
@@ -789,10 +655,8 @@ a#yesyes{
 		<div class="container">
 			<div class="row gap mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Pricing Tables</h2>
+					<h2 class="main-title">간편 메뉴</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
 				</div>
 			</div>
 			<!-- row -->
@@ -800,57 +664,43 @@ a#yesyes{
 			<div class="row gap flat">
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan1 flip-in">
-						<li class="plan-name">기획서작성</li>
-						<li class="plan-price"><strong>£19</strong> / month</li>
-						<li><strong>5GB</strong> Storage</li>
-						<li><strong>1GB</strong> RAM</li>
-						<li><strong>400GB</strong> Bandwidth</li>
-						<li><strong>10</strong> Email Address</li>
-						<li><strong>Forum</strong> Support</li>
+						<li class="plan-name">기획서 작성</li>
+						<li class="plan-price"><strong>기획자가되어</strong></li>
+						<li class="plan-price"><strong>봉사활동을 기획해보세요</strong></li>
+						
 						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">Signup</a></li>
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
 					</ul>
 				</div>
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
-					<ul class="plan plan2 featured flip-in">
-						<li class="plan-name">사진게시판</li>
-						<li class="plan-price"><strong>£39</strong> / month</li>
-						<li><strong>5GB</strong> Storage</li>
-						<li><strong>1GB</strong> RAM</li>
-						<li><strong>400GB</strong> Bandwidth</li>
-						<li><strong>10</strong> Email Address</li>
-						<li><strong>Forum</strong> Support</li>
+					<ul class="plan plan2 flip-in">
+						<li class="plan-name">사진 게시판</li>
+						<li class="plan-price"><strong>다른사람들의</strong></li>
+						<li class="plan-price"><strong>활동이 궁금하시면?</strong></li>						
 						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">Signup</a></li>
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
 					</ul>
 				</div>
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan3 flip-in">
 						<li class="plan-name">질문게시판</li>
-						<li class="plan-price"><strong>£199</strong> / month</li>
-						<li><strong>50GB</strong> Storage</li>
-						<li><strong>8GB</strong> RAM</li>
-						<li><strong>1024GB</strong> Bandwidth</li>
-						<li><strong>Unlimited</strong> Email Address</li>
-						<li><strong>Forum</strong> Support</li>
+						<li class="plan-price"><strong>궁금하게 있으시다면</strong></li>
+						<li class="plan-price"><strong>여기로 질문해주세요</strong></li>
+						
 						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">Signup</a></li>
+							class="btn btn-outlined btn-primary btn-lg">질문하기</a></li>
 					</ul>
 				</div>
 
 				<div class="col-lg-3 col-md-3 col-xs-12">
 					<ul class="plan plan4 flip-in">
 						<li class="plan-name">기획서목록</li>
-						<li class="plan-price"><strong>£999</strong> / month</li>
-						<li><strong>50GB</strong> Storage</li>
-						<li><strong>8GB</strong> RAM</li>
-						<li><strong>1024GB</strong> Bandwidth</li>
-						<li><strong>Unlimited</strong> Email Address</li>
-						<li><strong>Forum</strong> Support</li>
+						<li class="plan-price"><strong>다른 사람의 기획에 </strong></li>
+						<li class="plan-price"><strong>동참해주세요</strong></li>
 						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">Signup</a></li>
+							class="btn btn-outlined btn-primary btn-lg">신청하기</a></li>
 					</ul>
 				</div>
 			</div>

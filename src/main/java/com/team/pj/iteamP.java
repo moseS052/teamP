@@ -94,4 +94,6 @@ public interface iteamP {
 	ArrayList<L_listDTO> home_proposal();
 	ArrayList<boardDTO> freeboardPhoto(int b_no);
 	void freeboardPhotoRouteDel(int b_no);
+	ArrayList<L_listDTO> l_infor(int m_no);
+	ArrayList<L_listDTO> a_infor(int m_no);
 }

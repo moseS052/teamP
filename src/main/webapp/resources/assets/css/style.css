@@ -1374,7 +1374,11 @@ hr {
 }
 
 .divider-wrapper {
+<<<<<<< HEAD
     background: #095e46;
+=======
+    background: #b3e5fc;
+>>>>>>> kwon1
     padding-top: 35px;
     padding-bottom: 35px;
 }

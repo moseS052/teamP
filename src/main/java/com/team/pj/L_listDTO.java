@@ -13,9 +13,16 @@ public class L_listDTO {
 	 String l_route;
 	 String nick;
 	 String t_name;
+	 String mail;
 	 int l_views;
 	 int nop;
 	 int count;
+	public String getMail() {
+		return mail;
+	}
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
 	public int getCount() {
 		return count;
 	}
