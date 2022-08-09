@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -78,6 +78,7 @@ $(document)
 			$.ajax({
 				type:'post',url:'avatarChange',data:{avaRoute:$('#avatarMain').attr("src")},dataType:'text',
 				success:function(){
+					opener.$('#chp').val('1');
 					alert('아바타가 변경되었습니다.');
 					window.close();
 				},
@@ -98,6 +99,7 @@ $(document)
 				data : form,
 				type : 'POST',
 				success:function(){
+					opener.$('#chp').val('1');
 					alert('아바타가 변경되었습니다.');
 					window.close();
 				}

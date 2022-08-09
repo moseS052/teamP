@@ -433,17 +433,16 @@ $(document)
 				+ '&nbsp;&nbsp;<input type="button" id="re_replyaddbtn" class="btn btn-primary btn-outlined" value="답글추가"><input type="hidden" id="re_replynum" value="'+s+'">'
 				+ '</div>';
 		$('#re_replyadd' + s).append(strs);
-		$('#re_replynum').val(s);
 	} else if ($('#reply_controll' + s).val() == 'open') {
 		$('#re_replylist' + s).empty();
 		$('#re_replyadd' + s).empty();
-		$('#re_replynum').val('');
+		$(this).parent().find('#re_replynum').val('');
 		$('#reply_controll' + s).val('close');
 		minus();
 	};
 })
 .on('click','#re_replyaddbtn',function() {
-	let str = $('#re_replytextArea').val();
+	let str =$(this).parent().find('textarea').val();
 	if (str.replace(/\s| /gi, "").length == 0) {
 		alert('내용없음');
 	} else if (str.indexOf('@') == 0) {
@@ -451,13 +450,13 @@ $(document)
 				.indexOf(' '));
 		let sliceStr = str.substr(str.indexOf(' '),
 				str.length - 1);
-		let s = $('#re_replynum').val();
+		let s = $(this).parent().find('#re_replynum').val();
 		insertRe_ReplyTag(s, tag, sliceStr);
 		let sum = parseInt($('#counts' + s).text()) + 1;
 		$('#counts' + s).text(sum);
 	} else {
-		let s = $('#re_replynum').val();
-		insertRe_Reply(s);
+		let s = $(this).parent().find('#re_replynum').val();
+		insertRe_Reply(s,str);
 		let sum = parseInt($('#counts' + s).text()) + 1;
 		$('#counts' + s).text(sum);
 	}
@@ -610,19 +609,19 @@ function deleteRe_Reply(num) {
 
 	
 
-function insertRe_Reply(s) {
+function insertRe_Reply(s,str) {
 	$.ajax({
 		url : 're_replyinsert',
 		data : {
 			b_no : $('#page').val(),
 			c_pa_no : $('#realc_no' + s).val(),
-			c_con : $('#re_replytextArea').val()
+			c_con : str
 		},
 		type : 'post',
 		dataType : 'json',
 		success : function(data) {
 			console.log(data);
-			$('#re_replytextArea').val('');
+			$('textarea').val('');
 			rerplyList(s);
 			alarmComTnt($('#page').val());
 		}
@@ -637,14 +636,13 @@ function insertRe_ReplyTag(s, tag, sliceStr) {
 		data : {
 			b_no : $('#page').val(),
 			c_pa_no : $('#realc_no' + s).val(),
-			m_no : 3,
 			c_con : html
 		},
 		type : 'post',
 		dataType : 'json',
 		success : function(data) {
 			console.log(data);
-			$('#re_replytextArea').val('');
+			$('textarea').val('');
 			rerplyList(s);
 			alarmComTnt($('#page').val());
 		}

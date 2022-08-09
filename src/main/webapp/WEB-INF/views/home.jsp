@@ -996,12 +996,13 @@ a#yesyes{
 	<script type="text/javascript"
 		src='<c:url value="https://maps.googleapis.com/maps/api/js?key=AIzaSyCWDPCiH080dNCTYC-uprmLOn2mt2BMSUk&amp;sensor=true"/>'></script>
 	<script src="<c:url value="/resources/assets/js/init.js"/>"></script>
+<input type="hidden" id="phpp">
 </body>
 <script>
 var popup;
+var popop;
 $(document)
 .ready(function(){
-	console.log(`${userinfo}`!='');
 	if(`${userinfo}`!=''){
 	alarmList()
 	}
@@ -1014,7 +1015,13 @@ $(document)
 //avatar click <a href='' id='meminfo' seq='나'>nick</a>
 .on('click','#meminfo',function(){
 	let seq=$(this).attr('seq');
-	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	popop=window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	
+	popop.onbeforeunload=function(){
+		if($('#phpp').val()==1) {
+			location.reload(); 
+		}
+	}
 	return false;
 })
 //note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>

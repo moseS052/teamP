@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -37,6 +37,7 @@
 <c:if test="${m_no!=semno }">
 <a class="btn btn-primary btn-outlined" href="#" id="btnSendNote" myseq='${m_no}' yourseq='${semno}'>쪽지 보내기</a>
 </c:if>
+<input type="hidden" id="chp">
 </body>
 <script>
 var popup;
@@ -64,13 +65,18 @@ $(document)
 	popup=window.open("avatar", "_blank", "width=460, height=400, top=110, left=1700");
 	
 	popup.onbeforeunload=function(){
-		location.reload();
+		console.log("ss="+$('#chp').val())
+		if($('#chp').val()==1) {
+			opener.$('#phpp').val('1');
+			location.reload(); 
+		}
 	}
 	return false;
 })
 
 .keydown(function(event) {
     if ( event.keyCode == 27 || event.which == 27 ) {
+    	
     	window.close();
     }
 });
