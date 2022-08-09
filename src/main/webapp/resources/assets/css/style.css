@@ -135,7 +135,7 @@ hr {
     position: absolute;
     top: 0;
     left: 0;
-    background: #b0bec5;
+    background: #033024 ; /* 네비바 색상변경 */
     width: 260px;
     height: 100%;
 }
@@ -1374,7 +1374,7 @@ hr {
 }
 
 .divider-wrapper {
-    background: #2c3e50;
+    background: #095e46;
     padding-top: 35px;
     padding-bottom: 35px;
 }

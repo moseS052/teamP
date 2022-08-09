@@ -33,15 +33,22 @@ public class questionController {
 	//get faq list
 	@RequestMapping("/qna")
 	public String QnaList(HttpServletRequest req, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
 		if(session.getAttribute("id")==null) { //濡�洹몄�� ��
 			model.addAttribute("userinfo",null);
 			
 
 		}else { //濡�洹몄�� �깃났 ��
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
 			model.addAttribute("userinfo",session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
+			model.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
 		
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
@@ -54,15 +61,22 @@ public class questionController {
 	//faq answer
 		@RequestMapping("/qnaanswer")
 		public String QnaAnsewr(@RequestParam("q_no") int q_no, Model mod, HttpServletRequest req) {
+			iteamP p=sqlSession.getMapper(iteamP.class);
 			HttpSession session=req.getSession();
 			if(session.getAttribute("id")==null) { //濡�洹몄�� ��
 				mod.addAttribute("userinfo",null);
 				
 
 			}else { //濡�洹몄�� �깃났 ��
+				String nick=(String) session.getAttribute("nick");
+				if(nick.length()>5) {
+					nick=nick.substring(0, 5)+"..";
+				}
 				mod.addAttribute("userinfo",session.getAttribute("id"));
 				mod.addAttribute("m_no", session.getAttribute("m_no"));
-				mod.addAttribute("nick",session.getAttribute("nick"));
+				mod.addAttribute("nick",nick);
+				String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+				mod.addAttribute("avatar",avatar);
 			}
 			iQuestion qa = sqlSession.getMapper(iQuestion.class);
 			qnaDTO qdto = qa.answerList(q_no);	
@@ -79,6 +93,7 @@ public class questionController {
 	public String question(HttpServletRequest req, Model model) {
 		HttpSession session=req.getSession();
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		Integer m_no=(int) session.getAttribute("m_no");
 		System.out.println(m_no);
 		ArrayList<qnaDTO> qnalist=qa.question(m_no);
@@ -98,7 +113,13 @@ public class questionController {
 			
 	  model.addAttribute("m_no", session.getAttribute("m_no"));
 	  model.addAttribute("userinfo",session.getAttribute("id"));
-	  model.addAttribute("nick",session.getAttribute("nick"));
+	  String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+	  model.addAttribute("nick",nick);
+	  String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+	  model.addAttribute("avatar",avatar);
 	  model.addAttribute("list", ja); 
 	  model.addAttribute("datalist", ja); 
 	  model.addAttribute("answerlist", ja);
@@ -111,6 +132,7 @@ public class questionController {
 	public String questionAnswer(@RequestParam("q_no") int q_no, Model mod, HttpServletRequest req) {
 		HttpSession session=req.getSession();
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		qnaDTO qdto = qa.answerList(q_no);	
 		mod.addAttribute("qno", qdto.getQ_no());
 		mod.addAttribute("qtitle", qdto.getQ_title());
@@ -120,16 +142,29 @@ public class questionController {
 		mod.addAttribute("qa", qdto.getQ_a());
 		mod.addAttribute("m_no", session.getAttribute("m_no"));
 		mod.addAttribute("id",session.getAttribute("id"));
-		mod.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		mod.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		mod.addAttribute("avatar",avatar);
 		return "questionAnswer";
 	}
 	//1:1contact us
 	@RequestMapping("/contactus")
 	public String Contactus(HttpServletRequest req, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
 		model.addAttribute("m_no", session.getAttribute("m_no"));
 		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "conTactus";
 	}
 	@ResponseBody

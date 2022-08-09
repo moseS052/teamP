@@ -49,6 +49,61 @@
 	h2{
 		font-family: 'Binggrae';
 	}  
+	a{
+		font-family: 'Binggrae';
+	}
+	a#meminfo, #btnSendNote, #goList{
+ 	display:inline; 
+	font-size:18px;
+	color:#007979;
+}
+a#goList{
+margin-left: 4px
+}
+a#yesyes{
+	display:inline;
+	font-size:14px;
+	color:#007979;
+}
+#firstAvatar{
+	display:inline; 
+	margin-left: -3px;
+	margin-top: 0px;
+}
+#firstNick{
+	display:inline; 
+	font-size:16px;
+}
+#menu-logo{
+	margin-top:-8px;
+}
+#undm{
+	padding-top: 8px !important;
+}
+#undk,#undd{
+	display:inline; 
+	font-size:14px;
+	margin-left:-8px;
+}
+#avaung{ /* alarm position */
+	margin-top:-13px;
+	margin-right:-18px;
+}
+/* #lout{
+	padding-left:25px;
+	padding-top:400px;
+} */
+#alarmDiv{
+	width:100%;
+}
+.img-responsive3{
+	width: 100%;
+    height: 100px;
+}
+.img-responsive4{
+	width: 100%;
+    height: 250px;
+}
 /*  a:link { */
 /*   color :grey; */
 /* } */
@@ -72,23 +127,23 @@
 		<div class="menu-wrap">
 			<i class="fa fa-bars menu-close"></i>
 			<div id="menu-logo">
-				<h2>
-					<span class="pe-7s-chat logo-icon"></span> Quote
-				</h2>
-			 	<c:if test="${userinfo==''}">
-				<a href="login">login</a><a href="signup">회원가입</a>
-				</c:if>
-				<c:if test="${userinfo!=''}">
-				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${userinfo}&nbsp;님<a href='logout'>Logout</a>
-				</c:if>
-			</div>
-			<div>
+				<h2 id="undm"><span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span></h2>
 				<c:if test="${m_no!=null}">
-				<a href=''><img src=<c:url value="resources/assets/img/avatar1.png"/> width="20px" height="20px" id='meminfo' seq="${m_no}" /></a>
-				<a href='alarm'><img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" /></a>
-				<a href='#'><img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" /></a>
-				</c:if>
+				<h2 ><a href='' id="firstAvatar"><img src=<c:url value="${avatar}"/> width="35px" height="35px" id='meminfo' seq="${m_no}" /></a>
+				<a href='' id="firstNick">&nbsp;${nick }&nbsp;님</a>
+				<div class="dropdown pull-right" id="avaung">
+				<a href="#" class="dropdown-toggle menu-icon" data-toggle="dropdown" id="alarmClick"></a>
+		        <div id="alarmInto" class="dropdown-menu" style="width:740px; opacity: 1; left: 0; padding:10px 10px 10px 10px;">
+				</div>
+				</div>
+				<br><a href='logout' align=left>Logout</a></h2>
+				
+				</c:if>				
+			 	<c:if test="${m_no==null}">
+				<a href="login" style="font-size:14px;">login</a><a href="signup" style="font-size:14px;">회원가입</a>
+				</c:if>				
 			</div>
+			
 			<ul id="main-menu">
 			<c:if test="${userinfo!=''}">
 			<li class="dropdown"><a href="#" class="dropdown-toggle"
@@ -225,7 +280,78 @@
 $(document)
 .ready(function(){	
 	showlist();
+	if(`${m_no}`!=''){
+		alarmList()
+	}
 })
+.on('click','#firstNick',function(){
+	$('#meminfo').trigger('click');
+	return false;
+})
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
+})
+.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
+	let ms=$(this).parent().parent().attr("alseq");
+	console.log(ms);
+	$.ajax({
+		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
+		success:function(){
+			
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+})
+
+
+function alarmList() {
+	let str='';
+	let icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+	
+	$.ajax({
+		type:'get',url:'alarm',data:{},dataType:'json',
+		success:function(data){
+			for(let i=0;i<data.length;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					icon='<img src=<c:url value="resources/assets/img/all1.png"/> width="30px" height="30px" />';
+					break;
+				}else icon='<img src=<c:url value="resources/assets/img/all.png"/> width="30px" height="30px" />';
+			}
+			$('#alarmClick').append(icon);
+			for(let i=0;i<7;i++){
+				let jo=data[i];
+				if(jo['al_check']==0){
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:white"><div class="square pull-right" id="but" style="margin-top:-13px;"><a id="yesyes" href="">확인&nbsp;&nbsp;&nbsp;</a>'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>';
+					$('#alarmInto').append(str);
+				}else {
+					str='<div id="alarmDiv" alseq='+jo['al_no']+' class="well" style="height:35px; margin-bottom:5px; background-color:#e4e4e4"><div class="square pull-right" id="but" style="margin-top:-4px;">'+jo['al_time']+'</div><h4 style="margin-top:-15px;margin-left:-20px;">'+jo['alarm']+'</h4></div>'
+					$('#alarmInto').append(str);
+				}
+			}
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
+}
 function showlist(){
 	$.ajax({
 		url:'open_mysubs', data:{m_no:`${m_no}`},dataType:'json',type:'get',

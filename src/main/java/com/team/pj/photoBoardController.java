@@ -34,6 +34,7 @@ public class photoBoardController {
 	public String phothBoard(HttpServletRequest req, Model model,
 			@RequestParam("stanum") int stanum,
 			@RequestParam("endnum") int endnum) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session = req.getSession();
 		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
 			model.addAttribute("userinfo", null);
@@ -41,7 +42,13 @@ public class photoBoardController {
 		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
+			model.addAttribute("nick",nick);
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 //		System.out.println(req.getParameter("l_no"));
@@ -62,12 +69,19 @@ public class photoBoardController {
 
 	@RequestMapping("/donationReviwe")
 	String donationReview(HttpServletRequest req, Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session = req.getSession();
 		model.addAttribute("userinfo", session.getAttribute("id"));
 		model.addAttribute("m_no", session.getAttribute("m_no"));	
 		model.addAttribute("l_no",Integer.parseInt(req.getParameter("l_no")));
 		model.addAttribute("lmno",Integer.parseInt(req.getParameter("lmno")));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 
 		return "donationReview";
 	}
@@ -191,8 +205,9 @@ public class photoBoardController {
 		}
 		return "";
 	}
-	@RequestMapping("/ReadPhoto")
+	@RequestMapping("/ReadPhoto") //navi nick error
 	public String ReadPhoto(@RequestParam("seq") int b_no, Model model, HttpServletRequest req) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
 		HttpSession session = req.getSession();
 		
 		if (session.getAttribute("id") == null) { // 濡�洹몄�� ��
@@ -202,6 +217,8 @@ public class photoBoardController {
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
 			model.addAttribute("nick",session.getAttribute("nick"));
+			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
 		
 		

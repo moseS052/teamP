@@ -52,11 +52,18 @@ public class ApiController {
 	
 	@RequestMapping("/Mysubs")
 	public String dosubs(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "Mysubs";
 	}
 	@ResponseBody
@@ -125,11 +132,18 @@ public class ApiController {
 	//open MyPost.jsp//
 	@RequestMapping("/MyPost")
 	public String domypost(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "MyPost";
 	}
 	//open MyPost.jsp//
@@ -157,11 +171,18 @@ public class ApiController {
 	//pwchange.jsp open//
 	@RequestMapping("/pwchange")
 	public String dopasswordchange(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		int m_no = Integer.parseInt(req.getParameter("m_no"));
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "pwchange";
 	}
 	//pwchange.jsp open//
@@ -198,7 +219,13 @@ public class ApiController {
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
 		model.addAttribute("nick",session.getAttribute("nick"));
+		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		memberDTO re=team.privacyRead(m_no);
 		model.addAttribute("id",re.id);
 		model.addAttribute("name",re.name);
@@ -346,7 +373,11 @@ public class ApiController {
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
 		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
 		ArrayList<String> pho=team.l_routeRead(l_no);
 		model.addAttribute("list",pho);
 		team.l_views(l_no);
@@ -372,6 +403,8 @@ public class ApiController {
 		}
 //		System.out.println(str);
 		model.addAttribute("sd",str);
+		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "l_Read";
 	}
 	//--list read--//
@@ -440,6 +473,8 @@ public class ApiController {
 		ArrayList<L_listDTO> l_list=team.getM_noNick(m_no);
 		model.addAttribute("m_no",l_list.get(0).getM_no());
 		model.addAttribute("nick",l_list.get(0).getNick());
+		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "proposal";
 	}
 	//--占쏙옙占쏙옙활占쏙옙占쏙옙획占쏙옙--//
@@ -447,10 +482,17 @@ public class ApiController {
 	//--占쏙옙占쏙옙활占쏙옙 占쌜쇽옙占쏙옙황占쌉쏙옙占쏙옙 占쏙옙占쏙옙--//
 	@RequestMapping("/proposal_list")
 	public String doList(HttpServletRequest req,Model model) {
+		iteamP p=sqlSession.getMapper(iteamP.class);
 		HttpSession session=req.getSession();
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "proposal_list";
 	}
 	//--占쏙옙占쏙옙활占쏙옙 占쌜쇽옙占쏙옙황占쌉쏙옙占쏙옙 占쏙옙占쏙옙--//

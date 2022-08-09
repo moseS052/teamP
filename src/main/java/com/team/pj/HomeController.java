@@ -122,25 +122,6 @@ public class HomeController {
 		}
 		return Integer.toString(n);
 	}
-//	//load naver privacy
-//	@ResponseBody
-//	@RequestMapping(value="/naver", method=RequestMethod.POST)
-//	public String doN(HttpServletRequest req) {
-//		HttpSession session=req.getSession();
-////		iteamP p=sqlSession.getMapper(iteamP.class);
-//		int n=1;
-//		
-//		String naver_id=req.getParameter("mail");
-//		session.setAttribute("m_no",1);
-//		session.setAttribute("nick",req.getParameter("nick"));
-//		session.setAttribute("id", naver_id);
-//		session.setAttribute("naver",n); //when you login naver id, session naver==1
-//		//session.setAttribute("token",req.getParameter("token"));
-//		session.setAttribute("phone",req.getParameter("phone"));
-//		System.out.println("mail="+naver_id);	
-//		
-//		return Integer.toString(n);
-//	}
 	//check member overlap when login naver id
 	@ResponseBody
 	@RequestMapping(value="/navercheck", method=RequestMethod.POST, produces="application/text;charset=utf8")
@@ -165,6 +146,8 @@ public class HomeController {
 		session.setAttribute("m_no",p.getM_no1(id));
 		session.setAttribute("nick",p.getNickById(id));
 		session.setAttribute("id",id);
+		int n=1;
+		session.setAttribute("naver",n); //when you login naver id, session naver==1
 		
 		return "";
 	}
@@ -180,7 +163,8 @@ public class HomeController {
 		session.setAttribute("m_no",m_no);
 		session.setAttribute("nick",p.getNickBym_no(m_no));
 		session.setAttribute("id",p.getID(m_no));
-		
+		int n=1;
+		session.setAttribute("naver",n); //when you login naver id, session naver==1
 		return "";		
 	}
 	//logout
@@ -191,8 +175,8 @@ public class HomeController {
 		if(session.getAttribute("naver")==null){
 			
 		}else if((int)session.getAttribute("naver")==1) {
-			String token=(String)session.getAttribute("token");
-			System.out.println("token: "+token);
+			//String token=(String)session.getAttribute("token");
+			//System.out.println("token: "+token);
 			//String result = getHTML("https://nid.naver.com/oauth2.0/token?grant_type=delete&client_id=w9CWsYucH5U3OO9SqFPI&client_secret=b4wN_t5bWN&access_token="+token+"&service_provider=NAVER");
 			String result = getHTML("https://nid.naver.com/nidlogin.logout?returl=localhost%3A8080%2Fpj%2F");
 			//String result= getHTML("http://nid.naver.com/nidlogin.logout");
