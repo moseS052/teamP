@@ -79,8 +79,18 @@ public class boardController {
 	@RequestMapping("/delete_free")
 	public String doDelete_free(HttpServletRequest req,Model model) {
 		iteamP p=sqlSession.getMapper(iteamP.class);
+		String[] arr1=req.getParameterValues("route");
+		String[] arr2;
+		String deleteFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		for(int i=0; i<arr1.length; i++) {
+			arr2=arr1[i].split("/");
+			System.out.println(arr2[5]);
+			File file= new File(deleteFolder+arr2[5]);
+			file.delete();
+		}
 		//HttpSession session=req.getSession();
 		int bseq=Integer.parseInt(req.getParameter("b_no"));
+		p.freeboardPhotoRouteDel(bseq);
 		System.out.println("delete b_no"+bseq);
 		p.free_delete(bseq);
 		return "";
@@ -95,6 +105,9 @@ public class boardController {
 		model.addAttribute("nick",session.getAttribute("nick"));
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
+		ArrayList<boardDTO> boardPhoto=p.freeboardPhoto(b_no);
+		model.addAttribute("boardPhotoList",boardPhoto);
+		
 		boardDTO bdto=p.free_detail(b_no);
 		model.addAttribute("b_no",b_no);
 		model.addAttribute("bdto",bdto);

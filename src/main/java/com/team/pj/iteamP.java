@@ -2,6 +2,7 @@ package com.team.pj;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 
@@ -91,4 +92,6 @@ public interface iteamP {
 	int getM_noBymail(String mail);
 	String getNickBym_no(int m_no);
 	ArrayList<L_listDTO> home_proposal();
+	ArrayList<boardDTO> freeboardPhoto(int b_no);
+	void freeboardPhotoRouteDel(int b_no);
 }

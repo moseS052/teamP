@@ -17,6 +17,7 @@ import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.SystemPropertyUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -70,7 +71,88 @@ public class photoBoardController {
 
 		return "donationReview";
 	}
+	@RequestMapping("/donationReviweUpdate")
+	String donationReviewUpdate(HttpServletRequest req,Model model) {
+		HttpSession session = req.getSession();
+		model.addAttribute("userinfo", session.getAttribute("id"));
+		model.addAttribute("m_no", session.getAttribute("m_no"));	
+		model.addAttribute("nick",session.getAttribute("nick"));
+		iphotoBoard ipb=sqlSession.getMapper(iphotoBoard.class);
+		int photoB_bo=Integer.parseInt(req.getParameter("photo_b_no"));
+		session.setAttribute("photoboardB_bo", photoB_bo);
+		ArrayList<photoBoardDTO> updateList=ipb.updatePhotoBoard_Read(photoB_bo);
+		
+		String title=updateList.get(0).getB_title();
+		String con =updateList.get(0).getB_con();
+		model.addAttribute("title",title);
+		model.addAttribute("con",con);
+		model.addAttribute("list",updateList);
+		model.addAttribute("photoB_bo",photoB_bo);
+		return "donationReview";
+	}
+	//photoRemove
+	@ResponseBody
+	@RequestMapping(value = "/updatePhotoBoard", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	public String UpdatePhotoReview(HttpServletRequest req) {
+		iphotoBoard ipb=sqlSession.getMapper(iphotoBoard.class);
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		String[] arr1=req.getParameterValues("route");
+		String[] arr2;
+		String deleteFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
+		
+		for(int i=0; i<arr1.length; i++) {
+			System.out.println("루트에 안들어오나="+arr1[i]);
+			 arr2=arr1[i].split("/");
+			System.out.println("스플릿="+arr2[4]);
+			File file= new File(deleteFolder+arr2[4]);
+			file.delete();
+			ipb.updateDelPhotoBoard(b_no, arr1[i]);
+			}
+		return "";
+	}
+	//photoUpdate
+	@ResponseBody
+	@RequestMapping(value = "/updatePhotoBoardRouteInsert", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	String updatePhotoBoardRouteInsert(HttpServletRequest req, MultipartHttpServletRequest request) {
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		HttpSession session = req.getSession();
+		int b_no=(int)session.getAttribute("photoboardB_bo");
+		System.out.println(b_no);
+		String uploadFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
+		String realDataFolder = "/resources/assets/userimg/";
+		List<MultipartFile> filelist = request.getFiles("file");
+		for (MultipartFile mf : filelist) {
+			String fileRealName = mf.getOriginalFilename();
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			UUID uuid = UUID.randomUUID();
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			File saveFile = new File(uploadFolder + uniqueName + fileExtension);
+			try {
+				mf.transferTo(saveFile);
+				ipt.insertphotoRoute(b_no, realDataFolder + uniqueName + fileExtension);
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 
+		}
+		return "";
+	}
+	//update photoboard title, con
+	@ResponseBody
+	@RequestMapping(value = "/updatephotoBoardTitle", produces = "application/text;charset=utf8")
+	public String updatephotoBoardTitle(HttpServletRequest req) {
+		HttpSession session = req.getSession();
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		String title=req.getParameter("title");
+		String con=req.getParameter("con");
+		int b_no = (int)session.getAttribute("photoboardB_bo");
+		ipt.updatePhotoTitle_and_con(b_no, title, con);
+		session.removeAttribute("photoboardB_bo");
+		return "";
+	}
 	@ResponseBody
 	@RequestMapping(value = "/insertphotoBoard", produces = "application/text;charset=utf8")
 	String insertPhotoBoard(HttpServletRequest req, Model model, @RequestParam("title") String title,
@@ -141,7 +223,7 @@ public class photoBoardController {
 			m_no=boardList.get(i).getM_no();
 			model.addAttribute("b_con", b_con);
 			model.addAttribute("title", b_title);
-			model.addAttribute("nick",nick);
+			model.addAttribute("photo_nick",nick);
 			model.addAttribute("date",date);
 			model.addAttribute("view",view);
 			model.addAttribute("b_m_no", m_no);
@@ -159,10 +241,20 @@ public class photoBoardController {
 	}
 	@ResponseBody
 	@RequestMapping("/delPhotoBoard")
-	public String delPhotoBoard(@RequestParam("b_no") int b_no) {
-		System.out.println(b_no);
+	public String delPhotoBoard(HttpServletRequest req) {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		String[] arr1=req.getParameterValues("route");
+		String[] arr2;
+		String deleteFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
 		ipt.deletePhotoBoard(b_no);
+		for(int i=0; i<arr1.length; i++) {
+			ipt.deleteRoutePhoto(b_no, arr1[i]);
+			arr2=arr1[i].split("/");
+			System.out.println(arr2[5]);
+			File file= new File(deleteFolder+arr2[5]);
+			file.delete();
+		}
 		return "";
 	}
 	

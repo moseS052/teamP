@@ -290,5 +290,11 @@
       	group by l_no))b
       	on (a.l_no=b.l_no) where a.l_date>=current_date order by l_date) where rownum <=6 ]]>
 </select>
+<select id="freeboardPhoto" resultType="com.team.pj.boardDTO">
+ select b.b_route from boardf a, route b where a.b_no=b.b_no and a.b_no=#{param1}
+</select>
+<delete id="freeboardPhotoRouteDel">
+	delete from route where b_no=#{param1}
+</delete>
 </mapper>
 

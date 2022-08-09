@@ -181,10 +181,10 @@
 								<td colspan="2" rows=10 cols=90
 									style="border: none; background-color: transparent; resize: none;">
 										<div class="swiper">
-											<div class="swiper-wrapper">
+											<div  class="swiper-wrapper">
 												<c:forEach var="photo" items="${list}">
 													<div class="swiper-slide">
-														<img style="width: 700px; height: 600px;"
+														<img name="photoImagecount" style="width: 700px; height: 600px;"
 															src=<c:url value="${photo.b_route }"/>>
 													</div>
 												</c:forEach>
@@ -200,7 +200,7 @@
 								</td>
 							</tr>
 							<tr>
-								<td>작성자: <a href='' id='meminfo' seq='${b_m_no}'>${nick }</a></td>
+								<td>작성자: <a href='' id='meminfo' seq='${b_m_no}'>${photo_nick }</a></td>
 								<td>작성일자: <input type=text id=b_date name=b_date
 									style="border: none; background-color: transparent;"
 									 value="${date }" readonly></td>
@@ -211,9 +211,8 @@
 							<input type=hidden id="btdo.m_no" name="bdto.m_no" value="${sessionm_no}">
 							<c:if test="${b_m_no==sessionm_no }">
 							<div class="pull-right">
-								<input type=hidden id="b_no" name="b_no" >
 								<input type=button value='수정' id="updatePhotoBoard" class="btn btn-primary btn-outlined" >
-								<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
+								<input type=hidden id="photo_b_no" name="b_no" value="${b_no }">
 								<input type=button id="delPhotoBoard" name="del" value='글삭제' white-space="nowrap" class="btn btn-primary btn-outlined">
 							</div>
 							</c:if>
@@ -548,11 +547,21 @@
 		$(this).parent().parent().parent().parent().find('textarea').val(str);
 	})
 	.on('click','#delPhotoBoard', function(){
-		if(confirm("삭제 하시겠습니까")){
+		let arr=[];
+		for(let i=0 ; i<parseInt($('img[name=photoImagecount]').length-2); i++){
+			arr.push($('img[name=photoImagecount]').eq(i).attr('src'));
+			console.log(arr[i]);
+		}
+		
+		  if(confirm("삭제 하시겠습니까")){
 			$.ajax({
 				url:'delPhotoBoard',
-				data:{b_no : $('#page').val()},
+				data:{
+					b_no : $('#page').val(),
+					route:arr
+					},
 				dataType:'text',
+				traditional : true,
 				type:'get',
 				success :  function(data){
 					console.log(data);
@@ -562,20 +571,15 @@
 			});
 		}else{
 			return false;
-		}
+		}  
 	})
 	.on('click','#updatePhotoBoard', function(){
-		/* if($('#updatePhotoBoard').val()=='수정'){ */
-			let content=$('#PhotoBoardContent').text();
-			let title=$('#contitle').val();
-			$('#PhotoBoardContent').html('<textarea rows=5 cols=90 style="border:none;resize:none; " >'+content+'</textarea><p>사진변경은 글삭제후 재작성 부탁드립니다.</p>');
-			$('#b_titles').html('제목:<input type="text" value="'+title+'">');
-			$('#updatePhotoBoard').val('수정완료');
-		/* }else if($('#updatePhotoBoard').val()=='수정완료'){
-			$.ajax({
-				
-			});
-		} */
+		let phtoupdate=$('#photo_b_no').val();
+		document.location='/pj/donationReviweUpdate?photo_b_no='+phtoupdate;
+		
+	})
+	.on('click','#btnReset',function(){
+		document.location='/pj/photoBoard?stanum=1&endnum=6';
 	})
 	//대댓글 리스트 불러오기
 function rerplyList(num, doo) {

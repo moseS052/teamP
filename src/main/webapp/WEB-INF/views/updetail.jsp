@@ -258,7 +258,7 @@
 <script>
 $(document)
 .on('click','#btnReset',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/freeboard?pagenum=1';
 })
 .on('click','#up',function(){
 	if($('#b_con').val()=='' || $('#b_title').val()==''){
@@ -276,7 +276,7 @@ $(document)
 			},
 			success:function(){	
 				alert('수정이 완료되었습니다');
-				window.location.href="<%= request.getContextPath() %>/freeboard";
+				window.location.href="<%= request.getContextPath() %>/freeboard?pagenum=1";
 			}
 		}) 
 	}

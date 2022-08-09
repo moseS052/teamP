@@ -9,9 +9,20 @@ public class boardDTO {
 	String nick;
 	String b_date;
 	int views;
+	String b_route;
+	
 	public boardDTO() {
 		
 	}
+	
+	public String getB_route() {
+		return b_route;
+	}
+
+	public void setB_route(String b_route) {
+		this.b_route = b_route;
+	}
+
 	public int getB_no() {
 		return b_no;
 	}

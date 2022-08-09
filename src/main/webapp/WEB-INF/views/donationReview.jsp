@@ -171,29 +171,59 @@
 					<div class="gap">
 						
 					</div>
+					<c:if test="${title!=null }">
+						<div align="center" Style="height:90px;">
+						<input type="text" style="height:45px; width:300px; font-size:15px;" id="photoTitle" class="form-control" value="${title}" placeholder="제목">
+						
+						</div>
+					</c:if>
+					<c:if test="${title==null }">
 					<div align="center" Style="height:90px;">
 						<input type="text" style="height:45px; width:300px; font-size:15px;" id="photoTitle" class="form-control" placeholder="제목">
 						
 					</div>
-					
-					<div id="preview">
-						
-					</div>
+					</c:if>
+					<input type="hidden" id="photo_update_b_no" value="${photoB_bo}">
 					<div align="center">
+					 <c:if test="${list!=null }">
+					 <p>삭제하고 싶은 사진을 선택해 주세요.</p>
+						<c:forEach var="ca" items="${list }">
+							<div style="display:inline;">
+								<input type="checkbox" name="photoRouteCheck" value="${ca.b_route }">
+								<img style="width:150px; heigh:150px" src="<c:url value="${ca.b_route }"/>">
+							</div>
+						</c:forEach>
+						<form id="fileForm" method="post" enctype="multipart/form-data">
+						<br><br>
+								<input style="display:inline;" class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile"><a id="photoplus" class="btn">사진추가</a><a id="photoDel" class="btn">삭제</a>
+						</form>
+					</c:if>
+					<c:if test="${list==null }">
 						<form id="fileForm" method="post" enctype="multipart/form-data">
 								<input style="display:inline;" class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile"><a id="photoplus" class="btn">사진추가</a><a id="photoDel" class="btn">삭제</a>
 						</form>
 						<!-- <ul style="text-align:center;list-style:none;" id="fileList"></ul> -->
+					</c:if>
 					</div>
+					<c:if test="${con!=null }">
+					<div align="center">
+						<textarea style="padding:40px 40px 0 50px; height:150px; width:600px; resize:none;" id="photoContent" class="form-control"  placeholder="내용">${con }</textarea>
+					</div>
+					<div>
+						<input class="btn btn-primary btn-outlined" type="button" id="doDonationreviewUpdateBtn" value="수정하기">
+					</div>
+					</c:if>
+					<c:if test="${con==null }">
 					<div align="center">
 						<textarea style="padding:40px 40px 0 50px; height:150px; width:600px; resize:none;" id="photoContent" class="form-control"  placeholder="내용"></textarea>
 					</div>
-					
-					
-					
 					<div>
 						<input class="btn btn-primary btn-outlined" type="button" id="doDonationreviewBtn" value="후기작성">
 					</div>
+					</c:if>
+					
+					
+					
 				</div>
 			</div>
 
@@ -283,6 +313,46 @@ $(document)
 		document.location = '/pj/question';
 	}
 })
+.on('click','#doDonationreviewUpdateBtn',function(){
+	let formData = new FormData($('#fileForm')[0]);
+	let comval='';
+	for(let value of formData.values()){
+		comval+=value.name;
+	}
+	let arr=[];
+	$('input[name="photoRouteCheck"]:checked').each(function(){
+		arr.push($(this).val());
+		console.log($(this).val());
+	});
+	console.log(arr.length);
+	  if(arr.length>0){
+		 $.ajax({
+		url:'updatePhotoBoard',
+		data:{route:arr,
+			  b_no:	$('#photo_update_b_no').val()	
+		},
+		type:'post',
+		traditional : true,
+		susccecc:function(){
+			alert('전송 성공');
+			}
+		}); 
+	};
+	 if(comval.length>0){
+		$.ajax({
+			url:'updatePhotoBoardRouteInsert',
+			enctype: 'multipart/form-data',
+			processData : false,
+			contentType : false,
+			data : formData,
+			type : 'post',
+			success:function(){				
+				}
+		});
+	};
+	updatePhotoBoardTitle_and_con();
+		
+})
 .on('click','#doDonationreviewBtn', function(){
 	let formData = new FormData($('#fileForm')[0]);
 	let title=$('#photoTitle').val();
@@ -333,6 +403,20 @@ function setReview(){
 		},
 		complete:function(){}
 	})
+}
+function updatePhotoBoardTitle_and_con(){
+	$.ajax({
+		url:'updatephotoBoardTitle',
+		data:{
+			title:$('#photoTitle').val(),
+			con:$('#photoContent').val()
+		},
+		type:'get',
+		success:function(){
+			document.location='success_page?b=p';
+		}
+		
+	});
 }
 </script>
 </html>

@@ -328,7 +328,7 @@ $(document)
 		commentLIst();
 	})
 .on('click','#btnReset',function(){
-	document.location='/pj/reqboard';
+	document.location='/pj/reqboard?pagenum=1';
 })
 .on('click','#del',function(){
 	if(!confirm("정말로 글을 삭제 할까요?")) return false;
@@ -341,7 +341,7 @@ $(document)
 		},
 		success:function(){	
 			alert('글을 삭제하였습니다');
-			window.location.href="<%= request.getContextPath() %>/reqboard";
+			window.location.href="<%= request.getContextPath() %>/reqboard?pagenum=1";
 		}
 	}) 
 })

@@ -263,7 +263,7 @@
 <script>
 $(document)
 .on('click','#btnList',function(){
-	document.location='/pj/freeboard';
+	document.location='/pj/freeboard?pagenum=1';
 })
 .on('change','#uploadFile',function(){
 	$("#preview").html('');
@@ -295,7 +295,8 @@ $(document)
 		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
 		return false;
 	}
-})
+})	
+
 function insertFreeboardPhoto(){
 	let formData = new FormData($('#fileForm')[0]);
 	$.ajax({
