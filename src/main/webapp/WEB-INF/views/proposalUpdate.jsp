@@ -298,7 +298,6 @@ a#yesyes{
 
 $(document)
 .ready(function(){
-	alarmList()
 	let ar = `${sd}`.split("");
 	for(i=0; i<ar.length; i++){
 	 $('input:checkbox[name="che"]').each(function() {

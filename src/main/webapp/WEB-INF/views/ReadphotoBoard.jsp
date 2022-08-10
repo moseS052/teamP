@@ -523,7 +523,7 @@ a#yesyes{
 		rerplyList(s, doo);
 	})
 	.on('click', '#re_reply', function() {
-		$('textarea').val('');
+		$('#re_replytextArea').val('');
 		let s = parseInt($(this).attr('reseq'));
 		$('#potato').val($(this).attr('mno'));
 		let t = $(this).text().split('&nbsp;');
@@ -619,7 +619,7 @@ a#yesyes{
 		});
 	})
 	.on('click', '#ansercomment', function() {
-		$('textarea').val('');
+		$('#re_replytextArea').val('');
 		let str = '@' + $(this).attr('seq') + ' ';
 		$('#potato').val($(this).attr('mno'));
 		$(this).parent().parent().parent().parent().find('textarea').val(str);
@@ -781,7 +781,7 @@ function rerplyList(num, doo) {
 			dataType : 'json',
 			success : function(data) {
 				console.log(data);
-				$('textarea').val('');
+				$('#re_replytextArea').val('');
 				rerplyList(s);
 				alarmComTnt($('#page').val());
 			}
@@ -802,7 +802,7 @@ function rerplyList(num, doo) {
 			dataType : 'json',
 			success : function(data) {
 				console.log(data);
-				$('textarea').val('');
+				$('#re_replytextArea').val('');
 				rerplyList(s);
 				alarmComTnt($('#page').val());
 			}
