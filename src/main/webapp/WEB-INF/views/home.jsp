@@ -35,8 +35,8 @@ $(document)
 .ready(
 	function() {
 		jQuery('#headerwrap').backstretch(
-				[ "resources/assets/img/bg/main.jpg", "resources/assets/img/bg/main4.jpg",
-					"resources/assets/img/bg/main3.png" ], {
+				[ "resources/assets/img/bg/main.jpg", "resources/assets/img/bg/bg1.jpg",
+					"resources/assets/img/bg/main6.png" ], {
 					duration : 8000,
 					fade : 500
 				});

@@ -454,7 +454,7 @@ public class HomeController {
 	public String avatarChange_01(@RequestParam("file1")MultipartFile multi, HttpServletRequest req) {
 		System.out.println("들어오나요");
 		HttpSession session=req.getSession();
-		String uploadFolder = "C:/Users/admin/eclipse-workspace/teamP/src/main/webapp/resources/assets/img/avatar/";
+		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/img/avatar/";
 		String realDataFolder = "resources/assets/img/avatar/";
 		String fileRealName = multi.getOriginalFilename();
 		String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());

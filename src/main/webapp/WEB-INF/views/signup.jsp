@@ -479,7 +479,7 @@ $(document)
 		alert('비밀번호를 한번 더 입력해 주세요.');
 		$('#ppw2').val('').focus();
 	} else {
-		alert('비밀번호가 일치합니다.');
+		//alert('비밀번호가 일치합니다.');
 	}
 	return true;
 })

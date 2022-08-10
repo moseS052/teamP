@@ -295,20 +295,20 @@ a#yesyes{
 	    
 	</div>
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-1"></div><div class="col-lg-1"></div><!--col-lg-1-->
+				<div class="col-lg-1"></div><div class="col-lg-1"></div>col-lg-1
 				<div class="col-lg-8">
-									</div><!--col-lg-8-->
-			</div><!-- row -->
-		</div><!-- container -->
+									</div>col-lg-8
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->

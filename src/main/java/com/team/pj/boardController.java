@@ -103,7 +103,7 @@ public class boardController {
 			String[] arr1 = req.getParameterValues("route");
 			String[] arr2;
 			
-			String deleteFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+			String deleteFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/freeBoard";
 
 			for (int i = 0; i < arr1.length; i++) {
 				arr2 = arr1[i].split("/");
@@ -201,7 +201,7 @@ public class boardController {
 		int b_no = Integer.parseInt(req.getParameter("b_no"));
 		String[] arr1 = req.getParameterValues("route");
 		String[] arr2;
-		String deleteFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		String deleteFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/freeBoard/";
 		for (int i = 0; i < arr1.length; i++) {
 			arr2 = arr1[i].split("/");
 			p.deleteFreeboardPhotoRoute(b_no, arr1[i]);
@@ -330,7 +330,7 @@ public class boardController {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		iteamP p = sqlSession.getMapper(iteamP.class);
 		int freeboardb_no = (int)session.getAttribute("freeboardb_no");
-		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/freeBoard/";
 		String realDataFolder = "/resources/assets/freeBoard/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
@@ -362,7 +362,7 @@ public class boardController {
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		iteamP p = sqlSession.getMapper(iteamP.class);
 		int maxb_no = p.findMaxb_no((int) session.getAttribute("m_no"));
-		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/freeBoard/";
 		String realDataFolder = "/resources/assets/freeBoard/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
