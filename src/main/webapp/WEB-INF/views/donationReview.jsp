@@ -70,7 +70,7 @@ a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
 	color:#007979;
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 a#goList{
 margin-left: 4px

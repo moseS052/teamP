@@ -323,7 +323,7 @@ $(document)
 	})
 })
 .on('click','#question',function(){	
-	if(`${m_no}`==''){
+	if(`${m_no}`==null){
 		alert('로그인 후 사용가능합니다.');
 		return false;
 	}else{
