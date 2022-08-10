@@ -33,6 +33,7 @@ public interface iteamP {
 	void new_ad(int m_no,String l_title,String l_con,String l_date,String l_name, String l_address,String l_koo,int nop);
 	int checkl_no(int l_no,String l_date);
 	void check_ad(int l_no,int t_no);
+	void mycheck_ad(int m_no,int t_no);
 	String getNickById(String id);
 	String getID(int m_no);
 	int getM_no(String id);
@@ -49,7 +50,9 @@ public interface iteamP {
 	void l_apdel(int l_no);
 	L_listDTO reto(int l_no);
 	ArrayList<Integer> bringt_no(int l_no);
+	ArrayList<Integer> pribringt_no(int m_no);
 	void delcheck(int l_no);
+	void mydelcheck(int m_no);
 	ArrayList<String> bringt_name(int l_no);
 	int buttoncreate(int l_no,int m_no);
 	ArrayList<L_listDTO>applist(int l_no);

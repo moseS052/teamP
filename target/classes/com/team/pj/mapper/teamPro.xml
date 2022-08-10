@@ -96,6 +96,9 @@
 <insert id="check_ad">
 	insert into talent_check_list values(#{param1},#{param2})
 </insert>
+<insert id="mycheck_ad">
+	insert into talent_check values(#{param1},#{param2})
+</insert>
 <select id="l_read" resultType="com.team.pj.L_listDTO"> 
 	select a.nop,a.l_views, a.l_title ,a.m_no ,a.l_con ,a.l_name, a.l_address, to_char(l_date, 'YYYY-MM-DD') l_date , b.nick from list a , member b where a.m_no=b.m_no and l_no=#{param1}
 </select>
@@ -156,8 +159,14 @@
 <select id="bringt_no" resultType="int"> 
 	select t_no from talent_check_list where l_no=#{param1}
 </select>
+<select id="pribringt_no" resultType="int"> 
+	select t_no from talent_check where m_no=#{param1}
+</select>
 <delete id="delcheck">
 	delete from talent_check_list where l_no=#{param1}
+</delete>
+<delete id="mydelcheck">
+	delete from talent_check where m_no=#{param1}
 </delete>
 <select id="bringt_name" resultType="string"> 
 	select a.t_name from talent a,talent_check_list b where  a.t_no=b.t_no and l_no=#{param1}

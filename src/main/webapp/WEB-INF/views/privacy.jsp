@@ -223,7 +223,9 @@ accent-color:green;
 						ID<input type="text" class="form-control" id="priid" placeholder="아이디" value="${id}" disabled/>
 						닉네임<input type="text" class="form-control" id="prinick" value="${Rnick}"/><input class="btn btn-outlined btn-primary" type="button" id="nickcheck" value="중복확인" /><br>
 						이름<input type="text" class="form-control" id="priname" value="${name}"/>
-						전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
+						<p class="well">재능기부신청<br><input type="checkbox" value="21" name="che">공연&nbsp;<input type="checkbox" value="22" name="che">미용&nbsp;<input type="checkbox" value="23" name="che">레크레이션&nbsp;<input type="checkbox" value="24" name="che">체육교실&nbsp;<input type="checkbox" value="25" name="che">예체능강의<br>
+						   <input type="checkbox" value="26" name="che">미술치료&nbsp;<input type="checkbox" value="27" name="che">교육&nbsp;<input type="checkbox" value="28" name="che">의료봉사&nbsp;<input type="checkbox" value="29" name="che">요리&nbsp;<input type="checkbox" value="30" name="che">차량봉사<input type="checkbox" value="31" name="che">집수리</p>
+						   전화번호<input type="text" class="form-control" id="priphone" value="${phone}"/>
 						이메일<input type="text" class="form-control" id="primail" value="${mail}"/><br><br>
 						<div style="text-align:center"><input class="btn btn-outlined btn-primary" type="button" id="prichange" value="수정" /><input class="btn btn-outlined btn-primary" type="button" id="can" value="취소" />
 						<input class="btn btn-outlined btn-primary" type="button" id="out" value="회원탈퇴" /></div>
@@ -292,6 +294,12 @@ $(document)
 	if(`${m_no}`!=''){
 		alarmList()
 		}
+	let ar = `${sd}`.split("");
+	for(i=0; i<ar.length; i++){
+	 $('input:checkbox[name="che"]').each(function() {
+		     if(this.value == ar[i]){
+			this.checked = true; } });
+	}
 })
 
 .on('click','#can',function(){
@@ -308,10 +316,24 @@ $(document)
 	if($('#nick0').val()==0){
 		$.ajax({
 			type:'get',url:'prichange',data:{m_no:`${m_no}`,nick:$('#prinick').val(),name:$('#priname').val(),phone:$('#priphone').val(),mail:$('#primail').val()},
-				dataType:'text',
+				dataType:'text',async: false,
 		  		success:function(){
-		  			alert('수정되었습니다 다시 로그인해주세요')
-		  			document.location='/pj/logout'
+		  			$("input[type=checkbox]:checked").each(function(){
+	    				const value = $(this).val();
+	    				$.ajax({
+	    						type:'get',url:'myupcheckbox',data:{m_no:`${m_no}`,t_no:value},
+	    						dataType:'text',
+	    					  		success:function(){
+	    					  			alert('수정되었습니다 다시 로그인해주세요')
+	    					  			document.location='/pj/logout'
+	    				    		},
+	    				    		error:function(){
+	    				    			alert('데이터등록실패');
+	    				    		},
+	    				    		complete:function(){}
+	    				    	});
+	    			})
+		  			
 	    		},
 	    		error:function(){
 	    		},

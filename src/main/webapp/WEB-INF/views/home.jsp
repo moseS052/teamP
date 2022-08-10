@@ -667,8 +667,16 @@ a#yesyes{
 						<li class="plan-price"><strong>기획자가되어</strong></li>
 						<li class="plan-price"><strong>봉사활동을 기획해보세요</strong></li>
 						
-						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
+						<li class="plan-action">
+						<c:if test="${userinfo==null}">
+						<a href="login"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						</li>
 					</ul>
 				</div>
 
@@ -677,7 +685,7 @@ a#yesyes{
 						<li class="plan-name">사진 게시판</li>
 						<li class="plan-price"><strong>다른사람들의</strong></li>
 						<li class="plan-price"><strong>활동이 궁금하시면?</strong></li>						
-						<li class="plan-action"><a href="#"
+						<li class="plan-action"><a href="photoBoard?stanum=1&endnum=6"
 							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
 					</ul>
 				</div>
@@ -688,8 +696,15 @@ a#yesyes{
 						<li class="plan-price"><strong>궁금하게 있으시다면</strong></li>
 						<li class="plan-price"><strong>여기로 질문해주세요</strong></li>
 						
-						<li class="plan-action"><a href="#"
-							class="btn btn-outlined btn-primary btn-lg">질문하기</a></li>
+						<li class="plan-action"><c:if test="${userinfo==null}">
+						<a href="login"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						</li>
 					</ul>
 				</div>
 
@@ -698,7 +713,7 @@ a#yesyes{
 						<li class="plan-name">기획서목록</li>
 						<li class="plan-price"><strong>다른 사람의 기획에 </strong></li>
 						<li class="plan-price"><strong>동참해주세요</strong></li>
-						<li class="plan-action"><a href="#"
+						<li class="plan-action"><a href="proposal_list"
 							class="btn btn-outlined btn-primary btn-lg">신청하기</a></li>
 					</ul>
 				</div>
