@@ -294,7 +294,8 @@ $(document)
 	if(`${m_no}`!=''){
 		alarmList()
 		}
-	let ar = `${sd}`.split("");
+	let ar = `${sd}`.replace("[","").replace("]","").split(", ");
+	console.log(ar);
 	for(i=0; i<ar.length; i++){
 	 $('input:checkbox[name="che"]').each(function() {
 		     if(this.value == ar[i]){
@@ -324,8 +325,7 @@ $(document)
 	    						type:'get',url:'myupcheckbox',data:{m_no:`${m_no}`,t_no:value},
 	    						dataType:'text',
 	    					  		success:function(){
-	    					  			alert('수정되었습니다 다시 로그인해주세요')
-	    					  			document.location='/pj/logout'
+	    					  			
 	    				    		},
 	    				    		error:function(){
 	    				    			alert('데이터등록실패');
@@ -333,7 +333,8 @@ $(document)
 	    				    		complete:function(){}
 	    				    	});
 	    			})
-		  			
+	    			alert('수정되었습니다 다시 로그인해주세요')
+		  			document.location='/pj/logout'
 	    		},
 	    		error:function(){
 	    		},
@@ -454,6 +455,8 @@ function alarmList() {
 		},
 		complete:function(){}
 	})
+
+}
 }
 </script>
 </html>
