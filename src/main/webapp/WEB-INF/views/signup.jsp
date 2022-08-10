@@ -214,14 +214,7 @@
 						<input type="radio" name='pgender' id="pgender" value='F'>여성<br>
 						<label>이메일: </label><input type=text name='pmail' id="pmail" onkeypress='return checkBlank(event)'><br>
 						<label>생년월일: </label><input type=text name='pbirth' id="pbirth" onchange="view()" onkeypress='return checkBlank(event)'><br>
-						내가 가진 재능을 체크해 주세요<br>
-						<input type="checkbox" name='ptalent' value='1' id='a'>요리<br>
-						<input type="checkbox" name='ptalent' value='2' id='b'>청소<br>
-						<input type="checkbox" name='ptalent' value='3' id='c'>미용<br>
-						<input type="checkbox" name='ptalent' value='4' id='d'>강연<br>
-						<input type="checkbox" name='ptalent' value='5' id='e'>기타<br>
-						<input type=button id="up" class="btn btn-primary btn-outlined" value='회원가입'>&nbsp;
-						<input type=button id="clean" class="btn btn-primary btn-outlined" value='비우기'> -->
+						내가 가진 재능을 체크해 주세요<br>	 -->
 <div class="container">
     <div class="input-form-backgroud row">
       <div class="input-form col-md-12 mx-auto">
@@ -297,13 +290,20 @@
           </div>
 
           <div class="mb-3">
-            <label>내가 가진 재능을 체크해 주세요</label><br>
-            <input type="checkbox" name='ptalent' value='1' id='a'>요리<br>
-			<input type="checkbox" name='ptalent' value='2' id='b'>청소<br>
-			<input type="checkbox" name='ptalent' value='3' id='c'>미용<br>
-			<input type="checkbox" name='ptalent' value='4' id='d'>강연<br>
-			<input type="checkbox" name='ptalent' value='5' id='e'>기타<br>
-            
+            <label>내가 가진 재능을 선택해 주세요</label><br>
+            (여러개 선택 가능 또는 선택 하지 않아도 무관합니다)<br>
+            <input type="checkbox" name='ptalent' value='21' id='a'>공연
+			<input type="checkbox" name='ptalent' value='22' id='b'>미용
+			<input type="checkbox" name='ptalent' value='23' id='c'>레크레이션
+			<input type="checkbox" name='ptalent' value='24' id='d'>체육교실<br>
+			<input type="checkbox" name='ptalent' value='25' id='e'>예체능강의
+            <input type="checkbox" name='ptalent' value='26' id='f'>미술치료
+			<input type="checkbox" name='ptalent' value='27' id='g'>교육
+			<input type="checkbox" name='ptalent' value='28' id='h'>의료봉사<br>
+			<input type="checkbox" name='ptalent' value='29' id='i'>요리
+			<input type="checkbox" name='ptalent' value='30' id='j'>차량봉사
+			<input type="checkbox" name='ptalent' value='31' id='k'>집수리
+			
           </div>
 
           
@@ -400,26 +400,36 @@ $(document)
 .on('click','#up',function(){
 	if($('#pid').val()=='' || $('#ppw').val()=='' || $('#ppw2').val()=='' || $('#pname').val()==""||$('#pnick').val()=='' ||
 			$('#pphone').val()=='' || $('#pmail').val()=='' || $('#pbirth').val()=='' ||
-			!$('input:checkbox[name="ptalent"]').is(":checked") || !$('input:radio[name="pgender"]').is(":checked")){
+			/* !$('input:checkbox[name="ptalent"]').is(":checked") || */ !$('input:radio[name="pgender"]').is(":checked")){
 		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
 		return false;
 	}else{
+		let tt_no=$('input[name="ptalent"]:checked').val();
+		if(tt_no==null){
+			tt_no=0;
+		}
 		$.ajax({
 			type:'post',dataType:'text',url:'sign',async: false,
 			data:{id:$('#pid').val(),pw:$('#ppw').val(),name:$('#pname').val(),nick:$('#pnick').val(),
 				phone:$('#pphone').val(),gender:$('input[name="pgender"]:checked').val(),mail:$('#pmail').val(),
-				birth:$('#pbirth').val(),t_no:$('input[name="ptalent"]:checked').val()},
+				birth:$('#pbirth').val(),t_no:tt_no},
 			beforeSend:function(){
+				
 				console.log("id: "+$('#pid').val()+"pw: "+$('#ppw').val()+",name: "+$('#pname').val() + ",nick: "+$('#pnick').val()+
 						",phone: "+$('#pphone').val()+",gender: "+$('input[name="pgender"]:checked').val()+" ,mail: "+$('#pmail').val()+
-						",birth: "+$('#pbirth').val()+",talent: "+$('input[name="ptalent"]:checked').val());
+						",birth: "+$('#pbirth').val()+",talent: "+tt_no);
 				
 			},
 			success:function(){
 				let chk='';
-				$('input[name=ptalent]:checked').each(function(){
-					chk+=$(this).val()+' ';
-				})
+				if(tt_no!=0){
+					$('input[name=ptalent]:checked').each(function(){
+						chk+=$(this).val()+' ';
+					})
+				}else{
+					chk+=0;
+				}
+				
 				 $.ajax({
 					type:'post',dataType:'text',url:'talent',
 					data:{
@@ -429,7 +439,7 @@ $(document)
 						
 						},
 					beforeSend:function(){
-						console.log("t_no: "+$('input[name="ptalent"]:checked').val());
+						console.log("t_no: "+chk);
 					},
 					success:function(){
 						alert('가입이 완료되었습니다');
