@@ -239,7 +239,7 @@ a#yesyes{
 					<input type="hidden" id="photo_update_b_no" value="${photoB_bo}">
 					<div align="center">
 					 <c:if test="${list!=null }">
-					 <p>삭제하고 싶은 사진을 선택해 주세요.</p>
+					 	<p>삭제하고 싶은 사진을 선택해 주세요.</p>
 						<c:forEach var="ca" items="${list }">
 							<div style="display:inline;">
 								<input type="checkbox" name="photoRouteCheck" value="${ca.b_route }">

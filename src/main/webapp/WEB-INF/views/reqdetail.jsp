@@ -252,7 +252,7 @@ a#yesyes{
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
 					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
 					<c:if test="${m_no==bdto.m_no }">
-					<form id=frmup method=get action="requpdetail">
+					<form id=frmup method=get action="requpdetail" style="display:inline;">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>					
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">

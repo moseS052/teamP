@@ -308,5 +308,8 @@
 <select id="nickmail" resultType="com.team.pj.L_listDTO"> 
    				select nick,mail from member where m_no=#{param1}
 </select>
+<delete id="deleteFreeboardPhotoRoute">
+	delete from route where b_no=#{param1} and b_route=#{param2}
+</delete>
 </mapper>
 

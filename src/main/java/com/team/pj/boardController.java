@@ -28,267 +28,308 @@ public class boardController {
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	@Autowired
 	private SqlSession sqlSession;
-	//----------------------------------------------------free board
-	//go to free board
-	@RequestMapping(value="/freeboard", method=RequestMethod.GET)
+
+	// ----------------------------------------------------free board
+	// go to free board
+	@RequestMapping(value = "/freeboard", method = RequestMethod.GET)
 	public String doFreeboard(HttpServletRequest req, Model mod) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();
-		
-		if(session.getAttribute("m_no")!=null) {
-			String nick=(String) session.getAttribute("nick");
-			if(nick.length()>5) {
-				nick=nick.substring(0, 5)+"..";
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+
+		if (session.getAttribute("m_no") != null) {
+			String nick = (String) session.getAttribute("nick");
+			if (nick.length() > 5) {
+				nick = nick.substring(0, 5) + "..";
 			}
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
-			mod.addAttribute("id",session.getAttribute("id"));
-			mod.addAttribute("nick",nick);
-			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-			mod.addAttribute("avatar",avatar);
-		}else {
+			mod.addAttribute("id", session.getAttribute("id"));
+			mod.addAttribute("nick", nick);
+			String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+			mod.addAttribute("avatar", avatar);
+		} else {
 			mod.addAttribute("m_no", null);
 		}
-		int countFree_board=p.countFree_board();
-		int pagenum=Integer.parseInt(req.getParameter("pagenum"));
-		ArrayList<boardDTO> blist=p.listBoard(pagenum);
-		mod.addAttribute("boardlist",blist);
-		mod.addAttribute("countFree_board",countFree_board);
-		mod.addAttribute("pagenum",pagenum);
+		int countFree_board = p.countFree_board();
+		int pagenum = Integer.parseInt(req.getParameter("pagenum"));
+		ArrayList<boardDTO> blist = p.listBoard(pagenum);
+		mod.addAttribute("boardlist", blist);
+		mod.addAttribute("countFree_board", countFree_board);
+		mod.addAttribute("pagenum", pagenum);
 		return "freeboard";
-	}	
-	//go to new post page in free board
+	}
+
+	// go to new post page in free board
 	@RequestMapping("/newpost_fb")
 	public String doNewPost(HttpServletRequest req, Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session=req.getSession();
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String nick = (String) session.getAttribute("nick");
+		if (nick.length() > 5) {
+			nick = nick.substring(0, 5) + "..";
 		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
-		
+		model.addAttribute("id", session.getAttribute("id"));
+		model.addAttribute("nick", nick);
+		String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+		model.addAttribute("avatar", avatar);
+
 		return "newpost_fb";
 	}
-	//insert new post in free board
+
+	// insert new post in free board
 	@ResponseBody
-	@RequestMapping(value="/insert_free")
-	public String doInsert_free(HttpServletRequest req,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session=req.getSession();
-		String btitle=req.getParameter("title");
-		String bcontent=req.getParameter("content");		
-		System.out.println("title="+btitle);
-		System.out.println("content="+bcontent);
-		System.out.println("writer="+(int)session.getAttribute("m_no"));
-		p.free_insert((int)session.getAttribute("m_no"),btitle, bcontent);
+	@RequestMapping(value = "/insert_free")
+	public String doInsert_free(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String btitle = req.getParameter("title");
+		String bcontent = req.getParameter("content");
+		System.out.println("title=" + btitle);
+		System.out.println("content=" + bcontent);
+		System.out.println("writer=" + (int) session.getAttribute("m_no"));
+		p.free_insert((int) session.getAttribute("m_no"), btitle, bcontent);
 		return "";
 	}
-	//delete in free board & req board
+
+	// delete in free board & req board
 	@ResponseBody
 	@RequestMapping("/delete_free")
-	public String doDelete_free(HttpServletRequest req,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		String[] arr1=req.getParameterValues("route");
-		String[] arr2;
-		String deleteFolder="C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
-		for(int i=0; i<arr1.length; i++) {
-			arr2=arr1[i].split("/");
-			System.out.println(arr2[5]);
-			File file= new File(deleteFolder+arr2[5]);
-			file.delete();
+	public String doDelete_free(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		String current = req.getParameter("current");
+		int bseq = Integer.parseInt(req.getParameter("b_no"));
+		System.out.println(current);
+		if (current.equals("S")) {
+			String[] arr1 = req.getParameterValues("route");
+			String[] arr2;
+			
+			String deleteFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+
+			for (int i = 0; i < arr1.length; i++) {
+				arr2 = arr1[i].split("/");
+				System.out.println(arr2[5]);
+				File file = new File(deleteFolder + arr2[5]);
+				file.delete();
+			}
+			p.freeboardPhotoRouteDel(bseq);
+			p.free_delete(bseq);
 		}
-		//HttpSession session=req.getSession();
-		int bseq=Integer.parseInt(req.getParameter("b_no"));
-		p.freeboardPhotoRouteDel(bseq);
-		System.out.println("delete b_no"+bseq);
-		p.free_delete(bseq);
+		if(current.equals("Y")) {
+			p.free_delete(bseq);
+		}
+
 		return "";
 	}
-	//view detail on free board
+
+	// view detail on free board
 	@RequestMapping("/freedetail")
-	public String doDetail(HttpServletRequest req ,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();	
-		
-		if(session.getAttribute("m_no")!=null) {
-			String nick=(String) session.getAttribute("nick");
-			if(nick.length()>5) {
-				nick=nick.substring(0, 5)+"..";
+	public String doDetail(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+
+		if (session.getAttribute("m_no") != null) {
+			String nick = (String) session.getAttribute("nick");
+			if (nick.length() > 5) {
+				nick = nick.substring(0, 5) + "..";
 			}
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("id",session.getAttribute("id"));
-			model.addAttribute("nick",nick);
-			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-			model.addAttribute("avatar",avatar);
-		}else {
+			model.addAttribute("id", session.getAttribute("id"));
+			model.addAttribute("nick", nick);
+			String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+			model.addAttribute("avatar", avatar);
+		} else {
 			model.addAttribute("m_no", null);
 		}
 
-		int b_no=Integer.parseInt(req.getParameter("b_no"));
+		int b_no = Integer.parseInt(req.getParameter("b_no"));
 		p.free_viewcnt(b_no);
-		ArrayList<boardDTO> boardPhoto=p.freeboardPhoto(b_no);
-		model.addAttribute("boardPhotoList",boardPhoto);
-		
-		boardDTO bdto=p.free_detail(b_no);
-		model.addAttribute("b_no",b_no);
-		model.addAttribute("bdto",bdto);
-		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		int count=p.countComment_t(b_no);
-		model.addAttribute("countComment",count);
+		ArrayList<boardDTO> boardPhoto = p.freeboardPhoto(b_no);
+		model.addAttribute("boardPhotoList", boardPhoto);
+
+		boardDTO bdto = p.free_detail(b_no);
+		model.addAttribute("b_no", b_no);
+		model.addAttribute("bdto", bdto);
+		model.addAttribute("sessionm_no", session.getAttribute("m_no"));
+		int count = p.countComment_t(b_no);
+		model.addAttribute("countComment", count);
 		return "freedetail";
 	}
-	//view update page on free board
+
+	// view update page on free board
 	@RequestMapping("/updetail")
-	public String doUpdetail(HttpServletRequest req,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();	
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+	public String doUpdetail(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String nick = (String) session.getAttribute("nick");
+		if (nick.length() > 5) {
+			nick = nick.substring(0, 5) + "..";
 		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
-		int b_no=Integer.parseInt(req.getParameter("b_no"));
-		boardDTO bdto=p.free_detail(b_no);
-		model.addAttribute("bdto",bdto);
+		model.addAttribute("id", session.getAttribute("id"));
+		model.addAttribute("nick", nick);
+		String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+		model.addAttribute("avatar", avatar);
+		int b_no = Integer.parseInt(req.getParameter("b_no"));
+		session.setAttribute("freeboardb_no", b_no);
+		ArrayList<boardDTO> freeboardPhoto = p.freeboardPhoto(b_no);
+		model.addAttribute("freeboardPhotoList", freeboardPhoto);
+		boardDTO bdto = p.free_detail(b_no);
+		model.addAttribute("bdto", bdto);
 		return "updetail";
 	}
-	//update in free board & req board
+
+	// update in free board & req board
 	@ResponseBody
 	@RequestMapping("/update_free")
-	public String doUpdate(HttpServletRequest req,Model model) {
-		String btitle=req.getParameter("b_title");
-		String bcontent=req.getParameter("b_con");
-		int bseq=Integer.parseInt(req.getParameter("b_no"));
-		System.out.println("update title="+btitle);
-		System.out.println("update content="+bcontent);
-		System.out.println("update seqbbs="+bseq);
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		p.free_update(btitle,bcontent,bseq);		
+	public String doUpdate(HttpServletRequest req, Model model) {
+		String btitle = req.getParameter("b_title");
+		String bcontent = req.getParameter("b_con");
+		int bseq = Integer.parseInt(req.getParameter("b_no"));
+		System.out.println("update title=" + btitle);
+		System.out.println("update content=" + bcontent);
+		System.out.println("update seqbbs=" + bseq);
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		p.free_update(btitle, bcontent, bseq);
 		return "";
 	}
-	//---------------------------------------------request board
-	//go to request board
-	@RequestMapping(value="/reqboard", method=RequestMethod.GET)
+
+	// update free board photo
+	@ResponseBody
+	@RequestMapping("/updateFreeboardPhoto")
+	public String updateFreeboardPhoto(HttpServletRequest req) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		int b_no = Integer.parseInt(req.getParameter("b_no"));
+		String[] arr1 = req.getParameterValues("route");
+		String[] arr2;
+		String deleteFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		for (int i = 0; i < arr1.length; i++) {
+			arr2 = arr1[i].split("/");
+			p.deleteFreeboardPhotoRoute(b_no, arr1[i]);
+			File file = new File(deleteFolder + arr2[4]);
+			file.delete();
+
+		}
+		return "";
+	}
+
+	// ---------------------------------------------request board
+	// go to request board
+	@RequestMapping(value = "/reqboard", method = RequestMethod.GET)
 	public String doRequestboard(HttpServletRequest req, Model mod) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();
-		
-		if(session.getAttribute("m_no")!=null) {
-			String nick=(String) session.getAttribute("nick");
-			if(nick.length()>5) {
-				nick=nick.substring(0, 5)+"..";
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+
+		if (session.getAttribute("m_no") != null) {
+			String nick = (String) session.getAttribute("nick");
+			if (nick.length() > 5) {
+				nick = nick.substring(0, 5) + "..";
 			}
 			mod.addAttribute("m_no", session.getAttribute("m_no"));
-			mod.addAttribute("id",session.getAttribute("id"));
-			mod.addAttribute("nick",nick);
-			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-			mod.addAttribute("avatar",avatar);
-		}else {
+			mod.addAttribute("id", session.getAttribute("id"));
+			mod.addAttribute("nick", nick);
+			String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+			mod.addAttribute("avatar", avatar);
+		} else {
 			mod.addAttribute("m_no", null);
-		}	
-		int pagenum=Integer.parseInt(req.getParameter("pagenum"));
-		int countboardq=p.countBoardq();
-		ArrayList<boardDTO> blist=p.reqBoard(pagenum);
-		mod.addAttribute("boardlist",blist);
-		mod.addAttribute("countboardq",countboardq);
-		mod.addAttribute("pagenum",pagenum);
+		}
+		int pagenum = Integer.parseInt(req.getParameter("pagenum"));
+		int countboardq = p.countBoardq();
+		ArrayList<boardDTO> blist = p.reqBoard(pagenum);
+		mod.addAttribute("boardlist", blist);
+		mod.addAttribute("countboardq", countboardq);
+		mod.addAttribute("pagenum", pagenum);
 		return "reqboard";
-	}	
-	//go to new post page in request board
+	}
+
+	// go to new post page in request board
 	@RequestMapping("/newpost_req")
 	public String doNewrequest(HttpServletRequest req, Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session=req.getSession();
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String nick = (String) session.getAttribute("nick");
+		if (nick.length() > 5) {
+			nick = nick.substring(0, 5) + "..";
 		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
-		
+		model.addAttribute("id", session.getAttribute("id"));
+		model.addAttribute("nick", nick);
+		String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+		model.addAttribute("avatar", avatar);
+
 		return "newpost_req";
 	}
-	//insert new post in request board
-	@RequestMapping(value="/insert_req")
-	public String doInsert_req(HttpServletRequest req,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session=req.getSession();
-		String btitle=req.getParameter("title");
-		String bcontent=req.getParameter("content");		
-		System.out.println("title="+btitle);
-		System.out.println("content="+bcontent);
-		System.out.println("writer="+(int)session.getAttribute("m_no"));
-		p.req_insert((int)session.getAttribute("m_no"),btitle, bcontent);
+
+	// insert new post in request board
+	@RequestMapping(value = "/insert_req")
+	public String doInsert_req(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String btitle = req.getParameter("title");
+		String bcontent = req.getParameter("content");
+		System.out.println("title=" + btitle);
+		System.out.println("content=" + bcontent);
+		System.out.println("writer=" + (int) session.getAttribute("m_no"));
+		p.req_insert((int) session.getAttribute("m_no"), btitle, bcontent);
 		return "redirect:/reqboard?pagenum=1";
 	}
-	//view detail on request board
+
+	// view detail on request board
 	@RequestMapping("/reqdetail")
-	public String doDetail_req(HttpServletRequest req ,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();	
-		
-		if(session.getAttribute("m_no")!=null) {
-			String nick=(String) session.getAttribute("nick");
-			if(nick.length()>5) {
-				nick=nick.substring(0, 5)+"..";
+	public String doDetail_req(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+
+		if (session.getAttribute("m_no") != null) {
+			String nick = (String) session.getAttribute("nick");
+			if (nick.length() > 5) {
+				nick = nick.substring(0, 5) + "..";
 			}
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("id",session.getAttribute("id"));
-			model.addAttribute("nick",nick);
-			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-			model.addAttribute("avatar",avatar);
-		}else {
+			model.addAttribute("id", session.getAttribute("id"));
+			model.addAttribute("nick", nick);
+			String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+			model.addAttribute("avatar", avatar);
+		} else {
 			model.addAttribute("m_no", null);
-		}	
-		
-		int b_no=Integer.parseInt(req.getParameter("b_no"));
-		int count=p.countComment_t(b_no);
+		}
+
+		int b_no = Integer.parseInt(req.getParameter("b_no"));
+		int count = p.countComment_t(b_no);
 		p.free_viewcnt(b_no);
-		boardDTO bdto=p.req_detail(b_no);
-		model.addAttribute("bdto",bdto);
-		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		model.addAttribute("countComment",count);
+		boardDTO bdto = p.req_detail(b_no);
+		model.addAttribute("bdto", bdto);
+		model.addAttribute("sessionm_no", session.getAttribute("m_no"));
+		model.addAttribute("countComment", count);
 		return "reqdetail";
 	}
-	//view update page on request board
+
+	// view update page on request board
 	@RequestMapping("/requpdetail")
-	public String doReq_updetail(HttpServletRequest req,Model model) {
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		HttpSession session =req.getSession();	
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+	public String doReq_updetail(HttpServletRequest req, Model model) {
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		HttpSession session = req.getSession();
+		String nick = (String) session.getAttribute("nick");
+		if (nick.length() > 5) {
+			nick = nick.substring(0, 5) + "..";
 		}
 		model.addAttribute("m_no", session.getAttribute("m_no"));
-		model.addAttribute("id",session.getAttribute("id"));
-		model.addAttribute("nick",nick);
-		String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
-		int b_no=Integer.parseInt(req.getParameter("b_no"));
-		boardDTO bdto=p.req_detail(b_no);
-		model.addAttribute("bdto",bdto);
+		model.addAttribute("id", session.getAttribute("id"));
+		model.addAttribute("nick", nick);
+		String avatar = p.getAvaRoute((int) session.getAttribute("m_no"));
+		model.addAttribute("avatar", avatar);
+		int b_no = Integer.parseInt(req.getParameter("b_no"));
+		boardDTO bdto = p.req_detail(b_no);
+		model.addAttribute("bdto", bdto);
 		return "requpdetail";
 	}
-	//freeboard in Photo
+	//freeboard update phtoInsert
 	@ResponseBody
-	@RequestMapping(value="/freeBoard_inPhoto", method=RequestMethod.POST,  produces = "application/text;charset=utf8")
-	public String freeBoard_insertPhoto(HttpServletRequest req, MultipartHttpServletRequest request) {
-		HttpSession session =req.getSession();
+	@RequestMapping(value = "/freeBoardUpdate_inPhoto", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	public String freeBoardUpdate_inPhoto(HttpServletRequest req, MultipartHttpServletRequest request) {
+		HttpSession session = req.getSession();
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
-		iteamP p=sqlSession.getMapper(iteamP.class);
-		int maxb_no=p.findMaxb_no((int)session.getAttribute("m_no"));
-		System.out.println("��諛�="+maxb_no);
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		int freeboardb_no = (int)session.getAttribute("freeboardb_no");
 		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
 		String realDataFolder = "/resources/assets/freeBoard/";
 		List<MultipartFile> filelist = request.getFiles("file");
@@ -300,9 +341,9 @@ public class boardController {
 			String uniqueName = uuids[0];
 			File saveFile = new File(uploadFolder + uniqueName + fileExtension);
 			try {
-				 mf.transferTo(saveFile);
-				 ipt.insertphotoRoute(maxb_no, realDataFolder + uniqueName + fileExtension);
-				 
+				mf.transferTo(saveFile);
+				ipt.insertphotoRoute(freeboardb_no, realDataFolder + uniqueName + fileExtension);
+
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
@@ -310,6 +351,38 @@ public class boardController {
 			}
 
 		}
-		return"";
+		session.removeAttribute("freeboardb_no");
+		return "";
+	}
+	// freeboard in Photo
+	@ResponseBody
+	@RequestMapping(value = "/freeBoard_inPhoto", method = RequestMethod.POST, produces = "application/text;charset=utf8")
+	public String freeBoard_insertPhoto(HttpServletRequest req, MultipartHttpServletRequest request) {
+		HttpSession session = req.getSession();
+		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
+		iteamP p = sqlSession.getMapper(iteamP.class);
+		int maxb_no = p.findMaxb_no((int) session.getAttribute("m_no"));
+		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/freeBoard/";
+		String realDataFolder = "/resources/assets/freeBoard/";
+		List<MultipartFile> filelist = request.getFiles("file");
+		for (MultipartFile mf : filelist) {
+			String fileRealName = mf.getOriginalFilename();
+			String fileExtension = fileRealName.substring(fileRealName.lastIndexOf("."), fileRealName.length());
+			UUID uuid = UUID.randomUUID();
+			String[] uuids = uuid.toString().split("-");
+			String uniqueName = uuids[0];
+			File saveFile = new File(uploadFolder + uniqueName + fileExtension);
+			try {
+				mf.transferTo(saveFile);
+				ipt.insertphotoRoute(maxb_no, realDataFolder + uniqueName + fileExtension);
+
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+
+		}
+		return "";
 	}
 }

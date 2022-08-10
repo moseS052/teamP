@@ -234,18 +234,41 @@ a#yesyes{
 	   		<div class="container">
 		    	<div class="gap"></div>
 				<div class="row gap">
-
+						
+						 
+						
+						
+						
+						
 					<div class="col-md-12">
 					<table class="table table-striped" style="">
 					<input type=hidden id=b_no name=b_no value="${bdto.b_no }">
 					<tr><td colspan="2">제목: <input type=text id=b_title name=b_title size=90 style="border:none; background-color:transparent;" value="${bdto.b_title }"></td></tr>
-					<tr><td colspan="2">내용: <textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;">${bdto.b_con }</textarea></td></tr>
+					<tr><td colspan="2">
+					<c:if test="${freeboardPhotoList!='[]' }">
+					<div>
+					 		<p>삭제하고 싶은 사진을 선택해 주세요.</p>
+						<c:forEach var="ca" items="${freeboardPhotoList }">
+							<div style="display:inline;">
+								<input type="checkbox" name="photoRouteCheck" value="${ca.b_route }">
+								<img style="width:150px; heigh:150px" src="<c:url value="${ca.b_route }"/>">
+							</div>
+						</c:forEach>
+					</div>
+					</c:if>
+					<c:if test="${freeboardPhotoList=='[]' }">
+					</c:if>
+					<textarea id=b_con name=b_con rows=10 cols=90 style="border:none; background-color:transparent; resize:none;">${bdto.b_con }</textarea></td></tr>
 					<tr><td>작성자: <input type=text id=nick name=nick style="border:none; background-color:transparent;" value="${bdto.nick }" readonly>
 					작성일자: <input type=text id=b_date name=b_date style="border:none; background-color:transparent;" value="${bdto.b_date}" readonly></td></tr>
 					</table>
 					<input type=button id ="up" value='수정완료' class="btn btn-primary btn-outlined">
 					<input type=reset value='취소' id=btnReset class="btn btn-primary btn-outlined">
-					<!-- <button type=submit formaction='delete' formmethod=post>삭제</button> -->
+					<form id="fileForm" method="post" enctype="multipart/form-data">
+					<strong>추가하고싶은 사진을 선택해 주세요.</strong>
+						<br>
+						<input class="btn btn-primary btn-outlined" type="file" name="file" accept="image/*" id="uploadFile" multiple="true">
+					</form>
 					
 					
 					</div>
@@ -317,19 +340,37 @@ $(document)
 	document.location='/pj/freeboard?pagenum=1';
 })
 .on('click','#up',function(){
-	if($('#b_con').val()=='' || $('#b_title').val()==''){
+	let arr=[];
+	$('input[name="photoRouteCheck"]:checked').each(function(){
+		arr.push($(this).val());
+		console.log($(this).val());
+	});
+	console.log($('#uploadFile').val());
+	
+	 if($('#b_con').val()=='' || $('#b_title').val()==''){
 		alert('공백이 있습니다! 양식을 다시 확인해 주세요');
 		return false;
 	}else{
-		if(!confirm("글을 수정하시겠습니까?")) return false;
-
+		if(!confirm("글을 수정하시겠습니까?")) return false;	
+		if(arr.length>0){
+			 $.ajax({
+					url:'updateFreeboardPhoto',
+					data:{route:arr,
+						  b_no:	$('#b_no').val()	
+					},
+					type:'get',
+					traditional : true,
+					susccecc:function(){
+						alert('전송 성공');
+						}
+					}); 
+		}
+		if($('#uploadFile').val()!=''){
+			updateFreeboardPhotoInsert();
+		}
 		$.ajax({
 			type:'get',dataType:'text',url:'update_free',
 			data:{b_no:$('#b_no').val(),b_title:$('#b_title').val(),b_con:$('#b_con').val()},
-			beforeSend:function(){
-				console.log("b_no:"+$('#b_no').val());
-				console.log("b_con"+$('#b_con').text());
-			},
 			success:function(){	
 				alert('수정이 완료되었습니다');
 				window.location.href="<%= request.getContextPath() %>/freeboard?pagenum=1";
@@ -409,6 +450,19 @@ function alarmList() {
 		},
 		complete:function(){}
 	})
+}
+function updateFreeboardPhotoInsert(){
+	let formData = new FormData($('#fileForm')[0]);
+	$.ajax({
+		url:'freeBoardUpdate_inPhoto',
+		enctype: 'multipart/form-data',
+		processData : false,
+		contentType : false,
+		data : formData,
+		type : 'POST',
+		success:function(){
+			}
+	});
 }
 </script>
 </html>
