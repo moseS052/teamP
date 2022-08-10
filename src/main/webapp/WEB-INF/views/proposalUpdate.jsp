@@ -66,14 +66,22 @@ a#meminfo, #btnSendNote, #goList{
 	font-size:18px;
 	color:#007979;
 }
+a#goList{
+margin-left: 4px
+}
 #firstNick{
-	margin-left:18px;
+	margin-left:15px;
 	display:inline; 
 	font-size:16px;
 }
 #avaung{ /* alarm position */
 	margin-top:-13px;
 	margin-right:-18px;
+}
+a#yesyes{
+	display:inline;
+	font-size:14px;
+	color:#007979;
 }
 </style>
   <body class="single single-post"> 
@@ -385,6 +393,35 @@ $(document)
 		}
 	}
 	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	popup=window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	
+	popup.onbeforeunload=function(){
+		location.reload(); 
+	}
+	}
+	return false;
+})
+.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
+	let ms=$(this).parent().parent().attr("alseq");
+	console.log(ms);
+	$.ajax({
+		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
+		success:function(){
+			
+		},
+		error:function(){
+		},
+		complete:function(){}
+	})
 })
 
 function alarmList() {

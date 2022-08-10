@@ -88,9 +88,16 @@ public class photoBoardController {
 	@RequestMapping("/donationReviweUpdate")
 	String donationReviewUpdate(HttpServletRequest req,Model model) {
 		HttpSession session = req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
 		model.addAttribute("userinfo", session.getAttribute("id"));
-		model.addAttribute("m_no", session.getAttribute("m_no"));	
-		model.addAttribute("nick",session.getAttribute("nick"));
+		model.addAttribute("m_no", session.getAttribute("m_no"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=ip.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		iphotoBoard ipb=sqlSession.getMapper(iphotoBoard.class);
 		int photoB_bo=Integer.parseInt(req.getParameter("photo_b_no"));
 		session.setAttribute("photoboardB_bo", photoB_bo);
@@ -216,7 +223,11 @@ public class photoBoardController {
 		} else { // 濡�洹몄�� �깃났 ��
 			model.addAttribute("userinfo", session.getAttribute("id"));
 			model.addAttribute("m_no", session.getAttribute("m_no"));
-			model.addAttribute("nick",session.getAttribute("nick"));
+			String Snick=(String) session.getAttribute("nick");
+			if(Snick.length()>5) {
+				Snick=Snick.substring(0, 5)+"..";
+			}
+			model.addAttribute("Snick",Snick);
 			String avatar=p.getAvaRoute((int)session.getAttribute("m_no"));
 			model.addAttribute("avatar",avatar);
 		}

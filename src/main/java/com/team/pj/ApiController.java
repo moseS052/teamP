@@ -476,6 +476,11 @@ public class ApiController {
 		HttpSession session=req.getSession();
 		int m_no =Integer.parseInt(req.getParameter("m_no"));
 		iteamP team=sqlSession.getMapper(iteamP.class);
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("Snick",nick);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		ArrayList<L_listDTO> l_list=team.getM_noNick(m_no);
 		model.addAttribute("m_no",l_list.get(0).getM_no());
@@ -513,11 +518,18 @@ public class ApiController {
 	@RequestMapping("/success_page")
 	public String doSuccess(HttpServletRequest req,Model model) {
 		HttpSession session=req.getSession();
+		iteamP ip=sqlSession.getMapper(iteamP.class);
 		String boardType=req.getParameter("b");
 		model.addAttribute("boardType", boardType);
 		model.addAttribute("userinfo",session.getAttribute("id"));
 		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("nick",session.getAttribute("nick"));
+		String nick=(String) session.getAttribute("nick");
+		if(nick.length()>5) {
+			nick=nick.substring(0, 5)+"..";
+		}
+		model.addAttribute("nick",nick);
+		String avatar=ip.getAvaRoute((int)session.getAttribute("m_no"));
+		model.addAttribute("avatar",avatar);
 		return "success_page";
 	}
 	//insert占쏙옙 占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙占쏙옙//

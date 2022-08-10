@@ -88,7 +88,7 @@ a#yesyes{
 	margin-top: 0px;
 }
 #firstNick{
-	margin-left:18px;
+	margin-left:15px;
 	display:inline; 
 	font-size:16px;
 	font-family: 'Binggrae';
@@ -233,7 +233,7 @@ a#yesyes{
                         <h3 id="cbox">주소:${l_addr}</h3><input class="btn btn-outlined btn-primary" type="button" id="map" value="지도보기" />
                         </div>
 						<p>내용:${l_con}</p>
-                        	<div class="square pull-right" id="but">
+                        	<div class="square pull-right" id="butt">
 								<p>신청현황
 								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${lookapp}/${nop}<br>
 								<c:if test="${userinfo!=null && l_mno eq m_no}">	
@@ -367,29 +367,29 @@ $(document)
 	if(`${l_mno}`==`${m_no}`){
 		if(getToday()>`${l_date}`){
 			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button' id='goReview' value='후기보러가기' /></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview1' value='후기작성' />"
-			$('#but').append(str);
+			$('#butt').append(str);
 			}else{let str="<input class='btn btn-outlined btn-primary' type='button' id='l_retouch' value='수정하기' />"
 			+"<input class='btn btn-outlined btn-primary' type='button' id='l_del' value='삭제하기' />"
-			$('#but').append(str);}
+			$('#butt').append(str);}
 			
 	}else if(`${userinfo}`== ""){
 		if(getToday()>`${l_date}`){
 			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='후기작성' /></a>"
-			$('#but').append(str);
+			$('#butt').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
 				let str ="<input class='btn btn-outlined btn-primary' type='button'  value='신청마감' />"
-					$('#but').append(str);
+					$('#butt').append(str);
 			}else if(`${lookapp}`<=`${nop}`){
 					let str ="<a href='login'><input class='btn btn-outlined btn-primary' type='button'  value='신청하기' /></a>"
-						$('#but').append(str);	
+						$('#butt').append(str);	
 			}
 		}
 		
 	}else if(`${l_mno}`!=`${m_no}`){
 		if(getToday()>`${l_date}`){
 			let str="<a href='/pj/photoBoard?stanum=1&endnum=6&l_no="+$('#l_no').val()+"'><input class='btn btn-outlined btn-primary' type='button'  value='후기보러가기'/></a><input class='btn btn-outlined btn-primary' type='button' id='donationReview'  value='후기작성' />"
-				$('#but').append(str);
+				$('#butt').append(str);
 		}else{
 			if(`${lookapp}`==`${nop}`){
 				$.ajax({
@@ -400,10 +400,10 @@ $(document)
 				  			if(data==1){
 				  				let str="<input class='btn btn-outlined btn-primary'  type='button' value='신청마감' />"
 				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
-				  					$('#but').append(str);
+				  					$('#butt').append(str);
 				  			}else{
 				  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
-				  					$('#but').append(str);
+				  					$('#butt').append(str);
 				  			}
 			    		},
 			    		error:function(){
@@ -420,10 +420,10 @@ $(document)
 				  			if(data==1){
 				  				let str="<input class='btn btn-outlined btn-primary' type='button' value='신청완료' />"
 				  				+"<input class='btn btn-outlined btn-primary' type='button' id='apdel' value='신청취소' />"
-				  					$('#but').append(str);
+				  					$('#butt').append(str);
 				  			}else{
 				  				let str="<input class='btn btn-outlined btn-primary' id='called' type='button' value='신청하기' />"
-				  					$('#but').append(str);
+				  					$('#butt').append(str);
 				  			}
 			    		},
 			    		error:function(){

@@ -78,7 +78,7 @@ a#yesyes{
 	margin-top: 0px;
 }
 #firstNick{
-	margin-left:18px;
+	margin-left:15px;
 	display:inline; 
 	font-size:16px;
 }
