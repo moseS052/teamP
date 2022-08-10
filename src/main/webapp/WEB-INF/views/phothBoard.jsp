@@ -70,7 +70,7 @@
 	#searchDIV{
 		text-align:right;
 		margin-top:25px;
-		font-family: 'GangwonEdu_OTFBoldA';
+		font-family: 'Binggrae';
 	}
 	#btnSearch, #btnAll{ 
  		height:24px;
@@ -95,7 +95,7 @@ a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
 	color:#007979;
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 a#goList{
 margin-left: 4px
@@ -222,7 +222,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a id='question' href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 				
 			</ul>

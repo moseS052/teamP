@@ -45,7 +45,7 @@
     font-style: normal;
 	}
 	body{
-		font-family: 'GangwonEdu_OTFBoldA';
+		font-family: 'Binggrae';
 	}
 	h2{
 		font-family: 'Binggrae';
@@ -157,7 +157,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a id='question' href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 			</ul>
 		</div>
@@ -243,7 +243,7 @@ a#yesyes{
 	</div>
 
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -257,11 +257,11 @@ a#yesyes{
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -269,15 +269,15 @@ a#yesyes{
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
@@ -304,6 +304,9 @@ $(document)
 		     if(this.value == ar[i]){
 			this.checked = true; } });
 	}
+	if(`${m_no}`!=''){
+		alarmList()
+	}
 // 	console.log('이름='+$('#m_no').val());
 // 	console.log('제목='+$('#l_title').val());
 // 	console.log('내용='+$('#l_content').val());
@@ -313,7 +316,28 @@ $(document)
 // 	console.log('상호='+$('#l_name option:selected').text());
 // 	console.log('상세주소='+$('#l_address').val());
 })
-
+.on('click','#firstNick',function(){
+	$('#meminfo').trigger('click');
+	return false;
+})
+//avatar click <a href='' id='meminfo' seq='나'>nick</a>
+.on('click','#meminfo',function(){
+	let seq=$(this).attr('seq');
+	window.open("meminfo?m_no="+seq, "_blank", "width=400, height=400, top=40, left=1340");
+	return false;
+})
+//note click  <a href='' id='btnSendNote' myseq='상대' yourseq='나'>메세지</a>
+.on('click','#btnSendNote',function(){
+	let m_no=$(this).attr('myseq');
+	let m_pa_no=$(this).attr('yourseq');
+	if(`${m_no}`==''){
+		alert('로그인 후 이용해 주세요');
+		return false;
+	}else{
+	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
+	}
+	return false;
+})
 .on('click','#ad',function(){	
 	$.ajax({
 		type:'get',url:'proUp',data:{nop:$('#nop').val(),l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_title:$('#l_title').val(),l_content:$('#l_content').val(),l_date:$('#l_date').val(),l_file:$('#l_file').val(),l_koo:$('#l_koo option:selected').val(),l_name:$('#l_name option:selected').text(),l_address:$('#l_address').val()},
@@ -422,6 +446,14 @@ $(document)
 		},
 		complete:function(){}
 	})
+})
+.on('click','#question',function(){	
+	if(`${m_no}`==null){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
+	}
 })
 
 function alarmList() {

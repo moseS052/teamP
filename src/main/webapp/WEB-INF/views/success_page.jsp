@@ -48,6 +48,9 @@
 	h2{
 		font-family: 'Binggrae';
 	}	
+	h3{
+		font-family: 'Binggrae';
+	}	
 	a{
 		font-family: 'Binggrae';
 	}
@@ -55,7 +58,7 @@ a#meminfo, #btnSendNote, #goList{
  	display:inline; 
 	font-size:18px;
 	color:#007979;
-	font-family: 'GangwonEdu_OTFBoldA';
+	font-family: 'Binggrae';
 }
 a#goList{
 margin-left: 4px
@@ -181,7 +184,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a id='question' href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 			</ul>
 		</div>
@@ -228,7 +231,7 @@ a#yesyes{
 			</div>	
 	
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -242,11 +245,11 @@ a#yesyes{
 						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>	
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English.</p>
-				</div><!--col-lg-4-->
+				</div>col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>New York Office,<br/>
@@ -254,15 +257,15 @@ a#yesyes{
 					F: +458 4808-5489<br/>
 					E: <a href="mailto:#">hello@quoteguys.com</a>
 					</p>
-				</div><!--col-lg-4-->
-			</div><!-- row -->
-		</div><!-- container -->
+				</div>col-lg-4
+			</div>row
+		</div>container
 		<div id="footer-copyright">
 			<div class="container">
 				Created With Love By Distinctive Themes
 			</div>
 		</div>
-	</div>
+	</div> -->
 	
 	<a id="gototop" class="gototop no-display" href="#"><i class="fa fa-angle-up"></i></a>
 	<!-- END MAIN FOOTER -->
@@ -279,13 +282,14 @@ a#yesyes{
 	<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=4f3db20354b85124212a8809df35284b&libraries=services"></script>
 </body>
 <script>
+var popop;
+var popup;
 $(document)
 .ready(function(){
 	if(`${m_no}`!=''){
 		alarmList()
 	}
 })
-
 .on('click','#firstNick',function(){
 	$('#meminfo').trigger('click');
 	return false;

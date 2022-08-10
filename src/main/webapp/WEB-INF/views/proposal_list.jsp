@@ -43,7 +43,7 @@
     font-style: normal;
 	}
 	body{
-		font-family: 'GangwonEdu_OTFBoldA';
+		font-family: 'Binggrae';
 	}
 	table{
 		text-align:center;
@@ -51,6 +51,10 @@
 	th {
     	text-align:center;
 	}
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }	
 	#searchDIV{
 		text-align:right;
 		margin-top:25px;
@@ -249,7 +253,7 @@ a#yesyes{
 					data-toggle="dropdown">Q&nbsp;&&nbsp;A <i class="fa fa-solid fa-question menu-icon"></i></a>
 					<ul class="dropdown-menu">
 						<li><a href="/pj/qna">자주 묻는 질문</a></li>
-						<li><a id='question' href="#">1:1 질문</a></li>
+						<li><a id='question' href="/pj/question">1:1 질문</a></li>
 					</ul></li>	
 			</ul>
 		</div>
@@ -386,6 +390,14 @@ $(document)
 	showlist();
 	if(`${m_no}`!=''){
 		alarmList()
+	}
+})
+.on('click','#question',function(){	
+	if(`${m_no}`==''){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
 	}
 })
 .on('click','#firstNick',function(){

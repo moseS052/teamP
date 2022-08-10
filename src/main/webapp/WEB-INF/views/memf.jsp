@@ -25,9 +25,22 @@
 	a{
 		font-family: 'Binggrae';
 	}
+	table{
+		font-family: 'Binggrae';
+	}
+	h4{
+		font-family: 'Binggrae';
+	}
+	h3{
+		font-family: 'Binggrae';
+	}
+	h2{
+		font-family: 'Binggrae';
+	}
 	body{
 		margin:0;
 		padding:0;
+		font-family: 'Binggrae';
 	}
 	#ma{
 		margin-top:-30px;

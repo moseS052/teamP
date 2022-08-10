@@ -212,7 +212,7 @@ a#yesyes{
 			<div class="row">
 				<div id="bannertext" class="col-lg-8 col-lg-offset-2">
 					<h1 class="fade-down gap">
-						<span class="pe-7s-chat"></span> QUOTE 
+						<span class="fa fa-smile-o logo-icon"></span><span style="font-family:'Binggrae';">재능드림</span>  
 					</h1>
 									
 					<div class="spacer"></div>

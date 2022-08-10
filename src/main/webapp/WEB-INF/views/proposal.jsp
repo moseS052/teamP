@@ -52,7 +52,7 @@ accent-color:green;
     font-style: normal;
 	}
 	body{
-		font-family: 'GangwonEdu_OTFBoldA';
+		font-family: 'Binggrae';
 	}
 	table{
 		text-align:center;
@@ -507,7 +507,14 @@ $(document)
 		complete:function(){}
 	})
 })
-
+.on('click','#question',function(){	
+	if(`${m_no}`==''){
+		alert('로그인 후 사용가능합니다.');
+		return false;
+	}else{
+		document.location='/pj/question';
+	}
+})
 
 function alarmList() {
 	let str='';
