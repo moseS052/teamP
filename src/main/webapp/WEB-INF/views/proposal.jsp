@@ -261,7 +261,8 @@ a#yesyes{
 						
 						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title"/>
 						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60 placeholder="자세한 내용을 적어주세요"></textarea></p>
-						   <p class="well">재능기부신청<br><input type="checkbox" value="1">요리&nbsp;<input type="checkbox" value="2">청소&nbsp;<input type="checkbox" value="3">미용&nbsp;<input type="checkbox" value="4">강연&nbsp;<input type="checkbox" value="5">기타</p>
+						   <p class="well">재능기부신청<br><input type="checkbox" value="21">공연&nbsp;<input type="checkbox" value="22">미용&nbsp;<input type="checkbox" value="23">레크레이션&nbsp;<input type="checkbox" value="24">체육교실&nbsp;<input type="checkbox" value="25">예체능강의<br>
+						   <input type="checkbox" value="26">미술치료&nbsp;<input type="checkbox" value="27">교육&nbsp;<input type="checkbox" value="28">의료봉사&nbsp;<input type="checkbox" value="29">요리&nbsp;<input type="checkbox" value="30">차량봉사<input type="checkbox" value="31">집수리</p>
 						   
 						   <div class="col-md-4 post fade-up">시행일자<input type="date" id="l_date" class="form-control"></div>
 						   <div class="col-md-4 post fade-up">사진추가

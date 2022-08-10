@@ -232,7 +232,23 @@ public class ApiController {
 		model.addAttribute("Rnick",re.nick);
 		model.addAttribute("phone",re.phone);
 		model.addAttribute("mail",re.mail);
+		ArrayList<Integer>sd=team.pribringt_no(m_no);
+		String str="";
+		for(int i=0;i<sd.size();i++) {
+			str+=sd.get(i);
+		}
+		System.out.println(sd);
+		model.addAttribute("sd",str);
 		return "privacy";
+	}
+	@ResponseBody
+	@RequestMapping(value="/myupcheckbox", produces="application/text;charset=utf8")
+	public String domyUpcheck(@RequestParam("m_no") int m_no,
+							@RequestParam("t_no") int t_no) {
+		iteamP team=sqlSession.getMapper(iteamP.class);
+			team.mydelcheck(m_no);
+			team.mycheck_ad(m_no,t_no);
+		return "";
 	}
 	//privacy.jsp open//
 	
