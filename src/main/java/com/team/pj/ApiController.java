@@ -233,12 +233,12 @@ public class ApiController {
 		model.addAttribute("phone",re.phone);
 		model.addAttribute("mail",re.mail);
 		ArrayList<Integer>sd=team.pribringt_no(m_no);
-		String str="";
-		for(int i=0;i<sd.size();i++) {
-			str+=sd.get(i);
-		}
+//		String str="";
+//		for(int i=0;i<sd.size();i++) {
+//			str+=sd.get(i)+"";
+//		}
 		System.out.println(sd);
-		model.addAttribute("sd",str);
+		model.addAttribute("sd",sd);
 		return "privacy";
 	}
 	@ResponseBody
@@ -677,7 +677,7 @@ public class ApiController {
 		System.out.println("l_no="+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		
-		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/L_route/";
+		String uploadFolder = "C:/Users/admin/git/teamP/src/main/webapp/resources/assets/L_route/";
 		String realDataFolder = "resources/assets/L_route/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {

@@ -194,9 +194,9 @@ a#yesyes{
 						
 						<p>제목<input type="text" class="form-control" id="l_title" placeholder="title" value="${l_title}"/>
 						   내용<textarea style="resize:none; overflow:hidden;"class="form-control" id="l_content" rows=10 cols=60>${l_con}</textarea></p>
-						   <p class="well">재능기부신청<br><input type="checkbox" value="21" name="che">공연&nbsp;<input type="checkbox" value="22" name="che">미용&nbsp;<input type="checkbox" value="23" name="che">레크레이션&nbsp;<input type="checkbox" value="24" name="che">체육교실&nbsp;<input type="checkbox" value="25" name="che">예체능강의<br>
-						   <input type="checkbox" value="26" name="che">미술치료&nbsp;<input type="checkbox" value="27" name="che">교육&nbsp;<input type="checkbox" value="28" name="che">의료봉사&nbsp;<input type="checkbox" value="29" name="che">요리&nbsp;<input type="checkbox" value="30" name="che">차량봉사<input type="checkbox" value="31" name="che">집수리</p>
-						  <div class="col-md-4 post fade-up"> 시행일자<input type="date" id="l_date" class="form-control" value="${l_date}"></div>
+						   <p class="well">재능기부신청<br><input type="checkbox" value="21" name="che">공연&nbsp;<input type="checkbox" value="22" name="che">미용&nbsp;<input type="checkbox" value="23" name="che">레크레이션&nbsp;<input type="checkbox" value="24" name="che">체육교실&nbsp;<input type="checkbox" value="25" name="che">예체능강의
+						   <input type="checkbox" value="26" name="che">미술치료<br><input type="checkbox" value="27" name="che">교육&nbsp;<input type="checkbox" value="28" name="che">의료봉사&nbsp;<input type="checkbox" value="29" name="che">요리&nbsp;<input type="checkbox" value="30" name="che">차량봉사<input type="checkbox" value="31" name="che">집수리<input type="checkbox" value="1" name="che">상관없음</p>
+						   <div class="col-md-4 post fade-up"> 시행일자<input type="date" id="l_date" class="form-control" value="${l_date}"></div>
 						  <div class="col-md-4 post fade-up">사진추가<input type="file" id="l_file"class="form-control" accept="image/*" required multiple></div>
 						  <div class="col-md-4 post fade-up">신청인원<input type="number" id="nop" value="${nop}" class="form-control"></div>
 						<p>신청구역(서울)<select id="l_koo" class="form-control">
@@ -298,8 +298,7 @@ a#yesyes{
 
 $(document)
 .ready(function(){
-	alarmList()
-	let ar = `${sd}`.split("");
+	let ar = `${sd}`.replace("[","").replace("]","").split(", ");
 	for(i=0; i<ar.length; i++){
 	 $('input:checkbox[name="che"]').each(function() {
 		     if(this.value == ar[i]){
@@ -351,7 +350,6 @@ $(document)
     						type:'get',url:'upcheckbox',data:{l_no:$('#l_no').val(),m_no:$('#m_no').val(),l_date:$('#l_date').val(),t_no:value},
     						dataType:'text',
     					  		success:function(){
-    					  		document.location='/pj/success_page'
     				    		},
     				    		error:function(){
     				    			alert('데이터등록실패');
@@ -359,7 +357,7 @@ $(document)
     				    		complete:function(){}
     				    	});
     			})
-	  			
+    			document.location='/pj/success_page'
     		},
     		error:function(){
     		},
