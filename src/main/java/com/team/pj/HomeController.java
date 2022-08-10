@@ -273,14 +273,9 @@ public class HomeController {
 		model.addAttribute("lst",me);
 		ArrayList<L_listDTO> mi = ip.a_infor(Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("ast",mi);
-		String nick1;
-		String mail;
-		for(int i=0; i<me.size();i++) {
-			nick1=me.get(i).getNick();
-			mail=me.get(i).getMail();
-			model.addAttribute("nick1", nick1);
-			model.addAttribute("mail", mail);
-		}
+		L_listDTO mei = ip.nickmail(Integer.parseInt(req.getParameter("m_no")));
+		model.addAttribute("nick1",mei.getNick());
+		model.addAttribute("mail",mei.getMail());
 		String avaRoute=ip.getAvaRoute(Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("semno",Integer.parseInt(req.getParameter("m_no")));
 		model.addAttribute("id",session.getAttribute("id"));

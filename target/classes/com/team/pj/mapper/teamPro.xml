@@ -254,7 +254,7 @@
 	select b_no,b_type,b_title,to_char(b_date, 'YYYY-MM-DD') b_date,views from board where m_no=#{param1} order by b_date 
 </select>
 <select id="open_mysubs" resultType="com.team.pj.L_listDTO">
-	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a  where l_no in(select l_no from apply where m_no=90) order by l_date desc
+	select a.nop,a.l_views,a.l_no,a.m_no,a.l_title,to_char(a.l_date, 'YYYY-MM-DD') l_date,(select count(*) from apply where l_no=a.l_no) count from list a  where l_no in(select l_no from apply where m_no=#{param1}) order by l_date desc
 </select>
 <select id="getApplyMem" resultType="int">
 	select m_no from apply where l_no=#{param1}
@@ -302,8 +302,11 @@
 </select>
 <select id="a_infor" resultType="com.team.pj.L_listDTO"> 
 	<![CDATA[select * from(
-   				select substr(l_title,0,15)l_title from list  where l_no in
+   				select substr(l_title,0,15)l_title,to_char(l_date, 'YYYY-MM-DD') l_date from list  where l_no in
    				(select l_no from apply where m_no=#{param1})) where rownum <=3 ]]>
+</select>
+<select id="nickmail" resultType="com.team.pj.L_listDTO"> 
+   				select nick,mail from member where m_no=#{param1}
 </select>
 </mapper>
 

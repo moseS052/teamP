@@ -81,11 +81,11 @@
 						</table>
 						<h4>참여부분</h4>
 						<table id='mytable' class="table table-striped">
-						<thead><tr><th>제목</th><th></th><th></th><th></th></tr></thead>
+						<thead><tr><th>제목</th><th></th><th></th><th>활동일자</th></tr></thead>
 							<tbody></tbody>
 							<c:if test="${ast!=null}">					
 							<c:forEach var="ast" items="${ast}">
-							<tr><td>${ast.l_title}</td><td></td><td></td><td></td></tr>
+							<tr><td>${ast.l_title}</td><td></td><td></td><td>${ast.l_date}</td></tr>
 							</c:forEach>
 							</c:if>
 							
@@ -100,9 +100,8 @@
 var popup;
 $(document)
 .ready(function(){
-	console.log(`${id}`)
-	console.log(`${m_no}`)
-	console.log(`${nick}`)
+	console.log(`${nick1}`)
+	console.log(`${mail}`)
 })
 
 
