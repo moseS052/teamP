@@ -50,6 +50,10 @@
 	h2{
 		font-family: 'Binggrae';
 	}
+	.form-control:focus {
+        border-color: #28a745;
+        box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    }
 input[type="checkbox"]{
 accent-color:green;
 }
