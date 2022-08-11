@@ -12,7 +12,7 @@
 <meta name="author" content="">
 
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Team Project</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -218,7 +218,7 @@ a#yesyes{
 				<div class="row gap">
 
 					<div class="col-md-8 fade-up">
-						<h3>비밀번호변경</h3>
+						
 						
 						<div id="cla">
 						<p><input type=hidden id="m_no" value="${m_no}"></p>

@@ -10,7 +10,7 @@
 <meta name="description" content="">
 <meta name="author" content="">
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Detail</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">

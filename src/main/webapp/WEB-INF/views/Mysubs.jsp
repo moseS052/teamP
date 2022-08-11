@@ -11,7 +11,7 @@
 <meta name="author" content="">
 
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Team Project</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -213,7 +213,7 @@ a#yesyes{
 				<div class="row gap">
 
 					<div class="col-lg-2"></div><div class="col-lg-8">
-						<h3>내가 신청한 게시판 목록</h3>
+						
 						<div>
 						<table id='mytable' class="table table-striped">
 						<thead><tr><th>게시판타입</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>

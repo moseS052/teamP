@@ -11,7 +11,7 @@
 <meta name="author" content="">
 
 <link rel="shortcut icon" href="<c:url value="/resources/assets/img/favicon.ico"/>">
-<title>Team Project</title>
+<title>재능드림</title>
 <link href="<c:url value="/resources/assets/css/bootstrap.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>" rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>" rel="stylesheet">
@@ -284,7 +284,7 @@ a#yesyes{
 		    	</div>
 				<div class="row gap" id="bonbox">
 					<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">재능기부신청 게시판</h2>
+					
 					</div>
 					<div class="col-lg-2" ></div><div class="col-lg-8" id="anbox">
 						<p>신청구역(서울)
@@ -569,7 +569,7 @@ $(document)
     	});
 })
 .on('click','#listPagingBtn',function(){
-	pageNum=pageNum+3;
+	pageNum=pageNum+6;
 	$('#cla').children('a:lt('+pageNum+')').show();
 })
 
