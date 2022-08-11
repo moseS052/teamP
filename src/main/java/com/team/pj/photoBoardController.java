@@ -190,7 +190,7 @@ public class photoBoardController {
 		HttpSession session = req.getSession();
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		int a = ipt.maxB_noFind((int) session.getAttribute("m_no"));
-		String uploadFolder = "C:/Users/admin/teampro/teamP/src/main/webapp/resources/assets/userimg/";
+		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/userimg/";
 		String realDataFolder = "/resources/assets/userimg/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
