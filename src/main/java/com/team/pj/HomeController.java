@@ -34,6 +34,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 
+
 /**
  * Handles requests for the application home page.
  */
@@ -42,6 +43,7 @@ public class HomeController {
 	
 	@Autowired
 	private SqlSession sqlSession;
+
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
@@ -475,4 +477,6 @@ public class HomeController {
 	
 		return "";
 	}
+	
+	
 }
