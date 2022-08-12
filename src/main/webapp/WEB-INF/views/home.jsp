@@ -349,112 +349,78 @@ a#yesyes{
 				</div>
 			</div>
 
-			<div id="team" class="container">
-				<div class="row mt">
-					<div class="col-md-6">
-						<div class="blockquote-box fade-up clearfix">
-							<div class="square pull-left">
-								<img src=<c:url value="/resources/assets/img/team/team1.jpg"/> width="120" alt="" class="" />
-							</div>
-							<h4>John Smith</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
-						</div>
-						<div class="blockquote-box fade-up clearfix">
-							<div class="square pull-left">
-								<img src=<c:url value="/resources/assets/img/team/team2.jpg"/> width="120" alt="" class="" />
-							</div>
-							<h4>mooooooo</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
-							<div class="pull-right btn-group social-profiles">
-								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
-								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
-								</a> <a class="btn" href="#"> <i
-									class="fa fa-google-plus google"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="blockquote-box fade-up clearfix">
-							<div class="square pull-left">
-								<img src=<c:url value="/resources/assets/img/team/team3.jpg"/> width="120" alt="" class="" />
-							</div>
-							<h4>John Smith</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
-							<div class="pull-right btn-group social-profiles">
-								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
-								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
-								</a> <a class="btn" href="#"> <i
-									class="fa fa-google-plus google"></i>
-								</a>
-							</div>
-						</div>
-						<div class="blockquote-box fade-up clearfix">
-							<div class="square pull-left">
-								<img src=<c:url value="/resources/assets/img/team/team4.jpg"/> width="120" alt="" class="" />
-							</div>
-							<h4>John Smith</h4>
-							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-								Integer posuere erat a ante.</p>
-							<div class="pull-right btn-group social-profiles">
-								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
-								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
-								</a> <a class="btn" href="#"> <i
-									class="fa fa-google-plus google"></i>
-								</a>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-<!-- aa -->
-		<section id="services" class="divider-wrapper">
-			<div class="container">
+			
+
+		<div class="container">
+			<div class="row gap mt">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Our Services</h2>
+					<h2 class="main-title">간편 메뉴</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
-				</div>
-				<div class="row">
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<span class="pe-7s-chat icon"></span>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Quality Design</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-question-circle"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Awesome Support</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-globe"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Global Services</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
 				</div>
 			</div>
-			<!-- container -->
-		</section>
+			<!-- row -->
 
+			<div class="row gap flat">
+				<div class="col-lg-3 col-md-3 col-xs-12">
+					<ul class="plan plan1 flip-in">
+						<li class="plan-name">기획서 작성</li>
+						<li class="plan-price"><strong>기획자가되어</strong></li>
+						<li class="plan-price"><strong>봉사활동을 기획해보세요</strong></li>
+						
+						<li class="plan-action">
+						<c:if test="${userinfo==null}">
+						<a href="login"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-xs-12">
+					<ul class="plan plan2 flip-in">
+						<li class="plan-name">사진 게시판</li>
+						<li class="plan-price"><strong>다른사람들의</strong></li>
+						<li class="plan-price"><strong>활동이 궁금하시면?</strong></li>						
+						<li class="plan-action"><a href="photoBoard?stanum=1&endnum=6"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-xs-12">
+					<ul class="plan plan3 flip-in">
+						<li class="plan-name">질문게시판</li>
+						<li class="plan-price"><strong>궁금하게 있으시다면</strong></li>
+						<li class="plan-price"><strong>여기로 질문해주세요</strong></li>
+						
+						<li class="plan-action"><c:if test="${userinfo==null}">
+						<a href="login"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						<c:if test="${userinfo!=null}">
+						<a href="proposal?m_no=${m_no}"
+							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
+						</c:if>
+						</li>
+					</ul>
+				</div>
+
+				<div class="col-lg-3 col-md-3 col-xs-12">
+					<ul class="plan plan4 flip-in">
+						<li class="plan-name">기획서목록</li>
+						<li class="plan-price"><strong>다른 사람의 기획에 </strong></li>
+						<li class="plan-price"><strong>동참해주세요</strong></li>
+						<li class="plan-action"><a href="proposal_list"
+							class="btn btn-outlined btn-primary btn-lg">신청하기</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+		
 		<section id="portfolio" class="white">
 			<div class="container">
 			
@@ -660,75 +626,7 @@ a#yesyes{
 		</div>
 		<!-- dg -->
 <!-- bb -->
-		<div class="container">
-			<div class="row gap mt">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">간편 메뉴</h2>
-					<hr>
-				</div>
-			</div>
-			<!-- row -->
-
-			<div class="row gap flat">
-				<div class="col-lg-3 col-md-3 col-xs-12">
-					<ul class="plan plan1 flip-in">
-						<li class="plan-name">기획서 작성</li>
-						<li class="plan-price"><strong>기획자가되어</strong></li>
-						<li class="plan-price"><strong>봉사활동을 기획해보세요</strong></li>
-						
-						<li class="plan-action">
-						<c:if test="${userinfo==null}">
-						<a href="login"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
-						</c:if>
-						<c:if test="${userinfo!=null}">
-						<a href="proposal?m_no=${m_no}"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
-						</c:if>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-lg-3 col-md-3 col-xs-12">
-					<ul class="plan plan2 flip-in">
-						<li class="plan-name">사진 게시판</li>
-						<li class="plan-price"><strong>다른사람들의</strong></li>
-						<li class="plan-price"><strong>활동이 궁금하시면?</strong></li>						
-						<li class="plan-action"><a href="photoBoard?stanum=1&endnum=6"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a></li>
-					</ul>
-				</div>
-
-				<div class="col-lg-3 col-md-3 col-xs-12">
-					<ul class="plan plan3 flip-in">
-						<li class="plan-name">질문게시판</li>
-						<li class="plan-price"><strong>궁금하게 있으시다면</strong></li>
-						<li class="plan-price"><strong>여기로 질문해주세요</strong></li>
-						
-						<li class="plan-action"><c:if test="${userinfo==null}">
-						<a href="login"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
-						</c:if>
-						<c:if test="${userinfo!=null}">
-						<a href="proposal?m_no=${m_no}"
-							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
-						</c:if>
-						</li>
-					</ul>
-				</div>
-
-				<div class="col-lg-3 col-md-3 col-xs-12">
-					<ul class="plan plan4 flip-in">
-						<li class="plan-name">기획서목록</li>
-						<li class="plan-price"><strong>다른 사람의 기획에 </strong></li>
-						<li class="plan-price"><strong>동참해주세요</strong></li>
-						<li class="plan-action"><a href="proposal_list"
-							class="btn btn-outlined btn-primary btn-lg">신청하기</a></li>
-					</ul>
-				</div>
-			</div>
-
-		</div>
+		
 
 
 
@@ -775,106 +673,7 @@ a#yesyes{
 			container
 		</section> -->
 
-		<section id="portfolio" class="white">
-			<div class="container">
-			
-				<div class="gap"></div>
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">활동 후기</h2>
-					<hr>
-				</div>
-				<!--/#portfolio-filter-->
-				<ul class="portfolio-items col-3 isotope fade-up gap">
-				<c:forEach var="p_list" items="${p_list}">
-					<li class="portfolio-item apps isotope-item">
-						<a href="/pj/ReadPhoto?seq=${p_list.b_no}">
-						<div class="item-inner">
-							<img src=<c:url value="${p_list.b_route}"/> alt="" class="img-responsive4">
-						</div>
-						</a>
-					</li>
-				</c:forEach>
-					<!--/.portfolio-item-->
-				</ul>
-				<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="photoBoard?stanum=1&endnum=6"><input class="btn form-control btn-outlined btn-primary" type="button" value="후기보러가기"></a>
-				</div>
-			</div>
-				
-		</section>
-
-		<section id="portfolio" class="white">
-		<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">신청 목록</h2>
-					<hr>
-				</div>
-		<div class="col-md-12">
-		<div class="row gap">
-					<c:forEach var="l_list" items="${l_list}">
-				<div class="col-md-6">
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="l_Read?l_no=${l_list.l_no}" class="post-title">${l_list.l_title}</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>${l_list.l_con}</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="l_Read?l_no=${l_list.l_no}">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
-				<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="proposal_list"><input class="btn form-control btn-outlined btn-primary" type="button" value="신청게시판가기"></a>
-				</div>
-			</div>
-		</div>
-		</section>
-
-		<!-- BLOG POSTS -->
-		<div class="container gap">
-			<div class="row mt">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">게시글</h2>
-					<hr>
-				</div>
-			</div>
-			<!-- row -->
-				<div>
-						<table id='mytable' class="table table-striped">
-						<thead><tr><th>작성자</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
-							<tbody></tbody>
-							<c:forEach var="F_board" items="${F_board}">
-							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
-							</c:forEach>
-						</table>
-						<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="freeboard?pagenum=1"><input class="btn form-control btn-outlined btn-primary" type="button" value="게시글더보러가기"></a>
-				</div>
-						
-              	</div>
-			
-			<!-- row -->
-			
-		</div>
+		
 		<!-- container -->
 
 		 <div class="container post-list gap"></div>
