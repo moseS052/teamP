@@ -237,48 +237,28 @@ a#yesyes{
 		<section id="about" class="section-wrapper">
 			<div class="container">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Our Story</h2>
+					<h2 class="main-title">재능드림 가이드</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
+					<!-- <p>She evil face fine calm have now. Separate screened he
+						outweigh of distance landlord.</p> -->
 				</div>
 
 				<div class="row gap">
 					<div class="col-md-8 col-md-offset-2">
-						<img src=<c:url value="/resources/assets/img/screens.png"/> class="fade-up img-responsive"
-							alt="Alt" />
+						<img src=<c:url value="/resources/assets/img/home1.png"/> class="fade-up img-responsive"
+							alt="Alt" /><br>
+						<img src=<c:url value="/resources/assets/img/home2.png"/> class="fade-up img-responsive"
+							alt="Alt" /><br>
+						<img src=<c:url value="/resources/assets/img/home3.png"/> class="fade-up img-responsive"
+							alt="Alt" />		
 					</div>
 				</div>
 
 				<div class="row gap">
 					<div class="col-md-8 fade-up">
-						<p>IIn as name to here them deny wise this. As rapid woody my
-							he me which. Men but they fail shew just wish next put. Led all
-							visitor musical calling nor her. Within coming figure sex things
-							are. Pretended concluded did repulsive education smallness yet
-							yet described. Had country man his pressed shewing. No gate dare
-							rose he. Eyes year if miss he as upon.</p>
-						<p>Of resolve to gravity thought my prepare chamber so.
-							Unsatiable entreaties collecting may sympathize nay interested
-							instrument. If continue building numerous of at relation in
-							margaret. Lasted engage roused mother an am at. Other early while
-							if by do to. Missed living excuse as be. Cause heard fat above
-							first shall for. My smiling to he removal weather on anxious.</p>
-						<p>Extremely we promotion remainder eagerness enjoyment an.
-							Ham her demands removal brought minuter raising invited gay.
-							Contented consisted continual curiosity contained get sex. Forth
-							child dried in in aware do. You had met they song how feel lain
-							evil near. Small she avoid six yet table china. And bed make say
-							been then dine mrs. To household rapturous fulfilled attempted on
-							so.</p>
-						<p>Of resolve to gravity thought my prepare chamber so.
-							Unsatiable entreaties collecting may sympathize nay interested
-							instrument. If continue building numerous of at relation in
-							margaret. Lasted engage roused mother an am at. Other early while
-							if by do to. Missed living excuse as be. Cause heard fat above
-							first shall for. My smiling to he removal weather on anxious.</p>
+						
 					</div>
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<div class="qa-message-list" id="wallmessages">
 							<div class="message-item fade-up" id="m16">
 								<div class="message-inner">
@@ -349,7 +329,68 @@ a#yesyes{
 				</div>
 			</div>
 
-			
+			<div id="team" class="container">
+				<div class="row mt">
+					<div class="col-md-6">
+						<div class="blockquote-box fade-up clearfix">
+							<div class="square pull-left">
+								<img src=<c:url value="/resources/assets/img/team/team1.jpg"/> width="120" alt="" class="" />
+							</div>
+							<h4>John Smith</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+						</div>
+						<div class="blockquote-box fade-up clearfix">
+							<div class="square pull-left">
+								<img src=<c:url value="/resources/assets/img/team/team2.jpg"/> width="120" alt="" class="" />
+							</div>
+							<h4>mooooooo</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+							<div class="pull-right btn-group social-profiles">
+								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
+								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
+								</a> <a class="btn" href="#"> <i
+									class="fa fa-google-plus google"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-6">
+						<div class="blockquote-box fade-up clearfix">
+							<div class="square pull-left">
+								<img src=<c:url value="/resources/assets/img/team/team3.jpg"/> width="120" alt="" class="" />
+							</div>
+							<h4>John Smith</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+							<div class="pull-right btn-group social-profiles">
+								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
+								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
+								</a> <a class="btn" href="#"> <i
+									class="fa fa-google-plus google"></i>
+								</a>
+							</div>
+						</div>
+						<div class="blockquote-box fade-up clearfix">
+							<div class="square pull-left">
+								<img src=<c:url value="/resources/assets/img/team/team4.jpg"/> width="120" alt="" class="" />
+							</div>
+							<h4>John Smith</h4>
+							<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+								Integer posuere erat a ante.</p>
+							<div class="pull-right btn-group social-profiles">
+								<a class="btn" href="#"> <i class="fa fa-facebook fb"></i>
+								</a> <a class="btn" href="#"> <i class="fa fa-twitter"></i>
+								</a> <a class="btn" href="#"> <i
+									class="fa fa-google-plus google"></i>
+								</a>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div> -->
+		</section>
 
 		<div class="container">
 			<div class="row gap mt">
@@ -529,7 +570,7 @@ a#yesyes{
 					</div>
 
 		<section id="stats" class="divider-wrapper">
-			<div class="container">
+			<!-- <div class="container">
 
 				<div class="row">
 					<div class="centered gap fade-down section-heading">
@@ -538,10 +579,10 @@ a#yesyes{
 						<p>She evil face fine calm have now. Separate screened he
 							outweigh of distance landlord.</p>
 					</div>
-				</div>
+				</div> -->
 				<!-- row -->
 
-				<div class="row gap">
+				<!-- <div class="row gap">
 					<div class="col-md-3 col-xs-12">
 						<div class="centered bounce-in">
 							<span class="stat-icon"><span
@@ -584,11 +625,11 @@ a#yesyes{
 					</div>
 				</div>
 
-			</div>
+			</div> -->
 		</section>
 
 		<!-- CLIENTS LOGOS -->
-		<div class="grey">
+		<!-- <div class="grey">
 			<div class="container">
 
 				<div class="row">
@@ -599,7 +640,7 @@ a#yesyes{
 							outweigh of distance landlord.</p>
 					</div>
 				</div>
-				<!-- row -->
+				row
 
 				<div class="row centered">
 					<div id="logo-carousel" class="fade-up">
@@ -619,7 +660,7 @@ a#yesyes{
 							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- row -->
 			</div>
 			<!-- container -->
@@ -630,57 +671,20 @@ a#yesyes{
 
 
 
-		<!-- <section id="services" class="divider-wrapper">
-			<div class="container">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Our Services</h2>
-					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
-				</div>
-				<div class="row">
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<span class="pe-7s-chat icon"></span>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Quality Design</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-question-circle"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Awesome Support</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-globe"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Global Services</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-				</div>
-			</div>
-			container
-		</section> -->
-
 		
+
+				
 		<!-- container -->
 
 		 <div class="container post-list gap"></div>
-	</div>
+
+			<!-- row -->
+		<!-- container -->
+
+	
 	
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	 <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -692,17 +696,16 @@ a#yesyes{
 						<li><a class="btn btn-primary btn-outlined" href="photoBoard?stanum=1&endnum=6">포토후기</a></li>
 						<li><a class="btn btn-primary btn-outlined" href="qna">Q&A</a></li>
 					</ul>
-				</div>
-				
+				</div>				
 				<div class="col-lg-8">
 					<h4 class="widget-title">Our Team</h4>
 					<p>
 						Github: <a href="https://github.com/moseS052/teamP.git">https://github.com/moseS052/teamP.git</a>
 					</p>
 				</div>
-				<!--col-lg-4-->
+				
 			</div>
-			<!-- row -->
+			
 		</div>
 	</div>
 
@@ -822,7 +825,11 @@ function alarmList() {
 
 </script>
 <script type="text/javascript">
+<<<<<<< HEAD
         var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+=======
+        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+>>>>>>> hee1
         
         // 접근 토큰 값 출력
         const token=naver_id_login.oauthParams.access_token;
