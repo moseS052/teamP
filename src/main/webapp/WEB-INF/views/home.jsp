@@ -250,31 +250,7 @@ a#yesyes{
 
 				<div class="row gap">
 					<div class="col-md-8 fade-up">
-						<!-- <p>IIn as name to here them deny wise this. As rapid woody my
-							he me which. Men but they fail shew just wish next put. Led all
-							visitor musical calling nor her. Within coming figure sex things
-							are. Pretended concluded did repulsive education smallness yet
-							yet described. Had country man his pressed shewing. No gate dare
-							rose he. Eyes year if miss he as upon.</p>
-						<p>Of resolve to gravity thought my prepare chamber so.
-							Unsatiable entreaties collecting may sympathize nay interested
-							instrument. If continue building numerous of at relation in
-							margaret. Lasted engage roused mother an am at. Other early while
-							if by do to. Missed living excuse as be. Cause heard fat above
-							first shall for. My smiling to he removal weather on anxious.</p>
-						<p>Extremely we promotion remainder eagerness enjoyment an.
-							Ham her demands removal brought minuter raising invited gay.
-							Contented consisted continual curiosity contained get sex. Forth
-							child dried in in aware do. You had met they song how feel lain
-							evil near. Small she avoid six yet table china. And bed make say
-							been then dine mrs. To household rapturous fulfilled attempted on
-							so.</p>
-						<p>Of resolve to gravity thought my prepare chamber so.
-							Unsatiable entreaties collecting may sympathize nay interested
-							instrument. If continue building numerous of at relation in
-							margaret. Lasted engage roused mother an am at. Other early while
-							if by do to. Missed living excuse as be. Cause heard fat above
-							first shall for. My smiling to he removal weather on anxious.</p> -->
+						
 					</div>
 					<!-- <div class="col-md-4">
 						<div class="qa-message-list" id="wallmessages">
