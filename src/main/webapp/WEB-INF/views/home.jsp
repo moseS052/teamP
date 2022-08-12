@@ -405,252 +405,8 @@ a#yesyes{
 				</div>
 			</div>
 		</section>
-
-		<section id="services" class="divider-wrapper">
-			<div class="container">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Our Services</h2>
-					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
-				</div>
-				<div class="row">
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<span class="pe-7s-chat icon"></span>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Quality Design</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-question-circle"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Awesome Support</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-
-					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
-						<i class="fa fa-globe"></i>
-					</div>
-					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
-						<h3>Global Services</h3>
-						<p>It is a long established fact that a reader will be
-							distracted by the readable content of a page when looking at its
-							layout.</p>
-					</div>
-				</div>
-			</div>
-			<!-- container -->
-		</section>
-
-		<section id="portfolio" class="white">
-			<div class="container">
-			
-				<div class="gap"></div>
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">활동 후기</h2>
-					<hr>
-				</div>
-				<!--/#portfolio-filter-->
-				<ul class="portfolio-items col-3 isotope fade-up gap">
-				<c:forEach var="p_list" items="${p_list}">
-					<li class="portfolio-item apps isotope-item">
-						<a href="/pj/ReadPhoto?seq=${p_list.b_no}">
-						<div class="item-inner">
-							<img src=<c:url value="${p_list.b_route}"/> alt="" class="img-responsive4">
-						</div>
-						</a>
-					</li>
-				</c:forEach>
-					<!--/.portfolio-item-->
-				</ul>
-				<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="photoBoard?stanum=1&endnum=6"><input class="btn form-control btn-outlined btn-primary" type="button" value="후기보러가기"></a>
-				</div>
-			</div>
-				
-		</section>
-
-		<section id="testimonials" class="divider-wrapper">
-		<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">신청 목록</h2>
-					<hr>
-				</div>
-		<div class="col-md-12">
-		<div class="row gap">
-					<c:forEach var="l_list" items="${l_list}">
-				<div class="col-md-6">
-					<div class="row">
-						<div class="col-md-12 post fade-up">
-							<div class="row">
-								<div class="col-md-12">
-									<h3>
-										<a href="l_Read?l_no=${l_list.l_no}" class="post-title">${l_list.l_title}</a>
-									</h3>
-								</div>
-							</div>
-							<div class="row post-content">
-								<div class="col-md-3">
-									<div class="item-inner">
-										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
-									</div>
-								</div>
-								<div class="col-md-9">
-									<p>${l_list.l_con}</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="l_Read?l_no=${l_list.l_no}">Read more</a>
-									</p>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				</c:forEach>
-				<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="proposal_list"><input class="btn form-control btn-outlined btn-primary" type="button" value="신청게시판가기"></a>
-				</div>
-			</div>
-		</div>
-		</section>
-
-		<!-- BLOG POSTS -->
-		<div class="container">
-			<div class="row mt">
-				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">게시글</h2>
-					<hr>
-				</div>
-			</div>
-			<!-- row -->
-				<div>
-						<table id='mytable' class="table table-striped">
-						<thead><tr><th>작성자</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
-							<tbody></tbody>
-							<c:forEach var="F_board" items="${F_board}">
-							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
-							</c:forEach>
-						</table>
-						<div class="col-md-2 post fade-up"></div>
-				<div class="col-md-8 post fade-up"></div>
-				<div class="col-md-2 post fade-up"><a href="freeboard?pagenum=1"><input class="btn form-control btn-outlined btn-primary" type="button" value="게시글더보러가기"></a>
-				</div>
-						
-              	</div>
-			
-			<!-- row -->
-		</div>
-		<!-- container -->
-
-		<div class="container post-list gap">
-					</div>
-
-		<section id="stats" class="divider-wrapper">
-			<div class="container">
-
-				<div class="row">
-					<div class="centered gap fade-down section-heading">
-						<h2 class="main-title">Stats Are Fun</h2>
-						<hr>
-						<p>She evil face fine calm have now. Separate screened he
-							outweigh of distance landlord.</p>
-					</div>
-				</div>
-				<!-- row -->
-
-				<div class="row gap">
-					<div class="col-md-3 col-xs-12">
-						<div class="centered bounce-in">
-							<span class="stat-icon"><span
-								class="pe-7s-timer bounce-in no-display animated bounceIn appear"></span></span>
-							<h5>
-								<span class="countup">99999999</span>
-							</h5>
-							<h6>HOURS SAVED</h6>
-						</div>
-					</div>
-					<div class="col-md-3 col-xs-12">
-						<div class="centered bounce-in">
-							<span class="stat-icon"><span
-								class="pe-7s-light bounce-in no-display animated bounceIn appear"></span></span>
-							<h5>
-								<span class="countup">99999999</span>
-							</h5>
-							<h6>HOURS SAVED</h6>
-						</div>
-					</div>
-					<div class="col-md-3 col-xs-12">
-						<div class="centered bounce-in">
-							<span class="stat-icon"><span
-								class="pe-7s-graph1 bounce-in no-display animated bounceIn appear"></span></span>
-							<h5>
-								<span class="countup">99999999</span>
-							</h5>
-							<h6>HOURS SAVED</h6>
-						</div>
-					</div>
-					<div class="col-md-3 col-xs-12">
-						<div class="centered bounce-in">
-							<span class="stat-icon"><span
-								class="pe-7s-box2 bounce-in no-display animated bounceIn appear"></span></span>
-							<h5>
-								<span class="countup">99999999</span>
-							</h5>
-							<h6>HOURS SAVED</h6>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</section>
-
-		<!-- CLIENTS LOGOS -->
-		<div class="grey">
-			<div class="container">
-
-				<div class="row">
-					<div class="centered gap fade-down section-heading">
-						<h2 class="main-title">Previous Clients</h2>
-						<hr>
-						<p>She evil face fine calm have now. Separate screened he
-							outweigh of distance landlord.</p>
-					</div>
-				</div>
-				<!-- row -->
-
-				<div class="row centered">
-					<div id="logo-carousel" class="fade-up">
-						<div class="item">
-							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
-						</div>
-						<div class="item">
-							<img src=<c:url value="/resources/assets/img/logo/logo2.png"/> alt="">
-						</div>
-						<div class="item">
-							<img src=<c:url value="/resources/assets/img/logo/logo3.png"/> alt="">
-						</div>
-						<div class="item">
-							<img src=<c:url value="/resources/assets/img/logo/logo4.png"/> alt="">
-						</div>
-						<div class="item">
-							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
-						</div>
-					</div>
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- dg -->
-
+	
+	
 		<div class="container">
 			<div class="row gap mt">
 				<div class="centered gap fade-down section-heading">
@@ -721,86 +477,156 @@ a#yesyes{
 
 		</div>
 
-		<!-- CALL TO ACTION -->
-		<div id="call">
-			<div class="container">
-				<div class="row fade-up">
-					<h3>Call To Action</h3>
-					<div class="col-lg-8 col-lg-offset-2">
-						<p>Danger nearer length oppose really add now either. But ask
-							regret eat branch fat garden. Become am he except wishes. Past so
-							at door we walk want such sang. Feeling colonel get her garrets
-							own.</p>
-						<p>
-							<button type="button"
-								class="btn btn-outlined btn-primary btn-lg bounce-in">Call
-								To Action Button</button>
-						</p>
-					</div>
-				</div>
-				<!-- row -->
-			</div>
-			<!-- container -->
-		</div>
-		<!-- Call to action -->
 
-		<div class="container">
-			<div class="row mt">
+
+		<!-- <section id="services" class="divider-wrapper">
+			<div class="container">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Get In Touch</h2>
+					<h2 class="main-title">Our Services</h2>
 					<hr>
 					<p>She evil face fine calm have now. Separate screened he
 						outweigh of distance landlord.</p>
 				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<span class="pe-7s-chat icon"></span>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Quality Design</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<i class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Awesome Support</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<i class="fa fa-globe"></i>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Global Services</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+				</div>
+			</div>
+			container
+		</section> -->
+
+		<section id="portfolio" class="white">
+			<div class="container">
+			
+				<div class="gap"></div>
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">활동 후기</h2>
+					<hr>
+				</div>
+				<!--/#portfolio-filter-->
+				<ul class="portfolio-items col-3 isotope fade-up gap">
+				<c:forEach var="p_list" items="${p_list}">
+					<li class="portfolio-item apps isotope-item">
+						<a href="/pj/ReadPhoto?seq=${p_list.b_no}">
+						<div class="item-inner">
+							<img src=<c:url value="${p_list.b_route}"/> alt="" class="img-responsive4">
+						</div>
+						</a>
+					</li>
+				</c:forEach>
+					<!--/.portfolio-item-->
+				</ul>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="photoBoard?stanum=1&endnum=6"><input class="btn form-control btn-outlined btn-primary" type="button" value="후기보러가기"></a>
+				</div>
+			</div>
+				
+		</section>
+
+		<section id="portfolio" class="white">
+		<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">신청 목록</h2>
+					<hr>
+				</div>
+		<div class="col-md-12">
+		<div class="row gap">
+					<c:forEach var="l_list" items="${l_list}">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12 post fade-up">
+							<div class="row">
+								<div class="col-md-12">
+									<h3>
+										<a href="l_Read?l_no=${l_list.l_no}" class="post-title">${l_list.l_title}</a>
+									</h3>
+								</div>
+							</div>
+							<div class="row post-content">
+								<div class="col-md-3">
+									<div class="item-inner">
+										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
+									</div>
+								</div>
+								<div class="col-md-9">
+									<p>${l_list.l_con}</p>
+									<p>
+										<a class="btn btn-outlined btn-primary pull-right"
+											href="l_Read?l_no=${l_list.l_no}">Read more</a>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="proposal_list"><input class="btn form-control btn-outlined btn-primary" type="button" value="신청게시판가기"></a>
+				</div>
+			</div>
+		</div>
+		</section>
+
+		<!-- BLOG POSTS -->
+		<div class="container gap">
+			<div class="row mt">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">게시글</h2>
+					<hr>
+				</div>
 			</div>
 			<!-- row -->
+				<div>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>작성자</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+							<c:forEach var="F_board" items="${F_board}">
+							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							</c:forEach>
+						</table>
+						<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="freeboard?pagenum=1"><input class="btn form-control btn-outlined btn-primary" type="button" value="게시글더보러가기"></a>
+				</div>
+						
+              	</div>
+			
+			<!-- row -->
+			
 		</div>
 		<!-- container -->
 
-		<div id="mapwrapper" class="gap">
-			<div id="map" class="fade-up"></div>
-		</div>
-
-		<div class="container" id="contact-us">
-			<div class="row gap">
-				<div class="fade-up col-md-6 fade-up">
-					<p>Merry alone do it burst me songs. Sorry equal charm joy her
-						those folly ham. In they no is many both. Recommend new contented
-						intention improving bed performed age. Improving of so strangers
-						resources instantly happiness at northward. Danger nearer length
-						oppose really add now either. But ask regret eat branch fat
-						garden. Become am he except wishes. Past so at door we walk want
-						such sang. Feeling colonel get her garrets own.</p>
-				</div>
-				<div class="fade-up col-md-6 fade-up">
-					<div id="message"></div>
-					<form method="post" action="sendemail.php" id="contactform">
-						<p>
-							<input type="text" class="form-control" name="name" id="name"
-								placeholder="Name" />
-						</p>
-						<p>
-							<input type="text" class="form-control" name="email" id="email"
-								placeholder="Email" />
-						</p>
-						<p>
-							<input type="text" class="form-control" name="website"
-								id="website" placeholder="Website" />
-						</p>
-						<p>
-							<textarea name="comments" class="form-control" id="comments"
-								placeholder="Comments"></textarea>
-						</p>
-						<input class="btn btn-outlined btn-primary" type="submit"
-							name="submit" value="Submit" />
-					</form>
-				</div>
-			</div>
-			<!-- row -->
-		</div>
-
+		 <div class="container post-list gap"></div>
 	</div>
-
+	
 	<!-- MAIN FOOTER -->
 	<div id="footerwrap">
 		<div class="container">
@@ -808,38 +634,23 @@ a#yesyes{
 				<div class="col-lg-4">
 					<h4 class="widget-title">Tags</h4>
 					<ul class="tag-widget">
-						<li><a class="btn btn-primary btn-outlined" href="#">News</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Blog</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Photos</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Gallery</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Celeb</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Video</a></li>
-						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
+					<li><a class="btn btn-primary btn-outlined" href="proposal_list">봉사활동현황</a></li>
+						<li><a class="btn btn-primary btn-outlined" href="freeboard?pagenum=1">자유게시판</a></li>
+						<li><a class="btn btn-primary btn-outlined" href="reqboard?pagenum=1">요청게시판</a></li>
+						<li><a class="btn btn-primary btn-outlined" href="photoBoard?stanum=1&endnum=6">포토후기</a></li>
+						<li><a class="btn btn-primary btn-outlined" href="qna">Q&A</a></li>
 					</ul>
 				</div>
-				<!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Global Coverage</h4>
-					<p>The point of using Lorem Ipsum is that it has a more-or-less
-						normal distribution of letters, as opposed to using 'Content here,
-						content here', making it look like readable English.</p>
-				</div>
-				<!--col-lg-4-->
-				<div class="col-lg-4">
-					<h4 class="widget-title">Find Us</h4>
+				
+				<div class="col-lg-8">
+					<h4 class="widget-title">Our Team</h4>
 					<p>
-						New York Office,<br /> New York.<br /> F: +458 4808-5489<br /> E:
-						<a href="mailto:#">hello@quoteguys.com</a>
+						Github: <a href="https://github.com/moseS052/teamP.git">https://github.com/moseS052/teamP.git</a>
 					</p>
 				</div>
 				<!--col-lg-4-->
 			</div>
 			<!-- row -->
-		</div>
-		<!-- container -->
-		<div id="footer-copyright">
-			<div class="container">Created With Love By Distinctive Themes
-			</div>
 		</div>
 	</div>
 
@@ -961,7 +772,7 @@ function alarmList() {
 
 </script>
 <script type="text/javascript">
-        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
         
         // 접근 토큰 값 출력
         const token=naver_id_login.oauthParams.access_token;

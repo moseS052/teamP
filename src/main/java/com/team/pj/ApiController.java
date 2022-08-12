@@ -361,12 +361,11 @@ public class ApiController {
 		model.addAttribute("l_date",re.l_date);
 		model.addAttribute("nop",re.nop);
 		ArrayList<Integer>sd=team.bringt_no(l_no);
-		String str="";
-		for(int i=0;i<sd.size();i++) {
-			str+=sd.get(i);
-		}
+		/*
+		 * String str=""; for(int i=0;i<sd.size();i++) { str+=sd.get(i); }
+		 */
 		System.out.println(sd);
-		model.addAttribute("sd",str);
+		model.addAttribute("sd",sd);
 		return "proposalUpdate";
 	}
 	//--update read--//
@@ -677,7 +676,7 @@ public class ApiController {
 		System.out.println("l_no="+l_no);
 		iteamP team=sqlSession.getMapper(iteamP.class);
 		
-		String uploadFolder = "C:/Users/admin/eclipse-workspace/teamP/src/main/webapp/resources/assets/L_route/";
+		String uploadFolder = "/var/lib/tomcat9/webapps/pj/resources/assets/L_route/";
 		String realDataFolder = "resources/assets/L_route/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {

@@ -45,7 +45,7 @@ public class routeController {
 //		System.out.println("userimage 寃쎈�:"+path);
 
 		
-		String uploadPath = "C:/Users/admin/eclipse-workspace/teamP/src/main/webapp/resources/assets/userimg/";
+		String uploadPath = "/var/lib/tomcat9/webapps/pj/resources/assets/userimg/";
 //		String imaUploadPath = uploadPath +File.separator +"userim";
 //		System.out.println(imaUploadPath);
 		UUID uuid = UUID.randomUUID();
