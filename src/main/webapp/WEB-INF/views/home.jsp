@@ -231,22 +231,26 @@ a#yesyes{
 		<section id="about" class="section-wrapper">
 			<div class="container">
 				<div class="centered gap fade-down section-heading">
-					<h2 class="main-title">Our Story</h2>
+					<h2 class="main-title">재능드림 가이드</h2>
 					<hr>
-					<p>She evil face fine calm have now. Separate screened he
-						outweigh of distance landlord.</p>
+					<!-- <p>She evil face fine calm have now. Separate screened he
+						outweigh of distance landlord.</p> -->
 				</div>
 
 				<div class="row gap">
 					<div class="col-md-8 col-md-offset-2">
-						<img src=<c:url value="/resources/assets/img/screens.png"/> class="fade-up img-responsive"
-							alt="Alt" />
+						<img src=<c:url value="/resources/assets/img/home1.png"/> class="fade-up img-responsive"
+							alt="Alt" /><br>
+						<img src=<c:url value="/resources/assets/img/home2.png"/> class="fade-up img-responsive"
+							alt="Alt" /><br>
+						<img src=<c:url value="/resources/assets/img/home3.png"/> class="fade-up img-responsive"
+							alt="Alt" />		
 					</div>
 				</div>
 
 				<div class="row gap">
 					<div class="col-md-8 fade-up">
-						<p>IIn as name to here them deny wise this. As rapid woody my
+						<!-- <p>IIn as name to here them deny wise this. As rapid woody my
 							he me which. Men but they fail shew just wish next put. Led all
 							visitor musical calling nor her. Within coming figure sex things
 							are. Pretended concluded did repulsive education smallness yet
@@ -270,9 +274,9 @@ a#yesyes{
 							instrument. If continue building numerous of at relation in
 							margaret. Lasted engage roused mother an am at. Other early while
 							if by do to. Missed living excuse as be. Cause heard fat above
-							first shall for. My smiling to he removal weather on anxious.</p>
+							first shall for. My smiling to he removal weather on anxious.</p> -->
 					</div>
-					<div class="col-md-4">
+					<!-- <div class="col-md-4">
 						<div class="qa-message-list" id="wallmessages">
 							<div class="message-item fade-up" id="m16">
 								<div class="message-inner">
@@ -403,7 +407,7 @@ a#yesyes{
 						</div>
 					</div>
 				</div>
-			</div>
+			</div> -->
 		</section>
 
 		<section id="services" class="divider-wrapper">
@@ -554,7 +558,7 @@ a#yesyes{
 					</div>
 
 		<section id="stats" class="divider-wrapper">
-			<div class="container">
+			<!-- <div class="container">
 
 				<div class="row">
 					<div class="centered gap fade-down section-heading">
@@ -563,10 +567,10 @@ a#yesyes{
 						<p>She evil face fine calm have now. Separate screened he
 							outweigh of distance landlord.</p>
 					</div>
-				</div>
+				</div> -->
 				<!-- row -->
 
-				<div class="row gap">
+				<!-- <div class="row gap">
 					<div class="col-md-3 col-xs-12">
 						<div class="centered bounce-in">
 							<span class="stat-icon"><span
@@ -609,11 +613,11 @@ a#yesyes{
 					</div>
 				</div>
 
-			</div>
+			</div> -->
 		</section>
 
 		<!-- CLIENTS LOGOS -->
-		<div class="grey">
+		<!-- <div class="grey">
 			<div class="container">
 
 				<div class="row">
@@ -624,7 +628,7 @@ a#yesyes{
 							outweigh of distance landlord.</p>
 					</div>
 				</div>
-				<!-- row -->
+				row
 
 				<div class="row centered">
 					<div id="logo-carousel" class="fade-up">
@@ -644,7 +648,7 @@ a#yesyes{
 							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<!-- row -->
 			</div>
 			<!-- container -->
@@ -725,7 +729,7 @@ a#yesyes{
 		<div id="call">
 			<div class="container">
 				<div class="row fade-up">
-					<h3>Call To Action</h3>
+					<!-- <h3>Call To Action</h3>
 					<div class="col-lg-8 col-lg-offset-2">
 						<p>Danger nearer length oppose really add now either. But ask
 							regret eat branch fat garden. Become am he except wishes. Past so
@@ -735,7 +739,7 @@ a#yesyes{
 							<button type="button"
 								class="btn btn-outlined btn-primary btn-lg bounce-in">Call
 								To Action Button</button>
-						</p>
+						</p> -->
 					</div>
 				</div>
 				<!-- row -->
@@ -744,7 +748,7 @@ a#yesyes{
 		</div>
 		<!-- Call to action -->
 
-		<div class="container">
+		<!-- <div class="container">
 			<div class="row mt">
 				<div class="centered gap fade-down section-heading">
 					<h2 class="main-title">Get In Touch</h2>
@@ -752,7 +756,7 @@ a#yesyes{
 					<p>She evil face fine calm have now. Separate screened he
 						outweigh of distance landlord.</p>
 				</div>
-			</div>
+			</div> -->
 			<!-- row -->
 		</div>
 		<!-- container -->
@@ -764,15 +768,15 @@ a#yesyes{
 		<div class="container" id="contact-us">
 			<div class="row gap">
 				<div class="fade-up col-md-6 fade-up">
-					<p>Merry alone do it burst me songs. Sorry equal charm joy her
+					<!-- <p>Merry alone do it burst me songs. Sorry equal charm joy her
 						those folly ham. In they no is many both. Recommend new contented
 						intention improving bed performed age. Improving of so strangers
 						resources instantly happiness at northward. Danger nearer length
 						oppose really add now either. But ask regret eat branch fat
 						garden. Become am he except wishes. Past so at door we walk want
-						such sang. Feeling colonel get her garrets own.</p>
+						such sang. Feeling colonel get her garrets own.</p> -->
 				</div>
-				<div class="fade-up col-md-6 fade-up">
+				<!-- <div class="fade-up col-md-6 fade-up">
 					<div id="message"></div>
 					<form method="post" action="sendemail.php" id="contactform">
 						<p>
@@ -794,7 +798,7 @@ a#yesyes{
 						<input class="btn btn-outlined btn-primary" type="submit"
 							name="submit" value="Submit" />
 					</form>
-				</div>
+				</div> -->
 			</div>
 			<!-- row -->
 		</div>
@@ -802,7 +806,7 @@ a#yesyes{
 	</div>
 
 	<!-- MAIN FOOTER -->
-	<div id="footerwrap">
+	<!-- <div id="footerwrap">
 		<div class="container">
 			<div class="row">
 				<div class="col-lg-4">
@@ -817,14 +821,14 @@ a#yesyes{
 						<li><a class="btn btn-primary btn-outlined" href="#">Social</a></li>
 					</ul>
 				</div>
-				<!--col-lg-4-->
+				col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Global Coverage</h4>
 					<p>The point of using Lorem Ipsum is that it has a more-or-less
 						normal distribution of letters, as opposed to using 'Content here,
 						content here', making it look like readable English.</p>
 				</div>
-				<!--col-lg-4-->
+				col-lg-4
 				<div class="col-lg-4">
 					<h4 class="widget-title">Find Us</h4>
 					<p>
@@ -832,11 +836,11 @@ a#yesyes{
 						<a href="mailto:#">hello@quoteguys.com</a>
 					</p>
 				</div>
-				<!--col-lg-4-->
+				col-lg-4
 			</div>
-			<!-- row -->
+			row
 		</div>
-		<!-- container -->
+		container
 		<div id="footer-copyright">
 			<div class="container">Created With Love By Distinctive Themes
 			</div>
@@ -844,7 +848,7 @@ a#yesyes{
 	</div>
 
 	<a id="gototop" class="gototop no-display" href="#"><i
-		class="fa fa-angle-up"></i></a>
+		class="fa fa-angle-up"></i></a> -->
 	<!-- END MAIN FOOTER -->
 	
 	<!-- Bootstrap core JavaScript
@@ -961,7 +965,7 @@ function alarmList() {
 
 </script>
 <script type="text/javascript">
-        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
+        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
         
         // 접근 토큰 값 출력
         const token=naver_id_login.oauthParams.access_token;
