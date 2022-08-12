@@ -318,12 +318,12 @@ location.replace("http://localhost:8080/pj/");
 <script type="text/javascript">
 
 
-var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://localhost:8080/pj/");    // Client ID, CallBack URL 삽입
+var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj/");    // Client ID, CallBack URL 삽입
                                    // 단 'localhost'가 포함된 CallBack URL
 var state = naver_id_login.getUniqState();
 
 naver_id_login.setButton("green", 4, 40);
-naver_id_login.setDomain("http://localhost:8080/pj/login");    //  URL
+naver_id_login.setDomain("http://144.24.90.152:8080/pj/login");    //  URL
 naver_id_login.setState(state);
 //naver_id_login.setPopup();
 naver_id_login.init_naver_id_login();

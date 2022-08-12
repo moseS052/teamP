@@ -119,7 +119,7 @@ public class photoBoardController {
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		String[] arr1=req.getParameterValues("route");
 		String[] arr2;
-		String deleteFolder="C:/Users/admin/git/teamP/src/main/webapp/resources/assets/userimg/";
+		String deleteFolder="/var/lib/tomcat9/webapps/pj/resources/assets/userimg/";
 		
 		for(int i=0; i<arr1.length; i++) {
 			System.out.println("루트에 안들어오나="+arr1[i]);
@@ -139,7 +139,7 @@ public class photoBoardController {
 		HttpSession session = req.getSession();
 		int b_no=(int)session.getAttribute("photoboardB_bo");
 		System.out.println(b_no);
-		String uploadFolder="C:/Users/admin/git/teamP/src/main/webapp/resources/assets/userimg/";
+		String uploadFolder="/var/lib/tomcat9/webapps/pj/resources/assets/userimg/";
 		String realDataFolder = "/resources/assets/userimg/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
@@ -190,7 +190,7 @@ public class photoBoardController {
 		HttpSession session = req.getSession();
 		iphotoBoard ipt = sqlSession.getMapper(iphotoBoard.class);
 		int a = ipt.maxB_noFind((int) session.getAttribute("m_no"));
-		String uploadFolder = "C:/Users/admin/Desktop/p/teamP/src/main/webapp/resources/assets/userimg/";
+		String uploadFolder = "/var/lib/tomcat9/webapps/pj/resources/assets/userimg/";
 		String realDataFolder = "/resources/assets/userimg/";
 		List<MultipartFile> filelist = request.getFiles("file");
 		for (MultipartFile mf : filelist) {
@@ -274,7 +274,7 @@ public class photoBoardController {
 		int b_no=Integer.parseInt(req.getParameter("b_no"));
 		String[] arr1=req.getParameterValues("route");
 		String[] arr2;
-		String deleteFolder="C:/Users/admin/git/teamP/src/main/webapp/resources/assets/userimg/";
+		String deleteFolder="/var/lib/tomcat9/webapps/pj/resources/assets/userimg/";
 		ipt.deletePhotoBoard(b_no);
 		for(int i=0; i<arr1.length; i++) {
 			ipt.deleteRoutePhoto(b_no, arr1[i]);

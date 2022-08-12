@@ -473,7 +473,7 @@ $(document)
 	let ar =a.split("("); 
 // 	console.log(ar[0]);
 // 	console.log('"'+'map?key='+ar[0]+'"');
- 	window.open('http://192.168.0.2:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
+ 	window.open('http://144.24.90.152:8080/pj/map?key='+ar[0],"_blank", "width=800, height=580, top=40, left=1340");
 	return false;
 	// 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
 })
