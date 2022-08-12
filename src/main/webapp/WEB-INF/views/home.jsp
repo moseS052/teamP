@@ -108,11 +108,17 @@ a#yesyes{
 }
 .img-responsive3{
 	width: 100%;
-    height: 100px;
+    height: 150px;
 }
 .img-responsive4{
 	width: 100%;
     height: 250px;
+}
+#cal_size{
+	width: 250px;
+}
+#btn-move{
+	margin:40px;
 }
 </style>
 </head>
@@ -478,7 +484,7 @@ a#yesyes{
 				
 		</section>
 
-		<section id="testimonials" class="divider-wrapper">
+		<section id="portfolio" class="white">
 		<div class="centered gap fade-down section-heading">
 					<h2 class="main-title">신청 목록</h2>
 					<hr>
@@ -498,16 +504,19 @@ a#yesyes{
 							</div>
 							<div class="row post-content">
 								<div class="col-md-3">
-									<div class="item-inner">
+									<div class="item-inner" id="cal_size">
 										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
 									</div>
 								</div>
-								<div class="col-md-9">
-									<p>${l_list.l_con}</p>
-									<p>
-										<a class="btn btn-outlined btn-primary pull-right"
-											href="l_Read?l_no=${l_list.l_no}">Read more</a>
-									</p>
+								
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-5">
+									<p style="font-size:20px">${l_list.l_date}<br>${l_list.l_koo}</p>
+									<p><a class="btn btn-outlined btn-primary pull-right" 
+											href="l_Read?l_no=${l_list.l_no}">Read more</a></p>
 								</div>
 							</div>
 						</div>
@@ -904,7 +913,6 @@ $(document)
 
 
 .on('click','#question',function(){
-	console.log(`${userinfo}`=='')
 	if(`${userinfo}`==''){
 		alert('로그인 후 사용가능합니다.')
 	}else{
@@ -914,7 +922,6 @@ $(document)
 
 .on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
-	console.log(ms);
 	$.ajax({
 		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
 		success:function(){
@@ -975,10 +982,6 @@ function alarmList() {
             let nickname=naver_id_login.getProfileData('nickname');
         	let name=naver_id_login.getProfileData('name');
         	let phone=naver_id_login.getProfileData('mobile');
-        	console.log("mail: "+mail);
-        	console.log("nickname: "+nickname);
-        	console.log("name: "+name);
-        	console.log("phone: "+phone);
         	
         	var a=[];
         	a.push(mail);
@@ -988,7 +991,6 @@ function alarmList() {
         	for(let i=0;i<a.length;i++){
         		if(a[i]==null||a[i]==''||a[i]==undefined){
             		a[i]="0";
-            		console.log("처리 후 a["+i+"]는"+a[i]);
             	}
         	}
         	
@@ -996,7 +998,6 @@ function alarmList() {
         		type:'post',url:'navercheck',dataType:'text',async: false,
         		data:{mail:mail},
         		success:function(data){
-        			console.log("navercheck_count: "+data);
         			alert('naver로 로그인합니다');        			
         			if(parseInt(data) == 0){//new member
         				//nickname overlap check
@@ -1004,7 +1005,6 @@ function alarmList() {
         					type:'post',url:'nickcheck',async: false,
         					data:{nick:a[1]},
         					success:function(data){
-        						console.log("닉넴중복 수는 "+data);
         						if(parseInt(data)!=0){//nickname overlap
         	        				for(i=0;i<data.length;i++){
         	        					a[1]=a[1]+'.';
@@ -1024,15 +1024,10 @@ function alarmList() {
         	        			name:a[2],        	        			
         	        			phone:a[3] },
         	        		beforeSend:function(){
-        	        			console.log("보내기 전 naver 완전신규 id는"+a[0]);
-        	        			console.log("보내기 전 naver 완전신규 nick는"+a[1]);
-        	        			console.log("보내기 전 naver 완전신규 name는"+a[2]);
-        	        			console.log("보내기 전 naver 완전신규 phone는"+a[3]);
         	        			
         	        			//alert('보내기전');
         	        		},
         	        		success:function(){
-        	        			console.log("naver 완전신규 id는"+mail);
         	        			alert('naver로 접속하신 걸 환영합니다');  
         	        			
         	        		},

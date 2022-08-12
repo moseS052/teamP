@@ -61,10 +61,8 @@
 <script>
 $(document)
 .ready(function(){
-	console.log(`${m_no}`);
 })
 .on('click','a',function(){
-	console.log($(this).attr("sbc"))
 	$('#avatarMain').attr("src",$(this).attr("sbc"));
 	return false;
 })
@@ -91,7 +89,6 @@ $(document)
 		}else if($('#avatarChanger').val()=='2'){
 			let form = new FormData();
 			form.append("file1", $('#file1')[0].files[0]);
-			console.log(form);
 		 	$.ajax({
 				url:'avatarChange_01',
 				processData : false,

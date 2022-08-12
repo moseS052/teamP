@@ -263,7 +263,6 @@ let doo=5;
 		}
 	})
 	.on('click','#delete_comment',function(){
-		console.log($(this).attr('value'));
 		let s = $(this).attr('value');
 		if(confirm('댓글을 삭제하시겠습니까')){
 		 	$.ajax({
@@ -272,7 +271,6 @@ let doo=5;
 				dataType:'json',
 				type:'get',
 				success:function(data){
-					console.log(data);
 					commentLIst();
 				}
 			});
@@ -282,7 +280,6 @@ let doo=5;
 		let s=$(this).attr('seq');
 		let t=$(this).attr('value');
 		$('#comment_cno').val(t);
-		console.log(t);
 		let p =$('#page').val();
 		let str=$('#comment_content'+t).text();
 		let html='<textarea id="modifycomment" tseq="'+t+'" style="width:800px; height:100px; resize:none;">'+str+'</textarea><br>'
@@ -291,9 +288,6 @@ let doo=5;
 		
 	})
 	.on('click','#reply_revice',function(){
-		console.log('버튼 눌리나요');
-		console.log($('#modifycomment').attr('tseq'));
-		console.log($('#modifycomment').val());
 		  $.ajax({
 			url:'update_comment',
 			data:{
@@ -310,14 +304,11 @@ let doo=5;
 	.on('click','#btndoo',function(){		
 		let s=$(this).attr('seqnum');
 		doo+=5;
-		console.log(s);
 		rerplyList(s,doo);
 	})
 	.on('click','#re_reply',function(){
 		let s=parseInt($(this).attr('reseq'));
-		console.log($(this).attr('reseq'));
 		let t=$(this).text().split('&nbsp;');
-		console.log($('#reply_controll'+s).val());
 			
 		if($('#reply_controll'+s).val()=='close'){
 			rerplyList(s,doo);
@@ -377,7 +368,6 @@ let doo=5;
 	})
 	.on('click','#rerply_update',function(){
 		let c_no = $(this).attr('seq1');
-		console.log(c_no);
 		let c_pa_no = $(this).attr('seq2');
 		let b_no = $(this).attr('seq3');
 		let m_no = $(this).attr('seq4');
@@ -394,7 +384,6 @@ let doo=5;
 			dataType:'json',
 			type:'post',
 			success:function(data){
-				console.log(data);
 				rerplyList(c_pa_no);
 			}
 			
@@ -403,7 +392,6 @@ let doo=5;
  	.on('click','#ansercomment',function(){
  		let str='@'+$(this).attr('seq')+' ';
  		$('#re_replytextArea').val(str);
-	 	console.log();
  	})
 	//대댓글 리스트 불러오기
 	function rerplyList(num, doo){
@@ -454,7 +442,6 @@ let doo=5;
 			type:'post',
 			dataType:'json',
 			success:function(data){
-				console.log(data);
 				rerplyList(s);
 			}
 		});
@@ -473,7 +460,6 @@ let doo=5;
 			type:'post',
 			dataType:'json',
 			success:function(data){
-				console.log(data);
 				$('#re_replytextArea').val('');
 				rerplyList(s);
 			}
@@ -493,7 +479,6 @@ let doo=5;
 			type:'post',
 			dataType:'json',
 			success:function(data){
-				console.log(data);
 				$('#re_replytextArea').val('');
 				rerplyList(s);
 			}

@@ -361,12 +361,12 @@ public class ApiController {
 		model.addAttribute("l_date",re.l_date);
 		model.addAttribute("nop",re.nop);
 		ArrayList<Integer>sd=team.bringt_no(l_no);
-		String str="";
-		for(int i=0;i<sd.size();i++) {
-			str+=sd.get(i);
-		}
+//		String str="";
+//		for(int i=0;i<sd.size();i++) {
+//			str+=sd.get(i);
+//		}
 		System.out.println(sd);
-		model.addAttribute("sd",str);
+		model.addAttribute("sd",sd);
 		return "proposalUpdate";
 	}
 	//--update read--//
@@ -393,14 +393,23 @@ public class ApiController {
 		int lcount = lcom.countLComment_t(l_no);
 		System.out.println("댓글 개수=="+ lcount);
 		model.addAttribute("countLComment",lcount);
-		model.addAttribute("userinfo",session.getAttribute("id"));
-		model.addAttribute("m_no",session.getAttribute("m_no"));
-		model.addAttribute("sessionm_no",session.getAttribute("m_no"));
-		String nick=(String) session.getAttribute("nick");
-		if(nick.length()>5) {
-			nick=nick.substring(0, 5)+"..";
+
+		if(session.getAttribute("id")==null) { //로그인 전
+			model.addAttribute("userinfo", null);
+		}else {
+			model.addAttribute("userinfo",session.getAttribute("id"));
+			model.addAttribute("m_no",session.getAttribute("m_no"));
+			model.addAttribute("sessionm_no",session.getAttribute("m_no"));
+			
+			String nick=(String) session.getAttribute("nick");
+			if(nick.length()>5) {
+				nick=nick.substring(0, 5)+"..";
+			}
+			model.addAttribute("nick",nick);	
+			String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
+			model.addAttribute("avatar",avatar);
 		}
-		model.addAttribute("nick",nick);
+		
 		ArrayList<String> pho=team.l_routeRead(l_no);
 		model.addAttribute("list",pho);
 		team.l_views(l_no);
@@ -426,8 +435,6 @@ public class ApiController {
 		}
 //		System.out.println(str);
 		model.addAttribute("sd",str);
-		String avatar=team.getAvaRoute((int)session.getAttribute("m_no"));
-		model.addAttribute("avatar",avatar);
 		return "l_Read";
 	}
 	//--list read--//
