@@ -108,11 +108,17 @@ a#yesyes{
 }
 .img-responsive3{
 	width: 100%;
-    height: 100px;
+    height: 150px;
 }
 .img-responsive4{
 	width: 100%;
     height: 250px;
+}
+#cal_size{
+	width: 250px;
+}
+#btn-move{
+	margin:40px;
 }
 </style>
 </head>
@@ -405,8 +411,255 @@ a#yesyes{
 				</div>
 			</div>
 		</section>
-	
-	
+<!-- aa -->
+		<section id="services" class="divider-wrapper">
+			<div class="container">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">Our Services</h2>
+					<hr>
+					<p>She evil face fine calm have now. Separate screened he
+						outweigh of distance landlord.</p>
+				</div>
+				<div class="row">
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<span class="pe-7s-chat icon"></span>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Quality Design</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<i class="fa fa-question-circle"></i>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Awesome Support</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+
+					<div class="col-lg-1 col-md-1 col-sm-1 centered bounce-in">
+						<i class="fa fa-globe"></i>
+					</div>
+					<div class="col-lg-3 col-md-3 col-sm-3 fade-up">
+						<h3>Global Services</h3>
+						<p>It is a long established fact that a reader will be
+							distracted by the readable content of a page when looking at its
+							layout.</p>
+					</div>
+				</div>
+			</div>
+			<!-- container -->
+		</section>
+
+		<section id="portfolio" class="white">
+			<div class="container">
+			
+				<div class="gap"></div>
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">활동 후기</h2>
+					<hr>
+				</div>
+				<!--/#portfolio-filter-->
+				<ul class="portfolio-items col-3 isotope fade-up gap">
+				<c:forEach var="p_list" items="${p_list}">
+					<li class="portfolio-item apps isotope-item">
+						<a href="/pj/ReadPhoto?seq=${p_list.b_no}">
+						<div class="item-inner">
+							<img src=<c:url value="${p_list.b_route}"/> alt="" class="img-responsive4">
+						</div>
+						</a>
+					</li>
+				</c:forEach>
+					<!--/.portfolio-item-->
+				</ul>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="photoBoard?stanum=1&endnum=6"><input class="btn form-control btn-outlined btn-primary" type="button" value="후기보러가기"></a>
+				</div>
+			</div>
+				
+		</section>
+
+		<section id="portfolio" class="white">
+		<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">신청 목록</h2>
+					<hr>
+				</div>
+		<div class="col-md-12">
+		<div class="row gap">
+					<c:forEach var="l_list" items="${l_list}">
+				<div class="col-md-6">
+					<div class="row">
+						<div class="col-md-12 post fade-up">
+							<div class="row">
+								<div class="col-md-12">
+									<h3>
+										<a href="l_Read?l_no=${l_list.l_no}" class="post-title">${l_list.l_title}</a>
+									</h3>
+								</div>
+							</div>
+							<div class="row post-content">
+								<div class="col-md-3">
+									<div class="item-inner" id="cal_size">
+										<img src=<c:url value="${l_list.l_route}"/> alt="" class="img-responsive3">
+									</div>
+								</div>
+								
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-1">
+								</div>
+								<div class="col-md-5">
+									<p style="font-size:20px">${l_list.l_date}<br>${l_list.l_koo}</p>
+									<p><a class="btn btn-outlined btn-primary pull-right" 
+											href="l_Read?l_no=${l_list.l_no}">Read more</a></p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				</c:forEach>
+				<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="proposal_list"><input class="btn form-control btn-outlined btn-primary" type="button" value="신청게시판가기"></a>
+				</div>
+			</div>
+		</div>
+		</section>
+
+		<!-- BLOG POSTS -->
+		<div class="container">
+			<div class="row mt">
+				<div class="centered gap fade-down section-heading">
+					<h2 class="main-title">게시글</h2>
+					<hr>
+				</div>
+			</div>
+			<!-- row -->
+				<div>
+						<table id='mytable' class="table table-striped">
+						<thead><tr><th>작성자</th><th>제목</th><th>작성일자</th><th>조회수</th></tr></thead>
+							<tbody></tbody>
+							<c:forEach var="F_board" items="${F_board}">
+							<tr><td>${F_board.nick}</td><td><a href="freedetail?b_no=${F_board.b_no}">${F_board.b_title}</a></td><td>${F_board.b_date}</td><td>${F_board.views}</td></tr>
+							</c:forEach>
+						</table>
+						<div class="col-md-2 post fade-up"></div>
+				<div class="col-md-8 post fade-up"></div>
+				<div class="col-md-2 post fade-up"><a href="freeboard?pagenum=1"><input class="btn form-control btn-outlined btn-primary" type="button" value="게시글더보러가기"></a>
+				</div>
+						
+              	</div>
+			
+			<!-- row -->
+		</div>
+		<!-- container -->
+
+		<div class="container post-list gap">
+					</div>
+
+		<section id="stats" class="divider-wrapper">
+			<div class="container">
+
+				<div class="row">
+					<div class="centered gap fade-down section-heading">
+						<h2 class="main-title">Stats Are Fun</h2>
+						<hr>
+						<p>She evil face fine calm have now. Separate screened he
+							outweigh of distance landlord.</p>
+					</div>
+				</div>
+				<!-- row -->
+
+				<div class="row gap">
+					<div class="col-md-3 col-xs-12">
+						<div class="centered bounce-in">
+							<span class="stat-icon"><span
+								class="pe-7s-timer bounce-in no-display animated bounceIn appear"></span></span>
+							<h5>
+								<span class="countup">99999999</span>
+							</h5>
+							<h6>HOURS SAVED</h6>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-12">
+						<div class="centered bounce-in">
+							<span class="stat-icon"><span
+								class="pe-7s-light bounce-in no-display animated bounceIn appear"></span></span>
+							<h5>
+								<span class="countup">99999999</span>
+							</h5>
+							<h6>HOURS SAVED</h6>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-12">
+						<div class="centered bounce-in">
+							<span class="stat-icon"><span
+								class="pe-7s-graph1 bounce-in no-display animated bounceIn appear"></span></span>
+							<h5>
+								<span class="countup">99999999</span>
+							</h5>
+							<h6>HOURS SAVED</h6>
+						</div>
+					</div>
+					<div class="col-md-3 col-xs-12">
+						<div class="centered bounce-in">
+							<span class="stat-icon"><span
+								class="pe-7s-box2 bounce-in no-display animated bounceIn appear"></span></span>
+							<h5>
+								<span class="countup">99999999</span>
+							</h5>
+							<h6>HOURS SAVED</h6>
+						</div>
+					</div>
+				</div>
+
+			</div>
+		</section>
+
+		<!-- CLIENTS LOGOS -->
+		<div class="grey">
+			<div class="container">
+
+				<div class="row">
+					<div class="centered gap fade-down section-heading">
+						<h2 class="main-title">Previous Clients</h2>
+						<hr>
+						<p>She evil face fine calm have now. Separate screened he
+							outweigh of distance landlord.</p>
+					</div>
+				</div>
+				<!-- row -->
+
+				<div class="row centered">
+					<div id="logo-carousel" class="fade-up">
+						<div class="item">
+							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
+						</div>
+						<div class="item">
+							<img src=<c:url value="/resources/assets/img/logo/logo2.png"/> alt="">
+						</div>
+						<div class="item">
+							<img src=<c:url value="/resources/assets/img/logo/logo3.png"/> alt="">
+						</div>
+						<div class="item">
+							<img src=<c:url value="/resources/assets/img/logo/logo4.png"/> alt="">
+						</div>
+						<div class="item">
+							<img src=<c:url value="/resources/assets/img/logo/logo1.png"/> alt="">
+						</div>
+					</div>
+				</div>
+				<!-- row -->
+			</div>
+			<!-- container -->
+		</div>
+		<!-- dg -->
+<!-- bb -->
 		<div class="container">
 			<div class="row gap mt">
 				<div class="centered gap fade-down section-heading">
@@ -715,7 +968,6 @@ $(document)
 
 
 .on('click','#question',function(){
-	console.log(`${userinfo}`=='')
 	if(`${userinfo}`==''){
 		alert('로그인 후 사용가능합니다.')
 	}else{
@@ -725,7 +977,6 @@ $(document)
 
 .on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
-	console.log(ms);
 	$.ajax({
 		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
 		success:function(){
@@ -786,10 +1037,6 @@ function alarmList() {
             let nickname=naver_id_login.getProfileData('nickname');
         	let name=naver_id_login.getProfileData('name');
         	let phone=naver_id_login.getProfileData('mobile');
-        	console.log("mail: "+mail);
-        	console.log("nickname: "+nickname);
-        	console.log("name: "+name);
-        	console.log("phone: "+phone);
         	
         	var a=[];
         	a.push(mail);
@@ -799,7 +1046,6 @@ function alarmList() {
         	for(let i=0;i<a.length;i++){
         		if(a[i]==null||a[i]==''||a[i]==undefined){
             		a[i]="0";
-            		console.log("처리 후 a["+i+"]는"+a[i]);
             	}
         	}
         	
@@ -807,7 +1053,6 @@ function alarmList() {
         		type:'post',url:'navercheck',dataType:'text',async: false,
         		data:{mail:mail},
         		success:function(data){
-        			console.log("navercheck_count: "+data);
         			alert('naver로 로그인합니다');        			
         			if(parseInt(data) == 0){//new member
         				//nickname overlap check
@@ -815,7 +1060,6 @@ function alarmList() {
         					type:'post',url:'nickcheck',async: false,
         					data:{nick:a[1]},
         					success:function(data){
-        						console.log("닉넴중복 수는 "+data);
         						if(parseInt(data)!=0){//nickname overlap
         	        				for(i=0;i<data.length;i++){
         	        					a[1]=a[1]+'.';
@@ -835,15 +1079,10 @@ function alarmList() {
         	        			name:a[2],        	        			
         	        			phone:a[3] },
         	        		beforeSend:function(){
-        	        			console.log("보내기 전 naver 완전신규 id는"+a[0]);
-        	        			console.log("보내기 전 naver 완전신규 nick는"+a[1]);
-        	        			console.log("보내기 전 naver 완전신규 name는"+a[2]);
-        	        			console.log("보내기 전 naver 완전신규 phone는"+a[3]);
         	        			
         	        			//alert('보내기전');
         	        		},
         	        		success:function(){
-        	        			console.log("naver 완전신규 id는"+mail);
         	        			alert('naver로 접속하신 걸 환영합니다');  
         	        			
         	        		},

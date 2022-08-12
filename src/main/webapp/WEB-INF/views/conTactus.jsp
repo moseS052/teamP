@@ -347,7 +347,6 @@ $(document)
 		})
 		.on('click','#goList, #btnSendNote, #yesyes',function(){ //alarm counting
 	let ms=$(this).parent().parent().attr("alseq");
-	console.log(ms);
 	$.ajax({
 		type:'get',url:'alarmCheck',data:{al_no:ms},dataType:'text',
 		success:function(){

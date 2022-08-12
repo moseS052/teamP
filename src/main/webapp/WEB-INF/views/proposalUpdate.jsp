@@ -303,6 +303,7 @@ a#yesyes{
 $(document)
 .ready(function(){
 	let ar = `${sd}`.replace("[","").replace("]","").split(", ");
+	console.log(ar);
 	for(i=0; i<ar.length; i++){
 	 $('input:checkbox[name="che"]').each(function() {
 		     if(this.value == ar[i]){
@@ -376,7 +377,7 @@ $(document)
 	let aa=$('#hid').val()
 	console.log(aa);
 	console.log('"'+'map?key='+aa+'"');
- 	window.open('http://192.168.0.2:8080/pj/map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
+ 	window.open('http://144.24.90.152:8080/pj/map?key='+aa,"_blank", "width=800, height=580, top=40, left=1340");
 	return false;
 	// 현재 주소 종권이 로컬네트워크임, 서버로 옮길 수 있나 확인
 })
