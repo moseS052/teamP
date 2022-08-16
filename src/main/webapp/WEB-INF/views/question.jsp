@@ -230,18 +230,21 @@ a#yesyes{
 						<p style="padding:0 0 0 40px;">문의내역</p>
 					</div>
 		   </div>
-		   <div class="row gap" style="border-bottom:2px solid black;">
+		   <c:if test="${userinfo!='admin' }">
+		   	<div class="row gap" style="border-bottom:2px solid black;">
 		   			<div class="col-xs-5">
 						<p style="padding:10px 0 0 250px;">제목</p>
+						
 						<c:forEach var="questionDTO" items="${list }">
 							<p><a id="questiontitle" class="btn" style="padding:0 0 0 200px;" seq="${questionDTO.q_no }">${questionDTO.q_title }</a></p>
 						</c:forEach>
+						
 							
 					</div>
 					<div class="col-xs-3" >
 						<p style="text-align:center;">작성일 </p>
 						<c:forEach var="dataDTO" items="${datalist }">
-							<p style="padding:0 0 0 90px;">${dataDTO.q_date }</p>
+							<p style="padding:0 0 0 90px;font-size:15px;">${dataDTO.q_date }</p>
 						</c:forEach>
 					</div>
 					<div class="col-xs-2" >
@@ -262,6 +265,50 @@ a#yesyes{
 		    			<input id="questionBtn" type="button" class="btn btn-primary btn-outlined" value="1:1 문의하기">
 		    		</div>
 		    </div>
+		  </c:if>  
+		  
+		  <c:if test="${userinfo=='admin' }">
+		   	<div class="row gap" style="border-bottom:2px solid black;">
+		   			<div class="col-xs-5">
+						<p style="padding:10px 0 0 250px;">제목</p>
+						
+						<c:forEach var="questionDTO" items="${adminqnaList }">
+							<p><a id="questiontitle" class="btn" style="padding:0 0 0 200px;" seq="${questionDTO.q_no }">${questionDTO.q_title }</a></p>
+						</c:forEach>
+						
+							
+					</div>
+					<div class="col-xs-3" >
+						<p style="text-align:center;">작성일 </p>
+						
+						<c:forEach var="questionDTO" items="${adminqnaList }">
+							<p style="padding:0 0 0 90px;font-size:15px;">${questionDTO.q_date }</p>
+						</c:forEach>
+								
+					</div>
+					<div class="col-xs-2" >
+						<p style="text-align:right;">답변여부 </p>
+						 <c:forEach var="answerDTO" items="${adminqnaList }">
+							<c:if test="${empty answerDTO.q_a}">
+								<p style="text-align:right;">답변대기</p>
+							</c:if>
+							<c:if test="${!empty answerDTO.q_a}">
+								<strong><p style="text-align:right;">답변완료</p></strong>
+							</c:if>
+						</c:forEach>
+					</div>
+		
+		   </div>
+		  </c:if>  
+		  
+		  
+		  
+		  
+		     
+							
+						
+		    
+		    
 	</div>
 </div>
 	<!-- <MAIN FOOTER></MAIN>
@@ -318,7 +365,7 @@ a#yesyes{
 var popup;
 $(document)
 .ready(function(){
-	if(`${m_no}`!=''){
+	 if(`${m_no}`!=''){
 		alarmList()
 	}
 })

@@ -23,4 +23,10 @@
    				select a.b_no , b.nick , a.b_title ,a.views, a.b_date from board a, member b 
    				where a.m_no=b.m_no and a.b_type='F' order by a.views desc) where rownum <=6 ]]>
 </select>
+<select id="adminqnaList" resultType="com.team.pj.qnaDTO">
+	select * from questions where m_no!=0
+</select>
+<update id="updateQuestion">
+	update questions set q_a=#{param1} where q_no=#{param2}
+</update>
 </mapper>

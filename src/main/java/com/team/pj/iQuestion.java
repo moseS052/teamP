@@ -8,4 +8,6 @@ public interface iQuestion {
 	ArrayList<qnaDTO> question(int m_no);
 	int insertContactus(String title, String contact, int m_no);
 	ArrayList<boardDTO>f_BoardRead();
+	ArrayList<qnaDTO> adminqnaList();
+	void updateQuestion(String q_a, int qno);
 }

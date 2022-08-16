@@ -97,6 +97,7 @@ public class questionController {
 		Integer m_no=(int) session.getAttribute("m_no");
 		System.out.println(m_no);
 		ArrayList<qnaDTO> qnalist=qa.question(m_no);
+		
 		JSONArray ja= new JSONArray();
 		for(int i=0;i<qnalist.size();i++) {
 			qnaDTO qdto= qnalist.get(i);
@@ -113,6 +114,8 @@ public class questionController {
 			
 	  model.addAttribute("m_no", session.getAttribute("m_no"));
 	  model.addAttribute("userinfo",session.getAttribute("id"));
+	  ArrayList<qnaDTO> adminlist=qa.adminqnaList();
+	  model.addAttribute("adminqnaList", adminlist);
 	  String nick=(String) session.getAttribute("nick");
 		if(nick.length()>5) {
 			nick=nick.substring(0, 5)+"..";
@@ -142,6 +145,7 @@ public class questionController {
 		mod.addAttribute("qa", qdto.getQ_a());
 		mod.addAttribute("m_no", session.getAttribute("m_no"));
 		mod.addAttribute("id",session.getAttribute("id"));
+		mod.addAttribute("userinfo", session.getAttribute("id"));
 		String nick=(String) session.getAttribute("nick");
 		if(nick.length()>5) {
 			nick=nick.substring(0, 5)+"..";
@@ -175,6 +179,17 @@ public class questionController {
 		iQuestion qa = sqlSession.getMapper(iQuestion.class);
 		int m_no=(int) session.getAttribute("m_no");
 		qa.insertContactus(title, content, m_no);
+		return "";
+	}
+	
+	@ResponseBody
+	@RequestMapping(value="/updatequestion", produces="application/text;charset=utf8")
+	public String UpadateQuestion(@RequestParam("q_a") String q_a,
+								@RequestParam("qno") int qno) {
+		iQuestion qa = sqlSession.getMapper(iQuestion.class);
+		System.out.println(q_a);
+		System.out.println(qno);
+		qa.updateQuestion(q_a, qno);
 		return "";
 	}
 }

@@ -442,7 +442,7 @@ a#yesyes{
 							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
 						</c:if>
 						<c:if test="${userinfo!=null}">
-						<a href="proposal?m_no=${m_no}"
+						<a href="question"
 							class="btn btn-outlined btn-primary btn-lg">바로가기</a>
 						</c:if>
 						</li>
@@ -825,11 +825,9 @@ function alarmList() {
 
 </script>
 <script type="text/javascript">
-<<<<<<< HEAD
-        var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj/"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
-=======
+
         var naver_id_login = new naver_id_login("w9CWsYucH5U3OO9SqFPI", "http://144.24.90.152:8080/pj"); // 역시 마찬가지로 'localhost'가 포함된 CallBack URL
->>>>>>> hee1
+
         
         // 접근 토큰 값 출력
         const token=naver_id_login.oauthParams.access_token;

@@ -172,10 +172,10 @@ a#yesyes{
 					data-toggle="dropdown">Pages <i class="fa fa-file menu-icon"></i></a>
 					<ul class="dropdown-menu">	
 						<li>
-						<c:if test="${m_no==null}">
+						<c:if test="${userinfo==null}">
 						<a href="login">봉사활동기획서</a>
 						</c:if>
-						<c:if test="${m_no!=null}">
+						<c:if test="${userinfo!=null}">
 						<a href="proposal?m_no=${m_no}">봉사활동 기획서</a>
 						</c:if>
 						</li>
@@ -199,7 +199,14 @@ a#yesyes{
 					</ul></li>	
 				
 			</ul>
+			<%-- <div id="lout">
+			<c:if test="${m_no!=null}">
+			<h2 ><a href='logout' id="undk">Logout</a><a href='' id="undd"></a></h2>
+			</c:if>
+			</div> --%>
 		</div>
+		
+		
 	</nav>
     <!-- END NAV -->
 	
@@ -227,8 +234,16 @@ a#yesyes{
                         <div class="fade-up col-md-10 fade-up" style="margin:20px 20px 20px 60px;">
                             <div class="centered">
                                 <p><textarea class="form-control" readonly style="height:300px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qcontent }</textarea></p>
+                                <c:if test="${id=='admin' }">
+                                	<p><textarea id="questionAdminanswer" class="form-control" style="height:300px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qa }</textarea></p>
+                                </c:if>
+                                <c:if test="${id!='admin' }">
                                 <p><textarea class="form-control"  readonly style="height:300px; padding:60px 30px 30px 60px; font-size:20px; resize:none">${qa }</textarea></p>
+                        		</c:if>
                         	</div>
+                        	<c:if test="${id=='admin' }">
+                        		<input id="adminAnswer" type="button" class="btn btn-primary btn-outlined" value="답변달기" seq="${qno }">
+                        	</c:if>
                         	<input id="questionList" class="pull-right btn btn-primary btn-outlined" type="button" value="목록" seq="${qmno }">
                         </div>
                     </div><!-- row -->
@@ -294,11 +309,11 @@ a#yesyes{
 			alarmList()
 			}
 	})
-		.on('click','#questionList',function(){
+	.on('click','#questionList',function(){
 			let seq=$(this).attr('seq');
 			document.location='question';
 		})
-		.on('click','#question',function(){
+	.on('click','#question',function(){
 			if(`${userinfo}`==null){
 				alert('로그인 후 사용가능합니다.')
 			}else{
@@ -339,6 +354,17 @@ a#yesyes{
 	window.open("note?m_no="+m_no+"&m_pa_no="+m_pa_no, "_blank", "width=350, height=400, top=110, left=1700");
 	}
 	return false;
+})
+.on('click','#adminAnswer',function(){
+	let q_a=$('#questionAdminanswer').val();
+	let qno=$(this).attr('seq');
+	$.ajax({
+		type:'get', url:'updatequestion',
+		data:{q_a:q_a, qno:qno},
+		success:function(){
+			document.location='question';
+		}
+	});
 })
 function alarmList() {
 	let str='';

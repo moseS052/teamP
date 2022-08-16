@@ -251,7 +251,7 @@ a#yesyes{
 					<br><input type=button value='목록으로 돌아가기' id=btnReset class="btn btn-primary btn-outlined"<%--  onclick="location.href='<%= request.getContextPath() %>/freeboard'" --%>>
 					<input type=hidden id="m_no" name="m_no" value="${m_no}">
 					<input type=hidden id="bdto.m_no" name="bdto.m_no" value="${bdto.m_no }">
-					<c:if test="${m_no==bdto.m_no }">
+					<c:if test="${m_no==bdto.m_no||userinfo=='admin' }">
 					<form id=frmup method=get action="requpdetail" style="display:inline;">
 					<input type=hidden id="b_no" name="b_no" value="${bdto.b_no }">
 					<input type=submit value='수정' class="btn btn-primary btn-outlined"></form>					

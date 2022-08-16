@@ -14,9 +14,7 @@
 	href="<c:url value="/resources/assets/img/favicon.ico"/>">
 
 <title>사진게시판</title>
-
-<link href="<c:url value="/resources/assets/css/bootstrap.css"/>"
-	rel="stylesheet">
+<link href="<c:url value="/resources/assets/css/bootstrap.css"/>"rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/animate.css"/>"
 	rel="stylesheet">
 <link href="<c:url value="/resources/assets/css/prettyPhoto.css"/>"

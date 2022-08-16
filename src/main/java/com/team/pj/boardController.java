@@ -152,6 +152,7 @@ public class boardController {
 		model.addAttribute("sessionm_no", session.getAttribute("m_no"));
 		int count = p.countComment_t(b_no);
 		model.addAttribute("countComment", count);
+		model.addAttribute("userinfo",session.getAttribute("id"));
 		return "freedetail";
 	}
 
@@ -300,6 +301,7 @@ public class boardController {
 		model.addAttribute("bdto", bdto);
 		model.addAttribute("sessionm_no", session.getAttribute("m_no"));
 		model.addAttribute("countComment", count);
+		model.addAttribute("userinfo",session.getAttribute("id"));
 		return "reqdetail";
 	}
 
